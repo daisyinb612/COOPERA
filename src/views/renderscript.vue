@@ -1,15 +1,15 @@
 <template>
     <div>
-      <h1>Page Four</h1>
+      <h1>renderscript</h1>
     </div>
   </template>
-  
+
   <script>
   export default {
-    name: 'PageThree'
+    name: 'RenderScript'
   }
   </script>
-  
+
   <style scoped>
   /* 添加你的样式 */
   </style>

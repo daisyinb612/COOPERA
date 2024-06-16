@@ -1,7 +1,7 @@
 <template>
   <el-row :class="$style.menu">
     <div :class="$style.menuInner">
-      <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/input') ? $style.active : '' ]" plain>
+      <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/inputlogline') ? $style.active : '' ]" @click="goToPage('/home/inputlogline')" plain>
         <div :class="$style.inputLogline">input logline</div>
       </el-button>
     </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div :class="$style.menuInner">
-      <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/renderscript') ? $style.active : '' ]" plain>
+      <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/renderscript') ? $style.active : '' ]" @click="goToPage('/home/renderscript')" plain>
         <div :class="$style.inputLogline">render script</div>
       </el-button>
     </div>
