@@ -53,8 +53,8 @@
         <el-button-group class="button-container">
           <el-button class="asset-button" @click="selectTab('characters')"
             :class="{ active: selectedTab === 'characters' }">characters</el-button>
-          <el-button class="asset-button" @click="selectTab('scenes')"
-            :class="{ active: selectedTab === 'scenes' }">scenes</el-button>
+          <!-- <el-button class="asset-button" @click="selectTab('locations')"
+            :class="{ active: selectedTab === 'locations' }">locations</el-button> -->
         </el-button-group>
         <el-main class="assets-list-container">
           <el-scrollbar class="assets-list">
@@ -66,6 +66,7 @@
         </el-main>
         <el-footer class="add-button-container">
           <el-button class="addasset-button" @click="showAddDialog">Add</el-button>
+          <el-button class="addasset-button" @click="upload">Upload</el-button>
         </el-footer>
       </el-container>
     </el-container>
@@ -74,10 +75,7 @@
   <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
     <el-form :model="newAsset" label-width="100px" class="add-asset-form">
       <el-form-item label="Group">
-        <el-select v-model="newAsset.group" placeholder="Select group">
-          <el-option label="Characters" value="characters" />
-          <el-option label="Scenes" value="scenes" />
-        </el-select>
+        {{ selectedTab }}
       </el-form-item>
       <el-form-item label="Asset Name" :label-width="formLabelWidth">
         <el-input v-model="newAsset.name" autocomplete="off" />
@@ -98,14 +96,14 @@
     <el-form-item label="group">
       <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
         <el-option label="Characters" value="characters" />
-        <el-option label="Scenes" value="scenes" />
+        <el-option label="locations" value="locations" />
       </el-select>
     </el-form-item>
     <el-form-item label="Asset Name" :label-width="formLabelWidth">
       <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
         <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
       </el-select>
-      <!-- <el-input v-model="newAsset.name" autocomplete="off" /> -->
+      <el-input v-model="newAsset.name" autocomplete="off" />
     </el-form-item>
 
     <el-footer class="dialog-footer">
@@ -130,7 +128,8 @@
     </el-form-item>
 
     <el-form-item label="img" :label-width="formLabelWidth">
-      <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)" alt="Asset Image" />
+      <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)"
+        alt="Asset Image" />
     </el-form-item>
 
     <el-footer class="dialog-footer">
@@ -174,7 +173,7 @@ export default defineComponent({
         // image: ''
         // content: ''
       ],
-      scenes: [
+      locations: [
         // 更多场景...
       ]
     });
@@ -227,7 +226,7 @@ export default defineComponent({
     }
 
     function addNewAsset() {
-      if (newAsset.group === 'characters' || newAsset.group === 'scenes') {
+      if (newAsset.group === 'characters' || newAsset.group === 'locations') {
         allAssets[newAsset.group].push({ name: newAsset.name, image: 'empty.png', content: '' });
         handleAddDialogClose();
       }
@@ -242,21 +241,21 @@ export default defineComponent({
     }
 
     function saveAssetConfirm(group, name) {
-      if(name === ''){
+      if (name === '') {
         return
       }
 
       let i = 0
-      for (i=0; i < allAssets[group].length; ++i) {
-        if(allAssets[group][i]['name'] === name){
+      for (i = 0; i < allAssets[group].length; ++i) {
+        if (allAssets[group][i]['name'] === name) {
           break
         }
       }
 
-      if(curSaveType.value === 'image'){
+      if (curSaveType.value === 'image') {
         allAssets[group][i]['image'] = curSaveThing.value
       }
-      else{
+      else {
         allAssets[group][i]['content'] = curSaveThing.value
       }
       console.log(allAssets)
@@ -269,11 +268,11 @@ export default defineComponent({
 
     function editAsset(index) {
       curEditAssetIndex.value = index
-      if(selectedTab.value === 'characters'){
+      if (selectedTab.value === 'characters') {
         curGroup.value = allAssets.characters
       }
-      else{
-        curGroup.value = allAssets.scenes
+      else {
+        curGroup.value = allAssets.locations
       }
       console.log(curGroup, allAssets)
       showEditDialog.value = true

@@ -10,7 +10,7 @@
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pageone') ? $style.active : '' ]" @click="goToPage('/home/pageone')" plain>
           <div :class="$style.frameGroup">
             <el-icon :class="$style.icon">
-              <edit />
+              <User />
             </el-icon>
             <div :class="$style.charater">Character</div>
           </div>
@@ -26,15 +26,15 @@
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagethree') ? $style.active : '' ]" @click="goToPage('/home/pagethree')" plain>
           <div :class="$style.frameGroup">
             <el-icon :class="$style.icon">
-              <edit />
+              <Location />
             </el-icon>
-            <div :class="$style.charater">Scene</div>
+            <div :class="$style.charater">Location</div>
           </div>
         </el-button>
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagefour') ? $style.active : '' ]" @click="goToPage('/home/pagefour')" plain>
           <div :class="$style.frameGroup">
             <el-icon :class="$style.icon">
-              <edit />
+              <Reading />
             </el-icon>
             <div :class="$style.charater">Dialogue</div>
           </div>

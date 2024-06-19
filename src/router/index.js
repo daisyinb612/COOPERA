@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/homepage.vue'
-import InputLogLine from '../views/InputLogLine.vue'
+import InputLogLine from '../views/inputlogline.vue'
 import PageOne from '../views/pageone.vue'
 import PageTwo from '../views/pagetwo.vue'
 import PageThree from '../views/pagethree.vue'
@@ -17,7 +17,7 @@ const routes = [
     component: HomePage,
     children: [
       {
-        path: 'inputLogLine',
+        path: 'inputlogline',
         name: 'InputLogLine',
         component: InputLogLine
       },

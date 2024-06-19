@@ -1,12 +1,17 @@
 <template>
   <div>
-    <h1>Page Two</h1>
+    <GPlot />
   </div>
 </template>
 
 <script>
+import GPlot from '../components/GPlot.vue'; 
+
 export default {
-  name: 'PageTwo'
+  name: 'PageTwo',
+  components: {
+    GPlot
+  }
 }
 </script>
 
