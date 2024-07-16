@@ -144,6 +144,7 @@
 
 <script>
 import { defineComponent, ref, reactive, computed } from 'vue';
+import { mapGetters, mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'GCharacter',
@@ -174,8 +175,10 @@ export default defineComponent({
         // content: ''
       ],
       locations: [
-        // 更多场景...
-      ]
+        // name: ''
+        // image: ''
+        // content: ''
+      ],
     });
 
     const filteredAssets = computed(() => {
@@ -303,6 +306,8 @@ export default defineComponent({
       handleSaveClose,
       saveAssetConfirm,
       editAsset,
+      ...mapGetters('character', ['characterData']),
+      ...mapActions('character', ['updateCharacterData']),
     };
   }
 });
