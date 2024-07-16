@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '../views/homepage.vue'
-import InputLogLine from '../views/inputlogline.vue'
+import InputLogLine from '../views/inputLogLine.vue'
 import PageOne from '../views/pageone.vue'
 import PageTwo from '../views/pagetwo.vue'
 import PageThree from '../views/pagethree.vue'
