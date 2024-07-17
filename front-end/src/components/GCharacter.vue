@@ -201,8 +201,7 @@ export default defineComponent({
     function generateContent(index) {
       const message = messages.value[index];
       setTimeout(() => {
-        message.content = '等以后生成';
-        message.image = "test_asset.png";
+        message.content = '等以后生成仅生成文字';
         message.downloadIcon = true;
       }, 1000);
     }
