@@ -1,80 +1,79 @@
 <template>
-    <el-container class="main-container">
+    <div>
+      <el-container class="main-container">
         <el-main class="plot">
-            <el-header class="header">
-                <div>PLOT</div>
+          <el-header class="header">
+            <div>PLOT</div>
+          </el-header>
+          <el-main class="plot">
+            <el-header class="button-container-up">
+              <el-button class="button" @click="Gplot">Generate</el-button>
+              <el-button class="button" @click="AddPlot">Add</el-button>
             </el-header>
-            <el-main class="plot">
-                <el-header class="button-container-up">
-                    <el-button class="button" @click="Gplot">Generate</el-button>
-                    <el-button class="button" @click="AddPlot">Add</el-button>
-                </el-header>
-                <el-main class="plot-list-container">
-                    <el-scrollbar class="plots-list">
-                        <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
-                            <div class="plot-header">
-                                <div class="scene-name">{{ plot.sceneName }}</div>
-                                <div class="plot-element">{{ plot.plotElement }}</div>
-                                <div class="location">{{ plot.location }}</div>
-                                <div class="characters">
-                                    <span v-for="character in plot.characters" :key="character">{{ character }}</span>
-                                </div>
-                            </div>
-                            <el-input type="textarea" v-model="plot.beat" placeholder="Enter beat here..."
-                                class="beat-input"></el-input>
-                        </el-card>
-                    </el-scrollbar>
-                </el-main>
-                <el-footer class="button-container-down">
-                    <el-button class="button" @click="Save">Confirm</el-button>
-                    <el-button class="button" @click="UploadPlot">Upload</el-button>
-                </el-footer>
+            <el-main class="plot-list-container">
+              <el-scrollbar class="plots-list">
+                <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
+                  <div class="plot-header">
+                    <div class="scene-name">{{ plot.sceneName }}</div>
+                    <div class="plot-element">{{ plot.plotElement }}</div>
+                    <div class="location">{{ plot.location }}</div>
+                    <div class="characters">
+                      <span v-for="character in plot.characters" :key="character">{{ character }}</span>
+                    </div>
+                  </div>
+                  <el-input type="textarea" v-model="plot.beat" placeholder="Enter beat here..."
+                    class="beat-input"></el-input>
+                </el-card>
+              </el-scrollbar>
             </el-main>
-        </el-main>
-    </el-container>
-
-    <el-dialog title="Add Plot" v-model="addDialogVisible" custom-class="dialog-content">
-        <el-form :model="newPlot" label-width="100px" class="add-plot-form">
-            <el-form-item label="Scene Name">
-                <el-input v-model="newPlot.sceneName" autocomplete="off" />
-            </el-form-item>
-            <el-form-item label="Plot Element">
-                <el-radio-group v-model="newPlot.plotElement">
-                    <el-radio value="Exposition">Exposition</el-radio>
-                    <el-radio value="Inciting Incident">Inciting Incident</el-radio>
-                    <el-radio value="Conflict">Conflict</el-radio>
-                    <el-radio value="Rising Action">Rising Action</el-radio>
-                    <el-radio value="Climax">Climax</el-radio>
-                    <el-radio value="Resolution">Falling Action</el-radio>
-                    <el-radio value="Dénouement">Dénouement</el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <el-form-item label="Location">
-                <el-input v-model="newPlot.location" autocomplete="off" />
-            </el-form-item>
-            <el-form-item label="Characters">
-                <el-input v-model="newCharacter" @keyup.enter="addCharacter"
-                    placeholder="Enter character and press Enter" />
-                <div class="characters">
-                    <el-tag v-for="(character, index) in newPlot.characters" :key="index" closable
-                        @close="removeCharacter(index)">
-                        {{ character }}
-                    </el-tag>
-                </div>
-            </el-form-item>
-            <el-form-item label="Beat">
-                <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
-            </el-form-item>
-            <el-footer class="dialog-footer">
-                <el-button @click="handleAddDialogClose" class="cancel-button">Cancel</el-button>
-                <el-button type="primary" @click="addNewPlot" class="confirm-button">Confirm</el-button>
+            <el-footer class="button-container-down">
+              <el-button class="button" @click="Save">Confirm</el-button>
+              <el-button class="button" @click="UploadPlot">Upload</el-button>
             </el-footer>
+          </el-main>
+        </el-main>
+      </el-container>
+  
+      <el-dialog title="Add Plot" v-model="addDialogVisible" custom-class="dialog-content">
+        <el-form :model="newPlot" label-width="100px" class="add-plot-form">
+          <el-form-item label="Scene Name">
+            <el-input v-model="newPlot.sceneName" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="Plot Element">
+            <el-radio-group v-model="newPlot.plotElement">
+              <el-radio value="Exposition">Exposition</el-radio>
+              <el-radio value="Inciting Incident">Inciting Incident</el-radio>
+              <el-radio value="Conflict">Conflict</el-radio>
+              <el-radio value="Rising Action">Rising Action</el-radio>
+              <el-radio value="Climax">Climax</el-radio>
+              <el-radio value="Resolution">Falling Action</el-radio>
+              <el-radio value="Dénouement">Dénouement</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="Location">
+            <el-input v-model="newPlot.location" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="Characters">
+            <el-input v-model="newCharacter" @keyup.enter="addCharacter"
+              placeholder="Enter character and press Enter" />
+            <div class="characters">
+              <el-tag v-for="(character, index) in newPlot.characters" :key="index" closable
+                @close="removeCharacter(index)">
+                {{ character }}
+              </el-tag>
+            </div>
+          </el-form-item>
+          <el-form-item label="Beat">
+            <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
+          </el-form-item>
+          <el-footer class="dialog-footer">
+            <el-button @click="handleAddDialogClose" class="cancel-button">Cancel</el-button>
+            <el-button type="primary" @click="addNewPlot" class="confirm-button">Confirm</el-button>
+          </el-footer>
         </el-form>
-    </el-dialog>
-
-
-</template>
-
+      </el-dialog>
+    </div>
+  </template>
 <script>
 import { defineComponent, ref, reactive } from 'vue';
 

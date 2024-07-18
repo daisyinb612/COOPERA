@@ -1,145 +1,145 @@
 <template>
-  <el-container class="main-container">
-    <el-aside class="left-panel">
-      <div class="chat">
-        <el-header class="header">
-          <div class="asset-name">“CHAT”</div>
-        </el-header>
-        <el-main>
-          <el-card class="message" v-for="(message, index) in messages" :key="index">
-            <template #header>
-              <div class="message-header">{{ message.prompt }}</div>
-            </template>
-            <el-contanier>
-              <el-aside width="100px">
-                <el-avatar icon="el-icon-user" class="llm"></el-avatar>
-              </el-aside>
-              <el-main width="200px">
-                <el-row class="llm-wrapper">
-                  <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
-                    <Download @click="saveAsset('image', message.image)" />
-                  </el-icon>
-                  <img v-if="message.image" class="character-image" :src="require('@/assets/images/' + message.image)"
-                    alt="Character" />
-                  <div v-else class="loading-wrapper">
-                    <el-loading :loading="true" text="loading......" />
-                  </div>
-                </el-row>
-                <el-row class="llm-wrapper">
-                  <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
-                    <Download @click="saveAsset('content', message.content)" />
-                  </el-icon>
-                  <div class="message-content">{{ message.content }} </div>
-                </el-row>
-              </el-main>
-            </el-contanier>
-          </el-card>
-        </el-main>
-        <el-footer class="inputfooter">
-          <el-input placeholder="Type your message here..." v-model="inputMessage" class="input-field"
-            @keyup.enter="sendMessage" clearable>
-            <template #append>
-              <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
-            </template>
-          </el-input>
-        </el-footer>
-      </div>
-    </el-aside>
-    <el-container class="right-panel">
-      <el-header class="art-asset-header">
-        <div class="art-asset">art asset</div>
-      </el-header>
-      <el-container class="rightcontainer">
-        <el-button-group class="button-container">
-          <el-button class="asset-button" @click="selectTab('characters')"
-            :class="{ active: selectedTab === 'characters' }">characters</el-button>
-          <!-- <el-button class="asset-button" @click="selectTab('locations')"
-            :class="{ active: selectedTab === 'locations' }">locations</el-button> -->
-        </el-button-group>
-        <el-main class="assets-list-container">
-          <el-scrollbar class="assets-list">
-            <el-card v-for="(asset, index) in filteredAssets" :key="index" class="asset-item" @click="editAsset(index)">
-              <div class="asset-name">{{ asset.name }}</div>
-              <img class="asset-image" :src="require('@/assets/images/' + asset.image)" alt="Asset Image" />
+  <div>
+    <el-container class="main-container">
+      <el-aside class="left-panel">
+        <div class="chat">
+          <el-header class="header">
+            <div class="asset-name">“CHAT”</div>
+          </el-header>
+          <el-main>
+            <el-card class="message" v-for="(message, index) in messages" :key="index">
+              <template #header>
+                <div class="message-header">{{ message.prompt }}</div>
+              </template>
+              <el-container>
+                <el-aside width="100px">
+                  <el-avatar icon="el-icon-user" class="llm"></el-avatar>
+                </el-aside>
+                <el-main width="200px">
+                  <el-row class="llm-wrapper">
+                    <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
+                      <Download @click="saveAsset('image', message.image)" />
+                    </el-icon>
+                    <img v-if="message.image" class="character-image" :src="require('@/assets/images/' + message.image)"
+                      alt="Character" />
+                    <div v-elrrrrrse class="loading-wrapper">
+                      <el-loading :loading="true" text="loading......" />
+                    </div>
+                  </el-row>
+                  <el-row class="llm-wrapper">
+                    <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
+                      <Download @click="saveAsset('content', message.content)" />
+                    </el-icon>
+                    <div class="message-content">{{ message.content }} </div>
+                  </el-row>
+                </el-main>
+              </el-container>
             </el-card>
-          </el-scrollbar>
-        </el-main>
-        <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="showAddDialog">Add</el-button>
-          <el-button class="addasset-button" @click="upload">Upload</el-button>
-        </el-footer>
+          </el-main>
+          <el-footer class="inputfooter">
+            <el-input placeholder="Type your message here..." v-model="inputMessage" class="input-field"
+              @keyup.enter="sendMessage" clearable>
+              <template #append>
+                <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
+              </template>
+            </el-input>
+          </el-footer>
+        </div>
+      </el-aside>
+      <el-container class="right-panel">
+        <el-header class="art-asset-header">
+          <div class="art-asset">art asset</div>
+        </el-header>
+        <el-container class="rightcontainer">
+          <el-button-group class="button-container">
+            <el-button class="asset-button" @click="selectTab('characters')"
+              :class="{ active: selectedTab === 'characters' }">characters</el-button>
+            <!-- <el-button class="asset-button" @click="selectTab('locations')"
+              :class="{ active: selectedTab === 'locations' }">locations</el-button> -->
+          </el-button-group>
+          <el-main class="assets-list-container">
+            <el-scrollbar class="assets-list">
+              <el-card v-for="(asset, index) in filteredAssets" :key="index" class="asset-item" @click="editAsset(index)">
+                <div class="asset-name">{{ asset.name }}</div>
+                <img class="asset-image" :src="require('@/assets/images/' + asset.image)" alt="Asset Image" />
+              </el-card>
+            </el-scrollbar>
+          </el-main>
+          <el-footer class="add-button-container">
+            <el-button class="addasset-button" @click="showAddDialog">Add</el-button>
+            <el-button class="addasset-button" @click="upload">Upload</el-button>
+          </el-footer>
+        </el-container>
       </el-container>
     </el-container>
-  </el-container>
 
-  <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
-    <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-      <el-form-item label="Group">
-        {{ selectedTab }}
+    <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
+      <el-form :model="newAsset" label-width="100px" class="add-asset-form">
+        <el-form-item label="Group">
+          {{ selectedTab }}
+        </el-form-item>
+        <el-form-item label="Asset Name" :label-width="formLabelWidth">
+          <el-input v-model="newAsset.name" autocomplete="off" />
+        </el-form-item>
+
+        <el-footer class="dialog-footer">
+          <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
+          <el-button type="primary" @click="addNewAsset" class="confirm-button">confirm</el-button>
+        </el-footer>
+      </el-form>
+    </el-dialog>
+
+    <el-dialog :title="'Save ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
+      <el-form-item label="type">
+        {{ curSaveType }}
+      </el-form-item>
+
+      <el-form-item label="group">
+        <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
+          <el-option label="Characters" value="characters" />
+          <el-option label="locations" value="locations" />
+        </el-select>
       </el-form-item>
       <el-form-item label="Asset Name" :label-width="formLabelWidth">
+        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
+          <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
+        </el-select>
         <el-input v-model="newAsset.name" autocomplete="off" />
       </el-form-item>
 
       <el-footer class="dialog-footer">
-        <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
-        <el-button type="primary" @click="addNewAsset" class="confirm-button">confirm</el-button>
+        <el-button @click="handleSaveClose" class="cancel-button">cancel</el-button>
+        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
+          class="confirm-button">confirm</el-button>
       </el-footer>
-    </el-form>
-  </el-dialog>
+    </el-dialog>
 
-  <el-dialog :title="'Save ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
-    <el-form-item label="type">
-      {{ curSaveType }}
-    </el-form-item>
+    <el-dialog v-model="showEditDialog" title="Edit Asset" custom-class="dialog-content">
+      <el-form-item label="group">
+        {{ selectedTab }}
+      </el-form-item>
 
-    <el-form-item label="group">
-      <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
-        <el-option label="Characters" value="characters" />
-        <el-option label="locations" value="locations" />
-      </el-select>
-    </el-form-item>
-    <el-form-item label="Asset Name" :label-width="formLabelWidth">
-      <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
-        <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
-      </el-select>
-      <el-input v-model="newAsset.name" autocomplete="off" />
-    </el-form-item>
+      <el-form-item label="Asset Name" :label-width="formLabelWidth">
+        {{ curGroup[curEditAssetIndex].name }}
+      </el-form-item>
 
-    <el-footer class="dialog-footer">
-      <el-button @click="handleSaveClose" class="cancel-button">cancel</el-button>
-      <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-        class="confirm-button">confirm</el-button>
-    </el-footer>
-  </el-dialog>
+      <el-form-item label="Description" :label-width="formLabelWidth">
+        <!-- <div>1</div> -->
+        {{ curGroup[curEditAssetIndex].content }}
+      </el-form-item>
 
-  <el-dialog title="Edit Asset" v-model="showEditDialog" custom-class="dialog-content">
-    <el-form-item label="group">
-      {{ selectedTab }}
-    </el-form-item>
+      <el-form-item label="img" :label-width="formLabelWidth">
+        <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)"
+          alt="Asset Image" />
+      </el-form-item>
 
-    <el-form-item label="Asset Name" :label-width="formLabelWidth">
-      {{ curGroup[curEditAssetIndex].name }}
-    </el-form-item>
-
-    <el-form-item label="Description" :label-width="formLabelWidth">
-      <!-- <div></div> -->
-      {{ curGroup[curEditAssetIndex].content }}
-    </el-form-item>
-
-    <el-form-item label="img" :label-width="formLabelWidth">
-      <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)"
-        alt="Asset Image" />
-    </el-form-item>
-
-    <el-footer class="dialog-footer">
-      <el-button @click="handleSaveClose" class="cancel-button">cancel</el-button>
-      <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-        class="confirm-button">confirm</el-button>
-    </el-footer>
-  </el-dialog>
-
-
+      <el-footer class="dialog-footer">
+        <el-button class="cancel-button" @click="handleSaveClose">cancel</el-button>
+        <el-button type="primary" class="confirm-button"
+          @click="saveAssetConfirm(newAsset.group, newAsset.name)">confirm</el-button>
+      </el-footer>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
