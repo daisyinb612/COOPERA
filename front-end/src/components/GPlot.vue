@@ -52,13 +52,23 @@
                 <el-input v-model="newPlot.location" autocomplete="off" />
             </el-form-item>
             <el-form-item label="角色">
-                <el-input v-model="newCharacter" @keyup.enter="addCharacter"
-                    placeholder="Enter character and press Enter" />
+                <el-select v-model="selectedCharacters" multiple placeholder="请选择角色">
+                <el-option
+                    v-for="character in allAssets.characters"
+                    :key="character.name"
+                    :label="character.name"
+                    :value="character.name"
+                />
+                </el-select>
                 <div class="characters">
-                    <el-tag v-for="(character, index) in newPlot.characters" :key="index" closable
-                        @close="removeCharacter(index)">
-                        {{ character }}
-                    </el-tag>
+                <el-tag
+                    v-for="(character, index) in selectedCharacters"
+                    :key="index"
+                    closable
+                    @close="removeCharacter(character)"
+                >
+                    {{ character }}
+                </el-tag>
                 </div>
             </el-form-item>
             <el-form-item label="Beat">
@@ -91,13 +101,23 @@
                 <el-input v-model="newPlot.location" autocomplete="off" />
             </el-form-item>
             <el-form-item label="角色">
-                <el-input v-model="newCharacter" @keyup.enter="addCharacter"
-                    placeholder="Enter character and press Enter" />
+                <el-select v-model="selectedCharacters" multiple placeholder="请选择角色">
+                <el-option
+                    v-for="character in allAssets.characters"
+                    :key="character.name"
+                    :label="character.name"
+                    :value="character.name"
+                />
+                </el-select>
                 <div class="characters">
-                    <el-tag v-for="(character, index) in newPlot.characters" :key="index" closable
-                        @close="removeCharacter(index)">
-                        {{ character }}
-                    </el-tag>
+                <el-tag
+                    v-for="(character, index) in selectedCharacters"
+                    :key="index"
+                    closable
+                    @close="removeCharacter(character)"
+                >
+                    {{ character }}
+                </el-tag>
                 </div>
             </el-form-item>
             <el-form-item label="Beat">
@@ -129,6 +149,11 @@ import { ElMessage } from 'element-plus';
 
 export default defineComponent({
     name: 'GPlot',
+    data() {
+    return {
+      selectedCharacters: [],
+    };
+  },
     
     setup() {
         const addDialogVisible = ref(false);
@@ -141,6 +166,17 @@ export default defineComponent({
             location: '',
             characters: [],
             beat: ''
+        });
+        const allAssets = reactive({
+            characters: [
+                { name: 'Character 1', image: '', content: '' },
+                { name: 'Character 2', image: '', content: '' },
+                { name: 'Character 3', image: '', content: '' }
+            ],
+            locations: [
+                { name: 'Location 1', image: '', content: '' },
+                { name: 'Location 2', image: '', content: '' }
+            ]
         });
         
         const newCharacter = ref('');
@@ -280,6 +316,7 @@ export default defineComponent({
             newPlot,
             newCharacter,
             showDeleteConfirm,
+            allAssets,
             confirmDelete,
             showDeleteDialog,
             cancelDelete,

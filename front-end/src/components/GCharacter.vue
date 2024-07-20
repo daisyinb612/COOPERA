@@ -93,8 +93,9 @@
             </el-form-item>
 
       <!-- 上传附件（选择角色或场景分组时显示） -->
-      <el-form-item v-if="newAsset.group === 'characters' || newAsset.group === 'locations'" label="上传附件" :label-width="formLabelWidth">
-          <el-upload
+      <el-form-item v-if="newAsset.group === 'characters' || newAsset.group === 'locations'" label="图片" :label-width="formLabelWidth">
+        <div>  
+        <el-upload
               :http-request="uploadFile"
               list-type="picture-card"
               :on-success="handleUploadSuccess"
@@ -104,6 +105,9 @@
               :on-exceed="handleExceed">
               <i class="el-icon-plus"></i>
           </el-upload>
+          <el-button @click="genrate_image" class="confirm-button">生成</el-button>
+          <el-button @click="save_image" class="confirm-button">保存</el-button>
+        </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
@@ -526,6 +530,11 @@ export default defineComponent({
       showEditDialog.value = false;
     }
 
+    function generate_image() {
+      // 生成图片的逻辑
+      console.log('生成图片');
+    }
+
 
 
 
@@ -566,6 +575,7 @@ export default defineComponent({
       showDeleteDialog,
       cancelDelete,
       confirmDelete,
+      generate_image,
       ...mapGetters('character', ['characterData']),
       ...mapActions('character', ['updateCharacterData']),
     };

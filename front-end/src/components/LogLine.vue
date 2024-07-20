@@ -82,6 +82,14 @@ export default defineComponent({
       };
       history.value.push(userMessage);
 
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌;我就改了这个地方
+        },
+        timeout: 10000
+      };
+
       const requestBody = {
         action: 'get_storyline_help',
         data: {
@@ -96,7 +104,7 @@ export default defineComponent({
 
       try {
         console.log("Sending request...");  // 添加日志
-        const response = await axios.post('http://192.168.0.111:8000', requestBody,{ timeout: 10000 });
+        const response = await axios.post('http://192.168.0.111:8000', requestBody,config);
         console.log("Request successful");  // 添加日志
         if (response.status === 200) {
           const assistantMessage = {
