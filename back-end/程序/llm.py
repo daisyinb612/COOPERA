@@ -6,10 +6,14 @@ import requests
 from zhipuai import ZhipuAI
 from history import create_xlsx_file
 import xlsxwriter
-from openpyxl import load_workbook
+from openpyxl import Workbook, load_workbook
 
 class LLM(object):
     def __init__(self,apikey=None):
+        self.fix_json = '''
+        我将给出存在格式问题，你的任务是输出修正格式后的json字符串。
+        输出时不要复述任务要求，直接给出修改好的json字符串。
+        '''
         self.storyline_help = '''
         假设你是一位剧作家，
         你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###和###我的问题###。
@@ -177,10 +181,10 @@ class LLM(object):
         #workbook.save(filepath)
         self.save_json_to_excel(json_object=new_history,filepath=filepath)
         
-    def ask(self,question,prompt,history=None,model_name="openai"):##model_name改为其他值（例如None）时，默认使用GLM
+    def ask(self,question,prompt,history=None,model_name=None):##model_name改为其他值（例如None）时，默认使用GLM
         if history is None:
             if model_name=="openai":
-                client = OpenAI(api_key=self.apikey)
+                client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
                 response = client.chat.completions.create(
                     model="gpt-4o",
                     messages=[
@@ -209,7 +213,7 @@ class LLM(object):
                 new_message.append(row)
             new_message.append({"role": "user", "content": question})
             if model_name=="openai":
-                client = OpenAI(api_key=self.apikey)
+                client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
                 response = client.chat.completions.create(
                     model="gpt-4o",
                     messages=[
@@ -232,8 +236,9 @@ class LLM(object):
         answer = ''
         print('思考中', end='')
         for trunk in response:
-            print(trunk.choices[0].delta.content, end='')
-            answer += trunk.choices[0].delta.content
+            if trunk.choices[0].delta.content:
+                print(trunk.choices[0].delta.content, end='')
+                answer += trunk.choices[0].delta.content
         print('\n')
         # print(answer)
         # print('\n')
@@ -267,14 +272,19 @@ class LLM(object):
         return image_b64
 
     def analyze_answer(self,text):
-        '''
-        first_index = text.find('[')
-        last_index = text.rfind(']')
-        text = text[first_index:last_index+1]
-        print(text)'''
-        json_object = json.loads(text)
-        print(text)
-        return json_object
+        try:
+            first_index = text.find('[')
+            last_index = text.rfind(']')
+            text = text[first_index:last_index+1]
+            print(text)
+            json_object = json.loads(text)
+            print(text)
+            return json_object
+        except:
+            print("模型输出格式不符合json格式，将重新使用模型修正格式问题")
+            text = self.ask(question=text,prompt=self.fix_json)
+            json_object = self.analyze_answer(text=text)
+            return json_object
     
     def save_json_to_excel(self,json_object,filepath):
         try:
@@ -286,21 +296,36 @@ class LLM(object):
         headers = json_object[0].keys()
         worksheet.write_row('A1', headers)
         for row_num, character in enumerate(json_object, start=1):
-            row_index = str(row_num + 1)
             for col_num, header in enumerate(headers):
-                cell = worksheet.write(row_num, col_num, character[header])
+                cell_value = character[header]
+                if isinstance(cell_value, list):
+                    cell_value = ", ".join(str(item) for item in cell_value)
+                cell = worksheet.write(row_num, col_num, cell_value)
         workbook.close()
     
     def add_json_to_excel(self,json_object,filepath):
-        workbook = xlsxwriter.Workbook(filepath)
-        worksheet = workbook.add_worksheet()
+        # 检查文件路径是否存在
+        if os.path.exists(filepath):
+            # 如果文件已存在，则加载它
+            workbook = load_workbook(filepath)
+        else:
+            # 如果文件不存在，创建一个新的工作簿
+            workbook = Workbook()
+        # 获取工作簿的工作表数量，以便给新工作表命名
+        sheet_index = len(workbook.sheetnames)-1
+        worksheet_name = f'Sheet{sheet_index + 1}'
+        worksheet = workbook.create_sheet(title=worksheet_name)
+        
         headers = json_object[0].keys()
-        worksheet.write_row('A1', headers)
-        for row_num, character in enumerate(json_object, start=1):
-            row_index = str(row_num + 1)
-            for col_num, header in enumerate(headers):
-                cell = worksheet.write(row_num, col_num, character[header])
-        workbook.close()
+        for col_num, header in enumerate(headers, start=1):
+           worksheet.cell(row=1, column=col_num, value=header)
+        for row_num, character in enumerate(json_object, start=2):  # 开始于第二行，因为第一行是标题
+            for col_num, header in enumerate(headers, start=1):
+                cell_value = character[header]
+                if isinstance(cell_value, list):
+                    cell_value = ", ".join(str(item) for item in cell_value)
+                worksheet.cell(row=row_num, column=col_num, value=cell_value)
+        workbook.save(filepath)
 
     def update_json_to_excel(self, json_object, filepath, sheet_index):
         workbook = load_workbook(filepath)
