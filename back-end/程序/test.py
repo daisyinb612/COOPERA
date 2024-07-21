@@ -285,6 +285,19 @@ def test_save_dialogue_asset():
     json_data = json.dumps(data)
     response = requests.post(URL, data=json_data, headers=headers)
     assert response.status_code == 200
+
+def test_create_picture():
+    data = {
+        'action': 'create_picture',
+        'data': {"name":"古老的神庙","user_input":"神庙内部阴暗，充满了机关和陷阱。"}
+    }
+    headers = {'Content-Type': 'png/jpg'}
+    json_data = json.dumps(data)
+    response = requests.post(URL, data=json_data, headers=headers)
+    assert response.status_code == 200
+    print("返回的信息为：")
+    print(response.text)
+
 if __name__ == '__main__':
     #test_upload_storyline()
     #test_get_storyline_help()
@@ -298,4 +311,5 @@ if __name__ == '__main__':
     #save_scene_asset()
     #init_dialogue_generation()
     #test_save_dialogue_asset()
+    test_create_picture()
     pass

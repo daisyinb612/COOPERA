@@ -248,6 +248,7 @@ class LLM(object):
         return answer
 
     def create_picture(self,filepath,prompt,history=None):
+        '''
         url = 'https://api.openai.com/v1/images/generations'
         headers = {
             'Authorization': f'Bearer {self.apikey}',
@@ -269,7 +270,17 @@ class LLM(object):
         else:
             print("请求失败：", response.status_code, response.text)
         self.save_history(question=prompt,answer="",prompt="",history=history)
-        return image_b64
+        return image_b64'''
+        client = ZhipuAI(api_key=self.apikey)
+        response = client.images.generations(
+            model="cogview-3", 
+            prompt=prompt,
+        )
+        print(response.data[0].url)
+        with open(filepath, 'w',encoding='utf-8') as f:
+                f.write(response.data[0].url)
+        self.save_history(question=prompt,answer="",prompt="",history=history)
+        return response.data[0].url
 
     def analyze_answer(self,text):
         try:

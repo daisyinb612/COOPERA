@@ -190,12 +190,14 @@ class Handler(BaseHTTPRequestHandler):
             if action == "create_picture":
                 prompt = data["data"]["user_input"]
                 name = data["data"]["name"]
-                filepath = self.config["picture_path"]+"/"+name+".png"
+                #filepath = self.config["picture_path"]+"/"+name+".png" #大模型返回base_64编码的json格式字符串采用此语句
+                filepath = self.config["picture_path"]+"/"+name+".txt" #大模型返回url采用此语句
                 l = LLM(apikey=self.config["apikey"])
-                picture = l.create_picture(filepath=filepath,prompt=prompt) ##这里picture是base_64编码的json格式字符串
+                #picture = l.create_picture(filepath=filepath,prompt=prompt) #大模型返回base_64编码的json格式字符串采用此语句
+                picture = l.create_picture(filepath=filepath,prompt=prompt) #大模型返回url采用此语句
                 self.send_response(200)
                 self.end_headers()
-                self.wfile.write(picture)
+                self.wfile.write(picture.encode('utf-8'))
             else:
                 self.send_error(401, 'Invalid action type.')
         else:
