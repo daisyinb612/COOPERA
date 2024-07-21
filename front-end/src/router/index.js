@@ -7,6 +7,7 @@ import PageThree from '../views/pagethree.vue'
 import PageFour from '../views/pagefour.vue'
 import RenderScript from '../views/renderscript.vue'
 
+
 const routes = [
   {
     path: '/',

@@ -71,7 +71,7 @@
         </el-footer>
       </el-container>
     </el-container>
-  </el-container>
+  
 
   <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
     <el-form :model="newAsset" label-width="100px" class="add-asset-form">
@@ -140,7 +140,7 @@
         class="confirm-button">confirm</el-button>
     </el-footer>
   </el-dialog>
-
+  </el-container>
 
 </template>
 

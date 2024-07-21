@@ -1,12 +1,17 @@
 <template>
     <div>
-      <h1>Page Four</h1>
+      <GDialogue/>
     </div>
   </template>
   
   <script>
+  import GDialogue from '../components/GDialogue.vue';
+
   export default {
-    name: 'PageThree'
+    name: 'PageFour',
+    components: {
+      GDialogue  
+    }
   }
   </script>
   

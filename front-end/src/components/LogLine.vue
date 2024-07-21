@@ -2,14 +2,14 @@
   <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div>“editlogline”</div>
+        <div>“故事概要”</div>
       </el-header>
       <el-main class="editlogline">
-        <el-input v-model="textarea" :rows="5" type="textarea"  placeholder="Please input" />
+        <el-input v-model="textarea" :rows="5" type="textarea"  placeholder="请输入你的故事概要" />
       </el-main>
 
       <el-footer class="button-container">
-        <el-button class="upload-button" @click="UploadLogLine">Upload</el-button>
+        <el-button class="upload-button" @click="UploadLogLine">保存</el-button>
       </el-footer>
     </el-main>
 
@@ -23,7 +23,7 @@
             <template #header>
               <div class="message-header">{{ message.prompt }}</div>
             </template>
-            <el-contanier>
+            <el-container>
               <el-aside width="100px">
                 <el-avatar icon="el-icon-user" class="llm"></el-avatar>
               </el-aside>
@@ -35,11 +35,11 @@
                   <div class="message-content">{{ message.content }} </div>
                 </el-row>
               </el-main>
-            </el-contanier>
+            </el-container>
           </el-card>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="Type your message here..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
             @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
@@ -54,6 +54,8 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { ElMessage } from 'element-plus';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'LogLine',
@@ -62,36 +64,133 @@ export default defineComponent({
   setup() {
     const inputMessage = ref('');
     const messages = ref([]);
+    const history = ref([]);
     const textarea = ref('');
 
-    function sendMessage() {
-      if (inputMessage.value) {
-        messages.value.push({
-          prompt: inputMessage.value,
-          content: "Generating...",
-          image: ""
+    async function sendMessage() {
+      if (!inputMessage.value) {
+        ElMessage({
+          message: '输入不能为空',
+          type: 'warning',
         });
-        generateContent(messages.value.length - 1);
-        inputMessage.value = '';
+        return;
+      }
+
+      const userMessage = {
+        role: 'user',
+        content: inputMessage.value
+      };
+      history.value.push(userMessage);
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌;我就改了这个地方
+        },
+        timeout: 10000
+      };
+
+      const requestBody = {
+        action: 'get_storyline_help',
+        data: {
+          storyline: textarea.value,
+          history: history.value.map(msg => ({
+            role: msg.role,
+            content: msg.content
+          })),
+          user_input: inputMessage.value
+        }
+      };
+
+      try {
+        console.log("Sending request...");  // 添加日志
+        const response = await axios.post('http://192.168.0.111:8000', requestBody,config);
+        console.log("Request successful");  // 添加日志
+        if (response.status === 200) {
+          const assistantMessage = {
+            role: 'assistant',
+            prompt: inputMessage.value,
+            content: response.data.content,
+            image: "test_asset.png",
+            downloadIcon: true
+          };
+          messages.value.push(assistantMessage);
+          history.value.push(assistantMessage);
+          inputMessage.value = '';
+        } else {
+          ElMessage({
+            message: '请求失败',
+            type: 'error',
+          });
+        }
+      } catch (error) {
+        console.log("Request failed:", error);  // 添加日志
+        if (error.code === 'ECONNABORTED') {
+          ElMessage({
+            message: '请求超时',
+            type: 'error',
+          });
+        } else {
+          ElMessage({
+            message: '请求失败',
+            type: 'error',
+          });
+        }
       }
     }
 
-    function generateContent(index) {
-      const message = messages.value[index];
-      setTimeout(() => {
-        message.content = '等以后生成';
-        message.image = "test_asset.png";
-        message.downloadIcon = true;
-      }, 1000);
-    }
 
+    async function UploadLogLine() {
+      if (!textarea.value) {
+        ElMessage({
+          message: '输入不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+      
+      const requestBody = {
+        action: 'upload_storyline',
+        data: {
+          storyline: textarea.value
+        }
+      };
+
+      try {
+        const response = await axios.post('http://192.168.0.111:8000', requestBody,{ timeout: 10000 });
+
+        if (response.status === 200) {
+          ElMessage({
+            message: '保存成功',
+            type: 'success',
+          });
+        } else {
+          ElMessage({
+            message: '保存失败',
+            type: 'error',
+          });
+        }
+      } catch (error) {
+        if (error.code === 'ECONNABORTED') {
+          ElMessage({
+            message: '请求超时',
+            type: 'error',
+          });
+        } else {
+          ElMessage({
+            message: '请求失败',
+            type: 'error',
+          });
+        }
+      }
+    }
     
     return {
       inputMessage,
       messages,
       textarea,
       sendMessage,
-      generateContent,
+      UploadLogLine,
     }
   }
 });
@@ -160,6 +259,15 @@ export default defineComponent({
   cursor: pointer;
   border-radius: 10px !important;
   transition: background-color 0.2s, color 0.2s;
+}
+.upload-button:hover {
+  background-color: #93a2f7;
+  color: white;
+}
+
+.upload-button:active {
+  background-color: #3a51d4;
+  color: white;
 }
 
 .button-container {
