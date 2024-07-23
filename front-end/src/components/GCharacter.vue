@@ -218,7 +218,7 @@ export default defineComponent({
     });
 
     const charList=computed(()=>{
-return store.state.character.characters
+    return store.state.character.characters
 
     })
     // Vuex state and actions

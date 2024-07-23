@@ -19,8 +19,7 @@
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('image', message.image)" />
                   </el-icon>
-                  <img v-if="message.image" class="character-image" :src="require('@/assets/images/' + message.image)"
-                    alt="Character" />
+                  <img v-if="message.image" class="character-image" :src="message.image" alt="Character" />
                   <div v-else class="loading-wrapper">
                     <el-loading :loading="true" text="loading......" />
                   </div>
@@ -29,15 +28,15 @@
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('content', message.content)" />
                   </el-icon>
-                  <div class="message-content">{{ message.content }} </div>
+                  <div class="message-content">{{ message.content }}</div>
                 </el-row>
               </el-main>
             </el-container>
           </el-card>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="Type your message here..." v-model="inputMessage" class="input-field"
-            @keyup.enter="sendMessage" clearable>
+          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
+                    @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
             </template>
@@ -45,100 +44,497 @@
         </el-footer>
       </div>
     </el-aside>
+
     <el-container class="right-panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">Art Asset</div>
+        <div class="art-asset">艺术资产</div>
       </el-header>
       <el-container class="rightcontainer">
         <el-button-group class="button-container">
-          <el-button class="asset-button" @click="selectTab('locations')" :class="{ active: selectedTab === 'locations' }">Locations</el-button>
+          <el-button class="asset-button" @click="selectTab('scene')"
+                     :class="{ active: selectedTab === 'scene' }">场景</el-button>
         </el-button-group>
-        <el-main class="assets-list-container">
-          <el-scrollbar class="assets-list">
-            <el-card v-for="(asset, index) in filteredAssets" :key="index" class="asset-item" @click="editAsset(index)">
-              <div class="asset-name">{{ asset.name }}</div>
-              <img class="asset-image" :src="require('@/assets/images/' + asset.image)" alt="Asset Image" />
-            </el-card>
-          </el-scrollbar>
-        </el-main>
+
+        <el-scrollbar class="assets-list">
+          <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
+            <div class="asset-name">{{ asset.name }}</div>
+            <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" >
+          </el-card>
+        </el-scrollbar>
+
         <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="showAddDialog">Add</el-button>
-          <el-button class="addasset-button">Upload</el-button>
+          <el-button class="addasset-button" @click="showAddDialog">新增</el-button>
+          <el-button class="addasset-button" @click="upload">上传</el-button>
         </el-footer>
       </el-container>
     </el-container>
 
-    <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
-      <el-form :model="newAsset" :rules="rules" ref="addAssetForm" label-width="100px" class="add-asset-form">
-        <el-form-item label="Group" prop="group">
-          <el-select v-model="newAsset.group" placeholder="Select group">
-            <el-option label="Characters" value="characters" />
-            <el-option label="Locations" value="locations" />
+    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
+      <el-form :model="newAsset" label-width="100px" class="add-asset-form">
+        <el-form-item label="分组">
+          <el-select v-model="newAsset.group" placeholder="请选择分组">
+            <el-option label="场景" value="scenes" />
           </el-select>
         </el-form-item>
-        <el-form-item label="Asset Name" prop="name">
+
+        <el-form-item label="资产名" :label-width="formLabelWidth">
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
+
+        <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
+          <el-input v-model="newAsset.content" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
+          <div>
+            <el-upload :http-request="uploadFile"
+                       list-type="picture-card"
+                       :on-success="handleUploadSuccess"
+                       :file-list="fileList"
+                       :limit="1"
+                       :on-remove="handleRemove"
+                       :on-exceed="handleExceed">
+              <i class="el-icon-plus"></i>
+            </el-upload>
+            <el-button @click="generate_image" class="confirm-button">生成</el-button>
+            <el-button @click="save_image" class="confirm-button">保存</el-button>
+          </div>
+        </el-form-item>
+
         <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">Cancel</el-button>
-          <el-button type="primary" @click="addNewAsset" class="confirm-button">Confirm</el-button>
+          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
+          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>
         </el-footer>
       </el-form>
     </el-dialog>
 
-    <el-dialog :title="'Save ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
-      <el-form-item label="type">
+    <el-dialog :title="'保存 ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
+      <el-form-item label="类型">
         {{ curSaveType }}
       </el-form-item>
-      <el-form-item label="group">
-        <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
-          <el-option label="Characters" value="characters" />
-          <el-option label="Locations" value="locations" />
+
+      <el-form-item label="分组">
+        <el-select v-model="newAsset.group" placeholder="选择分组" @change="changeGroup">
+          <el-option label="场景" value="scene" />
         </el-select>
       </el-form-item>
-      <el-form-item label="Asset Name" :label-width="formLabelWidth">
-        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
+      <el-form-item label="资产名" :label-width="formLabelWidth">
+        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="选择名字">
           <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
         </el-select>
         <el-input v-model="newAsset.name" autocomplete="off" />
       </el-form-item>
+
       <el-footer class="dialog-footer">
-        <el-button @click="handleSaveClose" class="cancel-button">Cancel</el-button>
-        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)" class="confirm-button">Confirm</el-button>
+        <el-button @click="handleSaveClose" class="cancel-button">取消</el-button>
+        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
+                   class="confirm-button">确认</el-button>
       </el-footer>
     </el-dialog>
 
-    <el-dialog title="Edit Asset" v-model="showEditDialog" custom-class="dialog-content">
-      <el-form :model="curGroup[curEditAssetIndex]" :rules="rules" ref="editAssetForm" label-width="100px">
-        <el-form-item label="Group">
-          <el-input v-model="curGroup[curEditAssetIndex].group" autocomplete="off" disabled />
-        </el-form-item>
-        <el-form-item label="Asset Name" prop="name">
-          <el-input v-model="curGroup[curEditAssetIndex].name" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="Description" prop="content">
-          <el-input v-model="curGroup[curEditAssetIndex].content" autocomplete="off" />
-        </el-form-item>
-        <el-form-item label="Image">
-          <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)" alt="Asset Image" />
-        </el-form-item>
-        <el-footer class="dialog-footer">
-          <el-button @click="handleEditClose" class="cancel-button">Cancel</el-button>
-          <el-button type="primary" @click="saveEditedAsset" class="confirm-button">Confirm</el-button>
-        </el-footer>
-      </el-form>
+    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
+      <el-form-item label="分组" :label-width="formLabelWidth">
+        {{ selectedTab }}
+      </el-form-item>
+
+      <el-form-item label="资产名" :label-width="formLabelWidth">
+        <el-input v-model="currentEditAsset.name" autocomplete="off" />
+      </el-form-item>
+
+      <el-form-item label="描述" :label-width="formLabelWidth">
+        <el-input v-model="currentEditAsset.content" autocomplete="off" />
+      </el-form-item>
+
+      <el-form-item label="图片" :label-width="formLabelWidth">
+        <el-upload :http-request="uploadFile"
+                   list-type="picture-card"
+                   :on-success="handleUploadSuccess"
+                   :file-list="fileList"
+                   :limit="1"
+                   :on-remove="handleRemove"
+                   :on-exceed="handleExceed">
+          <i class="el-icon-plus"></i>
+        </el-upload>
+        <img v-if="currentEditAsset.image" class="asset-image" :src="getImageSrc(currentEditAsset.image)" alt="Asset Image" />
+      </el-form-item>
+
+      <el-footer class="dialog-footer">
+        <el-button @click="handleEditClose" class="cancel-button">取消</el-button>
+        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>
+        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">确定</el-button>
+      </el-footer>
+
+      <el-dialog v-model="showDeleteConfirm">
+        <div>你确认删除该资产吗？</div>
+        <span class="dialog-footer">
+          <el-button @click="cancelDelete" class="cancel-button">取消</el-button>
+          <el-button type="danger" @click="confirmDelete" class="confirm-button">确定</el-button>
+        </span>
+      </el-dialog>
     </el-dialog>
   </el-container>
 </template>
 
+
 <script>
-import { defineComponent, ref, reactive, computed } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
+import { mapState, mapActions,useStore } from 'vuex';
+import axios from 'axios';
+import { ElMessage } from 'element-plus';
 
 export default defineComponent({
   name: 'GCharacter',
+
   setup() {
-    const store = useStore();
+    const { proxy } = getCurrentInstance();
+
+    // State and reactive properties
+    const addDialogVisible = ref(false);
+    const showSaveDialog = ref(false);
+    const showEditDialog = ref(false);
+    const curSaveType = ref('');
+    const curSaveThing = ref('');
+    const curEditAssetIndex = ref('');
+    const fileList = ref([]);
+    const inputMessage = ref('');
+    const selectedTab = ref('scene');
+    const history = ref([]);
+    const messages = ref([]);
+    const showDeleteConfirm = ref(false);
+    const newAsset = reactive({
+      group: 'scenes',
+      name: '',
+      content: '',
+      image: '',
+    });
+    const store=useStore()
+
+    // Computed properties
+    const currentEditAsset = computed(() => {
+      return Scenedata[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    });
+
+    const filteredAssets = computed(() => {
+      return Scenedata;
+    });
+
+    const charList=computed(()=>{
+    return store.state.scene.scenes
+
+    })
+    // Vuex state and actions
+    const {
+      Scenedata,
+    } = mapState('scene', {
+      Scenedata: 'Scenedata',
+    });
+
+    const actions = mapActions('scene', [
+      'updateScenedata',
+      'addCharacter',
+      'updateCharacter',
+      'deleteCharacter',
+    ]);
+
+    // Functions
+    async function sendMessage() {
+      if (!inputMessage.value) {
+        ElMessage({
+          message: '输入不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      const userMessage = {
+        role: 'user',
+        content: inputMessage.value,
+      };
+      history.value.push(userMessage);
+
+      const requestBody = {
+        action: 'get_scene_help',
+        data: {
+          history: history.value.map((msg) => ({
+            role: msg.role,
+            content: msg.content,
+          })),
+          user_input: inputMessage.value,
+        },
+      };
+
+      try {
+        const response = await axios.post('http://localhost:8000', requestBody);
+        if (response.status === 200) {
+          const assistantMessage = {
+            role: 'assistant',
+            prompt: inputMessage.value,
+            content: response.data.content,
+            image: 'logo.png',
+            downloadIcon: true,
+          };
+          messages.value.push(assistantMessage);
+          history.value.push(assistantMessage);
+
+          const imageRequestBody = {
+            action: 'get_scene_image_help',
+            data: {
+              history: history.value.map((msg) => ({
+                role: msg.role,
+                content: msg.content,
+              })),
+              user_input: inputMessage.value,
+            },
+          };
+
+          const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
+          if (imageResponse.status === 200 && imageResponse.data.image) {
+            const index = messages.value.indexOf(assistantMessage);
+            if (index !== -1) {
+              messages.value[index].image = imageResponse.data.image;
+            }
+          }
+          inputMessage.value = '';
+        } else {
+          ElMessage({
+            message: '请求失败',
+            type: 'error',
+          });
+        }
+      } catch (error) {
+        ElMessage({
+          message: '请求失败',
+          type: 'error',
+        });
+      }
+    }
+
+    function selectTab(tab) {
+      selectedTab.value = tab;
+    }
+
+    function showAddDialog() {
+      addDialogVisible.value = true;
+    }
+
+    function handleAddDialogClose() {
+      newAsset.group = 'scenes';
+      newAsset.name = '';
+      newAsset.content = '';
+      newAsset.image = '';
+      fileList.value = [];
+      addDialogVisible.value = false;
+    }
+
+    const handleRemove = () => {
+      newAsset.image = '';
+    };
+
+    const handleExceed = () => {
+      proxy.$message.warning('只能上传一个附件');
+    };
+
+    function handleSaveClose() {
+      newAsset.group = '';
+      newAsset.name = '';
+      newAsset.content = '';
+      newAsset.image = '';
+      fileList.value = [];
+      showSaveDialog.value = false;
+    }
+
+    function addNewAsset() {
+      let scenesList=store.state.scene.scenes
+      if (!newAsset.name) {
+        proxy.$message.warning('资产名不能为空');
+        return;
+      }
+      if (scenesList.some((asset) => asset.name === newAsset.name)) {
+        proxy.$message.warning('资产名已存在');
+        return;
+      }
+
+      const scene = {
+        name: newAsset.name,
+        content: newAsset.content,
+        image: newAsset.image || 'empty.png',
+      };
+      store.dispatch('addCharacter',scene)
+      handleAddDialogClose();
+      proxy.$message.success('资产新增成功');
+    }
+
+    function saveAsset(Type, content) {
+      curSaveType.value = Type;
+      curSaveThing.value = content;
+      showSaveDialog.value = true;
+    }
+
+    function saveAssetConfirm(group, name) {
+      if (!name) {
+        proxy.$message.warning('资产名为空');
+        return;
+      }
+
+      const assetIndex = Scenedata.findIndex((asset) => asset.name === name);
+      if (assetIndex !== -1) {
+        if (curSaveType.value === 'image') {
+          Scenedata[assetIndex].image = curSaveThing.value;
+        } else {
+          Scenedata[assetIndex].content = curSaveThing.value;
+        }
+        actions.updateCharacter({ index: assetIndex, scene: Scenedata[assetIndex] });
+        proxy.$message.success('资产更新成功');
+      } else {
+        const newAsset = {
+          name: name,
+          image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
+          content: curSaveType.value === 'content' ? curSaveThing.value : '',
+        };
+        actions.addCharacter(newAsset);
+        proxy.$message.success('新资产添加成功');
+      }
+      showSaveDialog.value = false;
+    }
+
+    function editAsset(index) {
+      curEditAssetIndex.value = index;
+      showEditDialog.value = true;
+    }
+
+    const uploadFile = (options) => {
+      const formData = new FormData();
+      formData.append('action', 'save_scene_asset_image');
+      formData.append('scene_name', newAsset.name);
+      formData.append('scene_image', options.file);
+
+      axios.post('http://localhost:8000', formData)
+        .then((response) => {
+          if (response.data.success) {
+            newAsset.image = response.data.filePath;
+            options.onSuccess(response.data, options.file);
+          } else {
+            options.onError(new Error('Upload failed'));
+          }
+        })
+        .catch((error) => {
+          options.onError(error);
+        });
+    };
+
+    function handleEditClose() {
+      showEditDialog.value = false;
+    }
+
+    function showDeleteDialog() {
+      showDeleteConfirm.value = true;
+    }
+
+    function cancelDelete() {
+      showDeleteConfirm.value = false;
+    }
+
+    function confirmDelete() {
+      actions.deleteCharacter(curEditAssetIndex.value);
+      showDeleteConfirm.value = false;
+      handleEditClose();
+      ElMessage({
+        type: 'success',
+        message: `成功删除资产 "${currentEditAsset.value.name}"`,
+      });
+    }
+
+    function getImageSrc(image) {
+      return image ? image : '@/assets/images/logo.png';
+    }
+
+    function handleUploadSuccess(response) {
+      if (response.success) {
+        Scenedata[curEditAssetIndex.value].image = response.filePath;
+        actions.updateCharacter({ index: curEditAssetIndex.value, scene: Scenedata[curEditAssetIndex.value] });
+      }
+    }
+
+    function saveEditedAsset() {
+      const editedAsset = Scenedata[curEditAssetIndex.value];
+      if (!editedAsset.name) {
+        proxy.$message.warning('资产名不能为空');
+        return;
+      }
+      if (!editedAsset.content) {
+        proxy.$message.warning('描述不能为空');
+        return;
+      }
+      if (!editedAsset.image) {
+        proxy.$message.warning('请上传图片');
+        return;
+      }
+      actions.updateCharacter({ index: curEditAssetIndex.value, scene: editedAsset });
+      proxy.$message.success('资产更新成功');
+      showEditDialog.value = false;
+    }
+
+    function generate_image() {
+      console.log('生成图片');
+    }
+
+    return {
+      currentEditAsset,
+      fileList,
+      addDialogVisible,
+      inputMessage,
+      selectedTab,
+      messages,
+      newAsset,
+      filteredAssets,
+      showSaveDialog,
+      curSaveType,
+      curSaveThing,
+      showEditDialog,
+      curEditAssetIndex,
+      showDeleteConfirm,
+      handleSaveClose,
+      handleRemove,
+      handleExceed,
+      sendMessage,
+      showAddDialog,
+      handleAddDialogClose,
+      addNewAsset,
+      selectTab,
+      saveAsset,
+      saveAssetConfirm,
+      editAsset,
+      uploadFile,
+      handleEditClose,
+      handleUploadSuccess,
+      saveEditedAsset,
+      getImageSrc,
+      showDeleteDialog,
+      cancelDelete,
+      confirmDelete,
+      generate_image,
+      ...actions,
+      charList,
+      ...mapState('scene', ['Scenedata']),
+    };
+  },
+});
+</script>
+
+
+
+<!-- <script>
+import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
+import { mapState, mapActions,useStore } from 'vuex';
+import axios from 'axios';
+import { ElMessage } from 'element-plus';
+
+
+export default defineComponent({
+  name: 'GScene',
+  setup() {
+    const { proxy } = getCurrentInstance();
+
     const addDialogVisible = ref(false);
     const showSaveDialog = ref(false);
     const showEditDialog = ref(false);
@@ -146,19 +542,40 @@ export default defineComponent({
     const curSaveThing = ref('');
     const curGroup = ref([]);
     const curEditAssetIndex = ref('');
+
     const inputMessage = ref('');
     const selectedTab = ref('locations');
+    const history = ref([]);
     const messages = ref([]);
-    const newAsset = reactive({ group: '', name: '' });
+    const messages = ref([]);
+    const showDeleteConfirm = ref(false);
 
-    const rules = {
-      group: [
-        { required: true, message: 'Please select a group', trigger: 'change' },
-      ],
-      name: [
-        { required: true, message: 'Please input the asset name', trigger: 'blur' },
-      ],
-    };
+    const newAsset = reactive({ 
+      group: 'scene',
+      name: '',
+      content: '',
+      image: '',
+    });
+    const store=useStore()
+
+    const currentEditAsset = computed(() => {
+      return scenedata[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    });
+
+    const filteredAssets = computed(() => {
+      return scenedata;
+    });
+
+    const charList=computed(()=>{
+    return store.state.scene.scenes
+
+    const {
+      scenedata,
+    } = mapState('scene', {
+      scenedata: 'scenedata',
+    });
+
+
 
     const allAssets = computed(() => store.getters['scene/scenes'] || []);
     const filteredAssets = computed(() => {
@@ -303,7 +720,7 @@ export default defineComponent({
     };
   }
 });
-</script>
+</script> -->
 
 <style scoped>
 html,
@@ -393,7 +810,7 @@ body {
   margin-right: 10px;
 }
 
-.character-image {
+.scene-image {
   width: 100%;
   max-width: 400px;
   border-radius: 15px;
