@@ -55,7 +55,7 @@
                      :class="{ active: selectedTab === 'characters' }">角色</el-button>
         </el-button-group>
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in characterData" :key="index" class="asset-item" @click="editAsset(index)">
+          <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
             <div class="asset-name">{{ asset.name }}</div>
             <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" />
           </el-card>
@@ -177,7 +177,7 @@
 
 <script>
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions,useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -206,6 +206,7 @@ export default defineComponent({
       content: '',
       image: '',
     });
+    const store=useStore()
 
     // Computed properties
     const currentEditAsset = computed(() => {
@@ -216,6 +217,10 @@ export default defineComponent({
       return characterData;
     });
 
+    const charList=computed(()=>{
+return store.state.character.characters
+
+    })
     // Vuex state and actions
     const {
       characterData,
@@ -338,11 +343,12 @@ export default defineComponent({
     }
 
     function addNewAsset() {
+      let charactersList=store.state.character.characters
       if (!newAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
       }
-      if (characterData.some((asset) => asset.name === newAsset.name)) {
+      if (charactersList.some((asset) => asset.name === newAsset.name)) {
         proxy.$message.warning('资产名已存在');
         return;
       }
@@ -352,8 +358,7 @@ export default defineComponent({
         content: newAsset.content,
         image: newAsset.image || 'empty.png',
       };
-
-      actions.addCharacter(character);
+      store.dispatch('addCharacter',character)
       handleAddDialogClose();
       proxy.$message.success('资产新增成功');
     }
@@ -508,6 +513,7 @@ export default defineComponent({
       confirmDelete,
       generate_image,
       ...actions,
+      charList,
       ...mapState('character', ['characterData']),
     };
   },
