@@ -54,21 +54,22 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { mapState, mapActions } from 'vuex';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
 
 export default defineComponent({
   name: 'LogLine',
 
-
-  setup() {
-    const inputMessage = ref('');
-    const messages = ref([]);
-    const history = ref([]);
-    const textarea = ref('');
-
-    async function sendMessage() {
-      if (!inputMessage.value) {
+  computed: {
+    ...mapState({
+      loglineData: state => state.logline.loglineData,
+    }),
+  },
+  methods: {
+    ...mapActions(['updateLoglineData']),
+    async sendMessage() {
+      if (!this.inputMessage) {
         ElMessage({
           message: '输入不能为空',
           type: 'warning',
@@ -78,14 +79,14 @@ export default defineComponent({
 
       const userMessage = {
         role: 'user',
-        content: inputMessage.value
+        content: this.inputMessage
       };
-      history.value.push(userMessage);
+      this.history.push(userMessage);
 
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌;我就改了这个地方
+          'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌
         },
         timeout: 10000
       };
@@ -93,30 +94,30 @@ export default defineComponent({
       const requestBody = {
         action: 'get_storyline_help',
         data: {
-          storyline: textarea.value,
-          history: history.value.map(msg => ({
+          storyline: this.loglineData,
+          history: this.history.map(msg => ({
             role: msg.role,
             content: msg.content
           })),
-          user_input: inputMessage.value
+          user_input: this.inputMessage
         }
       };
 
       try {
-        console.log("Sending request...");  // 添加日志
-        const response = await axios.post('http://192.168.0.111:8000', requestBody,config);
-        console.log("Request successful");  // 添加日志
+        console.log("Sending request...");
+        const response = await axios.post('http://192.168.0.111:8000', requestBody, config);
+        console.log("Request successful");
         if (response.status === 200) {
           const assistantMessage = {
             role: 'assistant',
-            prompt: inputMessage.value,
+            prompt: this.inputMessage,
             content: response.data.content,
             image: "test_asset.png",
             downloadIcon: true
           };
-          messages.value.push(assistantMessage);
-          history.value.push(assistantMessage);
-          inputMessage.value = '';
+          this.messages.push(assistantMessage);
+          this.history.push(assistantMessage);
+          this.inputMessage = '';
         } else {
           ElMessage({
             message: '请求失败',
@@ -124,7 +125,7 @@ export default defineComponent({
           });
         }
       } catch (error) {
-        console.log("Request failed:", error);  // 添加日志
+        console.log("Request failed:", error);
         if (error.code === 'ECONNABORTED') {
           ElMessage({
             message: '请求超时',
@@ -137,11 +138,10 @@ export default defineComponent({
           });
         }
       }
-    }
+    },
 
-
-    async function UploadLogLine() {
-      if (!textarea.value) {
+    async UploadLogLine() {
+      if (!this.loglineData) {
         ElMessage({
           message: '输入不能为空',
           type: 'warning',
@@ -152,12 +152,12 @@ export default defineComponent({
       const requestBody = {
         action: 'upload_storyline',
         data: {
-          storyline: textarea.value
+          storyline: this.loglineData
         }
       };
 
       try {
-        const response = await axios.post('http://192.168.0.111:8000', requestBody,{ timeout: 10000 });
+        const response = await axios.post('http://192.168.0.111:8000', requestBody, { timeout: 10000 });
 
         if (response.status === 200) {
           ElMessage({
@@ -184,13 +184,17 @@ export default defineComponent({
         }
       }
     }
-    
+  },
+
+  setup() {
+    const inputMessage = ref('');
+    const messages = ref([]);
+    const history = ref([]);
+
     return {
       inputMessage,
       messages,
-      textarea,
-      sendMessage,
-      UploadLogLine,
+      history,
     }
   }
 });

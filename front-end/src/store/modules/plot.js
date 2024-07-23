@@ -1,21 +1,37 @@
+// store/modules/plot.js
 export default {
-    state() {
-      return {
-        plotData: null,
-      };
+  state: () => ({
+    plots: [],
+  }),
+  mutations: {
+    setPlot(state, plot) {
+      state.plots.push(plot);
     },
-    mutations: {
-      setPlotData(state, data) {
-        state.plotData = data;
-      },
+    addPlot(state, plot) {
+      state.plots.push(plot);
     },
-    actions: {
-      updatePlotData({ commit }, data) {
-        commit('setPlotData', data);
-      },
+    updatePlot(state, { index, plot }) {
+      state.plots.splice(index, 1, plot);
     },
-    getters: {
-      plotData: (state) => state.plotData,
+    deletePlot(state, index) {
+      state.plots.splice(index, 1);
     },
-  };
-  
+  },
+  actions: {
+    setPlot({ commit }, plot) {
+      commit('addPlot', plot);
+    },
+    addPlot({ commit }, plot) {
+      commit('addPlot', plot);
+    },
+    updatePlot({ commit }, payload) {
+      commit('updatePlot', payload);
+    },
+    deletePlot({ commit }, index) {
+      commit('deletePlot', index);
+    },
+  },
+  getters: {
+    plots: (state) => state.plots,
+  },
+};

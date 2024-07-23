@@ -10,7 +10,7 @@
             <template #header>
               <div class="message-header">{{ message.prompt }}</div>
             </template>
-            <el-contanier>
+            <el-container>
               <el-aside width="100px">
                 <el-avatar icon="el-icon-user" class="llm"></el-avatar>
               </el-aside>
@@ -25,7 +25,6 @@
                     <el-loading :loading="true" text="loading......" />
                   </div>
                 </el-row>
-
                 <el-row class="llm-wrapper">
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('content', message.content)" />
@@ -33,7 +32,7 @@
                   <div class="message-content">{{ message.content }} </div>
                 </el-row>
               </el-main>
-            </el-contanier>
+            </el-container>
           </el-card>
         </el-main>
         <el-footer class="inputfooter">
@@ -48,14 +47,11 @@
     </el-aside>
     <el-container class="right-panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">art asset</div>
+        <div class="art-asset">Art Asset</div>
       </el-header>
       <el-container class="rightcontainer">
         <el-button-group class="button-container">
-          <!-- <el-button class="asset-button" @click="selectTab('characters')"
-            :class="{ active: selectedTab === 'characters' }">characters</el-button> -->
-          <el-button class="asset-button" @click="selectTab('locations')"
-            :class="{ active: selectedTab === 'locations' }">locations</el-button>
+          <el-button class="asset-button" @click="selectTab('locations')" :class="{ active: selectedTab === 'locations' }">Locations</el-button>
         </el-button-group>
         <el-main class="assets-list-container">
           <el-scrollbar class="assets-list">
@@ -71,92 +67,78 @@
         </el-footer>
       </el-container>
     </el-container>
-  
 
-  <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
-    <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-      <el-form-item label="Group">
-        <el-select v-model="newAsset.group" placeholder="Select group">
-          {{ selectedTab }}
+    <el-dialog title="Add Asset" v-model="addDialogVisible" custom-class="dialog-content">
+      <el-form :model="newAsset" :rules="rules" ref="addAssetForm" label-width="100px" class="add-asset-form">
+        <el-form-item label="Group" prop="group">
+          <el-select v-model="newAsset.group" placeholder="Select group">
+            <el-option label="Characters" value="characters" />
+            <el-option label="Locations" value="locations" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Asset Name" prop="name">
+          <el-input v-model="newAsset.name" autocomplete="off" />
+        </el-form-item>
+        <el-footer class="dialog-footer">
+          <el-button @click="handleAddDialogClose" class="cancel-button">Cancel</el-button>
+          <el-button type="primary" @click="addNewAsset" class="confirm-button">Confirm</el-button>
+        </el-footer>
+      </el-form>
+    </el-dialog>
+
+    <el-dialog :title="'Save ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
+      <el-form-item label="type">
+        {{ curSaveType }}
+      </el-form-item>
+      <el-form-item label="group">
+        <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
+          <el-option label="Characters" value="characters" />
+          <el-option label="Locations" value="locations" />
         </el-select>
       </el-form-item>
       <el-form-item label="Asset Name" :label-width="formLabelWidth">
+        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
+          <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
+        </el-select>
         <el-input v-model="newAsset.name" autocomplete="off" />
       </el-form-item>
-
       <el-footer class="dialog-footer">
-        <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
-        <el-button type="primary" @click="addNewAsset" class="confirm-button">confirm</el-button>
+        <el-button @click="handleSaveClose" class="cancel-button">Cancel</el-button>
+        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)" class="confirm-button">Confirm</el-button>
       </el-footer>
-    </el-form>
-  </el-dialog>
+    </el-dialog>
 
-  <el-dialog :title="'Save ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
-    <el-form-item label="type">
-      {{ curSaveType }}
-    </el-form-item>
-
-    <el-form-item label="group">
-      <el-select v-model="newAsset.group" placeholder="Select group" @change="changeGroup">
-        <el-option label="Characters" value="characters" />
-        <el-option label="locations" value="locations" />
-      </el-select>
-    </el-form-item>
-    <el-form-item label="Asset Name" :label-width="formLabelWidth">
-      <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="Select Name">
-        <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
-      </el-select>
-      <el-input v-model="newAsset.name" autocomplete="off" />
-    </el-form-item>
-
-    <el-footer class="dialog-footer">
-      <el-button @click="handleSaveClose" class="cancel-button">cancel</el-button>
-      <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-        class="confirm-button">confirm</el-button>
-    </el-footer>
-  </el-dialog>
-
-  <el-dialog title="Edit Asset" v-model="showEditDialog" custom-class="dialog-content">
-    <el-form-item label="group">
-      {{ selectedTab }}
-    </el-form-item>
-
-    <el-form-item label="Asset Name" :label-width="formLabelWidth">
-      {{ curGroup[curEditAssetIndex].name }}
-    </el-form-item>
-
-    <el-form-item label="Description" :label-width="formLabelWidth">
-      {{ curGroup[curEditAssetIndex].content }}
-    </el-form-item>
-
-    <el-form-item label="img" :label-width="formLabelWidth">
-      <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)"
-        alt="Asset Image" />
-    </el-form-item>
-
-    <el-footer class="dialog-footer">
-      <el-button @click="handleSaveClose" class="cancel-button">cancel</el-button>
-      <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-        class="confirm-button">confirm</el-button>
-    </el-footer>
-  </el-dialog>
+    <el-dialog title="Edit Asset" v-model="showEditDialog" custom-class="dialog-content">
+      <el-form :model="curGroup[curEditAssetIndex]" :rules="rules" ref="editAssetForm" label-width="100px">
+        <el-form-item label="Group">
+          <el-input v-model="curGroup[curEditAssetIndex].group" autocomplete="off" disabled />
+        </el-form-item>
+        <el-form-item label="Asset Name" prop="name">
+          <el-input v-model="curGroup[curEditAssetIndex].name" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Description" prop="content">
+          <el-input v-model="curGroup[curEditAssetIndex].content" autocomplete="off" />
+        </el-form-item>
+        <el-form-item label="Image">
+          <img class="asset-image" :src="require('@/assets/images/' + curGroup[curEditAssetIndex].image)" alt="Asset Image" />
+        </el-form-item>
+        <el-footer class="dialog-footer">
+          <el-button @click="handleEditClose" class="cancel-button">Cancel</el-button>
+          <el-button type="primary" @click="saveEditedAsset" class="confirm-button">Confirm</el-button>
+        </el-footer>
+      </el-form>
+    </el-dialog>
   </el-container>
-
 </template>
 
 <script>
 import { defineComponent, ref, reactive, computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'GCharacter',
-
-  data() {
-    return {
-      test_image: 'logo.png'
-    }
-  },
-
   setup() {
+    const store = useStore();
     const addDialogVisible = ref(false);
     const showSaveDialog = ref(false);
     const showEditDialog = ref(false);
@@ -164,25 +146,24 @@ export default defineComponent({
     const curSaveThing = ref('');
     const curGroup = ref([]);
     const curEditAssetIndex = ref('');
-    const currentMessage = ref(null);
     const inputMessage = ref('');
     const selectedTab = ref('locations');
     const messages = ref([]);
     const newAsset = reactive({ group: '', name: '' });
-    const allAssets = reactive({
-      characters: [
-        // name: ''
-        // image: ''
-        // content: ''
-      ],
-      locations: [
-        // 更多场景...
-      ]
-    });
 
+    const rules = {
+      group: [
+        { required: true, message: 'Please select a group', trigger: 'change' },
+      ],
+      name: [
+        { required: true, message: 'Please input the asset name', trigger: 'blur' },
+      ],
+    };
+
+    const allAssets = computed(() => store.getters['scene/scenes'] || []);
     const filteredAssets = computed(() => {
-      console.log("Selected Tab:", selectedTab.value);
-      return allAssets[selectedTab.value];
+      const assets = allAssets.value;
+      return assets ? assets.filter(asset => asset.group === selectedTab.value) : [];
     });
 
     function sendMessage() {
@@ -208,7 +189,6 @@ export default defineComponent({
 
     function selectTab(tab) {
       selectedTab.value = tab;
-      console.log("Tab selected:", tab);
     }
 
     function showAddDialog() {
@@ -216,73 +196,85 @@ export default defineComponent({
     }
 
     function handleAddDialogClose() {
-      newAsset.group = ''
-      newAsset.name = ''
+      newAsset.group = '';
+      newAsset.name = '';
       addDialogVisible.value = false;
     }
 
     function handleSaveClose() {
-      newAsset.group = ''
-      newAsset.name = ''
+      newAsset.group = '';
+      newAsset.name = '';
       showSaveDialog.value = false;
     }
 
     function addNewAsset() {
-      if (newAsset.group === 'characters' || newAsset.group === 'locations') {
-        allAssets[newAsset.group].push({ name: newAsset.name, image: 'empty.png', content: '' });
-        handleAddDialogClose();
-      }
+      const addAssetForm = ref(null);
+      addAssetForm.value.validate((valid) => {
+        if (valid) {
+          store.dispatch('scene/addScene', { group: newAsset.group, name: newAsset.name, image: 'empty.png', content: '' });
+          handleAddDialogClose();
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     }
 
     function saveAsset(Type, content) {
-      curSaveType.value = Type
-      curSaveThing.value = content
-      newAsset.group = ''
-      newAsset.name = ''
-      showSaveDialog.value = true
+      curSaveType.value = Type;
+      curSaveThing.value = content;
+      newAsset.group = '';
+      newAsset.name = '';
+      showSaveDialog.value = true;
     }
 
     function saveAssetConfirm(group, name) {
-      if (name === '') {
-        return
-      }
-
-      let i = 0
-      for (i = 0; i < allAssets[group].length; ++i) {
-        if (allAssets[group][i]['name'] === name) {
-          break
+      if (!name) return;
+      const assetIndex = allAssets.value.findIndex(asset => asset.name === name && asset.group === group);
+      if (assetIndex !== -1) {
+        const updatedAsset = { ...allAssets.value[assetIndex] };
+        if (curSaveType.value === 'image') {
+          updatedAsset.image = curSaveThing.value;
+        } else {
+          updatedAsset.content = curSaveThing.value;
         }
+        store.dispatch('scene/updateScene', { index: assetIndex, scene: updatedAsset });
+        handleSaveClose();
       }
-
-      if (curSaveType.value === 'image') {
-        allAssets[group][i]['image'] = curSaveThing.value
-      }
-      else {
-        allAssets[group][i]['content'] = curSaveThing.value
-      }
-      console.log(allAssets)
-      return
     }
 
     function changeGroup() {
-      curGroup.value = allAssets[newAsset.group]
+      curGroup.value = allAssets.value.filter(asset => asset.group === newAsset.group);
     }
 
     function editAsset(index) {
-      curEditAssetIndex.value = index
-      if (selectedTab.value === 'characters') {
-        curGroup.value = allAssets.characters
-      }
-      else {
-        curGroup.value = allAssets.locations
-      }
-      console.log(curGroup, allAssets)
-      showEditDialog.value = true
+      curEditAssetIndex.value = index;
+      curGroup.value = filteredAssets.value;
+      showEditDialog.value = true;
+    }
+
+    function handleEditClose() {
+      showEditDialog.value = false;
+    }
+
+    function saveEditedAsset() {
+      const editAssetForm = ref(null);
+      editAssetForm.value.validate((valid) => {
+        if (valid) {
+          const index = curEditAssetIndex.value;
+          if (index !== null) {
+            store.dispatch('scene/updateScene', { index, scene: curGroup.value[index] });
+            handleEditClose();
+          }
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
     }
 
     return {
       addDialogVisible,
-      currentMessage,
       inputMessage,
       selectedTab,
       messages,
@@ -305,6 +297,9 @@ export default defineComponent({
       handleSaveClose,
       saveAssetConfirm,
       editAsset,
+      handleEditClose,
+      saveEditedAsset,
+      rules,
     };
   }
 });
@@ -375,7 +370,6 @@ body {
   padding: 10px;
 }
 
-
 .asset-name {
   font-size: 24px;
 }
@@ -392,7 +386,7 @@ body {
   display: flex;
   align-items: center;
   margin: 10px 0;
-  gap: 10px
+  gap: 10px;
 }
 
 .llm {

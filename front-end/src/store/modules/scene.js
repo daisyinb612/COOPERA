@@ -1,21 +1,37 @@
+// store/modules/scene.js
 export default {
-    state() {
-      return {
-        sceneData: null,
-      };
+  state: () => ({
+    scenes: [],
+  }),
+  mutations: {
+    setScenes(state, scenes) {
+      state.scenes = scenes;
     },
-    mutations: {
-      setSceneData(state, data) {
-        state.sceneData = data;
-      },
+    addScene(state, scene) {
+      state.scenes.push(scene);
     },
-    actions: {
-      updateSceneData({ commit }, data) {
-        commit('setSceneData', data);
-      },
+    updateScene(state, { index, scene }) {
+      state.scenes.splice(index, 1, scene);
     },
-    getters: {
-      sceneData: (state) => state.sceneData,
+    deleteScene(state, index) {
+      state.scenes.splice(index, 1);
     },
-  };
-  
+  },
+  actions: {
+    setScenes({ commit }, scenes) {
+      commit('setScenes', scenes);
+    },
+    addScene({ commit }, scene) {
+      commit('addScene', scene);
+    },
+    updateScene({ commit }, payload) {
+      commit('updateScene', payload);
+    },
+    deleteScene({ commit }, index) {
+      commit('deleteScene', index);
+    },
+  },
+  getters: {
+    scenes: (state) => state.scenes,
+  },
+};
