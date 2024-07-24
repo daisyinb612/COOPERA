@@ -5,7 +5,7 @@
         <div>“故事概要”</div>
       </el-header>
       <el-main class="editlogline">
-        <el-input v-model="textarea" :rows="5" type="textarea"  placeholder="请输入你的故事概要" />
+        <el-input v-model="loglineData" :rows="5" type="textarea" placeholder="请输入你的故事概要" />
       </el-main>
 
       <el-footer class="button-container">
@@ -190,11 +190,13 @@ export default defineComponent({
     const inputMessage = ref('');
     const messages = ref([]);
     const history = ref([]);
+    const loglineData = ref(''); // 初始化 loglineData
 
     return {
       inputMessage,
       messages,
       history,
+      loglineData, // 返回 loglineData
     }
   }
 });

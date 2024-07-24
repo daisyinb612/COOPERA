@@ -15,7 +15,7 @@
               <div class="plot-header">
                 <div class="scene-name">{{ plot.plotName }}</div>
                 <div class="plot-element">{{ plot.plotElement }}</div>
-                <div class="location">{{ plot.location }}</div>
+                <div class="location">{{ plot.scene }}</div>
                 <div class="characters">
                   <span v-for="character in plot.characters" :key="character">{{ character }}</span>
                 </div>
@@ -47,7 +47,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-input v-model="newPlot.location" autocomplete="off" />
+          <el-input v-model="newPlot.scene" autocomplete="off" />
         </el-form-item>
         <el-form-item label="角色">
           <el-select v-model="selectedCharacters" multiple placeholder="请选择角色">
@@ -86,7 +86,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-input v-model="editPlotData.location" autocomplete="off" />
+          <el-input v-model="editPlotData.scene" autocomplete="off" />
         </el-form-item>
         <el-form-item label="角色">
           <el-select v-model="editSelectedCharacters" multiple placeholder="请选择角色">
@@ -116,6 +116,7 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
+
 export default defineComponent({
   name: 'GPlot',
   setup() {
@@ -129,21 +130,21 @@ export default defineComponent({
     const newPlot = reactive({
       plotName: '',
       plotElement: '',
-      location: '',
+      scene: '',
       characters: [],
       beat: '',
     });
     const editPlotData = reactive({
       plotName: '',
       plotElement: '',
-      location: '',
+      scene: '',
       characters: [],
       beat: '',
     });
     const plotToDeleteIndex = ref(null);
     const plotToEditIndex = ref(null);
 
-    const plots = computed(() => store.getters['plot/plots']);
+    const plots = computed(() => store.getters['plot/plots'] || []);
     const allCharacters = computed(() => store.state.character.characters); // 修改为 characters
 
     const addPlot = (plot) => store.dispatch('plot/addPlot', plot);
@@ -177,7 +178,7 @@ export default defineComponent({
     function handleAddDialogClose() {
       newPlot.plotName = '';
       newPlot.plotElement = '';
-      newPlot.location = '';
+      newPlot.scene = '';
       newPlot.characters = [];
       newPlot.beat = '';
       selectedCharacters.value = [];
@@ -187,7 +188,7 @@ export default defineComponent({
     function handleEditDialogClose() {
       editPlotData.plotName = '';
       editPlotData.plotElement = '';
-      editPlotData.location = '';
+      editPlotData.scene = '';
       editPlotData.characters = [];
       editPlotData.beat = '';
       editSelectedCharacters.value = [];
@@ -238,7 +239,7 @@ export default defineComponent({
       const plotToEdit = plots.value[index];
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
-      editPlotData.location = plotToEdit.location;
+      editPlotData.scene = plotToEdit.scene;
       editPlotData.characters = [...plotToEdit.characters];
       editSelectedCharacters.value = [...plotToEdit.characters];
       editPlotData.beat = plotToEdit.beat;
@@ -251,7 +252,7 @@ export default defineComponent({
         const updatedPlot = {
           plotName: editPlotData.plotName,
           plotElement: editPlotData.plotElement,
-          location: editPlotData.location,
+          scene: editPlotData.scene,
           characters: [...editSelectedCharacters.value],
           beat: editPlotData.beat,
         };
@@ -274,7 +275,7 @@ export default defineComponent({
         addPlot({
           plotName: generatedPlot.plot,
           plotElement: '',
-          location: '',
+          scene: '',
           characters: [],
           beat: generatedPlot.plot_content,
         });
@@ -292,6 +293,7 @@ export default defineComponent({
         data: plots.value.map((plot) => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
+          场景: plot.scene,
           情节梗概: plot.beat,
           参与人物: plot.characters.map((character) => ({ 角色名字: character })),
         })),
