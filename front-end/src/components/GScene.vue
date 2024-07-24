@@ -19,7 +19,7 @@
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('image', message.image)" />
                   </el-icon>
-                  <img v-if="message.image" class="character-image" :src="message.image" alt="Character" />
+                  <img v-if="message.image" class="scene-image" :src="message.image" alt="Scene" />
                   <div v-else class="loading-wrapper">
                     <el-loading :loading="true" text="loading......" />
                   </div>
@@ -81,11 +81,11 @@
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
 
-        <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
+        <el-form-item v-if="newAsset.group === 'scenes'" label="描述" :label-width="formLabelWidth">
           <el-input v-model="newAsset.content" autocomplete="off" />
         </el-form-item>
 
-        <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
+        <el-form-item v-if="newAsset.group === 'scene'" label="图片" :label-width="formLabelWidth">
           <div>
             <el-upload :http-request="uploadFile"
                        list-type="picture-card"
@@ -183,7 +183,7 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
 export default defineComponent({
-  name: 'GCharacter',
+  name: 'GScene',
 
   setup() {
     const { proxy } = getCurrentInstance();
@@ -231,9 +231,9 @@ export default defineComponent({
 
     const actions = mapActions('scene', [
       'updateScenedata',
-      'addCharacter',
-      'updateCharacter',
-      'deleteCharacter',
+      'addScene',
+      'updateScene',
+      'deleteScene',
     ]);
 
     // Functions
@@ -359,7 +359,7 @@ export default defineComponent({
         content: newAsset.content,
         image: newAsset.image || 'empty.png',
       };
-      store.dispatch('addCharacter',scene)
+      store.dispatch('addScene',scene)
       handleAddDialogClose();
       proxy.$message.success('资产新增成功');
     }
@@ -383,7 +383,7 @@ export default defineComponent({
         } else {
           Scenedata[assetIndex].content = curSaveThing.value;
         }
-        actions.updateCharacter({ index: assetIndex, scene: Scenedata[assetIndex] });
+        actions.updateScene({ index: assetIndex, scene: Scenedata[assetIndex] });
         proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
@@ -391,7 +391,7 @@ export default defineComponent({
           image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
           content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
-        actions.addCharacter(newAsset);
+        actions.addScene(newAsset);
         proxy.$message.success('新资产添加成功');
       }
       showSaveDialog.value = false;
@@ -435,7 +435,7 @@ export default defineComponent({
     }
 
     function confirmDelete() {
-      actions.deleteCharacter(curEditAssetIndex.value);
+      actions.deleteScene(curEditAssetIndex.value);
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
@@ -451,7 +451,7 @@ export default defineComponent({
     function handleUploadSuccess(response) {
       if (response.success) {
         Scenedata[curEditAssetIndex.value].image = response.filePath;
-        actions.updateCharacter({ index: curEditAssetIndex.value, scene: Scenedata[curEditAssetIndex.value] });
+        actions.updateScene({ index: curEditAssetIndex.value, scene: Scenedata[curEditAssetIndex.value] });
       }
     }
 
@@ -469,7 +469,7 @@ export default defineComponent({
         proxy.$message.warning('请上传图片');
         return;
       }
-      actions.updateCharacter({ index: curEditAssetIndex.value, scene: editedAsset });
+      actions.updateScene({ index: curEditAssetIndex.value, scene: editedAsset });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
     }

@@ -144,7 +144,7 @@ export default defineComponent({
     const plotToEditIndex = ref(null);
 
     const plots = computed(() => store.getters['plot/plots']);
-    const allCharacters = computed(() => store.state.character.characterData);
+    const allCharacters = computed(() => store.state.character.characters); // 修改为 characters
 
     const addPlot = (plot) => store.dispatch('plot/addPlot', plot);
     const updatePlot = (payload) => store.dispatch('plot/updatePlot', payload);
@@ -320,7 +320,7 @@ export default defineComponent({
       selectedCharacters,
       editSelectedCharacters,
       showDeleteConfirm,
-      allCharacters,
+      allCharacters, // 修改为 characters
       confirmDelete,
       showDeleteDialog,
       cancelDelete,
@@ -338,6 +338,7 @@ export default defineComponent({
   },
 });
 </script>
+
 
 <style scoped>
 .main-container {

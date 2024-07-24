@@ -5,7 +5,10 @@ export default {
   }),
   mutations: {
     setPlot(state, plot) {
-      state.plots.push(plot);
+      const index = state.plots.findIndex(p => p.id === plot.id);
+      if (index !== -1) {
+        state.plots.splice(index, 1, plot);
+      }
     },
     addPlot(state, plot) {
       state.plots.push(plot);
@@ -19,7 +22,7 @@ export default {
   },
   actions: {
     setPlot({ commit }, plot) {
-      commit('addPlot', plot);
+      commit('setPlot', plot);
     },
     addPlot({ commit }, plot) {
       commit('addPlot', plot);
