@@ -6,8 +6,8 @@
       </el-header>
       <el-main class="plot">
         <el-header class="button-container-up">
-          <el-button class="button" @click="generatePlot">Generate</el-button>
-          <el-button class="button" @click="AddPlot">Add</el-button>
+          <el-button class="button" @click="generatePlot">生成</el-button>
+          <el-button class="button" @click="AddPlot">添加</el-button>
         </el-header>
         <el-main class="plot-list-container">
           <el-scrollbar class="plots-list">
@@ -15,39 +15,41 @@
               <div class="plot-header">
                 <div class="scene-name">{{ plot.plotName }}</div>
                 <div class="plot-element">{{ plot.plotElement }}</div>
-                <div class="location">{{ plot.scene }}</div>
+                <div class="location">{{ plot.scenes }}</div>
                 <div class="characters">
                   <span v-for="character in plot.characters" :key="character">{{ character }}</span>
                 </div>
               </div>
-              <el-input type="textarea" v-model="plot.beat" placeholder="Enter beat here..." class="beat-input"></el-input>
+              <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
             </el-card>
           </el-scrollbar>
         </el-main>
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadPlot">Upload</el-button>
+          <el-button class="button" @click="UploadPlot">上传</el-button>
         </el-footer>
       </el-main>
     </el-main>
 
-    <el-dialog title="Add Plot" v-model="addDialogVisible" custom-class="dialog-content">
+    <el-dialog title="添加情节" v-model="addDialogVisible" custom-class="dialog-content">
       <el-form :model="newPlot" label-width="100px" class="add-plot-form">
         <el-form-item label="情节名称">
           <el-input v-model="newPlot.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Plot Element">
+        <el-form-item label="情节元素">
           <el-radio-group v-model="newPlot.plotElement">
-            <el-radio value="Exposition">Exposition</el-radio>
-            <el-radio value="Inciting Incident">Inciting Incident</el-radio>
-            <el-radio value="Conflict">Conflict</el-radio>
-            <el-radio value="Rising Action">Rising Action</el-radio>
-            <el-radio value="Climax">Climax</el-radio>
-            <el-radio value="Resolution">Resolution</el-radio>
-            <el-radio value="Dénouement">Dénouement</el-radio>
+            <el-radio value="Exposition">展示</el-radio>
+            <el-radio value="Inciting Incident">激励事件</el-radio>
+            <el-radio value="Conflict">冲突</el-radio>
+            <el-radio value="Rising Action">上升动作</el-radio>
+            <el-radio value="Climax">高潮</el-radio>
+            <el-radio value="Resolution">解决</el-radio>
+            <el-radio value="Dénouement">结局</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-input v-model="newPlot.scene" autocomplete="off" />
+          <el-select v-model="newPlot.scenes" placeholder="请选择场景">
+            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.label" :value="scene.name" />
+          </el-select>
         </el-form-item>
         <el-form-item label="角色">
           <el-select v-model="selectedCharacters" multiple placeholder="请选择角色">
@@ -59,34 +61,41 @@
             </el-tag>
           </div>
         </el-form-item>
-        <el-form-item label="Beat">
+        <el-form-item label="情节梗概">
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">Cancel</el-button>
-          <el-button type="primary" @click="addNewPlot" class="confirm-button">Confirm</el-button>
+          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
+          <el-button type="primary" @click="addNewPlot" class="confirm-button">确认</el-button>
         </el-footer>
       </el-form>
     </el-dialog>
 
-    <el-dialog title="Edit Plot" v-model="editDialogVisible" custom-class="dialog-content">
+    <el-dialog title="编辑情节" v-model="editDialogVisible" custom-class="dialog-content">
       <el-form :model="editPlotData" label-width="100px" class="add-plot-form">
         <el-form-item label="情节名称">
           <el-input v-model="editPlotData.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Plot Element">
+        <el-form-item label="情节元素">
           <el-radio-group v-model="editPlotData.plotElement">
-            <el-radio value="Exposition">Exposition</el-radio>
-            <el-radio value="Inciting Incident">Inciting Incident</el-radio>
-            <el-radio value="Conflict">Conflict</el-radio>
-            <el-radio value="Rising Action">Rising Action</el-radio>
-            <el-radio value="Climax">Climax</el-radio>
-            <el-radio value="Resolution">Resolution</el-radio>
-            <el-radio value="Dénouement">Dénouement</el-radio>
+            <el-radio value="Exposition">展示</el-radio>
+            <el-radio value="Inciting Incident">激励事件</el-radio>
+            <el-radio value="Conflict">冲突</el-radio>
+            <el-radio value="Rising Action">上升动作</el-radio>
+            <el-radio value="Climax">高潮</el-radio>
+            <el-radio value="Resolution">解决</el-radio>
+            <el-radio value="Dénouement">结局</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-input v-model="editPlotData.scene" autocomplete="off" />
+          <el-select v-model="editSelectedScenes" placeholder="请选择场景">
+            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.label" :value="scene.name" />
+          </el-select>
+          <div class="characters">
+            <el-tag v-for="(scene, index) in editSelectedScenes" :key="index" closable @close="removeScene(scene)">
+              {{ scene }}
+            </el-tag>
+          </div>
         </el-form-item>
         <el-form-item label="角色">
           <el-select v-model="editSelectedCharacters" multiple placeholder="请选择角色">
@@ -98,12 +107,12 @@
             </el-tag>
           </div>
         </el-form-item>
-        <el-form-item label="Beat">
+        <el-form-item label="情节梗概">
           <el-input type="textarea" v-model="editPlotData.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleEditDialogClose" class="cancel-button">Cancel</el-button>
-          <el-button type="primary" @click="saveEditedPlot" class="confirm-button">Confirm</el-button>
+          <el-button @click="handleEditDialogClose" class="cancel-button">取消</el-button>
+          <el-button type="primary" @click="saveEditedPlot" class="confirm-button">确认</el-button>
         </el-footer>
       </el-form>
     </el-dialog>
@@ -116,7 +125,6 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
-
 export default defineComponent({
   name: 'GPlot',
   setup() {
@@ -124,61 +132,41 @@ export default defineComponent({
 
     const addDialogVisible = ref(false);
     const editDialogVisible = ref(false);
-    const showDeleteConfirm = ref(false);
     const selectedCharacters = ref([]);
     const editSelectedCharacters = ref([]);
+    const editSelectedScenes = ref([]);
     const newPlot = reactive({
       plotName: '',
       plotElement: '',
-      scene: '',
+      scenes: '',
       characters: [],
       beat: '',
     });
     const editPlotData = reactive({
       plotName: '',
       plotElement: '',
-      scene: '',
+      scenes: '',
       characters: [],
       beat: '',
     });
-    const plotToDeleteIndex = ref(null);
     const plotToEditIndex = ref(null);
 
-    const plots = computed(() => store.getters['plot/plots'] || []);
-    const allCharacters = computed(() => store.state.character.characters); // 修改为 characters
+    // 使用 computed 从 Vuex store 中获取数据
+    const plots = computed(() => store.getters['plots']);
+    const allScenes = computed(() => store.state.scene.scenes);
+    const allCharacters = computed(() => store.state.character.characters);
 
-    const addPlot = (plot) => store.dispatch('plot/addPlot', plot);
-    const updatePlot = (payload) => store.dispatch('plot/updatePlot', payload);
-    const deletePlot = (index) => store.dispatch('plot/deletePlot', index);
-
-    function showDeleteDialog() {
-      showDeleteConfirm.value = true;
-    }
-
-    function cancelDelete() {
-      showDeleteConfirm.value = false;
-    }
+    const addPlot = (plot) => store.dispatch('addPlot', plot);
+    const updatePlot = (payload) => store.dispatch('updatePlot', payload);
 
     function AddPlot() {
       addDialogVisible.value = true;
     }
 
-    function confirmDelete() {
-      if (plotToDeleteIndex.value !== null) {
-        deletePlot(plotToDeleteIndex.value);
-        ElMessage({
-          message: '情节已删除',
-          type: 'success',
-        });
-      }
-      showDeleteConfirm.value = false;
-      editDialogVisible.value = false;
-    }
-
     function handleAddDialogClose() {
       newPlot.plotName = '';
       newPlot.plotElement = '';
-      newPlot.scene = '';
+      newPlot.scenes = '';
       newPlot.characters = [];
       newPlot.beat = '';
       selectedCharacters.value = [];
@@ -188,10 +176,11 @@ export default defineComponent({
     function handleEditDialogClose() {
       editPlotData.plotName = '';
       editPlotData.plotElement = '';
-      editPlotData.scene = '';
+      editPlotData.scenes = '';
       editPlotData.characters = [];
       editPlotData.beat = '';
       editSelectedCharacters.value = [];
+      editSelectedScenes.value = [];
       editDialogVisible.value = false;
     }
 
@@ -239,9 +228,10 @@ export default defineComponent({
       const plotToEdit = plots.value[index];
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
-      editPlotData.scene = plotToEdit.scene;
+      editPlotData.scenes = plotToEdit.scenes;
       editPlotData.characters = [...plotToEdit.characters];
       editSelectedCharacters.value = [...plotToEdit.characters];
+      editSelectedScenes.value = plotToEdit.scenes;
       editPlotData.beat = plotToEdit.beat;
       plotToEditIndex.value = index;
       editDialogVisible.value = true;
@@ -252,7 +242,7 @@ export default defineComponent({
         const updatedPlot = {
           plotName: editPlotData.plotName,
           plotElement: editPlotData.plotElement,
-          scene: editPlotData.scene,
+          scenes: editSelectedScenes.value,
           characters: [...editSelectedCharacters.value],
           beat: editPlotData.beat,
         };
@@ -275,7 +265,7 @@ export default defineComponent({
         addPlot({
           plotName: generatedPlot.plot,
           plotElement: '',
-          scene: '',
+          scenes: '',
           characters: [],
           beat: generatedPlot.plot_content,
         });
@@ -293,7 +283,7 @@ export default defineComponent({
         data: plots.value.map((plot) => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
-          场景: plot.scene,
+          场景: plot.scenes,
           情节梗概: plot.beat,
           参与人物: plot.characters.map((character) => ({ 角色名字: character })),
         })),
@@ -321,11 +311,9 @@ export default defineComponent({
       editPlotData,
       selectedCharacters,
       editSelectedCharacters,
-      showDeleteConfirm,
-      allCharacters, // 修改为 characters
-      confirmDelete,
-      showDeleteDialog,
-      cancelDelete,
+      editSelectedScenes,
+      allScenes,
+      allCharacters,
       AddPlot,
       handleAddDialogClose,
       handleEditDialogClose,
@@ -340,7 +328,6 @@ export default defineComponent({
   },
 });
 </script>
-
 
 <style scoped>
 .main-container {
