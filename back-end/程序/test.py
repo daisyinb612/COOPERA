@@ -11,7 +11,7 @@ def test_upload_storyline():
     }
     json_data = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/upload_storyline', data=json_data, headers=headers) #在使用flask_server时需要再url后添加具体端点信息，否则不需要
     assert response.status_code == 200
 
  
@@ -45,7 +45,7 @@ def test_get_storyline_help():
     }
     json_data = json.dumps(data)
     headers = {'Content-Type': 'application/json'}
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/get_storyline_help', data=json_data, headers=headers)
     #print(response)
     assert response.status_code == 200
     assert response.text
@@ -59,7 +59,7 @@ def test_get_saved_storyline():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/get_storyline_help', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -70,7 +70,7 @@ def test_init_character_generation():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/init_character_generation', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -84,7 +84,7 @@ def test_get_character_help():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/get_character_help', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -116,7 +116,7 @@ def test_save_character_asset():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/save_character_asset', data=json_data, headers=headers)
     assert response.status_code == 200
 
 def init_plot_generation():
@@ -126,7 +126,7 @@ def init_plot_generation():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/init_plot_generation', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -181,7 +181,7 @@ def update_plot():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/update_plot', data=json_data, headers=headers)
     assert response.status_code == 200
 
 def init_scene_generation():
@@ -191,7 +191,7 @@ def init_scene_generation():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/init_scene_generation', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -227,7 +227,7 @@ def save_scene_asset():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/save_scene_asset', data=json_data, headers=headers)
     assert response.status_code == 200
 
 def init_dialogue_generation():
@@ -237,7 +237,7 @@ def init_dialogue_generation():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/init_dialogue_generation', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
@@ -283,7 +283,7 @@ def test_save_dialogue_asset():
     }
     headers = {'Content-Type': 'application/json'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/save_dialogue_asset', data=json_data, headers=headers)
     assert response.status_code == 200
 
 def test_create_picture():
@@ -293,14 +293,14 @@ def test_create_picture():
     }
     headers = {'Content-Type': 'png/jpg'}
     json_data = json.dumps(data)
-    response = requests.post(URL, data=json_data, headers=headers)
+    response = requests.post(URL+ '/create_picture', data=json_data, headers=headers)
     assert response.status_code == 200
     print("返回的信息为：")
     print(response.text)
 
 if __name__ == '__main__':
     #test_upload_storyline()
-    #test_get_storyline_help()
+    test_get_storyline_help()
     #test_get_saved_storyline()
     #test_init_character_generation()
     #test_get_character_help()
@@ -311,5 +311,5 @@ if __name__ == '__main__':
     #save_scene_asset()
     #init_dialogue_generation()
     #test_save_dialogue_asset()
-    test_create_picture()
+    #test_create_picture()
     pass
