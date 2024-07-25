@@ -5,7 +5,6 @@
         <el-header class="header">
           <div class="asset-name">“CHAT”</div>
         </el-header>
-        
         <el-main>
           <el-card class="message" v-for="(message, index) in messages" :key="index">
             <template #header>
@@ -29,16 +28,15 @@
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('content', message.content)" />
                   </el-icon>
-                  <div class="message-content">{{ message.content }} </div>
+                  <div class="message-content">{{ message.content }}</div>
                 </el-row>
               </el-main>
             </el-container>
           </el-card>
         </el-main>
-
         <el-footer class="inputfooter">
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
-            @keyup.enter="sendMessage" clearable>
+                    @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
             </template>
@@ -54,12 +52,10 @@
       <el-container class="rightcontainer">
         <el-button-group class="button-container">
           <el-button class="asset-button" @click="selectTab('characters')"
-            :class="{ active: selectedTab === 'characters' }">角色</el-button>
-          <!-- <el-button class="asset-button" @click="selectTab('locations')"
-            :class="{ active: selectedTab === 'locations' }">locations</el-button> -->
+                     :class="{ active: selectedTab === 'characters' }">角色</el-button>
         </el-button-group>
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in filteredAssets" :key="index" class="asset-item" @click="editAsset(index)">
+          <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
             <div class="asset-name">{{ asset.name }}</div>
             <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" />
           </el-card>
@@ -71,54 +67,45 @@
         </el-footer>
       </el-container>
     </el-container>
-  
 
-  
     <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
-    <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-      <el-form-item label="分组">
-        <el-select v-model="newAsset.group" placeholder="请选择分组">
-          <el-option label="角色" value="characters" />
-          <el-option label="场景" value="locations" />
-        </el-select>
-      </el-form-item>
+      <el-form :model="newAsset" label-width="100px" class="add-asset-form">
+        <el-form-item label="分组">
+          <el-select v-model="newAsset.group" placeholder="请选择分组">
+            <el-option label="角色" value="characters" />
+          </el-select>
+        </el-form-item>
 
-      <el-form-item label="资产名" :label-width="formLabelWidth">
-        <el-input v-model="newAsset.name" autocomplete="off" />
-      </el-form-item>
+        <el-form-item label="资产名" :label-width="formLabelWidth">
+          <el-input v-model="newAsset.name" autocomplete="off" />
+        </el-form-item>
 
-      <!-- 角色描述（选择角色或场景分组时显示） -->
-      <el-form-item v-if="newAsset.group === 'characters' || newAsset.group === 'locations'" label="描述" :label-width="formLabelWidth">
-                <el-input v-model="newAsset.content" autocomplete="off" />
-            </el-form-item>
+        <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
+          <el-input v-model="newAsset.content" autocomplete="off" />
+        </el-form-item>
 
-      <!-- 上传附件（选择角色或场景分组时显示） -->
-      <el-form-item v-if="newAsset.group === 'characters' || newAsset.group === 'locations'" label="图片" :label-width="formLabelWidth">
-        <div>  
-        <el-upload
-              :http-request="uploadFile"
-              list-type="picture-card"
-              :on-success="handleUploadSuccess"
-              :file-list="fileList"
-              :limit="1"
-              :on-remove="handleRemove"
-              :on-exceed="handleExceed">
+        <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
+          <div>
+            <el-upload :http-request="uploadFile"
+                       list-type="picture-card"
+                       :on-success="handleUploadSuccess"
+                       :file-list="fileList"
+                       :limit="1"
+                       :on-remove="handleRemove"
+                       :on-exceed="handleExceed">
               <i class="el-icon-plus"></i>
-          </el-upload>
-          <el-button @click="genrate_image" class="confirm-button">生成</el-button>
-          <el-button @click="save_image" class="confirm-button">保存</el-button>
-        </div>
-      </el-form-item>
+            </el-upload>
+            <el-button @click="generate_image" class="confirm-button">生成</el-button>
+            <el-button @click="save_image" class="confirm-button">保存</el-button>
+          </div>
+        </el-form-item>
 
-      <el-footer class="dialog-footer">
-        <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
-        <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>
-      </el-footer>
-    </el-form>
+        <el-footer class="dialog-footer">
+          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
+          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>
+        </el-footer>
+      </el-form>
     </el-dialog>
-
-
-
 
     <el-dialog :title="'保存 ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
       <el-form-item label="类型">
@@ -127,8 +114,7 @@
 
       <el-form-item label="分组">
         <el-select v-model="newAsset.group" placeholder="选择分组" @change="changeGroup">
-          <el-option label="Characters" value="characters" />
-          <el-option label="locations" value="locations" />
+          <el-option label="角色" value="characters" />
         </el-select>
       </el-form-item>
       <el-form-item label="资产名" :label-width="formLabelWidth">
@@ -141,7 +127,7 @@
       <el-footer class="dialog-footer">
         <el-button @click="handleSaveClose" class="cancel-button">取消</el-button>
         <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-          class="confirm-button">确认</el-button>
+                   class="confirm-button">确认</el-button>
       </el-footer>
     </el-dialog>
 
@@ -158,15 +144,14 @@
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="img" :label-width="formLabelWidth">
-        <el-upload
-          :http-request="uploadFile"
-          list-type="picture-card"
-          :on-success="handleUploadSuccess"
-          :file-list="fileList"
-          :limit="1"
-          :on-remove="handleRemove"
-          :on-exceed="handleExceed">
+      <el-form-item label="图片" :label-width="formLabelWidth">
+        <el-upload :http-request="uploadFile"
+                   list-type="picture-card"
+                   :on-success="handleUploadSuccess"
+                   :file-list="fileList"
+                   :limit="1"
+                   :on-remove="handleRemove"
+                   :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
         </el-upload>
         <img v-if="currentEditAsset.image" class="asset-image" :src="getImageSrc(currentEditAsset.image)" alt="Asset Image" />
@@ -178,7 +163,6 @@
         <el-button type="primary" @click="saveEditedAsset" class="confirm-button">确定</el-button>
       </el-footer>
 
-      <!-- 删除确认对话框 -->
       <el-dialog v-model="showDeleteConfirm">
         <div>你确认删除该资产吗？</div>
         <span class="dialog-footer">
@@ -187,67 +171,71 @@
         </span>
       </el-dialog>
     </el-dialog>
-
-
   </el-container>
-
 </template>
+
 
 <script>
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapGetters, mapActions } from 'vuex';
-import axios from 'axios'; // 导入 axios
+import { mapState, mapActions,useStore } from 'vuex';
+import axios from 'axios';
 import { ElMessage } from 'element-plus';
-
 
 export default defineComponent({
   name: 'GCharacter',
 
   setup() {
-    const { proxy } = getCurrentInstance(); // 获取组件实例
+    const { proxy } = getCurrentInstance();
 
+    // State and reactive properties
     const addDialogVisible = ref(false);
     const showSaveDialog = ref(false);
     const showEditDialog = ref(false);
     const curSaveType = ref('');
     const curSaveThing = ref('');
-    const curGroup = ref([]);
     const curEditAssetIndex = ref('');
-    const currentMessage = ref(null);
     const fileList = ref([]);
     const inputMessage = ref('');
     const selectedTab = ref('characters');
     const history = ref([]);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
-    const currentEditAsset = computed(() => {
-      return curGroup.value[curEditAssetIndex.value] || { name: '', content: '', image: '' };
-    });
-
     const newAsset = reactive({
-      group: '',
+      group: 'characters',
       name: '',
       content: '',
-      image: '' // 用于存储附件路径
+      image: '',
     });
-    const allAssets = reactive({
-      characters: [
-        // name: ''
-        // image: ''
-        // content: ''
-      ],
-      locations: [
-        // name: ''
-        // image: ''
-        // content: ''
-      ],
-    });
+    const store=useStore()
 
+    // Computed properties
+    const currentEditAsset = computed(() => {
+      return characterData[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    });
 
     const filteredAssets = computed(() => {
-      return allAssets[selectedTab.value];
+      return characterData;
     });
 
+    const charList=computed(()=>{
+    return store.state.character.characters
+
+    })
+    // Vuex state and actions
+    const {
+      characterData,
+    } = mapState('character', {
+      characterData: 'characterData',
+    });
+
+    const actions = mapActions('character', [
+      'updateCharacterData',
+      'addCharacter',
+      'updateCharacter',
+      'deleteCharacter',
+    ]);
+
+    // Functions
     async function sendMessage() {
       if (!inputMessage.value) {
         ElMessage({
@@ -259,50 +247,47 @@ export default defineComponent({
 
       const userMessage = {
         role: 'user',
-        content: inputMessage.value
+        content: inputMessage.value,
       };
       history.value.push(userMessage);
 
       const requestBody = {
         action: 'get_character_help',
         data: {
-          history: history.value.map(msg => ({
+          history: history.value.map((msg) => ({
             role: msg.role,
-            content: msg.content
+            content: msg.content,
           })),
-          user_input: inputMessage.value
-        }
+          user_input: inputMessage.value,
+        },
       };
 
       try {
-        // 发送获取文本的请求
         const response = await axios.post('http://localhost:8000', requestBody);
         if (response.status === 200) {
           const assistantMessage = {
             role: 'assistant',
             prompt: inputMessage.value,
             content: response.data.content,
-            image: "logo.png", // 默认图片路径
-            downloadIcon: true
+            image: 'logo.png',
+            downloadIcon: true,
           };
           messages.value.push(assistantMessage);
           history.value.push(assistantMessage);
 
-          // 发送获取图片的请求
           const imageRequestBody = {
             action: 'get_character_image_help',
             data: {
-              history: history.value.map(msg => ({
+              history: history.value.map((msg) => ({
                 role: msg.role,
-                content: msg.content
+                content: msg.content,
               })),
-              user_input: inputMessage.value
-            }
+              user_input: inputMessage.value,
+            },
           };
 
           const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
           if (imageResponse.status === 200 && imageResponse.data.image) {
-            // 更新messages中的对应对象的image属性
             const index = messages.value.indexOf(assistantMessage);
             if (index !== -1) {
               messages.value[index].image = imageResponse.data.image;
@@ -323,11 +308,8 @@ export default defineComponent({
       }
     }
 
-
-
     function selectTab(tab) {
       selectedTab.value = tab;
-      console.log("Tab selected:", tab);
     }
 
     function showAddDialog() {
@@ -335,53 +317,50 @@ export default defineComponent({
     }
 
     function handleAddDialogClose() {
-      newAsset.group = '';
+      newAsset.group = 'characters';
       newAsset.name = '';
       newAsset.content = '';
-      newAsset.image = ''; // 重置附件路径
+      newAsset.image = '';
       fileList.value = [];
       addDialogVisible.value = false;
     }
 
     const handleRemove = () => {
-      newAsset.image = ''; // 删除文件时重置附件路径
+      newAsset.image = '';
     };
 
     const handleExceed = () => {
-      proxy.$message.warning('只能上传一个附件'); // 使用 proxy 访问 $message
+      proxy.$message.warning('只能上传一个附件');
     };
 
     function handleSaveClose() {
       newAsset.group = '';
       newAsset.name = '';
       newAsset.content = '';
-      newAsset.image = ''; // 重置附件路径
+      newAsset.image = '';
       fileList.value = [];
       showSaveDialog.value = false;
     }
 
     function addNewAsset() {
-      if (!newAsset.group) {
-        proxy.$message.warning('请选择分组'); // 使用 proxy 访问 $message
-        return;
-      }
+      let charactersList=store.state.character.characters
       if (!newAsset.name) {
-        proxy.$message.warning('资产名不能为空'); // 使用 proxy 访问 $message
+        proxy.$message.warning('资产名不能为空');
         return;
       }
-      // 检查资产名是否已存在
-      if (allAssets[newAsset.group].some(asset => asset.name === newAsset.name)) {
-        proxy.$message.warning('资产名已存在'); // 使用 proxy 访问 $message
+      if (charactersList.some((asset) => asset.name === newAsset.name)) {
+        proxy.$message.warning('资产名已存在');
         return;
       }
-      // 添加新资产
-      allAssets[newAsset.group].push({
+
+      const character = {
         name: newAsset.name,
-        image: newAsset.image || 'empty.png', // 使用附件路径
-        content: newAsset.content || ''
-      });
+        content: newAsset.content,
+        image: newAsset.image || 'empty.png',
+      };
+      store.dispatch('addCharacter',character)
       handleAddDialogClose();
-      proxy.$message.success('资产新增成功'); // 使用 proxy 访问 $message
+      proxy.$message.success('资产新增成功');
     }
 
     function saveAsset(Type, content) {
@@ -391,61 +370,34 @@ export default defineComponent({
     }
 
     function saveAssetConfirm(group, name) {
-      if (!group) {
-        proxy.$message.warning('请选择分组'); // 使用 proxy 访问 $message
+      if (!name) {
+        proxy.$message.warning('资产名为空');
         return;
       }
 
-      if (name === '') {
-        proxy.$message.warning('资产名为空'); // 使用 proxy 访问 $message
-        return;
-      }
-
-      if (!allAssets[group]) {
-        proxy.$message.warning('无效的分组'); // 使用 proxy 访问 $message
-        return;
-      }
-      let assetFound = false;
-      let i = 0;
-      for (i = 0; i < allAssets[group].length; ++i) {
-        if (allAssets[group][i]['name'] === name) {
-          assetFound = true;
-          break;
-        }
-      }
-
-      if (assetFound) {
+      const assetIndex = characterData.findIndex((asset) => asset.name === name);
+      if (assetIndex !== -1) {
         if (curSaveType.value === 'image') {
-          allAssets[group][i]['image'] = curSaveThing.value;
+          characterData[assetIndex].image = curSaveThing.value;
         } else {
-          allAssets[group][i]['content'] = curSaveThing.value;
+          characterData[assetIndex].content = curSaveThing.value;
         }
-        proxy.$message.success('资产更新成功'); // 使用 proxy 访问 $message
+        actions.updateCharacter({ index: assetIndex, character: characterData[assetIndex] });
+        proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
           name: name,
           image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
-          content: curSaveType.value === 'content' ? curSaveThing.value : ''
+          content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
-        allAssets[group].push(newAsset);
-        proxy.$message.success('新资产添加成功'); // 使用 proxy 访问 $message
+        actions.addCharacter(newAsset);
+        proxy.$message.success('新资产添加成功');
       }
       showSaveDialog.value = false;
-      console.log(allAssets);
-    }
-
-    function changeGroup() {
-      curGroup.value = allAssets[newAsset.group];
     }
 
     function editAsset(index) {
       curEditAssetIndex.value = index;
-      if (selectedTab.value === 'characters') {
-        curGroup.value = allAssets.characters;
-      } else {
-        curGroup.value = allAssets.locations;
-      }
-      console.log(curGroup, allAssets);
       showEditDialog.value = true;
     }
 
@@ -456,21 +408,21 @@ export default defineComponent({
       formData.append('character_image', options.file);
 
       axios.post('http://localhost:8000', formData)
-        .then(response => {
+        .then((response) => {
           if (response.data.success) {
-            newAsset.image = response.data.filePath; // 从响应中获取文件路径
+            newAsset.image = response.data.filePath;
             options.onSuccess(response.data, options.file);
           } else {
             options.onError(new Error('Upload failed'));
           }
         })
-        .catch(error => {
+        .catch((error) => {
           options.onError(error);
         });
     };
-    
+
     function handleEditClose() {
-        showEditDialog.value = false;
+      showEditDialog.value = false;
     }
 
     function showDeleteDialog() {
@@ -482,38 +434,28 @@ export default defineComponent({
     }
 
     function confirmDelete() {
-      // 删除操作的逻辑，这里curEditAssetIndex.value 是当前编辑的资产索引
-      let deletedAssetName;
-      if (selectedTab.value === 'characters') {
-        deletedAssetName = allAssets.characters[curEditAssetIndex.value].name;
-        allAssets.characters.splice(curEditAssetIndex.value, 1);
-      } else {
-        deletedAssetName = allAssets.locations[curEditAssetIndex.value].name;
-        allAssets.locations.splice(curEditAssetIndex.value, 1);
-      }
+      actions.deleteCharacter(curEditAssetIndex.value);
       showDeleteConfirm.value = false;
-
-      // 关闭编辑界面
       handleEditClose();
-
-      // 显示删除成功的提示消息
       ElMessage({
         type: 'success',
-        message: `成功删除资产 "${deletedAssetName}"`,
+        message: `成功删除资产 "${currentEditAsset.value.name}"`,
       });
     }
 
-    function getImageSrc() {
-      return ('@/assets/images/logo.png');
+    function getImageSrc(image) {
+      return image ? image : '@/assets/images/logo.png';
     }
+
     function handleUploadSuccess(response) {
       if (response.success) {
-        curGroup.value[curEditAssetIndex.value].image = response.filePath;
+        characterData[curEditAssetIndex.value].image = response.filePath;
+        actions.updateCharacter({ index: curEditAssetIndex.value, character: characterData[curEditAssetIndex.value] });
       }
     }
 
     function saveEditedAsset() {
-      const editedAsset = curGroup.value[curEditAssetIndex.value];
+      const editedAsset = characterData[curEditAssetIndex.value];
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
@@ -526,23 +468,19 @@ export default defineComponent({
         proxy.$message.warning('请上传图片');
         return;
       }
+      actions.updateCharacter({ index: curEditAssetIndex.value, character: editedAsset });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
     }
 
     function generate_image() {
-      // 生成图片的逻辑
       console.log('生成图片');
     }
-
-
-
 
     return {
       currentEditAsset,
       fileList,
       addDialogVisible,
-      currentMessage,
       inputMessage,
       selectedTab,
       messages,
@@ -551,10 +489,10 @@ export default defineComponent({
       showSaveDialog,
       curSaveType,
       curSaveThing,
-      curGroup,
       showEditDialog,
       curEditAssetIndex,
       showDeleteConfirm,
+      handleSaveClose,
       handleRemove,
       handleExceed,
       sendMessage,
@@ -563,8 +501,6 @@ export default defineComponent({
       addNewAsset,
       selectTab,
       saveAsset,
-      changeGroup,
-      handleSaveClose,
       saveAssetConfirm,
       editAsset,
       uploadFile,
@@ -576,10 +512,11 @@ export default defineComponent({
       cancelDelete,
       confirmDelete,
       generate_image,
-      ...mapGetters('character', ['characterData']),
-      ...mapActions('character', ['updateCharacterData']),
+      ...actions,
+      charList,
+      ...mapState('character', ['characterData']),
     };
-  }
+  },
 });
 </script>
 

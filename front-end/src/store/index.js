@@ -1,21 +1,18 @@
-// store/index.js
 import { createStore } from 'vuex';
+import logline from './modules/logline';
 import character from './modules/character';
 import plot from './modules/plot';
-import scene from './modules/scene';
 import dialogue from './modules/dialogue';
+import scene from './modules/scene';
 import script from './modules/script';
-import logline from './modules/logline'; // 导入logline模块
 
-const store = createStore({
+export default createStore({
   modules: {
+    logline,
     character,
     plot,
-    scene,
     dialogue,
+    scene,
     script,
-    logline, // 注册logline模块
   },
 });
-
-export default store;

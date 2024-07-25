@@ -1,20 +1,38 @@
 export default {
-    state() {
-      return {
-        characterData: null,
-      };
+  state() {
+    return {
+      characters: [],
+    };
+  },
+  mutations: {
+    setCharacters(state, characters) {
+      state.characters = characters;
     },
-    mutations: {
-      setCharacterData(state, data) {
-        state.characterData = data;
-      },
+    addCharacter(state, character) {
+      state.characters.push(character);
     },
-    actions: {
-      updateCharacterData({ commit }, data) {
-        commit('setCharacterData', data);
-      },
+    updateCharacter(state, { index, character }) {
+      state.characters.splice(index, 1, character);
     },
-    getters: {
-      characterData: (state) => state.characterData,
+    deleteCharacter(state, index) {
+      state.characters.splice(index, 1);
     },
-  };
+  },
+  actions: {
+    setCharacters({ commit }, characters) {
+      commit('setCharacters', characters);
+    },
+    addCharacter({ commit }, character) {
+      commit('addCharacter', character);
+    },
+    updateCharacter({ commit }, payload) {
+      commit('updateCharacter', payload);
+    },
+    deleteCharacter({ commit }, index) {
+      commit('deleteCharacter', index);
+    },
+  },
+  getters: {
+    characters: (state) => state.characters,
+  },
+};

@@ -1,21 +1,36 @@
 export default {
-    state() {
-      return {
-        dialogueData: null,
-      };
+  state: () => ({
+    dialogues: [],
+  }),
+  mutations: {
+    setDialogues(state, dialogues) {
+      state.dialogues = dialogues;
     },
-    mutations: {
-      setDialogueData(state, data) {
-        state.dialogueData = data;
-      },
+    addDialogue(state, dialogue) {
+      state.dialogues.push(dialogue);
     },
-    actions: {
-      updateDialogueData({ commit }, data) {
-        commit('setDialogueData', data);
-      },
+    updateDialogue(state, { index, dialogue }) {
+      state.dialogues.splice(index, 1, dialogue);
     },
-    getters: {
-      dialogueData: (state) => state.dialogueData,
+    deleteDialogue(state, index) {
+      state.dialogues.splice(index, 1);
     },
-  };
-  
+  },
+  actions: {
+    setDialogues({ commit }, dialogues) {
+      commit('setDialogues', dialogues);
+    },
+    addDialogue({ commit }, dialogue) {
+      commit('addDialogue', dialogue);
+    },
+    updateDialogue({ commit }, payload) {
+      commit('updateDialogue', payload);
+    },
+    deleteDialogue({ commit }, index) {
+      commit('deleteDialogue', index);
+    },
+  },
+  getters: {
+    dialogues: (state) => state.dialogues,
+  },
+};

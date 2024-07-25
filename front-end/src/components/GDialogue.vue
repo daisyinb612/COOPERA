@@ -60,6 +60,7 @@
 
 <script>
 import { defineComponent, ref, computed } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -67,8 +68,9 @@ export default defineComponent({
   name: 'GDialogue',
 
   setup() {
-    const plots = ref([
-      // 示例数据
+    const store = useStore();
+
+    const examplePlots = [
       {
         plotName: 'Plot 1',
         plotElement: 'Conflict',
@@ -91,16 +93,22 @@ export default defineComponent({
           { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
         ]
       }
-    ]);
+    ];
+
+    const plots = computed(() => {
+      const storePlots = store.getters['plot/plots'];
+      return storePlots.length > 0 ? storePlots : examplePlots;
+    });
+
     const selectedPlotIndex = ref(null);
 
     const selectedPlot = computed(() => {
       return selectedPlotIndex.value !== null ? plots.value[selectedPlotIndex.value] : null;
     });
+
     const dialogueNumbers = computed(() => {
       return selectedPlot.value ? [...new Set(selectedPlot.value.dialogue.map(d => d.number))] : [];
     });
-
 
     function selectPlot(index) {
       selectedPlotIndex.value = index;
@@ -112,13 +120,14 @@ export default defineComponent({
         data: plots.value.map(plot => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
-          情节梗概: plot.dialogue,
+          情节梗概: plot.beat,
+          对话内容: plot.dialogue,
           参与人物: plot.characters.map(character => ({ 角色名字: character }))
         }))
       };
 
       try {
-        await axios.post('http:/localhost.8000', payload);
+        await axios.post('http://localhost:8000', payload);
         ElMessage({
           message: '上传成功',
           type: 'success'
@@ -130,9 +139,11 @@ export default defineComponent({
         });
       }
     }
+
     function filteredDialogues(dialogueNumber) {
       return selectedPlot.value ? selectedPlot.value.dialogue.filter(d => d.number === dialogueNumber) : [];
     }
+
     return {
       plots,
       selectedPlot,
@@ -278,22 +289,26 @@ export default defineComponent({
   background-color: #3a51d4;
   color: white;
 }
+
 .plot-item {
-    margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #e6e6e6;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #e6e6e6;
 }
+
 .plot-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
+
 .character-dialogue {
-  display: flex; /* 使用flex布局使角色和对话内容横排 */
+  display: flex;
 }
+
 .dialogue-content {
-  margin-left: 5px; /* 添加左边距，确保对话内容和冒号之间有足够的空间 */
+  margin-left: 5px;
 }
 </style>
