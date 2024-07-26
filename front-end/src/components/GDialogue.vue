@@ -1,9 +1,19 @@
 <template>
   <el-container class="main-container">
+    <el-aside class="sidebar">
+      <el-button class="sidebar-button" @click="inputLogline">Input Logline</el-button>
+      <el-button class="sidebar-button" @click="manageCharacter">Character</el-button>
+      <el-button class="sidebar-button" @click="managePlot">Plot</el-button>
+      <el-button class="sidebar-button" @click="manageScene">Scene</el-button>
+      <el-button class="sidebar-button" @click="manageDialogue">Dialogue</el-button>
+      <el-button class="sidebar-button" @click="renderScript">Render Script</el-button>
+    </el-aside>
+
     <el-main class="dialogue">
       <el-header class="header">
-        <div>Dialogue</div>
+        <div>Edit Dialogue</div>
       </el-header>
+
       <el-main class="dialogue">
         <el-header class="button-container-up">
           <el-scrollbar class="plot-name-list">
@@ -49,9 +59,9 @@
             </el-card>
           </template>
         </el-main>
-        
+
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadDialogue">Upload</el-button>
+          <el-button class="button" @click="uploadFullplot">Upload</el-button>
         </el-footer>
       </el-main>
     </el-main>
@@ -70,36 +80,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    const examplePlots = [
-      {
-        plotName: 'Plot 1',
-        plotElement: 'Conflict',
-        location: 'Location 1',
-        characters: ['Character 1', 'Character 2'],
-        beat: 'This is the beat for plot 1.',
-        dialogue: [
-          { number: 1, character: 'Character 1', content: 'Dialogue 1 for Character 1' },
-          { number: 2, character: 'Character 2', content: 'Dialogue 1 for Character 2' }
-        ]
-      },
-      {
-        plotName: 'Plot 2',
-        plotElement: 'Climax',
-        location: 'Location 2',
-        characters: ['Character 3', 'Character 4'],
-        beat: 'This is the beat for plot 2.',
-        dialogue: [
-          { number: 1, character: 'Character 3', content: 'Dialogue 1 for Character 3' },
-          { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
-        ]
-      }
-    ];
-
-    const plots = computed(() => {
-      const storePlots = store.getters['plot/plots'];
-      return storePlots.length > 0 ? storePlots : examplePlots;
-    });
-
+    const plots = computed(() => store.getters['fullplot/fullplots']);
     const selectedPlotIndex = ref(null);
 
     const selectedPlot = computed(() => {
@@ -114,9 +95,9 @@ export default defineComponent({
       selectedPlotIndex.value = index;
     }
 
-    async function UploadDialogue() {
+    async function uploadFullplot() {
       const payload = {
-        action: 'update_dialogue',
+        action: 'update_fullplot',
         data: plots.value.map(plot => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
@@ -151,7 +132,7 @@ export default defineComponent({
       selectedPlotIndex,
       filteredDialogues,
       selectPlot,
-      UploadDialogue
+      uploadFullplot
     };
   }
 });
