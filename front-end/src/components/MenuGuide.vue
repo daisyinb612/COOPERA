@@ -28,7 +28,7 @@
             <el-icon :class="$style.icon">
               <Location />
             </el-icon>
-            <div :class="$style.charater">Location</div>
+            <div :class="$style.charater">Scene</div>
           </div>
         </el-button>
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagefour') ? $style.active : '' ]" @click="goToPage('/home/pagefour')" plain>

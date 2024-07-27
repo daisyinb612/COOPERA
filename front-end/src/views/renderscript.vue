@@ -1,15 +1,20 @@
 <template>
-    <div>
-      <h1>renderscript</h1>
-    </div>
-  </template>
+  <div>
+    <GScript />
+  </div>
+</template>
 
-  <script>
-  export default {
-    name: 'RenderScript'
+<script>
+import GScript from '../components/GScript.vue';
+
+export default {
+  name: 'RenderScript',
+  components: {
+    GScript
   }
-  </script>
+}
+</script>
 
-  <style scoped>
-  /* 添加你的样式 */
-  </style>
+<style scoped>
+/* 添加你的样式 */
+</style>

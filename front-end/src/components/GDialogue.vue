@@ -1,19 +1,9 @@
 <template>
   <el-container class="main-container">
-    <el-aside class="sidebar">
-      <el-button class="sidebar-button" @click="inputLogline">Input Logline</el-button>
-      <el-button class="sidebar-button" @click="manageCharacter">Character</el-button>
-      <el-button class="sidebar-button" @click="managePlot">Plot</el-button>
-      <el-button class="sidebar-button" @click="manageScene">Scene</el-button>
-      <el-button class="sidebar-button" @click="manageDialogue">Dialogue</el-button>
-      <el-button class="sidebar-button" @click="renderScript">Render Script</el-button>
-    </el-aside>
-
     <el-main class="dialogue">
       <el-header class="header">
-        <div>Edit Dialogue</div>
+        <div>Dialogue</div>
       </el-header>
-
       <el-main class="dialogue">
         <el-header class="button-container-up">
           <el-scrollbar class="plot-name-list">
@@ -59,9 +49,9 @@
             </el-card>
           </template>
         </el-main>
-
+        
         <el-footer class="button-container-down">
-          <el-button class="button" @click="uploadFullplot">Upload</el-button>
+          <el-button class="button" @click="UploadDialogue">Upload</el-button>
         </el-footer>
       </el-main>
     </el-main>
@@ -70,7 +60,6 @@
 
 <script>
 import { defineComponent, ref, computed } from 'vue';
-import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -78,37 +67,60 @@ export default defineComponent({
   name: 'GDialogue',
 
   setup() {
-    const store = useStore();
+    const plots = ref([
+      // 示例数据
+      {
+        plotName: 'Plot 1',
+        logline: 'Logline 1',
+        plotElement: 'Conflict',
+        location: 'Location 1',
+        characters: ['Character 1', 'Character 2'],
+        beat: 'This is the beat for plot 1.',
+        dialogue: [
+          { number: 1, character: 'Character 1', content: 'Dialogue 1 for Character 1' },
+          { number: 2, character: 'Character 2', content: 'Dialogue 1 for Character 2' }
+        ]
+      },
 
-    const plots = computed(() => store.getters['fullplot/fullplots']);
+      {
+        plotName: 'Plot 2',
+        plotElement: 'Climax',
+        location: 'Location 2',
+        characters: ['Character 3', 'Character 4'],
+        beat: 'This is the beat for plot 2.',
+        dialogue: [
+          { number: 1, character: 'Character 3', content: 'Dialogue 1 for Character 3' },
+          { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
+        ]
+      }
+    ]);
     const selectedPlotIndex = ref(null);
 
     const selectedPlot = computed(() => {
       return selectedPlotIndex.value !== null ? plots.value[selectedPlotIndex.value] : null;
     });
-
     const dialogueNumbers = computed(() => {
       return selectedPlot.value ? [...new Set(selectedPlot.value.dialogue.map(d => d.number))] : [];
     });
+
 
     function selectPlot(index) {
       selectedPlotIndex.value = index;
     }
 
-    async function uploadFullplot() {
+    async function UploadDialogue() {
       const payload = {
-        action: 'update_fullplot',
+        action: 'update_dialogue',
         data: plots.value.map(plot => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
-          情节梗概: plot.beat,
-          对话内容: plot.dialogue,
+          情节梗概: plot.dialogue,
           参与人物: plot.characters.map(character => ({ 角色名字: character }))
         }))
       };
 
       try {
-        await axios.post('http://localhost:8000', payload);
+        await axios.post('http:/localhost.8000', payload);
         ElMessage({
           message: '上传成功',
           type: 'success'
@@ -120,11 +132,9 @@ export default defineComponent({
         });
       }
     }
-
     function filteredDialogues(dialogueNumber) {
       return selectedPlot.value ? selectedPlot.value.dialogue.filter(d => d.number === dialogueNumber) : [];
     }
-
     return {
       plots,
       selectedPlot,
@@ -132,7 +142,7 @@ export default defineComponent({
       selectedPlotIndex,
       filteredDialogues,
       selectPlot,
-      uploadFullplot
+      UploadDialogue
     };
   }
 });
@@ -270,26 +280,22 @@ export default defineComponent({
   background-color: #3a51d4;
   color: white;
 }
-
 .plot-item {
-  margin-bottom: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #e6e6e6;
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #e6e6e6;
 }
-
 .plot-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
-
 .character-dialogue {
-  display: flex;
+  display: flex; /* 使用flex布局使角色和对话内容横排 */
 }
-
 .dialogue-content {
-  margin-left: 5px;
+  margin-left: 5px; /* 添加左边距，确保对话内容和冒号之间有足够的空间 */
 }
 </style>

@@ -25,7 +25,7 @@
           </el-scrollbar>
         </el-main>
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadPlot">上传</el-button>
+          <el-button class="button" @click="UploadPlot">保存</el-button>
         </el-footer>
       </el-main>
     </el-main>

@@ -63,7 +63,7 @@
 
         <el-footer class="add-button-container">
           <el-button class="addasset-button" @click="showAddDialog">新增</el-button>
-          <el-button class="addasset-button" @click="upload">上传</el-button>
+          <el-button class="addasset-button" @click="upload">保存</el-button>
         </el-footer>
       </el-container>
     </el-container>
