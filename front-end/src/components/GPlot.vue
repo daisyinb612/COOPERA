@@ -15,7 +15,7 @@
               <div class="plot-header">
                 <div class="scene-name">{{ plot.plotName }}</div>
                 <div class="plot-element">{{ plot.plotElement }}</div>
-                <div class="location">{{ plot.scenes }}</div>
+                <div class="location">{{ plot.scene }}</div>
                 <div class="characters">
                   <span v-for="character in plot.characters" :key="character">{{ character }}</span>
                 </div>
@@ -47,19 +47,14 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-select v-model="newPlot.scenes" placeholder="请选择场景">
+          <el-select v-model="newPlot.scene" placeholder="请选择场景" allow-create filterable>
             <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.label" :value="scene.name" />
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
-          <el-select v-model="selectedCharacters" multiple placeholder="请选择角色">
+          <el-select v-model="newPlot.characters" multiple placeholder="请选择角色">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character.name" />
           </el-select>
-          <div class="characters">
-            <el-tag v-for="(character, index) in selectedCharacters" :key="index" closable @close="removeCharacter(character)">
-              {{ character }}
-            </el-tag>
-          </div>
         </el-form-item>
         <el-form-item label="情节梗概">
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
@@ -88,24 +83,14 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-select v-model="editSelectedScenes" placeholder="请选择场景">
-            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.label" :value="scene.name" />
+          <el-select v-model="editPlotData.scene" placeholder="请选择场景">
+            <el-option v-for="scene in allScenes" :key="scene.name" :label="scene.name" :value="scene.name" />
           </el-select>
-          <div class="characters">
-            <el-tag v-for="(scene, index) in editSelectedScenes" :key="index" closable @close="removeScene(scene)">
-              {{ scene }}
-            </el-tag>
-          </div>
         </el-form-item>
         <el-form-item label="角色">
-          <el-select v-model="editSelectedCharacters" multiple placeholder="请选择角色">
+          <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character.name" />
           </el-select>
-          <div class="characters">
-            <el-tag v-for="(character, index) in editSelectedCharacters" :key="index" closable @close="removeEditCharacter(character)">
-              {{ character }}
-            </el-tag>
-          </div>
         </el-form-item>
         <el-form-item label="情节梗概">
           <el-input type="textarea" v-model="editPlotData.beat" autocomplete="off" />
@@ -132,20 +117,17 @@ export default defineComponent({
 
     const addDialogVisible = ref(false);
     const editDialogVisible = ref(false);
-    const selectedCharacters = ref([]);
-    const editSelectedCharacters = ref([]);
-    const editSelectedScenes = ref([]);
     const newPlot = reactive({
       plotName: '',
       plotElement: '',
-      scenes: '',
+      scene: '',
       characters: [],
       beat: '',
     });
     const editPlotData = reactive({
       plotName: '',
       plotElement: '',
-      scenes: '',
+      scene: '',
       characters: [],
       beat: '',
     });
@@ -157,6 +139,7 @@ export default defineComponent({
     const allCharacters = computed(() => store.state.character.characters);
 
     const addPlot = (plot) => store.dispatch('addPlot', plot);
+    const addScene = (scene) => store.dispatch('addScene', scene);
     const updatePlot = (payload) => store.dispatch('updatePlot', payload);
 
     function AddPlot() {
@@ -166,21 +149,18 @@ export default defineComponent({
     function handleAddDialogClose() {
       newPlot.plotName = '';
       newPlot.plotElement = '';
-      newPlot.scenes = '';
+      newPlot.scene = '';
       newPlot.characters = [];
       newPlot.beat = '';
-      selectedCharacters.value = [];
       addDialogVisible.value = false;
     }
 
     function handleEditDialogClose() {
       editPlotData.plotName = '';
       editPlotData.plotElement = '';
-      editPlotData.scenes = '';
+      editPlotData.scene = '';
       editPlotData.characters = [];
       editPlotData.beat = '';
-      editSelectedCharacters.value = [];
-      editSelectedScenes.value = [];
       editDialogVisible.value = false;
     }
 
@@ -193,9 +173,27 @@ export default defineComponent({
         return;
       }
 
+      if (!newPlot.scene) {
+        ElMessage({
+          message: '场景不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if (newPlot.characters.length === 0) {
+        console.log(newPlot)
+        ElMessage({
+          message: '角色不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
       const existingPlotIndex = plots.value.findIndex((plot) => plot.plotName === newPlot.plotName);
       if (existingPlotIndex !== -1) {
         updatePlot({ index: existingPlotIndex, plot: { ...newPlot } });
+
         ElMessage({
           message: '更新成功',
           type: 'success',
@@ -207,43 +205,64 @@ export default defineComponent({
           type: 'success',
         });
       }
+
+      const newScene = {
+        name: newPlot.scene,
+        content: "",
+        image: 'empty.png',
+      };
+      const existingSceneIndex = allScenes.value.findIndex((scene) => scene.name === newScene.name)
+      if (existingSceneIndex === -1){
+        addScene({...newScene})
+      }
+
       handleAddDialogClose();
-    }
-
-    function removeCharacter(character) {
-      const index = selectedCharacters.value.indexOf(character);
-      if (index !== -1) {
-        selectedCharacters.value.splice(index, 1);
-      }
-    }
-
-    function removeEditCharacter(character) {
-      const index = editSelectedCharacters.value.indexOf(character);
-      if (index !== -1) {
-        editSelectedCharacters.value.splice(index, 1);
-      }
     }
 
     function editPlot(index) {
       const plotToEdit = plots.value[index];
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
-      editPlotData.scenes = plotToEdit.scenes;
+      editPlotData.scene = plotToEdit.scene;
       editPlotData.characters = [...plotToEdit.characters];
-      editSelectedCharacters.value = [...plotToEdit.characters];
-      editSelectedScenes.value = plotToEdit.scenes;
       editPlotData.beat = plotToEdit.beat;
       plotToEditIndex.value = index;
       editDialogVisible.value = true;
     }
 
     function saveEditedPlot() {
+
+      if (!editPlotData.plotName) {
+        ElMessage({
+          message: '情节名称不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if (!editPlotData.scene) {
+        ElMessage({
+          message: '场景不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if (editPlotData.characters.length === 0) {
+        ElMessage({
+          message: '角色不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+
       if (plotToEditIndex.value !== null) {
         const updatedPlot = {
           plotName: editPlotData.plotName,
           plotElement: editPlotData.plotElement,
-          scenes: editSelectedScenes.value,
-          characters: [...editSelectedCharacters.value],
+          scene: editPlotData.scene,
+          characters: [...editPlotData.characters.value],
           beat: editPlotData.beat,
         };
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
@@ -265,7 +284,7 @@ export default defineComponent({
         addPlot({
           plotName: generatedPlot.plot,
           plotElement: '',
-          scenes: '',
+          scene: '',
           characters: [],
           beat: generatedPlot.plot_content,
         });
@@ -283,7 +302,7 @@ export default defineComponent({
         data: plots.value.map((plot) => ({
           章节名: plot.plotName,
           故事阶段: plot.plotElement,
-          场景: plot.scenes,
+          场景: plot.scene,
           情节梗概: plot.beat,
           参与人物: plot.characters.map((character) => ({ 角色名字: character })),
         })),
@@ -309,17 +328,12 @@ export default defineComponent({
       plots,
       newPlot,
       editPlotData,
-      selectedCharacters,
-      editSelectedCharacters,
-      editSelectedScenes,
       allScenes,
       allCharacters,
       AddPlot,
       handleAddDialogClose,
       handleEditDialogClose,
       addNewPlot,
-      removeCharacter,
-      removeEditCharacter,
       editPlot,
       saveEditedPlot,
       generatePlot,
