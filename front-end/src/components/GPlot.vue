@@ -123,6 +123,7 @@ export default defineComponent({
       scene: '',
       characters: [],
       beat: '',
+      dialogue: [],
     });
     const editPlotData = reactive({
       plotName: '',
@@ -130,6 +131,7 @@ export default defineComponent({
       scene: '',
       characters: [],
       beat: '',
+      dialogue: [],
     });
     const plotToEditIndex = ref(null);
 
@@ -152,6 +154,7 @@ export default defineComponent({
       newPlot.scene = '';
       newPlot.characters = [];
       newPlot.beat = '';
+      editPlotData.dialogue = [];
       addDialogVisible.value = false;
     }
 
@@ -161,6 +164,7 @@ export default defineComponent({
       editPlotData.scene = '';
       editPlotData.characters = [];
       editPlotData.beat = '';
+      editPlotData.dialogue = [];
       editDialogVisible.value = false;
     }
 
@@ -226,6 +230,7 @@ export default defineComponent({
       editPlotData.scene = plotToEdit.scene;
       editPlotData.characters = [...plotToEdit.characters];
       editPlotData.beat = plotToEdit.beat;
+      editPlotData.dialogue = plotToEdit.dialogue;
       plotToEditIndex.value = index;
       editDialogVisible.value = true;
     }

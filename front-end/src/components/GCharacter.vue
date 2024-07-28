@@ -71,9 +71,7 @@
     <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
         <el-form-item label="分组">
-          <el-select v-model="newAsset.group" placeholder="请选择分组">
-            <el-option label="角色" value="characters" />
-          </el-select>
+          角色
         </el-form-item>
 
         <el-form-item label="资产名" :label-width="formLabelWidth">
@@ -133,7 +131,7 @@
 
     <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
       <el-form-item label="分组" :label-width="formLabelWidth">
-        {{ selectedTab }}
+        角色
       </el-form-item>
 
       <el-form-item label="资产名" :label-width="formLabelWidth">
@@ -177,7 +175,7 @@
 
 <script>
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapState, mapActions,useStore } from 'vuex';
+import { mapActions,useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -207,26 +205,24 @@ export default defineComponent({
       image: '',
     });
     const store=useStore()
-
-    // Computed properties
-    const currentEditAsset = computed(() => {
-      return characterData[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    const currentEditAsset = reactive({
+      name: '',
+      content: '',
+      image: '',
     });
 
+    // Computed properties
+    // const currentEditAsset = computed(() => {
+    //   return charList[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    // });
+
     const filteredAssets = computed(() => {
-      return characterData;
+      return charList;
     });
 
     const charList=computed(()=>{
-    return store.state.character.characters
-
+      return store.state.character.characters
     })
-    // Vuex state and actions
-    const {
-      characterData,
-    } = mapState('character', {
-      characterData: 'characterData',
-    });
 
     const actions = mapActions('character', [
       'updateCharacterData',
@@ -375,14 +371,14 @@ export default defineComponent({
         return;
       }
 
-      const assetIndex = characterData.findIndex((asset) => asset.name === name);
+      const assetIndex = charList.value.findIndex((asset) => asset.name === name);
       if (assetIndex !== -1) {
         if (curSaveType.value === 'image') {
-          characterData[assetIndex].image = curSaveThing.value;
+          charList[assetIndex].image = curSaveThing.value;
         } else {
-          characterData[assetIndex].content = curSaveThing.value;
+          charList[assetIndex].content = curSaveThing.value;
         }
-        actions.updateCharacter({ index: assetIndex, character: characterData[assetIndex] });
+        actions.updateCharacter({ index: assetIndex, character: charList[assetIndex] });
         proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
@@ -398,6 +394,9 @@ export default defineComponent({
 
     function editAsset(index) {
       curEditAssetIndex.value = index;
+      currentEditAsset.name = charList.value[index].name;
+      currentEditAsset.content = charList.value[index].content;
+      currentEditAsset.image = charList.value[index].image;
       showEditDialog.value = true;
     }
 
@@ -449,13 +448,13 @@ export default defineComponent({
 
     function handleUploadSuccess(response) {
       if (response.success) {
-        characterData[curEditAssetIndex.value].image = response.filePath;
-        actions.updateCharacter({ index: curEditAssetIndex.value, character: characterData[curEditAssetIndex.value] });
+        charList[curEditAssetIndex.value].image = response.filePath;
+        actions.updateCharacter({ index: curEditAssetIndex.value, character: charList[curEditAssetIndex.value] });
       }
     }
 
     function saveEditedAsset() {
-      const editedAsset = characterData[curEditAssetIndex.value];
+      const editedAsset = charList[curEditAssetIndex.value];
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
@@ -514,7 +513,6 @@ export default defineComponent({
       generate_image,
       ...actions,
       charList,
-      ...mapState('character', ['characterData']),
     };
   },
 });

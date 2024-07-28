@@ -56,85 +56,84 @@
         </el-button-group>
 
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
+          <el-card v-for="(asset, index) in scenes" :key="index" class="asset-item" @click="editAsset(index)">
             <div class="asset-name">{{ asset.name }}</div>
             <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" >
           </el-card>
         </el-scrollbar>
 
         <el-footer class="add-button-container">
-<!-- <el-button class="addasset-button" @click="showAddDialog">新增</el-button>/ -->
           <el-button class="addasset-button" @click="upload">保存</el-button>
         </el-footer>
       </el-container>
     </el-container>
 
-    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
-      <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-        <el-form-item label="分组">
-          <el-select v-model="newAsset.group" placeholder="请选择分组">
-            <el-option label="场景" value="scenes" />
-          </el-select>
-        </el-form-item>
+<!--    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">-->
+<!--      <el-form :model="newAsset" label-width="100px" class="add-asset-form">-->
+<!--        <el-form-item label="分组">-->
+<!--          <el-select v-model="newAsset.group" placeholder="请选择分组">-->
+<!--            <el-option label="场景" value="scenes" />-->
+<!--          </el-select>-->
+<!--        </el-form-item>-->
 
-        <el-form-item label="资产名" :label-width="formLabelWidth">
-          <el-input v-model="newAsset.name" autocomplete="off" />
-        </el-form-item>
+<!--        <el-form-item label="资产名" :label-width="formLabelWidth">-->
+<!--          <el-input v-model="newAsset.name" autocomplete="off" />-->
+<!--        </el-form-item>-->
 
-        <el-form-item v-if="newAsset.group === 'scenes'" label="描述" :label-width="formLabelWidth">
-          <el-input v-model="newAsset.content" autocomplete="off" />
-        </el-form-item>
+<!--        <el-form-item v-if="newAsset.group === 'scenes'" label="描述" :label-width="formLabelWidth">-->
+<!--          <el-input v-model="newAsset.content" autocomplete="off" />-->
+<!--        </el-form-item>-->
 
-        <el-form-item v-if="newAsset.group === 'scene'" label="图片" :label-width="formLabelWidth">
-          <div>
-            <el-upload :http-request="uploadFile"
-                       list-type="picture-card"
-                       :on-success="handleUploadSuccess"
-                       :file-list="fileList"
-                       :limit="1"
-                       :on-remove="handleRemove"
-                       :on-exceed="handleExceed">
-              <i class="el-icon-plus"></i>
-            </el-upload>
-            <el-button @click="generate_image" class="confirm-button">生成</el-button>
-            <el-button @click="save_image" class="confirm-button">保存</el-button>
-          </div>
-        </el-form-item>
+<!--        <el-form-item v-if="newAsset.group === 'scene'" label="图片" :label-width="formLabelWidth">-->
+<!--          <div>-->
+<!--            <el-upload :http-request="uploadFile"-->
+<!--                       list-type="picture-card"-->
+<!--                       :on-success="handleUploadSuccess"-->
+<!--                       :file-list="fileList"-->
+<!--                       :limit="1"-->
+<!--                       :on-remove="handleRemove"-->
+<!--                       :on-exceed="handleExceed">-->
+<!--              <i class="el-icon-plus"></i>-->
+<!--            </el-upload>-->
+<!--            <el-button @click="generate_image" class="confirm-button">生成</el-button>-->
+<!--            <el-button @click="save_image" class="confirm-button">保存</el-button>-->
+<!--          </div>-->
+<!--        </el-form-item>-->
 
-        <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
-          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>
-        </el-footer>
-      </el-form>
-    </el-dialog>
+<!--        <el-footer class="dialog-footer">-->
+<!--          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>-->
+<!--          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>-->
+<!--        </el-footer>-->
+<!--      </el-form>-->
+<!--    </el-dialog>-->
 
-    <el-dialog :title="'保存 ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">
-      <el-form-item label="类型">
-        {{ curSaveType }}
-      </el-form-item>
+<!--    <el-dialog :title="'保存 ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">-->
+<!--      <el-form-item label="类型">-->
+<!--        {{ curSaveType }}-->
+<!--      </el-form-item>-->
 
-      <el-form-item label="分组">
-        <el-select v-model="newAsset.group" placeholder="选择分组" @change="changeGroup">
-          <el-option label="场景" value="scene" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="资产名" :label-width="formLabelWidth">
-        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="选择名字">
-          <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />
-        </el-select>
-        <el-input v-model="newAsset.name" autocomplete="off" />
-      </el-form-item>
+<!--      <el-form-item label="分组">-->
+<!--        <el-select v-model="newAsset.group" placeholder="选择分组" @change="changeGroup">-->
+<!--          <el-option label="场景" value="scene" />-->
+<!--        </el-select>-->
+<!--      </el-form-item>-->
+<!--      <el-form-item label="资产名" :label-width="formLabelWidth">-->
+<!--        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="选择名字">-->
+<!--          <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />-->
+<!--        </el-select>-->
+<!--        <el-input v-model="newAsset.name" autocomplete="off" />-->
+<!--      </el-form-item>-->
 
-      <el-footer class="dialog-footer">
-        <el-button @click="handleSaveClose" class="cancel-button">取消</el-button>
-        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"
-                   class="confirm-button">确认</el-button>
-      </el-footer>
-    </el-dialog>
+<!--      <el-footer class="dialog-footer">-->
+<!--        <el-button @click="handleSaveClose" class="cancel-button">取消</el-button>-->
+<!--        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"-->
+<!--                   class="confirm-button">确认</el-button>-->
+<!--      </el-footer>-->
+<!--    </el-dialog>-->
 
     <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
       <el-form-item label="分组" :label-width="formLabelWidth">
-        {{ selectedTab }}
+        场景
       </el-form-item>
 
       <el-form-item label="资产名" :label-width="formLabelWidth">
@@ -160,7 +159,7 @@
 
       <el-footer class="dialog-footer">
         <el-button @click="handleEditClose" class="cancel-button">取消</el-button>
-        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>
+<!--        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>-->
         <el-button type="primary" @click="saveEditedAsset" class="confirm-button">确定</el-button>
       </el-footer>
 
@@ -178,7 +177,7 @@
 
 <script>
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapState, mapActions,useStore } from 'vuex';
+import { mapActions,useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -207,34 +206,36 @@ export default defineComponent({
       content: '',
       image: '',
     });
-    const store=useStore()
+    const store=useStore();
+    const currentEditAsset = reactive({
+      group: 'scenes',
+      name: '',
+      content: '',
+      image: '',
+    });
 
     // Computed properties
-    const currentEditAsset = computed(() => {
-      return Scenedata[curEditAssetIndex.value] || { name: '', content: '', image: '' };
-    });
+    // const currentEditAsset = computed(() => {
+    //   return Scenedata[curEditAssetIndex.value] || { name: '', content: '', image: '' };
+    // });
 
     const filteredAssets = computed(() => {
-      return Scenedata;
+      return scenes;
     });
 
-    const charList=computed(()=>{
-    return store.state.scene.scenes
-
-    })
-    // Vuex state and actions
-    const {
-      Scenedata,
-    } = mapState('scene', {
-      Scenedata: 'Scenedata',
+    const scenes=computed(()=>{
+      return store.state.scene.scenes
     });
+
 
     const actions = mapActions('scene', [
-      'updateScenedata',
       'addScene',
-      'updateScene',
       'deleteScene',
     ]);
+
+    // const addScene = (scene) => store.dispatch('addScene', scene);
+    const updateScene = (payload) => store.dispatch('updateScene', payload);
+    // const deleteScene = (index) => store.dispatch('updateScene', index);
 
     // Functions
     async function sendMessage() {
@@ -343,27 +344,6 @@ export default defineComponent({
       showSaveDialog.value = false;
     }
 
-    function addNewAsset() {
-      let scenesList=store.state.scene.scenes
-      if (!newAsset.name) {
-        proxy.$message.warning('资产名不能为空');
-        return;
-      }
-      if (scenesList.some((asset) => asset.name === newAsset.name)) {
-        proxy.$message.warning('资产名已存在');
-        return;
-      }
-
-      const scene = {
-        name: newAsset.name,
-        content: newAsset.content,
-        image: newAsset.image || 'empty.png',
-      };
-      store.dispatch('addScene',scene)
-      handleAddDialogClose();
-      proxy.$message.success('资产新增成功');
-    }
-
     function saveAsset(Type, content) {
       curSaveType.value = Type;
       curSaveThing.value = content;
@@ -376,14 +356,14 @@ export default defineComponent({
         return;
       }
 
-      const assetIndex = Scenedata.findIndex((asset) => asset.name === name);
+      const assetIndex = scenes.value.findIndex((asset) => asset.name === name);
       if (assetIndex !== -1) {
         if (curSaveType.value === 'image') {
-          Scenedata[assetIndex].image = curSaveThing.value;
+          scenes[assetIndex].image = curSaveThing.value;
         } else {
-          Scenedata[assetIndex].content = curSaveThing.value;
+          scenes[assetIndex].content = curSaveThing.value;
         }
-        actions.updateScene({ index: assetIndex, scene: Scenedata[assetIndex] });
+        actions.updateScene({ index: assetIndex, scene: scenes[assetIndex] });
         proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
@@ -398,7 +378,10 @@ export default defineComponent({
     }
 
     function editAsset(index) {
-      curEditAssetIndex.value = index;
+      curEditAssetIndex.value = index
+      currentEditAsset.name = scenes.value[index].name;
+      currentEditAsset.content = scenes.value[index].content;
+      currentEditAsset.image = scenes.value[index].image;
       showEditDialog.value = true;
     }
 
@@ -450,26 +433,28 @@ export default defineComponent({
 
     function handleUploadSuccess(response) {
       if (response.success) {
-        Scenedata[curEditAssetIndex.value].image = response.filePath;
-        actions.updateScene({ index: curEditAssetIndex.value, scene: Scenedata[curEditAssetIndex.value] });
+        scenes[curEditAssetIndex.value].image = response.filePath;
+        actions.updateScene({ index: curEditAssetIndex.value, scene: scenes[curEditAssetIndex.value] });
       }
     }
 
     function saveEditedAsset() {
-      const editedAsset = Scenedata[curEditAssetIndex.value];
-      if (!editedAsset.name) {
+      // const editedAsset = Scenedata[curEditAssetIndex.value];
+
+      if (!currentEditAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
       }
-      if (!editedAsset.content) {
+      if (!currentEditAsset.content) {
         proxy.$message.warning('描述不能为空');
         return;
       }
-      if (!editedAsset.image) {
-        proxy.$message.warning('请上传图片');
-        return;
-      }
-      actions.updateScene({ index: curEditAssetIndex.value, scene: editedAsset });
+      // if (!currentEditAsset.image) {
+      //   proxy.$message.warning('请上传图片');
+      //   return;
+      // }
+      console.log(currentEditAsset)
+      updateScene({ index: curEditAssetIndex.value, scene: { ...currentEditAsset } });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
     }
@@ -499,7 +484,6 @@ export default defineComponent({
       sendMessage,
       showAddDialog,
       handleAddDialogClose,
-      addNewAsset,
       selectTab,
       saveAsset,
       saveAssetConfirm,
@@ -514,8 +498,8 @@ export default defineComponent({
       confirmDelete,
       generate_image,
       ...actions,
-      charList,
-      ...mapState('scene', ['Scenedata']),
+      scenes,
+      // ...mapState('scene', ['scenes']),
     };
   },
 });
