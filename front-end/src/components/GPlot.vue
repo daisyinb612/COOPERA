@@ -262,7 +262,7 @@ export default defineComponent({
           plotName: editPlotData.plotName,
           plotElement: editPlotData.plotElement,
           scene: editPlotData.scene,
-          characters: [...editPlotData.characters.value],
+          characters: [...editPlotData.characters],
           beat: editPlotData.beat,
         };
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
