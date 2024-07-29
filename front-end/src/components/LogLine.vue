@@ -157,7 +157,7 @@ export default defineComponent({
       };
 
       try {
-        const response = await axios.post('http://192.168.0.111:8000', requestBody, { timeout: 10000 });
+        const response = await axios.post('http://localhost:8000/upload_storyline', requestBody, { timeout: 10000 });
 
         if (response.status === 200) {
           ElMessage({

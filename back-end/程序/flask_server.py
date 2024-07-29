@@ -21,7 +21,6 @@ info_dict = {
  
 @app.route('/upload_storyline', methods=['POST'])
 def upload_storyline():
-    print("YES")
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
