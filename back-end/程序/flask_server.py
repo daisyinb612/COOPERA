@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
 from excel import ExcelOp
 from llm import LLM
+from flask_cors import CORS
  
 app = Flask(__name__)
+CORS(app)
+
+
  
 # Configuration dictionary
 info_dict = {
@@ -17,6 +21,7 @@ info_dict = {
  
 @app.route('/upload_storyline', methods=['POST'])
 def upload_storyline():
+    print("YES")
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
@@ -40,6 +45,7 @@ def get_storyline_help():
     question = "\n###故事线###:" + storyline + "\n###我的问题###:" + user_input
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.storyline_help, history=history)
+    print("Yes")
 
     return jsonify({"answer": answer})
  

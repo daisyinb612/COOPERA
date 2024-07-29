@@ -62,7 +62,7 @@ export default defineComponent({
   name: 'LogLine',
 
   computed: {
-    ...mapState({
+    ...mapState({ 
       loglineData: state => state.logline.loglineData,
     }),
   },
@@ -105,7 +105,7 @@ export default defineComponent({
 
       try {
         console.log("Sending request...");
-        const response = await axios.post('http://192.168.0.111:8000', requestBody, config);
+        const response = await axios.post('http://localhost:8000/get_storyline_help', requestBody, config);
         console.log("Request successful");
         if (response.status === 200) {
           const assistantMessage = {
