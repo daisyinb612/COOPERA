@@ -175,7 +175,7 @@
 
 <script>
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapActions,useStore } from 'vuex';
+import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
@@ -224,12 +224,6 @@ export default defineComponent({
       return store.state.character.characters
     })
 
-    const actions = mapActions('character', [
-      'updateCharacterData',
-      'addCharacter',
-      'updateCharacter',
-      'deleteCharacter',
-    ]);
 
     // Functions
     async function sendMessage() {
@@ -259,7 +253,7 @@ export default defineComponent({
       };
 
       try {
-        const response = await axios.post('http://localhost:8000', requestBody);
+        const response = await axios.post('http://localhost:8000/get_character_help', requestBody);
         if (response.status === 200) {
           const assistantMessage = {
             role: 'assistant',
@@ -282,7 +276,7 @@ export default defineComponent({
             },
           };
 
-          const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
+          const imageResponse = await axios.post('http://localhost:8000/get_character_image_help', imageRequestBody);
           if (imageResponse.status === 200 && imageResponse.data.image) {
             const index = messages.value.indexOf(assistantMessage);
             if (index !== -1) {
@@ -378,7 +372,7 @@ export default defineComponent({
         } else {
           charList[assetIndex].content = curSaveThing.value;
         }
-        actions.updateCharacter({ index: assetIndex, character: charList[assetIndex] });
+        store.dispatch('updateCharacter', { index: assetIndex, character: charList[assetIndex] });
         proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
@@ -386,10 +380,10 @@ export default defineComponent({
           image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
           content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
-        actions.addCharacter(newAsset);
+        store.dispatch('addCharacter',newAsset)
         proxy.$message.success('新资产添加成功');
       }
-      showSaveDialog.value = false;
+      // showSaveDialog.value = false;
     }
 
     function editAsset(index) {
@@ -406,7 +400,7 @@ export default defineComponent({
       formData.append('character_name', newAsset.name);
       formData.append('character_image', options.file);
 
-      axios.post('http://localhost:8000', formData)
+      axios.post('http://localhost:8000/update_character_asset_image', formData)
         .then((response) => {
           if (response.data.success) {
             newAsset.image = response.data.filePath;
@@ -433,7 +427,7 @@ export default defineComponent({
     }
 
     function confirmDelete() {
-      actions.deleteCharacter(curEditAssetIndex.value);
+      store.dispatch('deleteCharacter',curEditAssetIndex.value)
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
@@ -449,7 +443,7 @@ export default defineComponent({
     function handleUploadSuccess(response) {
       if (response.success) {
         charList[curEditAssetIndex.value].image = response.filePath;
-        actions.updateCharacter({ index: curEditAssetIndex.value, character: charList[curEditAssetIndex.value] });
+        store.dispatch('updateCharacter', { index: curEditAssetIndex.value, character: charList[curEditAssetIndex.value] });
       }
     }
 
@@ -467,7 +461,7 @@ export default defineComponent({
         proxy.$message.warning('请上传图片');
         return;
       }
-      actions.updateCharacter({ index: curEditAssetIndex.value, character: editedAsset });
+      store.dispatch('updateCharacter', { index: curEditAssetIndex.value, character: editedAsset });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
     }
@@ -511,7 +505,6 @@ export default defineComponent({
       cancelDelete,
       confirmDelete,
       generate_image,
-      ...actions,
       charList,
     };
   },

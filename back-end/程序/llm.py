@@ -195,7 +195,9 @@ class LLM(object):
                     stream=True,
                 )
             else:
+                print("AAAA")
                 client = ZhipuAI(api_key=self.apikey)
+                print("开始提问")
                 response = client.chat.completions.create(
                     model="glm-4",
                     messages=[
@@ -207,6 +209,7 @@ class LLM(object):
                     max_tokens=8192,
                     stream=True,
                 )
+                print("提问完成")
         else:
             new_message = [{"role": "system", "content": prompt}]
             for row in history:
@@ -224,7 +227,9 @@ class LLM(object):
                     stream=True,
                 )
             else:
+                print("BBBB")
                 client = ZhipuAI(api_key=self.apikey)
+                print("开始提问")
                 response = client.chat.completions.create(
                     model="glm-4",
                     messages=new_message,
@@ -233,6 +238,7 @@ class LLM(object):
                     max_tokens=8192,
                     stream=True,
                 )
+                print("提问完成")
         answer = ''
         print('思考中', end='')
         for trunk in response:

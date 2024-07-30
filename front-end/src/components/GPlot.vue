@@ -281,7 +281,7 @@ export default defineComponent({
 
     async function generatePlot() {
       try {
-        const response = await axios.post('http://localhost:8000', {
+        const response = await axios.post('http://localhost:8000/init_plot_generation', {
           action: 'init_plot_generation',
           data: null,
         });
@@ -314,7 +314,7 @@ export default defineComponent({
       };
 
       try {
-        await axios.post('your-api-endpoint', payload);
+        await axios.post('http://localhost:8000/update_plot', payload);
         ElMessage({
           message: '上传成功',
           type: 'success',

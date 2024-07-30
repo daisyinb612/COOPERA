@@ -170,6 +170,24 @@ def create_picture():
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/get_character_image_help', methods=['POST'])
+def get_character_image_help():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid JSON"}), 402
+        action = data.get("action")
+        if action == "get_character_image_help":
+            prompt = data["data"]["user_input"]
+            filepath = info_dict["picture_path"] + "/character_image.txt"  # Assuming the LLM returns a URL
+            l = LLM(apikey=info_dict["apikey"])
+            picture = l.create_picture(filepath=filepath, prompt=prompt)
+            return jsonify({"image": picture})
+        else:
+            return jsonify({"error": "Invalid action type."}), 401
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)

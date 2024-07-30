@@ -265,7 +265,7 @@ export default defineComponent({
       };
 
       try {
-        const response = await axios.post('http://localhost:8000', requestBody);
+        const response = await axios.post('http://localhost:8000/get_scene_help', requestBody);
         if (response.status === 200) {
           const assistantMessage = {
             role: 'assistant',
@@ -391,7 +391,7 @@ export default defineComponent({
       formData.append('scene_name', newAsset.name);
       formData.append('scene_image', options.file);
 
-      axios.post('http://localhost:8000', formData)
+      axios.post('http://localhost:8000/save_scene_asset', formData)
         .then((response) => {
           if (response.data.success) {
             newAsset.image = response.data.filePath;

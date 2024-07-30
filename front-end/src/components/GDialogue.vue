@@ -120,7 +120,7 @@ export default defineComponent({
       };
 
       try {
-        await axios.post('http:/localhost.8000', payload);
+        await axios.post('http://localhost:8000/generate_dialogue', payload);
         ElMessage({
           message: '上传成功',
           type: 'success'
