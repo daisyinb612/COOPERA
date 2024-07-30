@@ -57,6 +57,7 @@ import { defineComponent, ref } from 'vue';
 import { mapState, mapActions } from 'vuex';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'LogLine',
@@ -139,7 +140,6 @@ export default defineComponent({
         }
       }
     },
-
     async UploadLogLine() {
       if (!this.loglineData) {
         ElMessage({
@@ -158,7 +158,7 @@ export default defineComponent({
 
       try {
         const response = await axios.post('http://localhost:8000/upload_storyline', requestBody, { timeout: 10000 });
-
+        this.$store.dispatch('addCharacter', response.data);
         if (response.status === 200) {
           ElMessage({
             message: '保存成功',
@@ -181,16 +181,18 @@ export default defineComponent({
             message: '请求失败',
             type: 'error',
           });
+          }
         }
       }
-    }
   },
 
   setup() {
+    const store=useStore()
     const inputMessage = ref('');
     const messages = ref([]);
     const history = ref([]);
     const loglineData = ref(''); // 初始化 loglineData
+    console.log(store);
 
     return {
       inputMessage,

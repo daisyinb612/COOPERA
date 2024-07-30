@@ -9,7 +9,12 @@ export default {
       state.characters = characters;
     },
     addCharacter(state, character) {
-      state.characters.push(character);
+      if (Array.isArray(character)) {
+        state.characters = state.characters.concat(character);
+      }else{
+        state.characters.push(character);
+      }
+      console.log(state.characters);
     },
     updateCharacter(state, { index, character }) {
       state.characters.splice(index, 1, character);
