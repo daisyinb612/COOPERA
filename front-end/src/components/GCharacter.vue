@@ -146,14 +146,16 @@
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
-                   :file-list="fileList[curEditAssetIndex]"
+                   :file-list="[{
+                    name: currentEditAsset.name,
+                    url: currentEditAsset.image? currentEditAsset.image : '@/assets/images/logo.png',
+                   }]"
                    show-file-list="true"
                    :limit="1"
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
         </el-upload>
-        <img v-if="currentEditAsset.image" class="asset-image" :src="getImageSrc(currentEditAsset.image)" alt="Asset Image" />
       </el-form-item>
 
       <el-footer class="dialog-footer">
@@ -483,6 +485,7 @@ export default defineComponent({
             url: imageResponse.data.image,
           });
           newAsset.image = imageResponse.data.image;
+          currentEditAsset.image = imageResponse.data.image;
       }
 
     return {
