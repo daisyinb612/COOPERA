@@ -24,14 +24,19 @@ def upload_storyline():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
-    storyline = data["data"]["storyline"]
-    question = "\n###故事线###:" + storyline
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_role_create)
-    plot = l.analyze_answer(answer)
-    print(plot)
-    l.save_json_to_excel(json_object=plot, filepath=info_dict["world_setting_path"])
-    return jsonify(plot)
+    action = data.get("action")
+    if action == "upload_storyline":
+        with open(info_dict['world_setting_path'], 'w', encoding='utf-8') as f:
+            f.write(data["data"]["storyline"])
+        storyline = data["data"]["storyline"]
+        question = "\n###故事线###:" + storyline
+        l = LLM(apikey=info_dict["apikey"])
+        answer = l.ask(question=question, prompt=l.setting_role_create)
+        plot = l.analyze_answer(answer)
+        
+        return jsonify(plot)
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
  
 @app.route('/get_storyline_help', methods=['POST'])
 def get_storyline_help():
@@ -56,16 +61,16 @@ def get_saved_storyline():
         storyline = f.read()
     return jsonify({"storyline": storyline})
  
-@app.route('/init_character_generation', methods=['POST'])
-def init_character_generation():
-    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
-        storyline = f.read()
-    question = "###故事线###:" + storyline
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_role_create)
-    characters = l.analyze_answer(answer)
-    l.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
-    return jsonify(characters)
+# @app.route('/init_character_generation', methods=['POST'])
+# def init_character_generation():
+#     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+#         storyline = f.read()
+#     question = "###故事线###:" + storyline
+#     l = LLM(apikey=info_dict["apikey"])
+#     answer = l.ask(question=question, prompt=l.setting_role_create)
+#     characters = l.analyze_answer(answer)
+#     l.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
+#     return jsonify(characters)
  
 @app.route('/get_character_help', methods=['POST'])
 def get_character_help():
