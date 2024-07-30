@@ -287,6 +287,14 @@ export default defineComponent({
         });
         console.log(response.data);
         addPlot(response.data);
+        const scenes = response.data.map((plot) => {
+          return {
+            name: plot.scene,
+            url: 'empty.png',
+          }
+        }
+        )
+        store.dispatch('addScene', scenes);
       } catch (error) {
         ElMessage({
           message: '请求失败',

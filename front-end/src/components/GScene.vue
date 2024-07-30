@@ -56,9 +56,9 @@
         </el-button-group>
 
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in scenes" :key="index" class="asset-item" @click="editAsset(index)">
+          <el-card v-for="(asset, index) in sceneList" :key="index" class="asset-item" @click="editAsset(index)">
             <div class="asset-name">{{ asset.name }}</div>
-            <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" >
+            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" >
           </el-card>
         </el-scrollbar>
 
@@ -67,69 +67,6 @@
         </el-footer>
       </el-container>
     </el-container>
-
-<!--    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">-->
-<!--      <el-form :model="newAsset" label-width="100px" class="add-asset-form">-->
-<!--        <el-form-item label="分组">-->
-<!--          <el-select v-model="newAsset.group" placeholder="请选择分组">-->
-<!--            <el-option label="场景" value="scenes" />-->
-<!--          </el-select>-->
-<!--        </el-form-item>-->
-
-<!--        <el-form-item label="资产名" :label-width="formLabelWidth">-->
-<!--          <el-input v-model="newAsset.name" autocomplete="off" />-->
-<!--        </el-form-item>-->
-
-<!--        <el-form-item v-if="newAsset.group === 'scenes'" label="描述" :label-width="formLabelWidth">-->
-<!--          <el-input v-model="newAsset.content" autocomplete="off" />-->
-<!--        </el-form-item>-->
-
-<!--        <el-form-item v-if="newAsset.group === 'scene'" label="图片" :label-width="formLabelWidth">-->
-<!--          <div>-->
-<!--            <el-upload :http-request="uploadFile"-->
-<!--                       list-type="picture-card"-->
-<!--                       :on-success="handleUploadSuccess"-->
-<!--                       :file-list="fileList"-->
-<!--                       :limit="1"-->
-<!--                       :on-remove="handleRemove"-->
-<!--                       :on-exceed="handleExceed">-->
-<!--              <i class="el-icon-plus"></i>-->
-<!--            </el-upload>-->
-<!--            <el-button @click="generate_image" class="confirm-button">生成</el-button>-->
-<!--            <el-button @click="save_image" class="confirm-button">保存</el-button>-->
-<!--          </div>-->
-<!--        </el-form-item>-->
-
-<!--        <el-footer class="dialog-footer">-->
-<!--          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>-->
-<!--          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>-->
-<!--        </el-footer>-->
-<!--      </el-form>-->
-<!--    </el-dialog>-->
-
-<!--    <el-dialog :title="'保存 ' + curSaveType" v-model="showSaveDialog" custom-class="dialog-content">-->
-<!--      <el-form-item label="类型">-->
-<!--        {{ curSaveType }}-->
-<!--      </el-form-item>-->
-
-<!--      <el-form-item label="分组">-->
-<!--        <el-select v-model="newAsset.group" placeholder="选择分组" @change="changeGroup">-->
-<!--          <el-option label="场景" value="scene" />-->
-<!--        </el-select>-->
-<!--      </el-form-item>-->
-<!--      <el-form-item label="资产名" :label-width="formLabelWidth">-->
-<!--        <el-select v-if="newAsset.group" v-model="newAsset.name" placeholder="选择名字">-->
-<!--          <el-option v-for="(asset, index) in curGroup" :key="index" :label="asset.name" :value="asset.name" />-->
-<!--        </el-select>-->
-<!--        <el-input v-model="newAsset.name" autocomplete="off" />-->
-<!--      </el-form-item>-->
-
-<!--      <el-footer class="dialog-footer">-->
-<!--        <el-button @click="handleSaveClose" class="cancel-button">取消</el-button>-->
-<!--        <el-button type="primary" @click="saveAssetConfirm(newAsset.group, newAsset.name)"-->
-<!--                   class="confirm-button">确认</el-button>-->
-<!--      </el-footer>-->
-<!--    </el-dialog>-->
 
     <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
       <el-form-item label="分组" :label-width="formLabelWidth">
@@ -145,16 +82,22 @@
       </el-form-item>
 
       <el-form-item label="图片" :label-width="formLabelWidth">
+        <div>
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
-                   :file-list="fileList"
+                   :file-list="[{
+                    name: currentEditAsset.name,
+                    url: currentEditAsset.image? currentEditAsset.image : '@/assets/images/logo.png',
+                   }]"
                    :limit="1"
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
         </el-upload>
-        <img v-if="currentEditAsset.image" class="asset-image" :src="getImageSrc(currentEditAsset.image)" alt="Asset Image" />
+        <el-button @click="generate_image" class="confirm-button">生成</el-button>
+        <el-button @click="save_image" class="confirm-button">保存</el-button>
+        </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
@@ -200,6 +143,9 @@ export default defineComponent({
     const history = ref([]);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
+    const sceneList=computed(()=>{
+      return store.state.scene.scenes
+    })
     const newAsset = reactive({
       group: 'scenes',
       name: '',
@@ -368,7 +314,7 @@ export default defineComponent({
       } else {
         const newAsset = {
           name: name,
-          image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
+          url: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
           content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
         actions.addScene(newAsset);
@@ -459,9 +405,23 @@ export default defineComponent({
       showEditDialog.value = false;
     }
 
-    function generate_image() {
-      console.log('生成图片');
-    }
+    async function generate_image() {
+      const imageRequestBody = {
+            action: 'create_scene_picture',
+            data: {
+              name: currentEditAsset.name,
+              user_input: currentEditAsset.content,
+            },
+          };
+
+          const imageResponse = await axios.post('http://localhost:8000/create_scene_picture', imageRequestBody);
+          sceneList.value[curEditAssetIndex.value] = {
+            name: currentEditAsset.name,
+            url: imageResponse.data.image,
+          }
+          currentEditAsset.image = imageResponse.data.image;
+          newAsset.image = imageResponse.data.image;
+      }
 
     return {
       currentEditAsset,
@@ -499,6 +459,7 @@ export default defineComponent({
       generate_image,
       ...actions,
       scenes,
+      sceneList,
       // ...mapState('scene', ['scenes']),
     };
   },

@@ -160,16 +160,38 @@ def save_dialogue_asset():
     l.update_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"], sheet_index=number - 1)
     return jsonify({})
 
-@app.route('/create_picture', methods=['POST'])
-def create_picture():
+@app.route('/create_scene_picture', methods=['POST'])
+def create_scene_picture():
     try:
         data = request.get_json()
         if not data:
             return jsonify({"error": "Invalid JSON"}), 402
 
         action = data.get("action")
-        if action == "create_picture":
-            prompt = data["data"]["user_input"]
+        if action == "create_scene_picture":
+            prompt = "请生成场景图片， 场景的名称为："+data["data"]["name"]
+            if data["data"]["user_input"] != "":
+                prompt += "场景的描述为："+data["data"]["user_input"]
+            name = data["data"]["name"]
+            filepath = info_dict["picture_path"] + "/" + name + ".txt"  # Assuming the LLM returns a URL
+            l = LLM(apikey=info_dict["apikey"])
+            picture = l.create_picture(filepath=filepath, prompt=prompt)
+            return jsonify({"image": picture})
+        else:
+            return jsonify({"error": "Invalid action type."}), 401
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
+@app.route('/create_character_picture', methods=['POST'])
+def create_character_picture():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({"error": "Invalid JSON"}), 402
+
+        action = data.get("action")
+        if action == "create_character_picture":
+            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"角色的描述为"+data["data"]["user_input"]
             name = data["data"]["name"]
             filepath = info_dict["picture_path"] + "/" + name + ".txt"  # Assuming the LLM returns a URL
             l = LLM(apikey=info_dict["apikey"])

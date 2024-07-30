@@ -146,7 +146,7 @@
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
-                   :file-list="fileList"
+                   :file-list="fileList[curEditAssetIndex]"
                    show-file-list="true"
                    :limit="1"
                    :on-remove="handleRemove"
@@ -470,14 +470,14 @@ export default defineComponent({
 
     async function generate_image() {
       const imageRequestBody = {
-            action: 'create_picture',
+            action: 'create_character_picture',
             data: {
               name: newAsset.name,
               user_input: newAsset.content,
             },
           };
 
-          const imageResponse = await axios.post('http://localhost:8000/create_picture', imageRequestBody);
+          const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
           fileList.value.push({
             name: 'image',
             url: imageResponse.data.image,

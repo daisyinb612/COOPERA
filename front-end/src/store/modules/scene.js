@@ -8,6 +8,10 @@ export default {
       state.scenes = scenes;
     },
     addScene(state, scene) {
+      if (Array.isArray(scene)) {
+        state.scenes.push(...scene);
+        return;
+      }
       state.scenes.push(scene);
     },
     updateScene(state, { index, scene }) {
