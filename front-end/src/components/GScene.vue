@@ -14,8 +14,8 @@
               <el-aside width="100px">
                 <el-avatar icon="el-icon-user" class="llm"></el-avatar>
               </el-aside>
-              <el-main width="200px">
-                <el-row class="llm-wrapper">
+              <el-main width="200px">{{ message.content }}
+                <!-- <el-row class="llm-wrapper">
                   <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
                     <Download @click="saveAsset('image', message.image)" />
                   </el-icon>
@@ -29,7 +29,7 @@
                     <Download @click="saveAsset('content', message.content)" />
                   </el-icon>
                   <div class="message-content">{{ message.content }}</div>
-                </el-row>
+                </el-row> -->
               </el-main>
             </el-container>
           </el-card>
@@ -270,37 +270,37 @@ export default defineComponent({
           const assistantMessage = {
             role: 'assistant',
             prompt: inputMessage.value,
-            content: response.data.content,
+            content: response.data.answer,
             image: 'logo.png',
             downloadIcon: true,
           };
           messages.value.push(assistantMessage);
           history.value.push(assistantMessage);
 
-          const imageRequestBody = {
-            action: 'get_scene_image_help',
-            data: {
-              history: history.value.map((msg) => ({
-                role: msg.role,
-                content: msg.content,
-              })),
-              user_input: inputMessage.value,
-            },
-          };
+        //   const imageRequestBody = {
+        //     action: 'get_scene_image_help',
+        //     data: {
+        //       history: history.value.map((msg) => ({
+        //         role: msg.role,
+        //         content: msg.content,
+        //       })),
+        //       user_input: inputMessage.value,
+        //     },
+        //   };
 
-          const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
-          if (imageResponse.status === 200 && imageResponse.data.image) {
-            const index = messages.value.indexOf(assistantMessage);
-            if (index !== -1) {
-              messages.value[index].image = imageResponse.data.image;
-            }
-          }
-          inputMessage.value = '';
-        } else {
-          ElMessage({
-            message: '请求失败',
-            type: 'error',
-          });
+        //   const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
+        //   if (imageResponse.status === 200 && imageResponse.data.image) {
+        //     const index = messages.value.indexOf(assistantMessage);
+        //     if (index !== -1) {
+        //       messages.value[index].image = imageResponse.data.image;
+        //     }
+        //   }
+        //   inputMessage.value = '';
+        // } else {
+        //   ElMessage({
+        //     message: '请求失败',
+        //     type: 'error',
+        //   });
         }
       } catch (error) {
         ElMessage({

@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from excel import ExcelOp
 from llm import LLM
 from flask_cors import CORS
+import pandas as pd
+import ast
  
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +15,7 @@ info_dict = {
    "apikey": "e4ab8bb5cc7cc6eb620f9cde3093b8b4.FauytagDuxsJpEuD",
    "world_setting_path": "./剧本信息/世界观设定/storyline.txt",
    "characters_path": "./剧本信息/角色设定/characters.xlsx",
-   "outline_path": "./剧本信息/故事大纲/outline.xlsx",
+   "outline_path": "./剧本信息/故事大纲/outline.csv",
    "scene_path": "./剧本信息/场景/scene.xlsx",
    "dialogue_path": "./剧本信息/对话/dialogue_path.xlsx",
    "picture_path": "./剧本信息/图片"
@@ -103,7 +105,7 @@ def init_plot_generation():
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_outline_create)
     plot = l.analyze_answer(answer)
-    l.save_json_to_excel(json_object=plot, filepath=info_dict["outline_path"])
+    l.save_json_to_csv(json_object=plot, filepath=info_dict["outline_path"])
     return jsonify(plot)
  
 @app.route('/update_plot', methods=['POST'])
@@ -194,7 +196,32 @@ def get_character_image_help():
         else:
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)}), 500  
+
+@app.route('/get_scene_help', methods=['POST'])
+def get_scene_help():
+    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+        storyline = f.read()
+
+    df = pd.read_csv(info_dict['outline_path'])
+    data = request.get_json()
+    history = data["data"]["history"]
+    question = "\n###故事线###：" + storyline + "\n###故事大纲###："
+
+    for i in range(len(df)):
+        plotName = df.loc[i, 'plotName']
+        plotStage = df.loc[i, 'plotStage']
+        scene = df.loc[i, 'scene']
+        beat = df.loc[i, 'beat']
+        characters = df.loc[i, 'characters']
+        characters_list = ast.literal_eval('[' + characters + ']')  # convert string to list of dictionaries
+        names = [character['name'] for character in characters_list] 
+        question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表"
+        for character in names:
+            question += character + "，"
+    l = LLM(apikey=info_dict["apikey"])
+    answer = l.ask(question=question, prompt=l.role_help, history=history)
+    return jsonify({"answer": answer})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)

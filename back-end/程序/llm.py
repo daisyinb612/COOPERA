@@ -6,6 +6,7 @@ import requests
 from zhipuai import ZhipuAI
 from history import create_xlsx_file
 import xlsxwriter
+import csv
 from openpyxl import Workbook, load_workbook
 
 class LLM(object):
@@ -22,6 +23,12 @@ class LLM(object):
         self.role_help = '''
         假设你是一位剧作家，
         你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###、###角色表###和###我的问题###。
+        输出时不要复述任务要求。
+        '''
+        self.scene_help = '''
+        假设你是一位剧作家，
+        你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###、###故事大纲###和###我的问题###。
+        故事大纲包括每一个情节的###情节名###、###情节阶段###、###场景名###、###梗概###和###角色表###。
         输出时不要复述任务要求。
         '''
         self.setting_world_create = '''
@@ -320,6 +327,22 @@ class LLM(object):
                     cell_value = ", ".join(str(item) for item in cell_value)
                 cell = worksheet.write(row_num, col_num, cell_value)
         workbook.close()
+
+    def save_json_to_csv(self, json_object, filepath):
+        try:
+            os.remove(filepath)
+        except OSError:
+            pass
+        headers = json_object[0].keys()
+        with open(filepath, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+            for character in json_object:
+                for key in character:
+                    if isinstance(character[key], list):
+                        character[key] = ", ".join(str(item) for item in character[key])
+                writer.writerow(character)
+
     
     def add_json_to_excel(self,json_object,filepath):
         # 检查文件路径是否存在
