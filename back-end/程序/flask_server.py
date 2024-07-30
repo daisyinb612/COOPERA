@@ -24,12 +24,14 @@ def upload_storyline():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
-
-    action = data.get("action")
-    if action == "upload_storyline":
-        with open(info_dict['world_setting_path'], 'w', encoding='utf-8') as f:
-            f.write(data["data"]["storyline"])
-        return jsonify({})
+    storyline = data["data"]["storyline"]
+    question = "\n###故事线###:" + storyline
+    l = LLM(apikey=info_dict["apikey"])
+    answer = l.ask(question=question, prompt=l.setting_role_create)
+    plot = l.analyze_answer(answer)
+    print(plot)
+    l.save_json_to_excel(json_object=plot, filepath=info_dict["world_setting_path"])
+    return jsonify(plot)
  
 @app.route('/get_storyline_help', methods=['POST'])
 def get_storyline_help():
