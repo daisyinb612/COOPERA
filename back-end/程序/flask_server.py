@@ -165,7 +165,7 @@ def create_picture():
             filepath = info_dict["picture_path"] + "/" + name + ".txt"  # Assuming the LLM returns a URL
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(filepath=filepath, prompt=prompt)
-            return jsonify({"picture": picture})
+            return jsonify({"image": picture})
         else:
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:

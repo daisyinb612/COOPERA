@@ -57,7 +57,7 @@
         <el-scrollbar class="assets-list">
           <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
             <div class="asset-name">{{ asset.name }}</div>
-            <img v-if="asset.image" class="asset-image" :src="getImageSrc(asset.image)" alt="Asset Image" />
+            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" />
           </el-card>
         </el-scrollbar>
 
@@ -147,6 +147,7 @@
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
                    :file-list="fileList"
+                   show-file-list="true"
                    :limit="1"
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
@@ -375,6 +376,7 @@ export default defineComponent({
         store.dispatch('updateCharacter', { index: assetIndex, character: charList[assetIndex] });
         proxy.$message.success('资产更新成功');
       } else {
+        console.log(curSaveThing.value);
         const newAsset = {
           name: name,
           image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
@@ -466,9 +468,22 @@ export default defineComponent({
       showEditDialog.value = false;
     }
 
-    function generate_image() {
-      console.log('生成图片');
-    }
+    async function generate_image() {
+      const imageRequestBody = {
+            action: 'create_picture',
+            data: {
+              name: newAsset.name,
+              user_input: newAsset.content,
+            },
+          };
+
+          const imageResponse = await axios.post('http://localhost:8000/create_picture', imageRequestBody);
+          fileList.value.push({
+            name: 'image',
+            url: imageResponse.data.image,
+          });
+          newAsset.image = imageResponse.data.image;
+      }
 
     return {
       currentEditAsset,
