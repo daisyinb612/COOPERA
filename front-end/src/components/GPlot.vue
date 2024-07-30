@@ -14,10 +14,10 @@
             <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
               <div class="plot-header">
                 <div class="scene-name">{{ plot.plotName }}</div>
-                <div class="plot-element">{{ plot.plotElement }}</div>
+                <div class="plot-element">{{ plot.plotStage }}</div>
                 <div class="location">{{ plot.scene }}</div>
                 <div class="characters">
-                  <span v-for="character in plot.characters" :key="character">{{ character }}</span>
+                  <span v-for="character in plot.characters" :key="character">{{ character.name }}</span>
                 </div>
               </div>
               <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
@@ -285,14 +285,8 @@ export default defineComponent({
           action: 'init_plot_generation',
           data: null,
         });
-        const generatedPlot = response.data;
-        addPlot({
-          plotName: generatedPlot.plot,
-          plotElement: '',
-          scene: '',
-          characters: [],
-          beat: generatedPlot.plot_content,
-        });
+        console.log(response.data);
+        addPlot(response.data);
       } catch (error) {
         ElMessage({
           message: '请求失败',
@@ -305,11 +299,11 @@ export default defineComponent({
       const payload = {
         action: 'update_plot',
         data: plots.value.map((plot) => ({
-          章节名: plot.plotName,
-          故事阶段: plot.plotElement,
-          场景: plot.scene,
+          plotName: plot.plotName,
+          plotStage: plot.plotStage,
+          scene: plot.scene,
           情节梗概: plot.beat,
-          参与人物: plot.characters.map((character) => ({ 角色名字: character })),
+          characters: plot.characters.map((character) => ({ name: character })),
         })),
       };
 

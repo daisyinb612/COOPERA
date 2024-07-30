@@ -11,6 +11,10 @@ export default {
       }
     },
     addPlot(state, plot) {
+      if (Array.isArray(plot)) {
+        state.plots.push(...plot);
+        return;
+      }
       state.plots.push(plot);
     },
     updatePlot(state, { index, plot }) {
