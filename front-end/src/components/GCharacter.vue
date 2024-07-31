@@ -435,9 +435,15 @@ export default defineComponent({
       showDeleteConfirm.value = false;
     }
 
-    function confirmDelete() {
+    async function confirmDelete() {
       const name = charList.value[curEditAssetIndex.value].name;
       store.dispatch('deleteCharacter',curEditAssetIndex.value)
+      await axios.post('http://localhost:8000/delete_character', {
+        action: 'delete_character',
+        data: {
+          index: curEditAssetIndex.value,
+        },
+      });
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
@@ -457,7 +463,7 @@ export default defineComponent({
       }
     }
 
-    function saveEditedAsset() {
+    async function saveEditedAsset() {
       const editedAsset = charList.value[curEditAssetIndex.value];
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
@@ -472,6 +478,13 @@ export default defineComponent({
         return;
       }
       store.dispatch('updateCharacter', { index: curEditAssetIndex.value, character: editedAsset });
+      await axios.post('http://localhost:8000/update_character', {
+        action: 'update_character',
+        data: {
+          index: curEditAssetIndex.value, character: editedAsset 
+        },
+        
+      });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
         

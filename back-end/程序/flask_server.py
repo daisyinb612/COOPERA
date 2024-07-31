@@ -4,6 +4,7 @@ from llm import LLM
 from flask_cors import CORS
 import pandas as pd
 import ast
+import os
 import json
  
 app = Flask(__name__)
@@ -15,9 +16,9 @@ CORS(app)
 info_dict = {
    "apikey": "e4ab8bb5cc7cc6eb620f9cde3093b8b4.FauytagDuxsJpEuD",
    "world_setting_path": "./剧本信息/世界观设定/storyline.txt",
-   "characters_path": "./剧本信息/角色设定/characters.xlsx",
-   "outline_path": "./剧本信息/故事大纲/outline.csv",
-   "scene_path": "./剧本信息/场景/scene.xlsx",
+   "characters_path": "./剧本信息/角色设定/characters.json",
+   "outline_path": "./剧本信息/故事大纲/outline.json",
+   "scene_path": "./剧本信息/场景/scene.json",
    "dialogue_path": "./剧本信息/对话/dialogue_path.json",
    "picture_path": "./剧本信息/图片"
 }
@@ -36,7 +37,8 @@ def upload_storyline():
         l = LLM(apikey=info_dict["apikey"])
         answer = l.ask(question=question, prompt=l.setting_role_create)
         plot = l.analyze_answer(answer)
-        
+        with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
+            json.dump(plot, f, indent=4, ensure_ascii=False)
         return jsonify(plot)
     else:
         return jsonify({"error": "Invalid action type."}), 401
@@ -79,12 +81,15 @@ def get_saved_storyline():
 def get_character_help():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
-    e = ExcelOp(file=info_dict["characters_path"])
-    characters = e.get_json_all()
+    with open(info_dict['characters_path'], "r", encoding="utf-8") as f:
+        characters = json.load(f)
     data = request.get_json()
     history = data["data"]["history"]
     user_input = data["data"]["user_input"]
-    question = "\n###故事线###:" + storyline + "\n###角色表###:" + characters + "\n###我的问题###:" + user_input
+    question = "\n###故事线###:" + storyline + "\n###角色表###:"
+    for character in characters:
+        question += character["name"] + ": " + character["content"] + "\n"
+    question += "\n###我的问题###:" + user_input
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.role_help, history=history)
     return jsonify({"answer": answer})
@@ -107,7 +112,12 @@ def init_plot_generation():
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_outline_create)
     plot = l.analyze_answer(answer)
-    l.save_json_to_csv(json_object=plot, filepath=info_dict["outline_path"])
+    with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
+        json.dump(plot, f, indent=4, ensure_ascii=False)
+    scene = [{"name": x["scene"], "url": ""} for x in plot]
+    with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+        json.dump(scene, f, indent=4, ensure_ascii=False)
+        
     return jsonify(plot)
  
 @app.route('/update_plot', methods=['POST'])
@@ -115,28 +125,45 @@ def update_plot():
     data = request.get_json()
     plot = data["data"]
     l = LLM(apikey=info_dict["apikey"])
-    l.save_json_to_excel(json_object=plot, filepath=info_dict["outline_path"])
+    with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
+        json.dump(plot, f, indent=4, ensure_ascii=False)
     return jsonify({})
  
-@app.route('/init_scene_generation', methods=['POST'])
-def init_scene_generation():
-    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
-        storyline = f.read()
-    e = ExcelOp(file=info_dict["outline_path"])
-    plot = e.get_json_all()
-    question = "\n###故事线###:" + storyline + "\n###角色表###:" + plot
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_scene_create)
-    scene = l.analyze_answer(answer)
-    l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
-    return jsonify(scene)
+# @app.route('/init_scene_generation', methods=['POST'])
+# def init_scene_generation():
+#     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+#         storyline = f.read()
+#     with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
+#         plot = json.load(f)
+#     question = "\n###故事线###:" + storyline + "\n###角色表###:" + plot
+#     l = LLM(apikey=info_dict["apikey"])
+#     answer = l.ask(question=question, prompt=l.setting_scene_create)
+#     scene = l.analyze_answer(answer)
+#     l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+#     return jsonify(scene)
  
 @app.route('/save_scene_asset', methods=['POST'])
 def save_scene_asset():
     data = request.get_json()
-    scene = data["data"]
+    index = data["data"]["index"]
+    scene = data["data"]["scene"]
     l = LLM(apikey=info_dict["apikey"])
-    l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+    with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
+        old_data = json.load(f)
+    old_data[index] = scene
+    with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+        json.dump(old_data, f, indent=4, ensure_ascii=False)
+    return jsonify({})
+
+@app.route("/delete_scene_asset", methods=['POST'])
+def delete_scene_asset():
+    data = request.get_json()
+    index = data["data"]["index"]
+    with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
+        old_data = json.load(f)
+    old_data.pop(index)
+    with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+        json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
  
 @app.route('/init_dialogue_generation', methods=['POST'])
@@ -175,9 +202,8 @@ def create_scene_picture():
             if data["data"]["user_input"] != "":
                 prompt += "场景的描述为："+data["data"]["user_input"]
             name = data["data"]["name"]
-            filepath = info_dict["picture_path"] + "/" + name + ".txt"  # Assuming the LLM returns a URL
             l = LLM(apikey=info_dict["apikey"])
-            picture = l.create_picture(filepath=filepath, prompt=prompt)
+            picture = l.create_picture(prompt=prompt)
             return jsonify({"image": picture})
         else:
             return jsonify({"error": "Invalid action type."}), 401
@@ -195,49 +221,87 @@ def create_character_picture():
         if action == "create_character_picture":
             prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"角色的描述为"+data["data"]["user_input"]
             name = data["data"]["name"]
-            filepath = info_dict["picture_path"] + "/" + name + ".txt"  # Assuming the LLM returns a URL
             l = LLM(apikey=info_dict["apikey"])
-            picture = l.create_picture(filepath=filepath, prompt=prompt)
+            picture = l.create_picture(prompt=prompt)
             return jsonify({"image": picture})
         else:
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     
-@app.route('/get_character_image_help', methods=['POST'])
-def get_character_image_help():
-    try:
-        data = request.get_json()
-        if not data:
-            return jsonify({"error": "Invalid JSON"}), 402
-        action = data.get("action")
-        if action == "get_character_image_help":
-            prompt = data["data"]["user_input"]
-            filepath = info_dict["picture_path"] + "/character_image.txt"  # Assuming the LLM returns a URL
-            l = LLM(apikey=info_dict["apikey"])
-            picture = l.create_picture(filepath=filepath, prompt=prompt)
-            return jsonify({"image": picture})
-        else:
-            return jsonify({"error": "Invalid action type."}), 401
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500  
+
+@app.route("/update_character", methods=['POST'])
+def update_character():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 402
+    action = data.get("action")
+    character = data["data"]["character"]
+    index = data["data"]["index"]
+    if action == "update_character":
+        with open(info_dict['characters_path'], 'r', encoding='utf-8') as f:
+            old_data = json.load(f)
+
+        old_data[index] = character
+        with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
+            json.dump(old_data, f, indent=4, ensure_ascii=False)
+        return jsonify({"message": "Characters updated successfully."})
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
+    
+
+@app.route("/delete_character", methods=['POST'])
+def delete_character():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 402
+    action = data.get("action")
+    index = data["data"]["index"]
+    if action == "delete_character":
+        with open(info_dict['characters_path'], 'r', encoding='utf-8') as f:
+            old_data = json.load(f)
+
+        old_data.pop(index)
+        with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
+            json.dump(old_data, f, indent=4, ensure_ascii=False)
+        return jsonify({"message": "Characters updated successfully."})
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
+    
+# @app.route('/get_character_image_help', methods=['POST'])
+# def get_character_image_help():
+#     try:
+#         data = request.get_json()
+#         if not data:
+#             return jsonify({"error": "Invalid JSON"}), 402
+#         action = data.get("action")
+#         if action == "get_character_image_help":
+#             prompt = data["data"]["user_input"]
+#             l = LLM(apikey=info_dict["apikey"])
+#             picture = l.create_picture(filepath=filepath, prompt=prompt)
+#             return jsonify({"image": picture})
+#         else:
+#             return jsonify({"error": "Invalid action type."}), 401
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500  
 
 @app.route('/get_scene_help', methods=['POST'])
 def get_scene_help():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
+    with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
+        plot = json.load(f)
 
-    df = pd.read_csv(info_dict['outline_path'])
     data = request.get_json()
     history = data["data"]["history"]
     question = "\n###故事线###：" + storyline + "\n###故事大纲###："
 
-    for i in range(len(df)):
-        plotName = df.loc[i, 'plotName']
-        plotStage = df.loc[i, 'plotStage']
-        scene = df.loc[i, 'scene']
-        beat = df.loc[i, 'beat']
-        characters = df.loc[i, 'characters']
+    for i in range(len(plot)):
+        plotName = plot[i]["plotName"]
+        plotStage = plot[i]["plotStage"]
+        scene = plot[i]["scene"]
+        beat = plot[i]["beat"]
+        characters = ', '.join(plot[i]["characters"])
         question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.role_help, history=history)

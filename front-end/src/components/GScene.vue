@@ -310,6 +310,7 @@ export default defineComponent({
           scenes[assetIndex].content = curSaveThing.value;
         }
         actions.updateScene({ index: assetIndex, scene: scenes[assetIndex] });
+
         proxy.$message.success('资产更新成功');
       } else {
         const newAsset = {
@@ -331,13 +332,14 @@ export default defineComponent({
       showEditDialog.value = true;
     }
 
-    const uploadFile = (options) => {
+    const uploadFile = async (options) => {
       const formData = new FormData();
       formData.append('action', 'save_scene_asset_image');
       formData.append('scene_name', newAsset.name);
+      formData.append('scene_content', newAsset.content);
       formData.append('scene_image', options.file);
 
-      axios.post('http://localhost:8000/save_scene_asset', formData)
+      await axios.post('http://localhost:8000/save_scene_asset', formData)
         .then((response) => {
           if (response.data.success) {
             newAsset.image = response.data.filePath;
@@ -363,8 +365,14 @@ export default defineComponent({
       showDeleteConfirm.value = false;
     }
 
-    function confirmDelete() {
+    async function confirmDelete() {
       actions.deleteScene(curEditAssetIndex.value);
+      await axios.post('http://localhost:8000/delete_scene_asset', {
+        action: 'delete_scene_asset',
+        data: {
+          index: curEditAssetIndex.value,
+        },
+      });
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
@@ -384,7 +392,7 @@ export default defineComponent({
       }
     }
 
-    function saveEditedAsset() {
+    async function saveEditedAsset() {
       // const editedAsset = Scenedata[curEditAssetIndex.value];
 
       if (!currentEditAsset.name) {
@@ -401,6 +409,12 @@ export default defineComponent({
       // }
       console.log(currentEditAsset)
       updateScene({ index: curEditAssetIndex.value, scene: { ...currentEditAsset } });
+      await axios.post('http://localhost:8000/save_scene_asset', {
+          action: 'save_scene_asset',
+          data: {
+            index: curEditAssetIndex.value, scene: currentEditAsset
+          },
+        });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
     }

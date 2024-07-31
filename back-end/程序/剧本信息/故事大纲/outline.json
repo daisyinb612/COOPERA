@@ -1,0 +1,74 @@
+[
+    {
+        "plotName": "神秘启示",
+        "plotStage": "Expositon",
+        "scene": "梅林的密室",
+        "beat": "梅林向海尔揭示公主艾莉娅被诅咒的命运，海尔决定踏上拯救公主的旅程。",
+        "characters": [
+            "魔导师梅林",
+            "勇敢的冒险者海尔"
+        ]
+    },
+    {
+        "plotName": "命运之旅",
+        "plotStage": "Inciting Incident",
+        "scene": "王国森林",
+        "beat": "海尔在森林中遭遇神秘商人贾维，获得了一件神秘的魔法物品。",
+        "characters": [
+            "勇敢的冒险者海尔",
+            "神秘商人贾维"
+        ]
+    },
+    {
+        "plotName": "诅咒的真相",
+        "plotStage": "Conflict",
+        "scene": "被诅咒的城堡",
+        "beat": "海尔发现了邪恶巫师萨洛斯的诅咒真相，并与之展开激烈的辩论。",
+        "characters": [
+            "勇敢的冒险者海尔",
+            "邪恶巫师萨洛斯"
+        ]
+    },
+    {
+        "plotName": "智慧的力量",
+        "plotStage": "Rising Action",
+        "scene": "梅林的密室",
+        "beat": "梅林教导海尔如何运用魔法物品来破解诅咒。",
+        "characters": [
+            "魔导师梅林",
+            "勇敢的冒险者海尔"
+        ]
+    },
+    {
+        "plotName": "勇闯禁地",
+        "plotStage": "Climax",
+        "scene": "黑暗地牢",
+        "beat": "海尔深入地牢，与邪恶巫师进行了一场激烈的对决。",
+        "characters": [
+            "勇敢的冒险者海尔",
+            "邪恶巫师萨洛斯"
+        ]
+    },
+    {
+        "plotName": "公主的救赎",
+        "plotStage": "Falling Action",
+        "scene": "城堡大厅",
+        "beat": "海尔利用梅林所教的方法成功解救了公主艾莉娅。",
+        "characters": [
+            "勇敢的冒险者海尔",
+            "公主艾莉娅"
+        ]
+    },
+    {
+        "plotName": "和平的庆典",
+        "plotStage": "Denouement",
+        "scene": "王国广场",
+        "beat": "王国举行了盛大的庆典，庆祝公主的重生和邪恶势力的灭亡。",
+        "characters": [
+            "魔导师梅林",
+            "勇敢的冒险者海尔",
+            "公主艾莉娅",
+            "神秘商人贾维"
+        ]
+    }
+]

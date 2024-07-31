@@ -7,6 +7,8 @@ from zhipuai import ZhipuAI
 from history import create_xlsx_file
 import xlsxwriter
 import csv
+from datetime import datetime
+import json
 from openpyxl import Workbook, load_workbook
 
 class LLM(object):
@@ -189,12 +191,16 @@ class LLM(object):
                 new_history.append(row)
         new_history.append({"role": "user", "content": question})
         new_history.append({"role": "assistant", "content": answer})
-        filepath = create_xlsx_file()
+        # filepath = create_xlsx_file()
         #workbook = load_workbook(filepath)
         #for sheet_name in workbook.sheetnames:
         #    del workbook[sheet_name]
         #workbook.save(filepath)
-        self.save_json_to_excel(json_object=new_history,filepath=filepath)
+        current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        with open("./消息历史/history.jsonl", 'a', encoding='utf-8') as f:
+            json.dump({"time": current_time, "history": new_history}, f, ensure_ascii=False, indent=4)
+            
+        # self.save_json_to_excel(json_object=new_history,filepath=filepath)
         
     def ask(self,question,prompt,history=None,model_name=None):##model_name改为其他值（例如None）时，默认使用GLM
         if history is None:
@@ -262,7 +268,7 @@ class LLM(object):
         self.save_history(question=question,answer=answer,prompt=prompt,history=history)
         return answer
 
-    def create_picture(self,filepath,prompt,history=None):
+    def create_picture(self,prompt,history=None):
         '''
         url = 'https://api.openai.com/v1/images/generations'
         headers = {
@@ -292,8 +298,6 @@ class LLM(object):
             prompt=prompt,
         )
         print(response.data[0].url)
-        with open(filepath, 'w',encoding='utf-8') as f:
-                f.write(response.data[0].url)
         self.save_history(question=prompt,answer="",prompt="",history=history)
         return response.data[0].url
 
