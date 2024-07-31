@@ -219,7 +219,7 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"角色的描述为"+data["data"]["user_input"]
+            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["user_input"]
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
@@ -317,7 +317,9 @@ def generate_dialogue():
     scene = data["scene"]
     beat = data["beat"]
     characters = data["characters"]
-    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
+    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表"
+    for character in characters:
+        question += character + " "
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_dialogue_create)
     scene = l.analyze_answer(answer)
