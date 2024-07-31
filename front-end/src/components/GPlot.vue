@@ -17,7 +17,7 @@
                 <div class="plot-element">{{ plot.plotStage }}</div>
                 <div class="location">{{ plot.scene }}</div>
                 <div class="characters">
-                  <span v-for="character in plot.characters" :key="character">{{ character.name }}</span>
+                  <span v-for="character in plot.characters" :key="character">{{ character }}</span>
                 </div>
               </div>
               <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
@@ -228,7 +228,8 @@ export default defineComponent({
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
       editPlotData.scene = plotToEdit.scene;
-      editPlotData.characters = [...plotToEdit.characters];
+      console.log(Array.isArray(plotToEdit.characters));
+      editPlotData.characters = plotToEdit.characters;
       editPlotData.beat = plotToEdit.beat;
       editPlotData.dialogue = plotToEdit.dialogue;
       plotToEditIndex.value = index;
@@ -285,6 +286,7 @@ export default defineComponent({
           action: 'init_plot_generation',
           data: null,
         });
+        response.data.characters = response.data.characters.split(", ")
         console.log(response.data);
         addPlot(response.data);
         const scenes = response.data.map((plot) => {

@@ -70,7 +70,8 @@ class LLM(object):
         '''
         self.setting_outline_create = '''
         假设你是一位剧作家，
-        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中beat指梗概。
+        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，
+        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。
         输出时参照###输出示例###只输出json字符串,"故事阶段"的值只能取{"Expositon","Inciting Incident","Conflict","Rising Action","Climax","Falling Action","Denouement"}其中之一
         ###输出示例###
         [{
@@ -78,49 +79,49 @@ class LLM(object):
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         },
         {
         "plotName": "***",
         "plotStage": "***",
         "scene": "***",
         "beat": "***",
-        "characters":[{"name":""},{"name":""},{"name":""}]
+        "characters":["**", "**", "**"]
         }
         ]
         '''

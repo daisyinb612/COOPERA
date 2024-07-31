@@ -143,6 +143,7 @@
       </el-form-item>
 
       <el-form-item label="图片" :label-width="formLabelWidth">
+        <div>
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
@@ -155,7 +156,10 @@
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
+
         </el-upload>
+        <el-button @click="generate_image" class="confirm-button">生成</el-button>
+        </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
@@ -224,6 +228,7 @@ export default defineComponent({
     });
 
     const charList=computed(()=>{
+      console.log(store.state.character.characters);
       return store.state.character.characters
     })
 
@@ -431,12 +436,13 @@ export default defineComponent({
     }
 
     function confirmDelete() {
+      const name = charList.value[curEditAssetIndex.value].name;
       store.dispatch('deleteCharacter',curEditAssetIndex.value)
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
         type: 'success',
-        message: `成功删除资产 "${currentEditAsset.value.name}"`,
+        message: `成功删除资产 "${name}"`,
       });
     }
 
@@ -452,7 +458,7 @@ export default defineComponent({
     }
 
     function saveEditedAsset() {
-      const editedAsset = charList[curEditAssetIndex.value];
+      const editedAsset = charList.value[curEditAssetIndex.value];
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
@@ -486,6 +492,7 @@ export default defineComponent({
           });
           newAsset.image = imageResponse.data.image;
           currentEditAsset.image = imageResponse.data.image;
+          charList.value[curEditAssetIndex.value].image = imageResponse.data.image;
       }
 
     return {
