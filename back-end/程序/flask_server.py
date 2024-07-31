@@ -88,20 +88,21 @@ def get_character_help():
     answer = l.ask(question=question, prompt=l.role_help, history=history)
     return jsonify({"answer": answer})
  
-@app.route('/save_character_asset', methods=['POST'])
-def save_character_asset():
-    data = request.get_json()
-    l = LLM(apikey=info_dict["apikey"])
-    l.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
-    return jsonify({})
+# @app.route('/save_character_asset', methods=['POST'])
+# def save_character_asset():
+#     data = request.get_json()
+#     l = LLM(apikey=info_dict["apikey"])
+#     l.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
+#     return jsonify({})
  
 @app.route('/init_plot_generation', methods=['POST'])
 def init_plot_generation():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
-    e = ExcelOp(file=info_dict["characters_path"])
-    characters = e.get_json_all()
-    question = "\n###故事线###:" + storyline + "\n###角色表###:" + characters
+    characters = request.get_json()["data"]["characters"]
+    question = "\n###故事线###:" + storyline + "\n###角色表###:" 
+    for character in characters:
+        question += character["name"] + ": " + character["content"] + "\n"
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_outline_create)
     plot = l.analyze_answer(answer)

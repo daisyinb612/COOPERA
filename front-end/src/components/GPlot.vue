@@ -36,7 +36,7 @@
           <el-input v-model="newPlot.plotName" autocomplete="off" />
         </el-form-item>
         <el-form-item label="情节元素">
-          <el-radio-group v-model="newPlot.plotElement">
+          <el-radio-group v-model="newPlot.plotStage">
             <el-radio value="Exposition">展示</el-radio>
             <el-radio value="Inciting Incident">激励事件</el-radio>
             <el-radio value="Conflict">冲突</el-radio>
@@ -72,7 +72,7 @@
           <el-input v-model="editPlotData.plotName" autocomplete="off" />
         </el-form-item>
         <el-form-item label="情节元素">
-          <el-radio-group v-model="editPlotData.plotElement">
+          <el-radio-group v-model="editPlotData.plotStage">
             <el-radio value="Exposition">展示</el-radio>
             <el-radio value="Inciting Incident">激励事件</el-radio>
             <el-radio value="Conflict">冲突</el-radio>
@@ -228,8 +228,7 @@ export default defineComponent({
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
       editPlotData.scene = plotToEdit.scene;
-      console.log(Array.isArray(plotToEdit.characters));
-      editPlotData.characters = plotToEdit.characters;
+      editPlotData.characters = plotToEdit.characters.split(", ");
       editPlotData.beat = plotToEdit.beat;
       editPlotData.dialogue = plotToEdit.dialogue;
       plotToEditIndex.value = index;
@@ -268,7 +267,7 @@ export default defineComponent({
           plotName: editPlotData.plotName,
           plotElement: editPlotData.plotElement,
           scene: editPlotData.scene,
-          characters: [...editPlotData.characters],
+          characters: editPlotData.characters.join(", "),
           beat: editPlotData.beat,
         };
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
@@ -284,10 +283,10 @@ export default defineComponent({
       try {
         const response = await axios.post('http://localhost:8000/init_plot_generation', {
           action: 'init_plot_generation',
-          data: null,
+          data: {
+            characters: store.state.character.characters
+          }
         });
-        response.data.characters = response.data.characters.split(", ")
-        console.log(response.data);
         addPlot(response.data);
         const scenes = response.data.map((plot) => {
           return {

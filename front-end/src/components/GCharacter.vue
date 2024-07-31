@@ -474,6 +474,8 @@ export default defineComponent({
       store.dispatch('updateCharacter', { index: curEditAssetIndex.value, character: editedAsset });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;
+        
+      
     }
 
     async function generate_image() {
