@@ -197,7 +197,7 @@ class LLM(object):
         #    del workbook[sheet_name]
         #workbook.save(filepath)
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        with open("./消息历史/history.jsonl", 'a', encoding='utf-8') as f:
+        with open("./history/history.jsonl", 'a', encoding='utf-8') as f:
             json.dump({"time": current_time, "history": new_history}, f, ensure_ascii=False, indent=4)
             
         # self.save_json_to_excel(json_object=new_history,filepath=filepath)

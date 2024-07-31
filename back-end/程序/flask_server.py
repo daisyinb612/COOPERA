@@ -15,12 +15,12 @@ CORS(app)
 # Configuration dictionary
 info_dict = {
    "apikey": "e4ab8bb5cc7cc6eb620f9cde3093b8b4.FauytagDuxsJpEuD",
-   "world_setting_path": "./剧本信息/世界观设定/storyline.txt",
-   "characters_path": "./剧本信息/角色设定/characters.json",
-   "outline_path": "./剧本信息/故事大纲/outline.json",
-   "scene_path": "./剧本信息/场景/scene.json",
-   "dialogue_path": "./剧本信息/对话/dialogue_path.json",
-   "picture_path": "./剧本信息/图片"
+   "world_setting_path": "./opera_info/storyline/storyline.txt",
+   "characters_path": "./opera_info/character/characters.json",
+   "outline_path": "./opera_info/outline/outline.json",
+   "scene_path": "./opera_info/scene/scene.json",
+   "dialogue_path": "./opera_info/dialog/dialogue_path.json",
+   "picture_path": "./opera_info/img"
 }
  
 @app.route('/upload_storyline', methods=['POST'])
