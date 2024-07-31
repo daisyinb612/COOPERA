@@ -62,38 +62,41 @@
 import { defineComponent, ref, computed } from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
+import {useStore} from 'vuex';
 
 export default defineComponent({
   name: 'GDialogue',
 
   setup() {
-    const plots = ref([
-      // 示例数据
-      {
-        plotName: 'Plot 1',
-        logline: 'Logline 1',
-        plotElement: 'Conflict',
-        location: 'Location 1',
-        characters: ['Character 1', 'Character 2'],
-        beat: 'This is the beat for plot 1.',
-        dialogue: [
-          { number: 1, character: 'Character 1', content: 'Dialogue 1 for Character 1' },
-          { number: 2, character: 'Character 2', content: 'Dialogue 1 for Character 2' }
-        ]
-      },
+    // const plots = ref([
+    //   // 示例数据
+    //   {
+    //     plotName: 'Plot 1',
+    //     logline: 'Logline 1',
+    //     plotElement: 'Conflict',
+    //     location: 'Location 1',
+    //     characters: ['Character 1', 'Character 2'],
+    //     beat: 'This is the beat for plot 1.',
+    //     dialogue: [
+    //       { number: 1, character: 'Character 1', content: 'Dialogue 1 for Character 1' },
+    //       { number: 2, character: 'Character 2', content: 'Dialogue 1 for Character 2' }
+    //     ]
+    //   },
 
-      {
-        plotName: 'Plot 2',
-        plotElement: 'Climax',
-        location: 'Location 2',
-        characters: ['Character 3', 'Character 4'],
-        beat: 'This is the beat for plot 2.',
-        dialogue: [
-          { number: 1, character: 'Character 3', content: 'Dialogue 1 for Character 3' },
-          { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
-        ]
-      }
-    ]);
+    //   {
+    //     plotName: 'Plot 2',
+    //     plotElement: 'Climax',
+    //     location: 'Location 2',
+    //     characters: ['Character 3', 'Character 4'],
+    //     beat: 'This is the beat for plot 2.',
+    //     dialogue: [
+    //       { number: 1, character: 'Character 3', content: 'Dialogue 1 for Character 3' },
+    //       { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
+    //     ]
+    //   }
+    // ]);
+    const store = useStore();
+    const plots = computed(() => store.state.plot.plots);
     const selectedPlotIndex = ref(null);
 
     const selectedPlot = computed(() => {

@@ -237,11 +237,7 @@ def get_scene_help():
         scene = df.loc[i, 'scene']
         beat = df.loc[i, 'beat']
         characters = df.loc[i, 'characters']
-        characters_list = ast.literal_eval('[' + characters + ']')  # convert string to list of dictionaries
-        names = [character['name'] for character in characters_list] 
-        question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表"
-        for character in names:
-            question += character + "，"
+        question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.role_help, history=history)
     return jsonify({"answer": answer})
