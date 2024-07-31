@@ -24,8 +24,8 @@
             <el-card class="plot-item">
               <div class="plot-header">
                 <div class="scene-name">{{ selectedPlot.plotName }}</div>
-                <div class="plot-element">{{ selectedPlot.plotElement }}</div>
-                <div class="location">{{ selectedPlot.location }}</div>
+                <div class="plot-element">{{ selectedPlot.plotStage }}</div>
+                <!-- <div class="location">{{ selectedPlot.location }}</div> -->
                 <div class="characters">
                   <span v-for="character in selectedPlot.characters" :key="character">{{ character }}</span>
                 </div>
