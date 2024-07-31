@@ -6,33 +6,22 @@
           <div class="asset-name">“CHAT”</div>
         </el-header>
         <el-main>
-          <el-card class="message" v-for="(message, index) in messages" :key="index">
-            <template #header>
-              <div class="message-header">{{ message.prompt }}</div>
-            </template>
-            <el-container>
-              <el-aside width="100px">
-                <el-avatar icon="el-icon-user" class="llm"></el-avatar>
-              </el-aside>
-              <el-main width="200px">
-                {{ message.content }}
-                <!-- <el-row class="llm-wrapper">
-                  <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
-                    <Download @click="saveAsset('image', message.image)" />
-                  </el-icon>
-                  <div v-else class="loading-wrapper">
-                    <el-loading :loading="true" text="loading......" />
-                  </div>
-                </el-row>
-                <el-row class="llm-wrapper">
-                  <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
-                    <Download @click="saveAsset('content', message.content)" />
-                  </el-icon>
-                  <div class="message-content">{{ message.content }}</div>
-                </el-row> -->
-              </el-main>
-            </el-container>
-          </el-card>
+          <div class="message" v-for="(message, index) in messages" :key="index">
+            <el-row>
+              <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length*2"></el-col>
+              <el-col :span="message.prompt.length > 35 ?20: message.prompt.length*2"><div class="human-iutput"  :style="{  }">
+                {{ message.prompt }}</div></el-col>
+              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
+            </el-row>
+            <br>
+            <br>
+            <br>
+            <el-row>
+              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
+              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
+            
+            </el-row>
+          </div>
         </el-main>
         <el-footer class="inputfooter">
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
@@ -259,6 +248,14 @@ export default defineComponent({
           user_input: inputMessage.value,
         },
       };
+      const assistantMessage = {
+            role: 'assistant',
+            prompt: inputMessage.value,
+            content: "loading...",
+            image: 'logo.png',
+            downloadIcon: true,
+          };
+      messages.value.push(assistantMessage);
 
       try {
         const response = await axios.post('http://localhost:8000/get_character_help', requestBody);
@@ -270,7 +267,7 @@ export default defineComponent({
             image: 'logo.png',
             downloadIcon: true,
           };
-          messages.value.push(assistantMessage);
+          messages.value.splice(messages.value.length - 1, 1, assistantMessage);
           history.value.push(assistantMessage);
 
           // const imageRequestBody = {
@@ -740,6 +737,18 @@ body {
   font-weight: bold;
 }
 
+.human-iutput{
+  padding: 15px;
+  line-height: 20px;
+  border-radius: 10px;
+  background-color: grey
+}
+
+.AI-output{
+  padding: 15px;
+  line-height: 20px;
+  border-radius: 10px;
+}
 .asset-image {
   max-width: 100%;
   border-radius: 10px;
