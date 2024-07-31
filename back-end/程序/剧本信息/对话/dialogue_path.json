@@ -1,0 +1,105 @@
+[
+    {
+        "beat": "李明在打扫卫生时意外发现了一本古老的书。",
+        "characters": "李明",
+        "plotName": "意外之书",
+        "plotStage": "Exposition",
+        "scene": "李明的宿舍",
+        "dialogue": [
+            {
+                "character": "李明",
+                "content": "（扫着地，突然发现床下有个小缝隙）嘿，这是什么东西？",
+                "number": "1"
+            },
+            {
+                "character": "李明",
+                "content": "（用力拉出一本书，灰尘飞扬）哇，这本看起来好古老啊。",
+                "number": "2"
+            },
+            {
+                "character": "李明",
+                "content": "（拍打书皮，仔细端详）上面写的都是些什么呢？得找个时间好好研究一下。",
+                "number": "3"
+            },
+            {
+                "character": "李明",
+                "content": "（把书放在桌上，继续打扫）不过现在还是得先把卫生做完。",
+                "number": "4"
+            },
+            {
+                "character": "李明",
+                "content": "（收拾完毕，坐在桌前，目光再次落在书上）好吧，就翻一页看看吧。",
+                "number": "5"
+            }
+        ]
+    },
+    {
+        "beat": "李明和王雪一起研究这本书，他们发现书中的文字开始发光，并赋予他们特殊能力。",
+        "characters": "李明, 王雪",
+        "plotName": "神秘力量",
+        "plotStage": "Inciting Incident",
+        "scene": "图书馆",
+        "dialogue": [
+            {
+                "character": "李明",
+                "content": "王雪，你看这本书上的字怎么在发光？我们之前都没注意到。",
+                "number": "1"
+            },
+            {
+                "character": "王雪",
+                "content": "是啊，太奇怪了。可能这本书不是普通的书，我们还是小心点好。",
+                "number": "2"
+            },
+            {
+                "character": "李明",
+                "content": "我忍不住想碰一下这些发光的文字...",
+                "number": "3"
+            },
+            {
+                "character": "王雪",
+                "content": "别！李明，你... 哇，你碰了之后，发生了什么？你的眼睛看起来不一样了。",
+                "number": "4"
+            },
+            {
+                "character": "李明",
+                "content": "我感觉我好像有了超能力！王雪，你也试试看。",
+                "number": "5"
+            }
+        ]
+    },
+    {
+        "beat": "李明和王雪寻求张教授的帮助，教授透露这本书可能与古代的超能力传说有关。",
+        "characters": "李明, 王雪, 张教授",
+        "plotName": "教授的秘密",
+        "plotStage": "Conflict",
+        "scene": "张教授的办公室"
+    },
+    {
+        "beat": "两人开始探索自己的能力，但发现能力带来的后果远超他们的想象。",
+        "characters": "李明, 王雪",
+        "plotName": "能力的代价",
+        "plotStage": "Rising Action",
+        "scene": "校园各处"
+    },
+    {
+        "beat": "李明和王雪在张教授的带领下发现了一个隐藏的遗址，揭开了古书背后的真相。",
+        "characters": "李明, 王雪, 张教授",
+        "plotName": "真相大白",
+        "plotStage": "Climax",
+        "scene": "古书的遗址"
+    },
+    {
+        "beat": "面对真相，李明和王雪必须决定是否继续使用他们的超能力。",
+        "characters": "李明, 王雪",
+        "plotName": "能力的抉择",
+        "plotStage": "Falling Action",
+        "scene": "李明的宿舍"
+    },
+    {
+        "beat": "李明和王雪做出选择，故事以他们的成长和新生活的开始告终。",
+        "characters": "李明, 王雪",
+        "plotName": "新的开始",
+        "plotStage": "Denouement",
+        "scene": "校园广场"
+    }
+]

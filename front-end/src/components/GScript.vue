@@ -4,14 +4,44 @@
       <el-header class="header">
         <div>剧本</div>
       </el-header>
+        <el-button @click="generate_script" class="confirm-button">生成</el-button>
+        <div class="script-header">
+          <el-scrollbar class="script-content">
+          <div class="script-name">Title</div>
+          {{ script.storylines }}
+          <div v-for="plot in script.dialogues" :key="plot.plotName">
+            <h3>{{ plot.plotName }}</h3>
+            scene: {{ plot.scene }}
+            <div v-for="dialogue in plot.dialogue" :key="dialogue.character">
+              <div>{{ dialogue.character }}: {{ dialogue.content }}</div>
+              </div>
+          </div>
+          </el-scrollbar>
+        </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
+import axios from 'axios';
 import { defineComponent} from 'vue';
+import { ref } from 'vue';
+
 export default defineComponent({
   name: 'GScript',
+  setup() {
+    const script = ref({
+      storylines: "",
+      dialogues: "",
+    })
+    async function generate_script(){
+      const res = await axios.get('http://localhost:8000/generate_script')
+      script.value.dialogues = res.data['dialogues']
+      script.value.storylines = res.data['storylines']
+      console.log(script.value);
+    }
+    return {generate_script, script};
+  },
 });
 </script>
 
@@ -45,5 +75,12 @@ export default defineComponent({
   box-sizing: border-box;
   padding: 0;
 }
+
+.script-header {
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 20px;
+}
+
 
 </style>

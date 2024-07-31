@@ -4,6 +4,7 @@ from llm import LLM
 from flask_cors import CORS
 import pandas as pd
 import ast
+import json
  
 app = Flask(__name__)
 CORS(app)
@@ -17,7 +18,7 @@ info_dict = {
    "characters_path": "./剧本信息/角色设定/characters.xlsx",
    "outline_path": "./剧本信息/故事大纲/outline.csv",
    "scene_path": "./剧本信息/场景/scene.xlsx",
-   "dialogue_path": "./剧本信息/对话/dialogue_path.xlsx",
+   "dialogue_path": "./剧本信息/对话/dialogue_path.json",
    "picture_path": "./剧本信息/图片"
 }
  
@@ -258,6 +259,35 @@ def generate_dialogue():
     scene = l.analyze_answer(answer)
     l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
     return jsonify(scene)
+
+
+@app.route("/upload_dialogue", methods=['POST'])
+def upload_dialogue():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 402
+    action = data.get("action")
+    if action == "upload_dialogue":
+        with open(info_dict['dialogue_path'], 'w', encoding='utf-8') as f:
+            json.dump(data["data"], f, indent=4, ensure_ascii=False)
+
+        return jsonify({"message": "Dialogue uploaded successfully."})
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
+    
+@app.route("/generate_script", methods=['GET'])
+def generate_script():
+    res = {
+        "storylines": "",
+        "dialogues": ""
+    }
+    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+        storyline = f.read()
+    res["storylines"] = storyline
+    with open(info_dict['dialogue_path'], "r", encoding="utf-8") as f:
+        dialogue = json.load(f)
+    res["dialogues"] = dialogue
+    return jsonify(res)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)

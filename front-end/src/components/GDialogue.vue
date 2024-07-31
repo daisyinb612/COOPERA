@@ -46,7 +46,12 @@
               </div>
               <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
                 <div class="character">{{ dialogue.character }}: </div>
-                <div class="dialogue-content">{{ dialogue.content }}</div>
+                <el-input
+                type="textarea"
+                v-model="dialogue.content"
+                placeholder="Enter beat here..."
+                class="beat-input"
+              ></el-input>
               <!-- </div> -->
             </el-card>
           </template>
@@ -116,17 +121,12 @@ export default defineComponent({
 
     async function UploadDialogue() {
       const payload = {
-        action: 'update_dialogue',
-        data: plots.value.map(plot => ({
-          章节名: plot.plotName,
-          故事阶段: plot.plotStage,
-          情节梗概: plot.dialogue,
-          参与人物: plot.characters.map(character => ({ 角色名字: character }))
-        }))
+        action: 'upload_dialogue',
+        data: plots.value
       };
 
       try {
-        await axios.post('http://localhost:8000/generate_dialogue', payload);
+        await axios.post('http://localhost:8000/upload_dialogue', payload);
         ElMessage({
           message: '上传成功',
           type: 'success'
