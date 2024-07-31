@@ -496,7 +496,7 @@ body {
   padding: 30px;
   overflow: hidden;
   box-sizing: border-box;
-  background-color: #F4F4F4;
+  background-color: #F1F1F1;
 }
 
 .left-panel {
@@ -710,7 +710,7 @@ body {
 }
 
 .cancel-button {
-  background-color: #f5f5f5;
+  background-color: #F1F1F1;
   color: #333;
 }
 

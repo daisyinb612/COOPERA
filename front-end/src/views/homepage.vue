@@ -62,7 +62,7 @@ body,
 
 .main-content {
   flex: 1;
-  background-color: #f5f5f5;
+  background-color: #F1F1F1;
 }
 
 </style>

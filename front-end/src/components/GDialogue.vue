@@ -165,7 +165,7 @@ export default defineComponent({
   padding: 30px;
   overflow: hidden;
   box-sizing: border-box;
-  background-color: #F4F4F4;
+  background-color: #F1F1F1;
 }
 
 .header {

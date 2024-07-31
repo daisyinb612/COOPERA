@@ -195,7 +195,7 @@ export default defineComponent({
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
-  background-color: #F5F5F5;
+  background-color: #F1F1F1;
 }
 
 .inputLoglineWrapper + .inputLoglineWrapper {
