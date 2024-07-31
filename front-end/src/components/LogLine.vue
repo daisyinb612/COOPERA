@@ -28,12 +28,7 @@
                 <el-avatar icon="el-icon-user" class="llm"></el-avatar>
               </el-aside>
               <el-main width="200px">
-                <el-row class="llm-wrapper">
-                  <el-icon v-if="message.downloadIcon" :size="15" class="generated-icon">
-                    <Download @click="saveAsset('content', message.content)" />
-                  </el-icon>
-                  <div class="message-content">{{ message.content }} </div>
-                </el-row>
+                {{ message.content }}
               </el-main>
             </el-container>
           </el-card>
@@ -112,7 +107,7 @@ export default defineComponent({
           const assistantMessage = {
             role: 'assistant',
             prompt: this.inputMessage,
-            content: response.data.content,
+            content: response.data.answer,
             image: "test_asset.png",
             downloadIcon: true
           };
