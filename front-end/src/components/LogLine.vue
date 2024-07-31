@@ -83,8 +83,7 @@ export default defineComponent({
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌
-        },
-        timeout: 10000
+        }
       };
 
       const requestBody = {

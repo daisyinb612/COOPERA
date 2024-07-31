@@ -242,5 +242,22 @@ def get_scene_help():
     answer = l.ask(question=question, prompt=l.role_help, history=history)
     return jsonify({"answer": answer})
 
+@app.route('/generate_dialogue', methods=['POST'])
+def generate_dialogue():
+    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+        storyline = f.read()
+    data = request.get_json()["data"]
+    plotName = data["plotName"]
+    plotStage = data["plotStage"]
+    scene = data["scene"]
+    beat = data["beat"]
+    characters = data["characters"]
+    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
+    l = LLM(apikey=info_dict["apikey"])
+    answer = l.ask(question=question, prompt=l.setting_dialogue_create)
+    scene = l.analyze_answer(answer)
+    l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+    return jsonify(scene)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)

@@ -19,12 +19,14 @@
         </el-header>
 
         <el-main class="dialogue-list-container">
+          <el-scrollbar class="plots-list">
           <template v-if="selectedPlot">
             <!-- 显示选中情节的剧情卡片 -->
-            <el-card class="plot-item">
+            <el-card class="plot-item">  
               <div class="plot-header">
                 <div class="scene-name">{{ selectedPlot.plotName }}</div>
-                <div class="plot-element">{{ selectedPlot.plotStage }}</div>
+                <el-button @click="generate_dialogue" class="confirm-button">生成</el-button>
+            <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                 <!-- <div class="location">{{ selectedPlot.location }}</div> -->
                 <div class="characters">
                   <span v-for="character in selectedPlot.characters" :key="character">{{ character }}</span>
@@ -38,16 +40,17 @@
               ></el-input>
             </el-card>
             <!-- 根据对话编号显示角色和对话内容 -->
-            <el-card class="dialogue-item" v-for="(dialogueNumber, index) in dialogueNumbers" :key="index">
+            <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index">
               <div class="dialogue-header">
-                <div class="dialogue-number">Dialogue {{ dialogueNumber }}</div>
+                <div class="dialogue-number">Dialogue {{ index+1 }}</div>
               </div>
-              <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue">
+              <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
                 <div class="character">{{ dialogue.character }}: </div>
                 <div class="dialogue-content">{{ dialogue.content }}</div>
-              </div>
+              <!-- </div> -->
             </el-card>
           </template>
+        </el-scrollbar>
         </el-main>
         
         <el-footer class="button-container-down">
@@ -68,33 +71,6 @@ export default defineComponent({
   name: 'GDialogue',
 
   setup() {
-    // const plots = ref([
-    //   // 示例数据
-    //   {
-    //     plotName: 'Plot 1',
-    //     logline: 'Logline 1',
-    //     plotElement: 'Conflict',
-    //     location: 'Location 1',
-    //     characters: ['Character 1', 'Character 2'],
-    //     beat: 'This is the beat for plot 1.',
-    //     dialogue: [
-    //       { number: 1, character: 'Character 1', content: 'Dialogue 1 for Character 1' },
-    //       { number: 2, character: 'Character 2', content: 'Dialogue 1 for Character 2' }
-    //     ]
-    //   },
-
-    //   {
-    //     plotName: 'Plot 2',
-    //     plotElement: 'Climax',
-    //     location: 'Location 2',
-    //     characters: ['Character 3', 'Character 4'],
-    //     beat: 'This is the beat for plot 2.',
-    //     dialogue: [
-    //       { number: 1, character: 'Character 3', content: 'Dialogue 1 for Character 3' },
-    //       { number: 2, character: 'Character 4', content: 'Dialogue 1 for Character 4' }
-    //     ]
-    //   }
-    // ]);
     const store = useStore();
     const plots = computed(() => store.state.plot.plots);
     const selectedPlotIndex = ref(null);
@@ -102,8 +78,8 @@ export default defineComponent({
     const selectedPlot = computed(() => {
       return selectedPlotIndex.value !== null ? plots.value[selectedPlotIndex.value] : null;
     });
-    const dialogueNumbers = computed(() => {
-      return selectedPlot.value ? [...new Set(selectedPlot.value.dialogue.map(d => d.number))] : [];
+    const dialogues = computed(() => {
+      return selectedPlot.value.dialogue ?? [];
     });
 
 
@@ -111,12 +87,39 @@ export default defineComponent({
       selectedPlotIndex.value = index;
     }
 
+    async function generate_dialogue(){
+      const payload = {
+        action: 'generate_dialogue',
+        data: {
+          plotName: selectedPlot.value.plotName,
+          plotStage: selectedPlot.value.plotStage,
+          scene: selectedPlot.value.scene,
+          beat: selectedPlot.value.beat,
+          characters: selectedPlot.value.characters
+        }
+      };
+      try {
+        const response = await axios.post('http://localhost:8000/generate_dialogue', payload);
+        console.log(response.data);
+        selectedPlot.value.dialogue = response.data;
+        ElMessage({
+          message: '对话生成成功',
+          type: 'success'
+        });
+      } catch (error) {
+        ElMessage({
+          message: '对话生成失败',
+          type: 'error'
+        });
+      }
+    }
+
     async function UploadDialogue() {
       const payload = {
         action: 'update_dialogue',
         data: plots.value.map(plot => ({
           章节名: plot.plotName,
-          故事阶段: plot.plotElement,
+          故事阶段: plot.plotStage,
           情节梗概: plot.dialogue,
           参与人物: plot.characters.map(character => ({ 角色名字: character }))
         }))
@@ -135,17 +138,19 @@ export default defineComponent({
         });
       }
     }
-    function filteredDialogues(dialogueNumber) {
-      return selectedPlot.value ? selectedPlot.value.dialogue.filter(d => d.number === dialogueNumber) : [];
-    }
+    // function filteredDialogues(dialogueNumber) {
+    //   return selectedPlot.value ? selectedPlot.value.dialogue.filter(d => d.number === dialogueNumber) : [];
+    // }
     return {
       plots,
       selectedPlot,
-      dialogueNumbers,
+      // dialogueNumbers,
+      dialogues,
       selectedPlotIndex,
-      filteredDialogues,
+      // filteredDialogues,
       selectPlot,
-      UploadDialogue
+      UploadDialogue,
+      generate_dialogue
     };
   }
 });
@@ -301,4 +306,9 @@ export default defineComponent({
 .dialogue-content {
   margin-left: 5px; /* 添加左边距，确保对话内容和冒号之间有足够的空间 */
 }
+.plots-list {
+  height: 100%;
+  overflow-y: auto;
+}
+
 </style>
