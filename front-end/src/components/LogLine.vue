@@ -19,19 +19,22 @@
           <div class="asset-name">“chat”</div>
         </el-header>
         <el-main>
-          <el-card class="message" v-for="(message, index) in messages" :key="index">
-            <template #header>
-              <div class="message-header">{{ message.prompt }}</div>
-            </template>
-            <el-container>
-              <el-aside width="100px">
-                <el-avatar icon="el-icon-user" class="llm"></el-avatar>
-              </el-aside>
-              <el-main width="200px">
-                {{ message.content }}
-              </el-main>
-            </el-container>
-          </el-card>
+          <div class="message" v-for="(message, index) in messages" :key="index">
+            <el-row>
+              <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length"></el-col>
+              <el-col :span="message.prompt.length > 35 ?20: message.prompt.length"><div class="human-iutput"  :style="{  }">
+                {{ message.prompt }}</div></el-col>
+              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
+            </el-row>
+            <br>
+            <br>
+            <br>
+            <el-row>
+              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
+              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
+            
+            </el-row>
+          </div>
         </el-main>
         <el-footer class="inputfooter">
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
@@ -97,6 +100,14 @@ export default defineComponent({
           user_input: this.inputMessage
         }
       };
+      const assistantMessage = {
+            role: 'assistant',
+            prompt: this.inputMessage,
+            content: "loading...",
+            image: 'logo.png',
+            downloadIcon: true,
+          };
+      this.messages.push(assistantMessage);
 
       try {
         console.log("Sending request...");
@@ -110,7 +121,7 @@ export default defineComponent({
             image: "test_asset.png",
             downloadIcon: true
           };
-          this.messages.push(assistantMessage);
+          this.messages.splice(this.messages.length - 1, 1, assistantMessage);
           this.history.push(assistantMessage);
           this.inputMessage = '';
         } else {
@@ -285,6 +296,20 @@ export default defineComponent({
   background-color: EEEEEE;
   width: 100%;
   height: 100%;
+}
+
+
+.human-iutput{
+  padding: 15px;
+  line-height: 20px;
+  border-radius: 10px;
+  background-color: grey
+}
+
+.AI-output{
+  padding: 15px;
+  line-height: 20px;
+  border-radius: 10px;
 }
 
 </style>
