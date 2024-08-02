@@ -14,7 +14,7 @@ from openpyxl import Workbook, load_workbook
 class LLM(object):
     def __init__(self,apikey=None):
         self.fix_json = '''
-        我将给出存在格式问题，你的任务是输出修正格式后的json字符串。
+        我将给出存在格式问题的文本，你的任务是输出修正格式后的json字符串。
         输出时不要复述任务要求，直接给出修改好的json字符串。
         '''
         self.storyline_help = '''
