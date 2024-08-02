@@ -228,7 +228,7 @@ export default defineComponent({
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotElement = plotToEdit.plotElement;
       editPlotData.scene = plotToEdit.scene;
-      editPlotData.characters = plotToEdit.characters.split(", ");
+      editPlotData.characters = plotToEdit.characters
       editPlotData.beat = plotToEdit.beat;
       editPlotData.dialogue = plotToEdit.dialogue;
       plotToEditIndex.value = index;
