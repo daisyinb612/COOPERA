@@ -82,12 +82,6 @@ export default defineComponent({
       };
       this.history.push(userMessage);
 
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer your_token_here'  // 示例：如果需要身份验证令牌
-        }
-      };
 
       const requestBody = {
         action: 'get_storyline_help',
@@ -111,7 +105,7 @@ export default defineComponent({
 
       try {
         console.log("Sending request...");
-        const response = await axios.post('http://localhost:8000/get_storyline_help', requestBody, config);
+        const response = await axios.post('http://localhost:8000/get_storyline_help', requestBody);
         console.log("Request successful");
         if (response.status === 200) {
           const assistantMessage = {
