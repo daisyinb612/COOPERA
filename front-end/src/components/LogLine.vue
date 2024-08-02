@@ -156,7 +156,7 @@ export default defineComponent({
       };
 
       try {
-        const response = await axios.post('http://localhost:8000/upload_storyline', requestBody, { timeout: 10000 });
+        const response = await axios.post('http://localhost:8000/upload_storyline', requestBody);
         this.$store.dispatch('addCharacter', response.data);
         if (response.status === 200) {
           ElMessage({
