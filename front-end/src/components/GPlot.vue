@@ -17,7 +17,7 @@
                 <div class="plot-element">{{ plot.plotStage }}</div>
                 <div class="location">{{ plot.scene }}</div>
                 <div class="characters">
-                  <span v-for="character in plot.characters" :key="character">{{ character }}</span>
+                  <span v-for="character in plot.characters" :key="character">{{ character }},</span>
                 </div>
               </div>
               <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>

@@ -682,4 +682,52 @@
             "content": "[\n    {\"number\": \"1\",\n    \"character\": \"Mulan\",\n    \"content\":\"终于回到这条熟悉的小路，离家越近，心情就越不平静。\"\n    },\n    {\"number\": \"2\",\n    \"character\": \"Neighbor A\",\n    \"content\":\"哎呀，那不是木兰吗？她真的回来了！快去告诉其他人！\"\n    },\n    {\"number\": \"3\",\n    \"character\": \"Neighbor B\",\n    \"content\":\"木兰回来了！快，把好消息传遍全村！\"\n    },\n    {\"number\": \"4\",\n    \"character\": \"Village Elder\",\n    \"content\":\"英雄归来，真是我们村子的骄傲！准备迎接仪式，让木兰感受到我们的敬意。\"\n    },\n    {\"number\": \"5\",\n    \"character\": \"Mulan's Mother\",\n    \"content\":\"女儿啊，你终于回来了！娘亲想你想得好苦啊！\"\n    },\n    {\"number\": \"6\",\n    \"character\": \"Mulan's Father\",\n    \"content\":\"木兰，你不仅为家族争光，更为国家立下了汗马功劳，父亲为你感到自豪！\"\n    },\n    {\"number\": \"7\",\n    \"character\": \"Mulan's Younger Sister\",\n    \"content\":\"姐姐，你不知道，家里和村子里的人有多么想念你！\"\n    },\n    {\"number\": \"8\",\n    \"character\": \"Mulan\",\n    \"content\":\"家人们，我只是做了我应该做的事，现在，让我们团聚在一起，享受这份平静和幸福吧。\"\n    }\n]"
         }
     ]
+}{
+    "time": "2024-08-04_19-51-20",
+    "history": [
+        {
+            "role": "system",
+            "content": ""
+        },
+        {
+            "role": "user",
+            "content": "请生成场景图片， 场景的名称为：木兰家中场景的描述为：家"
+        },
+        {
+            "role": "assistant",
+            "content": ""
+        }
+    ]
+}{
+    "time": "2024-08-04_19-52-15",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"Expositon\",\"Inciting Incident\",\"Conflict\",\"Rising Action\",\"Climax\",\"Falling Action\",\"Denouement\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:木兰得胜归乡，不受官禄，只愿返回故里与家人团聚，乡里亲族欢欣鼓舞，纷纷准备迎接这位英雄归来\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "木兰（主角），木兰的父亲，木兰的母亲，木兰的妹妹，家乡的族长，乡里年轻人甲，乡里年轻人乙\n\n###输出示例###\n\n```json\n[\n  {\n    \"plotName\": \"英雄归来\",\n    \"plotStage\": \"Falling Action\",\n    \"scene\": \"乡村\",\n    \"beat\": \"木兰得胜归乡，不受官禄，决定返回故里与家人团聚。\",\n    \"characters\":[\"木兰\", \"木兰的父亲\", \"木兰的母亲\"]\n  },\n  {\n    \"plotName\": \"欢庆准备\",\n    \"plotStage\": \"Falling Action\",\n    \"scene\": \"乡村广场\",\n    \"beat\": \"家乡的族长组织乡里年轻人甲和乙准备盛大的欢迎仪式。\",\n    \"characters\":[\"家乡的族长\", \"乡里年轻人甲\", \"乡里年轻人乙\"]\n  },\n  {\n    \"plotName\": \"家庭团聚\",\n    \"plotStage\": \"Falling Action\",\n    \"scene\": \"木兰家\",\n    \"beat\": \"木兰与家人团聚，分享战场经历，家人感到骄傲和欣慰。\",\n    \"characters\":[\"木兰\", \"木兰的父亲\", \"木兰的母亲\", \"木兰的妹妹\"]\n  },\n  {\n    \"plotName\": \"盛大欢迎\",\n    \"plotStage\": \"Denouement\",\n    \"scene\": \"乡村广场\",\n    \"beat\": \"乡里举行盛大的欢迎仪式，庆祝木兰的胜利归来。\",\n    \"characters\":[\"木兰\", \"家乡的族长\", \"乡里年轻人甲\", \"乡里年轻人乙\"]\n  },\n  {\n    \"plotName\": \"和平岁月\",\n    \"plotStage\": \"Denouement\",\n    \"scene\": \"乡村\",\n    \"beat\": \"木兰回归平静的生活，与家人和乡里人共同享受和平的岁月。\",\n    \"characters\":[\"木兰\", \"木兰的父亲\", \"木兰的母亲\", \"木兰的妹妹\", \"家乡的族长\", \"乡里年轻人甲\", \"乡里年轻人乙\"]\n  }\n]\n```"
+        }
+    ]
+}{
+    "time": "2024-08-04_19-53-22",
+    "history": [
+        {
+            "role": "system",
+            "content": ""
+        },
+        {
+            "role": "user",
+            "content": "请生成场景图片， 场景的名称为：乡村场景的描述为：乡村"
+        },
+        {
+            "role": "assistant",
+            "content": ""
+        }
+    ]
 }

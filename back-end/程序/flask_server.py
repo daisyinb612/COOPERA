@@ -5,6 +5,7 @@ from flask_cors import CORS
 import pandas as pd
 import ast
 import os
+from audio import get_wav
 import json
  
 app = Flask(__name__)
@@ -151,6 +152,7 @@ def save_scene_asset():
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data[index] = scene
+    print(scene)
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
@@ -165,6 +167,15 @@ def delete_scene_asset():
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
+
+@app.route("/generate_audio", methods=['POST'])
+def generate_audio():
+    data = request.get_json()
+    text = data["data"]["text"]
+    wav = get_wav(text)
+    return jsonify({"wav": wav})
+    
+
  
 @app.route('/init_dialogue_generation', methods=['POST'])
 def init_dialogue_generation():

@@ -2,61 +2,62 @@
     {
         "plotName": "英雄归来",
         "plotStage": "Falling Action",
-        "scene": "乡村道路",
-        "beat": "木兰骑马返回故里，乡亲们得知消息后纷纷出来迎接。",
+        "scene": "乡村",
+        "beat": "木兰得胜归乡，不受官禄，决定返回故里与家人团聚。",
         "characters": [
-            "Mulan",
-            "Father",
-            "Mother",
-            "Younger Sister",
-            "Neighbor A",
-            "Neighbor B",
-            "Village Elder"
+            "木兰",
+            "木兰的父亲",
+            "木兰的母亲"
+        ]
+    },
+    {
+        "plotName": "欢庆准备",
+        "plotStage": "Falling Action",
+        "scene": "乡村广场",
+        "beat": "家乡的族长组织乡里年轻人甲和乙准备盛大的欢迎仪式。",
+        "characters": [
+            "家乡的族长",
+            "乡里年轻人甲",
+            "乡里年轻人乙"
         ]
     },
     {
         "plotName": "家庭团聚",
-        "plotStage": "Denouement",
-        "scene": "木兰家中",
-        "beat": "木兰与家人紧紧拥抱，庆祝团圆，家人为木兰的胜利和归来感到骄傲。",
-        "characters": [
-            "Mulan",
-            "Father",
-            "Mother",
-            "Younger Sister"
-        ]
-    },
-    {
-        "plotName": "乡里欢庆",
-        "plotStage": "Denouement",
-        "scene": "村庄广场",
-        "beat": "乡绅组织村民举办庆典，赞美木兰的英勇，全乡上下欢声笑语。",
-        "characters": [
-            "Mulan",
-            "Village Elder",
-            "Neighbor A",
-            "Neighbor B"
-        ]
-    },
-    {
-        "plotName": "辞官不受",
         "plotStage": "Falling Action",
-        "scene": "宫殿",
-        "beat": "木兰婉拒皇帝的封赏，表达只想回家与亲人团聚的愿望。",
+        "scene": "木兰家",
+        "beat": "木兰与家人团聚，分享战场经历，家人感到骄傲和欣慰。",
         "characters": [
-            "Mulan",
-            "Emperor"
+            "木兰",
+            "木兰的父亲",
+            "木兰的母亲",
+            "木兰的妹妹"
         ]
     },
     {
-        "plotName": "准备迎接",
-        "plotStage": "Rising Action",
-        "scene": "乡村",
-        "beat": "乡民们得知木兰即将归来，开始张灯结彩，准备迎接英雄。",
+        "plotName": "盛大欢迎",
+        "plotStage": "Denouement",
+        "scene": "乡村广场",
+        "beat": "乡里举行盛大的欢迎仪式，庆祝木兰的胜利归来。",
         "characters": [
-            "Neighbor A",
-            "Neighbor B",
-            "Village Elder"
+            "木兰",
+            "家乡的族长",
+            "乡里年轻人甲",
+            "乡里年轻人乙"
+        ]
+    },
+    {
+        "plotName": "和平岁月",
+        "plotStage": "Denouement",
+        "scene": "乡村",
+        "beat": "木兰回归平静的生活，与家人和乡里人共同享受和平的岁月。",
+        "characters": [
+            "木兰",
+            "木兰的父亲",
+            "木兰的母亲",
+            "木兰的妹妹",
+            "家乡的族长",
+            "乡里年轻人甲",
+            "乡里年轻人乙"
         ]
     }
 ]

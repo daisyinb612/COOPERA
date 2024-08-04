@@ -62,6 +62,7 @@
                 placeholder="Enter beat here..."
                 class="beat-input"
               ></el-input>
+              <div @click="generate_audio(dialogue.content)"></div>
               <!-- </div> -->
             </el-card>
           </template>
@@ -97,6 +98,28 @@ export default defineComponent({
     const dialogues = computed(() => {
       return selectedPlot.value.dialogue ?? [];
     });
+
+    async function generate_audio(content){
+      const payload = {
+        action: 'generate_audio',
+        data: {
+          content: content
+        }
+      };
+      try {
+        const response = await axios.post('http://localhost:8000/generate_audio', payload);
+        console.log(response.data);
+        ElMessage({
+          message: '音频生成成功',
+          type: 'success'
+        });
+      } catch (error) {
+        ElMessage({
+          message: '音频生成失败',
+          type: 'error'
+        });
+      }
+    }
 
 
     function selectPlot(index) {
@@ -161,6 +184,7 @@ export default defineComponent({
       // filteredDialogues,
       selectPlot,
       UploadDialogue,
+      generate_audio,
       generate_dialogue
     };
   }
