@@ -1,72 +1,62 @@
 [
     {
-        "plotName": "Discovery of the Rift",
-        "plotStage": "Exposition",
-        "scene": "Alex's Lab",
-        "beat": "Alex, a young scientist, discovers a time rift while working on a secret experiment.",
-        "characters": [
-            "Alex"
-        ]
-    },
-    {
-        "plotName": "Secret Spilled",
-        "plotStage": "Inciting Incident",
-        "scene": "Cafe",
-        "beat": "In a moment of excitement, Alex tells Mr. Gold, a powerful businessman, about the rift.",
-        "characters": [
-            "Alex",
-            "Mr. Gold"
-        ]
-    },
-    {
-        "plotName": "Scheme Unveiled",
-        "plotStage": "Conflict",
-        "scene": "Gold Enterprises",
-        "beat": "Mr. Gold plans to exploit the rift for financial gain.",
-        "characters": [
-            "Mr. Gold"
-        ]
-    },
-    {
-        "plotName": "Unlikely Alliance",
-        "plotStage": "Rising Action",
-        "scene": "University Library",
-        "beat": "Alex teams up with Dr. Brown, a historian, to stop Mr. Gold's scheme.",
-        "characters": [
-            "Alex",
-            "Dr. Brown"
-        ]
-    },
-    {
-        "plotName": "Race Against Time",
-        "plotStage": "Climax",
-        "scene": "Time Rift",
-        "beat": "Alex and Dr. Brown race to the time rift to prevent Mr. Gold from using it.",
-        "characters": [
-            "Alex",
-            "Dr. Brown",
-            "Mr. Gold"
-        ]
-    },
-    {
-        "plotName": "Showdown",
+        "plotName": "英雄归来",
         "plotStage": "Falling Action",
-        "scene": "Time Rift",
-        "beat": "Alex and Dr. Brown confront Mr. Gold and manage to close the rift.",
+        "scene": "乡村道路",
+        "beat": "木兰骑马返回故里，乡亲们得知消息后纷纷出来迎接。",
         "characters": [
-            "Alex",
-            "Dr. Brown",
-            "Mr. Gold"
+            "Mulan",
+            "Father",
+            "Mother",
+            "Younger Sister",
+            "Neighbor A",
+            "Neighbor B",
+            "Village Elder"
         ]
     },
     {
-        "plotName": "Consequences and Reflection",
+        "plotName": "家庭团聚",
         "plotStage": "Denouement",
-        "scene": "Alex's Lab",
-        "beat": "Alex reflects on the consequences of his discovery, while Dr. Brown writes a historical account of the events.",
+        "scene": "木兰家中",
+        "beat": "木兰与家人紧紧拥抱，庆祝团圆，家人为木兰的胜利和归来感到骄傲。",
         "characters": [
-            "Alex",
-            "Dr. Brown"
+            "Mulan",
+            "Father",
+            "Mother",
+            "Younger Sister"
+        ]
+    },
+    {
+        "plotName": "乡里欢庆",
+        "plotStage": "Denouement",
+        "scene": "村庄广场",
+        "beat": "乡绅组织村民举办庆典，赞美木兰的英勇，全乡上下欢声笑语。",
+        "characters": [
+            "Mulan",
+            "Village Elder",
+            "Neighbor A",
+            "Neighbor B"
+        ]
+    },
+    {
+        "plotName": "辞官不受",
+        "plotStage": "Falling Action",
+        "scene": "宫殿",
+        "beat": "木兰婉拒皇帝的封赏，表达只想回家与亲人团聚的愿望。",
+        "characters": [
+            "Mulan",
+            "Emperor"
+        ]
+    },
+    {
+        "plotName": "准备迎接",
+        "plotStage": "Rising Action",
+        "scene": "乡村",
+        "beat": "乡民们得知木兰即将归来，开始张灯结彩，准备迎接英雄。",
+        "characters": [
+            "Neighbor A",
+            "Neighbor B",
+            "Village Elder"
         ]
     }
 ]

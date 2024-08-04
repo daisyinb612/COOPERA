@@ -406,7 +406,11 @@ export default defineComponent({
       //   return;
       // }
       console.log(currentEditAsset)
+      const currentPlot = store.state.plot.plots[curEditAssetIndex.value]
+      console.log(currentPlot);
+      currentPlot.scene = {...currentEditAsset}
       updateScene({ index: curEditAssetIndex.value, scene: { ...currentEditAsset } });
+      store.dispatch('updatePlot', { index: curEditAssetIndex.value,  plot: currentPlot });
       await axios.post('http://localhost:8000/save_scene_asset', {
           action: 'save_scene_asset',
           data: {

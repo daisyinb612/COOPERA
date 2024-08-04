@@ -314,10 +314,11 @@ def generate_dialogue():
     data = request.get_json()["data"]
     plotName = data["plotName"]
     plotStage = data["plotStage"]
-    scene = data["scene"]
+    sceneName = data["scene"]["name"]
+    sceneContent = data["scene"]["content"]
     beat = data["beat"]
     characters = data["characters"]
-    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表"
+    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景名字" + sceneName + ', 场景描述' + sceneContent + "，梗概" + beat + "，角色表"
     for character in characters:
         question += character + " "
     l = LLM(apikey=info_dict["apikey"])

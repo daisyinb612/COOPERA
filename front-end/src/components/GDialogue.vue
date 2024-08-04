@@ -28,16 +28,26 @@
                 <el-button @click="generate_dialogue" class="confirm-button">生成</el-button>
             <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                 <!-- <div class="location">{{ selectedPlot.location }}</div> -->
-                <div class="characters">
-                  <span v-for="character in selectedPlot.characters" :key="character">{{ character }}</span>
-                </div>
+                
               </div>
-              <el-input
-                type="textarea"
-                v-model="selectedPlot.beat"
-                placeholder="Enter beat here..."
-                class="beat-input"
-              ></el-input>
+              <el-row>
+                <el-col :span="3">
+                  <img v-if="selectedPlot.scene.image" class="scene-image" :src="selectedPlot.scene.image" alt="Asset Image" />
+                </el-col>
+                <el-col :span="3">
+                 </el-col>
+                <el-col :span="12">
+                  <div>plotElement: {{ selectedPlot.plotStage }}</div>
+                  <div>Scene name: {{ selectedPlot.scene.name }}</div>
+                  <div>Scene discription: {{ selectedPlot.scene.content }}</div>
+                  <div>Character:
+                  <span v-for="character in selectedPlot.characters" :key="character">{{ character }},</span>
+                </div>
+                <div>Plot beat: {{ selectedPlot.beat }}</div>
+                </el-col>
+              </el-row>
+              
+                  
             </el-card>
             <!-- 根据对话编号显示角色和对话内容 -->
             <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index">
@@ -78,6 +88,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const plots = computed(() => store.state.plot.plots);
+    console.log(plots.value);
     const selectedPlotIndex = ref(null);
 
     const selectedPlot = computed(() => {
@@ -309,6 +320,11 @@ export default defineComponent({
 .plots-list {
   height: 100%;
   overflow-y: auto;
+}
+
+.scene-image{
+  width: 100%;
+  margin: 10px;
 }
 
 </style>
