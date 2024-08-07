@@ -1,12 +1,8 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import requests
 from excel import ExcelOp
 from llm import LLM
 from flask_cors import CORS
-import pandas as pd
-import ast
-import os
-from audio import get_wav
 import json
  
 app = Flask(__name__)
@@ -23,7 +19,7 @@ info_dict = {
    "scene_path": "./opera_info/scene/scene.json",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
-   "wav_path": "./opera_info/wavs/wav_path.wav"
+   "wav_path": "./opera_info/wavs/" 
 }
  
 @app.route('/upload_storyline', methods=['POST'])
@@ -375,7 +371,7 @@ def do_tts():
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
     action = data.get("action")
-    if action == "upload_dialogue":
+    if action == "do_tts":
         text = data["data"]["text"]
         id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
         url = "http://tsn.baidu.com/text2audio"
@@ -395,9 +391,10 @@ def do_tts():
         response = requests.post(url, headers=header, data=body)
         print('Status Code:', response.status_code)
         if response.status_code == 200:
-            with open(info_dict["wav_path"], 'wb') as file:
-                file.write(response.content)
-            return response.content
+            with open(info_dict['wav_path'] + data["data"]["filename"], 'wb') as f:
+                f.write(response.content)
+            return send_file(info_dict['wav_path'] + data["data"]["filename"], mimetype="audio/wav")
+        
         else:
             print(f'Failed to retrieve the file. Status code: {response.status_code}')
             print(response.text)

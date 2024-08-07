@@ -1,63 +1,58 @@
 [
     {
         "plotName": "英雄归来",
-        "plotStage": "Falling Action",
+        "plotStage": "Denouement",
         "scene": "乡村",
-        "beat": "木兰得胜归乡，不受官禄，决定返回故里与家人团聚。",
+        "beat": "木兰胜利归乡，村民们为她准备了一场盛大的欢迎仪式。",
         "characters": [
-            "木兰",
-            "木兰的父亲",
-            "木兰的母亲"
+            "Mulan",
+            "Father",
+            "Mother",
+            "Younger Sister",
+            "Younger Brother",
+            "Village Elder",
+            "Villagers"
         ]
     },
     {
-        "plotName": "欢庆准备",
+        "plotName": "辞官归里",
         "plotStage": "Falling Action",
-        "scene": "乡村广场",
-        "beat": "家乡的族长组织乡里年轻人甲和乙准备盛大的欢迎仪式。",
+        "scene": "宫殿",
+        "beat": "皇帝赐予木兰官禄，但她婉拒，只求返回故里。",
         "characters": [
-            "家乡的族长",
-            "乡里年轻人甲",
-            "乡里年轻人乙"
+            "Mulan",
+            "Emperor"
         ]
     },
     {
-        "plotName": "家庭团聚",
-        "plotStage": "Falling Action",
+        "plotName": "家人的骄傲",
+        "plotStage": "Rising Action",
         "scene": "木兰家",
-        "beat": "木兰与家人团聚，分享战场经历，家人感到骄傲和欣慰。",
+        "beat": "木兰的家人得知她即将归来，感到无比自豪与喜悦，开始准备迎接。",
         "characters": [
-            "木兰",
-            "木兰的父亲",
-            "木兰的母亲",
-            "木兰的妹妹"
+            "Father",
+            "Mother",
+            "Younger Sister",
+            "Younger Brother"
         ]
     },
     {
-        "plotName": "盛大欢迎",
-        "plotStage": "Denouement",
+        "plotName": "乡里欢腾",
+        "plotStage": "Conflict",
         "scene": "乡村广场",
-        "beat": "乡里举行盛大的欢迎仪式，庆祝木兰的胜利归来。",
+        "beat": "乡里长者号召村民们一同准备迎接木兰，村民们积极响应，准备庆典。",
         "characters": [
-            "木兰",
-            "家乡的族长",
-            "乡里年轻人甲",
-            "乡里年轻人乙"
+            "Village Elder",
+            "Villagers"
         ]
     },
     {
-        "plotName": "和平岁月",
-        "plotStage": "Denouement",
-        "scene": "乡村",
-        "beat": "木兰回归平静的生活，与家人和乡里人共同享受和平的岁月。",
+        "plotName": "木兰的决心",
+        "plotStage": "Expositon",
+        "scene": "军营",
+        "beat": "木兰在军营中决定，即便得胜归来，也不求荣华富贵，只希望回家与亲人团聚。",
         "characters": [
-            "木兰",
-            "木兰的父亲",
-            "木兰的母亲",
-            "木兰的妹妹",
-            "家乡的族长",
-            "乡里年轻人甲",
-            "乡里年轻人乙"
+            "Mulan"
         ]
     }
 ]
