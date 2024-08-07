@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import requests
 from excel import ExcelOp
 from llm import LLM
 from flask_cors import CORS
@@ -21,7 +22,8 @@ info_dict = {
    "outline_path": "./opera_info/outline/outline.json",
    "scene_path": "./opera_info/scene/scene.json",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
-   "picture_path": "./opera_info/img"
+   "picture_path": "./opera_info/img",
+   "wav_path": "./opera_info/wavs/wav_path.wav"
 }
  
 @app.route('/upload_storyline', methods=['POST'])
@@ -367,5 +369,39 @@ def generate_script():
     res["dialogues"] = dialogue
     return jsonify(res)
 
+@app.route("/do_tts", methods=['POST'])
+def do_tts():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 402
+    action = data.get("action")
+    if action == "upload_dialogue":
+        text = data["data"]["text"]
+        id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
+        url = "http://tsn.baidu.com/text2audio"
+        header = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "*/*"
+        }
+        body = {
+            "tex": text,
+            "tok": "24.bdff459dfc2bb287f10a5777d9265c92.2592000.1725624992.282335-102429250",
+            "cuid": "FsvTrRLbtYgKul1z2dAHuO3yorA07eJ1",
+            "ctp": 1,
+            "lan": "zh",
+            "per": id_speaker,
+            "aue": 6
+        }
+        response = requests.post(url, headers=header, data=body)
+        print('Status Code:', response.status_code)
+        if response.status_code == 200:
+            with open(info_dict["wav_path"], 'wb') as file:
+                file.write(response.content)
+            return response.content
+        else:
+            print(f'Failed to retrieve the file. Status code: {response.status_code}')
+            print(response.text)
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
