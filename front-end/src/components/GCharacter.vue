@@ -507,9 +507,7 @@ export default defineComponent({
         
       });
       proxy.$message.success('资产更新成功');
-      showEditDialog.value = false;
-        
-      
+      showEditDialog.value = false;   
     }
 
     async function generate_image() {
