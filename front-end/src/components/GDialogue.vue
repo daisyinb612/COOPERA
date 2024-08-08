@@ -94,9 +94,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const plots = computed(() => store.state.plot.plots);
-    console.log(plots.value);
     const selectedPlotIndex = ref(null);
-
     const selectedPlot = computed(() => {
       return selectedPlotIndex.value !== null ? plots.value[selectedPlotIndex.value] : null;
     });
@@ -106,20 +104,22 @@ export default defineComponent({
 
     async function generate_audio(content, character, scene, index) {
       const filename = `scene${scene}_${index}.wav`;
-      console.log(scene);
+      console.log(character);
+      const id_speaker = store.state.character.characters.find(c => c.name === character).per;
+      
       const payload = {
         action: 'do_tts',
         data: {
           filename: filename,
           text: content,
-          id_speaker: 1
+          id_speaker: id_speaker
         }
       };
       try {
         const response = await axios.post('http://localhost:8000/do_tts', payload);
         console.log(response.data);
         dialogues.value[index].audio = "/" + filename;
-
+        
         ElMessage({
           message: '音频生成成功',
           type: 'success'
