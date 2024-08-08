@@ -62,12 +62,13 @@
                 placeholder="Enter beat here..."
                 class="beat-input"
               ></el-input>
-              <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlot.scene.content, index)" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><g fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.08 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h.08a2 2 0 0 1 1.519.698l3.642 4.25c.604.704 1.759.277 1.759-.651V4.703c0-.928-1.155-1.355-1.76-.65L6.6 8.301A2 2 0 0 1 5.08 9zm13.556-4.725a1 1 0 1 0-1.377 1.45c3.655 3.472 3.655 9.078 0 12.55a1 1 0 1 0 1.377 1.45c4.485-4.26 4.485-11.19 0-15.45zm-2.947 2.8a1 1 0 1 0-1.378 1.45c2.027 1.925 2.027 5.025 0 6.95a1 1 0 1 0 1.378 1.45c2.857-2.714 2.857-7.136 0-9.85z" fill="currentColor"/></g></svg>
-              <!-- </div> -->
-              <audio controls>
-                <source :src="''" type="audio/wav">
 
+              <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)" xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><g fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.08 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h.08a2 2 0 0 1 1.519.698l3.642 4.25c.604.704 1.759.277 1.759-.651V4.703c0-.928-1.155-1.355-1.76-.65L6.6 8.301A2 2 0 0 1 5.08 9zm13.556-4.725a1 1 0 1 0-1.377 1.45c3.655 3.472 3.655 9.078 0 12.55a1 1 0 1 0 1.377 1.45c4.485-4.26 4.485-11.19 0-15.45zm-2.947 2.8a1 1 0 1 0-1.378 1.45c2.027 1.925 2.027 5.025 0 6.95a1 1 0 1 0 1.378 1.45c2.857-2.714 2.857-7.136 0-9.85z" fill="currentColor"/></g></svg> 
+              <audio controls>
+                <source :src="dialogue.audio" type="audio/wav">
+                Your browser does not support the audio element.
               </audio>
+            
             </el-card>
           </template>
         </el-scrollbar>
@@ -104,7 +105,7 @@ export default defineComponent({
     });
 
     async function generate_audio(content, character, scene, index) {
-      const filename = `${scene}_${index}.wav`;
+      const filename = `scene${scene}_${index}.wav`;
       console.log(scene);
       const payload = {
         action: 'do_tts',
@@ -117,8 +118,8 @@ export default defineComponent({
       try {
         const response = await axios.post('http://localhost:8000/do_tts', payload);
         console.log(response.data);
-        // dialogues.value[index].audio = "../../../back-end/程序/opera_info/wavs/a_0.wav";
-        // dialogues.value[index].audio = `../../../back-end/程序/opera_info/wavs/${selectedPlot.value.scene.content}_${index}.wav`;
+        dialogues.value[index].audio = "/" + filename;
+
         ElMessage({
           message: '音频生成成功',
           type: 'success'

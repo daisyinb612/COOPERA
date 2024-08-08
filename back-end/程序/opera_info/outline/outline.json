@@ -1,58 +1,82 @@
 [
     {
         "plotName": "英雄归来",
+        "plotStage": "Falling Action",
+        "scene": "乡村",
+        "beat": "木兰胜利归乡，村民开始准备迎接她的到来。",
+        "characters": [
+            "木兰",
+            "村民甲",
+            "村民乙"
+        ]
+    },
+    {
+        "plotName": "家宴准备",
+        "plotStage": "Falling Action",
+        "scene": "木兰家",
+        "beat": "木兰的家人为她的归来准备家宴。",
+        "characters": [
+            "木兰的父亲",
+            "木兰的母亲",
+            "木兰的妹妹"
+        ]
+    },
+    {
+        "plotName": "乡里欢迎",
+        "plotStage": "Falling Action",
+        "scene": "乡村广场",
+        "beat": "族长带领村民在广场上举行欢迎仪式。",
+        "characters": [
+            "木兰",
+            "族长",
+            "村民甲",
+            "村民乙"
+        ]
+    },
+    {
+        "plotName": "团聚时刻",
+        "plotStage": "Denouement",
+        "scene": "木兰家",
+        "beat": "木兰与家人团聚，享受久违的家庭温暖。",
+        "characters": [
+            "木兰",
+            "木兰的父亲",
+            "木兰的母亲",
+            "木兰的妹妹"
+        ]
+    },
+    {
+        "plotName": "辞官不受",
+        "plotStage": "Denouement",
+        "scene": "乡村广场",
+        "beat": "木兰在村民面前表达自己辞官不受禄，只愿与家人过平凡生活的愿望。",
+        "characters": [
+            "木兰",
+            "族长",
+            "村民甲",
+            "村民乙"
+        ]
+    },
+    {
+        "plotName": "和平生活",
         "plotStage": "Denouement",
         "scene": "乡村",
-        "beat": "木兰胜利归乡，村民们为她准备了一场盛大的欢迎仪式。",
+        "beat": "故事以木兰回归平静的乡村生活作结。",
         "characters": [
-            "Mulan",
-            "Father",
-            "Mother",
-            "Younger Sister",
-            "Younger Brother",
-            "Village Elder",
-            "Villagers"
+            "木兰",
+            "村民甲",
+            "村民乙"
         ]
     },
     {
-        "plotName": "辞官归里",
-        "plotStage": "Falling Action",
-        "scene": "宫殿",
-        "beat": "皇帝赐予木兰官禄，但她婉拒，只求返回故里。",
+        "plotName": "传奇流传",
+        "plotStage": "Denouement",
+        "scene": "乡村",
+        "beat": "木兰的故事在乡里流传，成为千古佳话。",
         "characters": [
-            "Mulan",
-            "Emperor"
-        ]
-    },
-    {
-        "plotName": "家人的骄傲",
-        "plotStage": "Rising Action",
-        "scene": "木兰家",
-        "beat": "木兰的家人得知她即将归来，感到无比自豪与喜悦，开始准备迎接。",
-        "characters": [
-            "Father",
-            "Mother",
-            "Younger Sister",
-            "Younger Brother"
-        ]
-    },
-    {
-        "plotName": "乡里欢腾",
-        "plotStage": "Conflict",
-        "scene": "乡村广场",
-        "beat": "乡里长者号召村民们一同准备迎接木兰，村民们积极响应，准备庆典。",
-        "characters": [
-            "Village Elder",
-            "Villagers"
-        ]
-    },
-    {
-        "plotName": "木兰的决心",
-        "plotStage": "Expositon",
-        "scene": "军营",
-        "beat": "木兰在军营中决定，即便得胜归来，也不求荣华富贵，只希望回家与亲人团聚。",
-        "characters": [
-            "Mulan"
+            "村民甲",
+            "村民乙",
+            "族长"
         ]
     }
 ]

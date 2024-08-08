@@ -19,7 +19,7 @@ info_dict = {
    "scene_path": "./opera_info/scene/scene.json",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
-   "wav_path": "./opera_info/wavs/" 
+   "wav_path": "../../front-end/public/"
 }
  
 @app.route('/upload_storyline', methods=['POST'])
@@ -401,4 +401,4 @@ def do_tts():
     else:
         return jsonify({"error": "Invalid action type."}), 401
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=8000, debug=True)
