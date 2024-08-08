@@ -131,6 +131,12 @@
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
+      <el-form-item label="音色">
+          <el-select v-model="currentEditAsset.per" placeholder="请选择角色音色">
+            <el-option v-for="audio in audios" :key="audio" :label="audio" :value="audio" />
+          </el-select>
+        </el-form-item>
+
       <el-form-item label="图片" :label-width="formLabelWidth">
         <div>
         <el-upload :http-request="uploadFile"
@@ -201,9 +207,21 @@ export default defineComponent({
       image: '',
     });
     const store=useStore()
+    const audios = {
+      0:"标准女音",
+      1:"标准男音",
+      3:"斯文男音",
+      4:"小萌萌",
+      5:"知性女音",
+      6:"老教授",
+      9:"播音员",
+      10:"京腔",
+      11:"温柔大叔",
+    }
     const currentEditAsset = reactive({
       name: '',
       content: '',
+      per: '',
       image: '',
     });
 
@@ -396,6 +414,7 @@ export default defineComponent({
       curEditAssetIndex.value = index;
       currentEditAsset.name = charList.value[index].name;
       currentEditAsset.content = charList.value[index].content;
+      currentEditAsset.per = charList.value[index].per;
       currentEditAsset.image = charList.value[index].image;
       showEditDialog.value = true;
     }
@@ -461,7 +480,8 @@ export default defineComponent({
     }
 
     async function saveEditedAsset() {
-      const editedAsset = charList.value[curEditAssetIndex.value];
+      // const editedAsset = charList.value[curEditAssetIndex.value];
+      const editedAsset = currentEditAsset;
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
@@ -470,10 +490,14 @@ export default defineComponent({
         proxy.$message.warning('描述不能为空');
         return;
       }
-      if (!editedAsset.image) {
-        proxy.$message.warning('请上传图片');
+      if (!editedAsset.per) {
+        proxy.$message.warning('请选择音色');
         return;
       }
+      // if (!editedAsset.image) {
+      //   proxy.$message.warning('请上传图片');
+      //   return;
+      // }
       store.dispatch('updateCharacter', { index: curEditAssetIndex.value, character: editedAsset });
       await axios.post('http://localhost:8000/update_character', {
         action: 'update_character',
@@ -543,6 +567,7 @@ export default defineComponent({
       confirmDelete,
       generate_image,
       charList,
+      audios,
     };
   },
 });

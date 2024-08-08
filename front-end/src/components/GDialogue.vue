@@ -101,12 +101,24 @@ export default defineComponent({
     const dialogues = computed(() => {
       return selectedPlot.value.dialogue ?? [];
     });
+    const audios = {
+      "标准女音":0,
+      "标准男音":1,
+      "斯文男音":3,
+      "小萌萌":4,
+      "知性女音":5,
+      "老教授":6,
+      "播音员":9,
+      "京腔":10,
+      "温柔大叔":11,
+    }
 
     async function generate_audio(content, character, scene, index) {
       const filename = `scene${scene}_${index}.wav`;
       console.log(character);
-      const id_speaker = store.state.character.characters.find(c => c.name === character).per;
-      
+      let id_speaker = store.state.character.characters.find(c => c.name === character).per;
+      // per是字符串，需要通过audios转换成数字
+      id_speaker =  audios[id_speaker];
       const payload = {
         action: 'do_tts',
         data: {
