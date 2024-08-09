@@ -19,33 +19,51 @@ const routes = [
     children: [
       {
         path: 'inputlogline',
-        name: 'InputLogLine',
-        component: InputLogLine
+        name: 'LogLine',
+        component: InputLogLine,
+        meta:{
+          keepAlive: true
+        }
       },
       {
         path: 'pageone',
         name: 'PageOne',
-        component: PageOne
+        component: PageOne,
+        meta:{
+          keepAlive: true
+        }
       },
       {
         path: 'pagetwo',
         name: 'PageTwo',
-        component: PageTwo
+        component: PageTwo,
+        meta:{
+          keepAlive: true
+        }
       },
       {
         path: 'pagethree',
         name: 'PageThree',
-        component: PageThree
+        component: PageThree,
+        meta:{
+          keepAlive: true
+        }
       },
       {
         path: 'pagefour',
         name: 'PageFour',
-        component: PageFour
+        component: PageFour,
+        meta:{
+          keepAlive: true
+        }
       },
       {
         path: 'renderscript',
         name: 'RenderScript',
-        component: RenderScript
+        component: RenderScript,
+        meta:{
+          keepAlive: true
+        }
       }
     ]
   }
