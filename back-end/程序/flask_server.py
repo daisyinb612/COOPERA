@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory, abort
+import os
 import requests
 from excel import ExcelOp
 from llm import LLM
@@ -19,7 +20,7 @@ info_dict = {
    "scene_path": "./opera_info/scene/scene.json",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
-   "wav_path": "../../front-end/static/audio/"
+   "wav_path": "./opera_info/audio/"
 }
  
 @app.route('/upload_storyline', methods=['POST'])
@@ -406,5 +407,25 @@ def do_tts():
             print(response.text)
     else:
         return jsonify({"error": "Invalid action type."}), 401
+
+
+@app.route('/get_audio', methods=['GET'])
+def get_audio():
+    # 从前端请求中获取音频文件名
+    filename = request.args.get('filename')
+
+    if not filename:
+        return jsonify({"error": "No filename provided"}), 400
+
+    # 检查文件是否存在
+    AUDIO_DIRECTORY = f'./opera_info/audio/'
+    file_path = os.path.join(AUDIO_DIRECTORY, filename)
+    if os.path.exists(file_path):
+        # 返回音频文件
+        print('res')
+        return send_from_directory(AUDIO_DIRECTORY, filename)
+    else:
+        return abort(404, description="File not found")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)

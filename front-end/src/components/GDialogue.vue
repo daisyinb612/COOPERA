@@ -67,7 +67,6 @@
                   <source :src="dialogue.audio" type="audio/wav">
                   Your browser does not support the audio element.
                 </audio>
-
               </el-card>
             </template>
           </el-scrollbar>
@@ -75,6 +74,7 @@
 
         <el-footer class="button-container-down">
           <el-button class="button" @click="UploadDialogue">Upload</el-button>
+
         </el-footer>
       </el-main>
     </el-main>
@@ -127,10 +127,11 @@ export default defineComponent({
         }
       };
       try {
+        // dialogues.value[index].audio = 'init';
         await axios.post('http://localhost:8000/do_tts', payload);
         // console.log(response.data);
-        dialogues.value[index].audio = "../static/audio/" + filename;
-
+        dialogues.value[index].audio = 'http://localhost:8000/get_audio?filename=' + filename;
+        console.log('dialogues.value[index].audio', dialogues.value[index].audio)
         ElMessage({
           message: '音频生成成功',
           type: 'success'
