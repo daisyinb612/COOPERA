@@ -1,87 +1,61 @@
 [
     {
-        "plotName": "晓曦的日常",
-        "plotStage": "Exposition",
-        "scene": "便利店",
-        "beat": "林晓曦在便利店里忙碌着，面带微笑地服务每一位顾客。",
+        "plotName": "时空误闯",
+        "plotStage": "激励事件",
+        "scene": "李小明的实验室",
+        "beat": "李晓明意外激活了时空装置，穿越到了过去。",
         "characters": [
-            "林晓曦"
+            "李晓明"
         ]
     },
     {
-        "plotName": "志宏的坚持",
-        "plotStage": "Exposition",
-        "scene": "邮局",
-        "beat": "王志宏一丝不苟地整理邮件，确保每一封信都能准确送达。",
+        "plotName": "历史的裂痕",
+        "plotStage": "冲突",
+        "scene": "历史博物馆",
+        "beat": "李晓明发现历史已被改变，自己的未来身份李博士正面临危机。",
         "characters": [
-            "王志宏"
+            "李晓明"
         ]
     },
     {
-        "plotName": "子墨的宁静",
-        "plotStage": "Exposition",
-        "scene": "图书馆",
-        "beat": "李子墨在安静的图书馆里整理书籍，偶尔翻阅一下心爱的小说。",
+        "plotName": "线索追踪",
+        "plotStage": "上升动作",
+        "scene": "城市街道",
+        "beat": "李晓明与王小花合作，试图找到修复时间线的方法。",
         "characters": [
-            "李子墨"
+            "李晓明",
+            "王小花"
         ]
     },
     {
-        "plotName": "小鹿的好奇",
-        "plotStage": "Inciting Incident",
-        "scene": "学校",
-        "beat": "张小鹿在学校里对新事物充满好奇，意外发现了一封神秘的信。",
+        "plotName": "未来相遇",
+        "plotStage": "高潮",
+        "scene": "李博士的秘密基地",
+        "beat": "李晓明与李博士相遇，双方展开了一场关于时间真相的讨论。",
         "characters": [
-            "张小鹿"
+            "李晓明",
+            "李博士"
         ]
     },
     {
-        "plotName": "莉莉的智慧",
-        "plotStage": "Conflict",
-        "scene": "大学教室",
-        "beat": "孙莉莉在课堂上讲解生动有趣，引导学生思考，却因一封信而陷入困惑。",
+        "plotName": "时间修复",
+        "plotStage": "解决",
+        "scene": "李小明的实验室",
+        "beat": "李晓明在李博士的帮助下，成功修复了时间线。",
         "characters": [
-            "孙莉莉",
-            "张小鹿"
+            "李晓明",
+            "李博士",
+            "张警探"
         ]
     },
     {
-        "plotName": "信件的秘密",
-        "plotStage": "Rising Action",
+        "plotName": "新的开始",
+        "plotStage": "结局",
         "scene": "公园",
-        "beat": "林晓曦、王志宏、李子墨、张小鹿和孙莉莉因一封信的秘密在公园相遇，决定一起揭开信件的谜团。",
+        "beat": "李晓明和王小花回顾这次经历，展望未来。",
         "characters": [
-            "林晓曦",
-            "王志宏",
-            "李子墨",
-            "张小鹿",
-            "孙莉莉"
-        ]
-    },
-    {
-        "plotName": "谜团的揭晓",
-        "plotStage": "Climax",
-        "scene": "旧房子",
-        "beat": "五人历经艰辛，终于在一所旧房子里找到了信件的来源，揭示了一个感人的故事。",
-        "characters": [
-            "林晓曦",
-            "王志宏",
-            "李子墨",
-            "张小鹿",
-            "孙莉莉"
-        ]
-    },
-    {
-        "plotName": "和解与感悟",
-        "plotStage": "Denouement",
-        "scene": "学校礼堂",
-        "beat": "五人在学校礼堂分享了这个故事，让大家明白了珍惜当下、关爱他人的重要性。",
-        "characters": [
-            "林晓曦",
-            "王志宏",
-            "李子墨",
-            "张小鹿",
-            "孙莉莉"
+            "李晓明",
+            "王小花"
         ]
     }
 ]

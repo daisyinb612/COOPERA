@@ -37,13 +37,7 @@
         </el-form-item>
         <el-form-item label="情节元素">
           <el-radio-group v-model="newPlot.plotStage">
-            <el-radio value="Exposition">展示</el-radio>
-            <el-radio value="Inciting Incident">激励事件</el-radio>
-            <el-radio value="Conflict">冲突</el-radio>
-            <el-radio value="Rising Action">上升动作</el-radio>
-            <el-radio value="Climax">高潮</el-radio>
-            <el-radio value="Resolution">解决</el-radio>
-            <el-radio value="Dénouement">结局</el-radio>
+            <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
@@ -73,13 +67,7 @@
         </el-form-item>
         <el-form-item label="情节元素">
           <el-radio-group v-model="editPlotData.plotStage">
-            <el-radio value="Exposition">展示</el-radio>
-            <el-radio value="Inciting Incident">激励事件</el-radio>
-            <el-radio value="Conflict">冲突</el-radio>
-            <el-radio value="Rising Action">上升动作</el-radio>
-            <el-radio value="Climax">高潮</el-radio>
-            <el-radio value="Resolution">解决</el-radio>
-            <el-radio value="Dénouement">结局</el-radio>
+            <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
@@ -119,7 +107,7 @@ export default defineComponent({
     const editDialogVisible = ref(false);
     const newPlot = reactive({
       plotName: '',
-      plotElement: '',
+      plotStage: '',
       scene: '',
       characters: [],
       beat: '',
@@ -127,7 +115,7 @@ export default defineComponent({
     });
     const editPlotData = reactive({
       plotName: '',
-      plotElement: '',
+      plotStage: '',
       scene: '',
       characters: [],
       beat: '',
@@ -139,6 +127,7 @@ export default defineComponent({
     const plots = computed(() => store.getters['plots']);
     const allScenes = computed(() => store.state.scene.scenes);
     const allCharacters = computed(() => store.state.character.characters);
+    const stageList = ["展示","激励事件","冲突","上升动作","高潮","解决","结局"]
 
     const addPlot = (plot) => store.dispatch('addPlot', plot);
     const addScene = (scene) => store.dispatch('addScene', scene);
@@ -150,7 +139,7 @@ export default defineComponent({
 
     function handleAddDialogClose() {
       newPlot.plotName = '';
-      newPlot.plotElement = '';
+      newPlot.plotStage = '';
       newPlot.scene = '';
       newPlot.characters = [];
       newPlot.beat = '';
@@ -160,7 +149,7 @@ export default defineComponent({
 
     function handleEditDialogClose() {
       editPlotData.plotName = '';
-      editPlotData.plotElement = '';
+      editPlotData.plotStage = '';
       editPlotData.scene = '';
       editPlotData.characters = [];
       editPlotData.beat = '';
@@ -226,7 +215,7 @@ export default defineComponent({
     function editPlot(index) {
       const plotToEdit = plots.value[index];
       editPlotData.plotName = plotToEdit.plotName;
-      editPlotData.plotElement = plotToEdit.plotElement;
+      editPlotData.plotStage = plotToEdit.plotStage;
       editPlotData.scene = plotToEdit.scene;
       editPlotData.characters = plotToEdit.characters
       editPlotData.beat = plotToEdit.beat;
@@ -265,7 +254,7 @@ export default defineComponent({
       if (plotToEditIndex.value !== null) {
         const updatedPlot = {
           plotName: editPlotData.plotName,
-          plotElement: editPlotData.plotElement,
+          plotStage: editPlotData.plotStage,
           scene: editPlotData.scene,
           characters: editPlotData.characters.join(", "),
           beat: editPlotData.beat,
@@ -335,6 +324,7 @@ export default defineComponent({
       editDialogVisible,
       plots,
       newPlot,
+      stageList,
       editPlotData,
       allScenes,
       allCharacters,
