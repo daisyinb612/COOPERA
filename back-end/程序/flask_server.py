@@ -12,14 +12,14 @@ CORS(app)
  
 # Configuration dictionary
 info_dict = {
-   "apikey": "e4ab8bb5cc7cc6eb620f9cde3093b8b4.FauytagDuxsJpEuD",
+   "apikey": "sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74",
    "world_setting_path": "./opera_info/storyline/storyline.txt",
    "characters_path": "./opera_info/character/characters.json",
    "outline_path": "./opera_info/outline/outline.json",
    "scene_path": "./opera_info/scene/scene.json",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
-   "wav_path": "../../front-end/public/"
+   "wav_path": "../../front-end/static/audio/"
 }
  
 @app.route('/upload_storyline', methods=['POST'])
@@ -48,7 +48,7 @@ def get_storyline_help():
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
 
-    storyline = data["data"]["storyline"]
+    storyline = data["data"]["storyline"] if data["data"]["storyline"] else ""
     history = data["data"]["history"]
     user_input = data["data"]["user_input"]
 
@@ -115,6 +115,7 @@ def init_plot_generation():
         json.dump(plot, f, indent=4, ensure_ascii=False)
     scene = [{"name": x["scene"], "url": ""} for x in plot]
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+        print('scene', scene)
         json.dump(scene, f, indent=4, ensure_ascii=False)
         
     return jsonify(plot)
@@ -150,7 +151,7 @@ def save_scene_asset():
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data[index] = scene
-    print(scene)
+    print('old data', scene)
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
@@ -334,7 +335,10 @@ def generate_dialogue():
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_dialogue_create)
     scene = l.analyze_answer(answer)
-    l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+    # print('genrate_dialogue scene', scene)
+    # l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+    with open(info_dict["scene_path"], 'w', encoding='utf-8') as f:
+        json.dump(scene, f, indent=4, ensure_ascii=False)
     return jsonify(scene)
 
 
@@ -374,6 +378,7 @@ def do_tts():
     action = data.get("action")
     if action == "do_tts":
         text = data["data"]["text"]
+        print('do_tts text', text)
         id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
         url = "http://tsn.baidu.com/text2audio"
         header = {

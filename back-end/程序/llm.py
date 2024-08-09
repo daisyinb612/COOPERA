@@ -301,7 +301,7 @@ class LLM(object):
             
         # self.save_json_to_excel(json_object=new_history,filepath=filepath)
         
-    def ask(self,question,prompt,history=None,model_name=None):##model_name改为其他值（例如None）时，默认使用GLM
+    def ask(self,question,prompt,history=None,model_name='openai'):##model_name改为其他值（例如None）时，默认使用GLM
         if history is None:
             if model_name=="openai":
                 client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
