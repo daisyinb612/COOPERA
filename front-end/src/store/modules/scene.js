@@ -9,7 +9,12 @@ export default {
     },
     addScene(state, scene) {
       if (Array.isArray(scene)) {
-        state.scenes.push(...scene);
+        scene.forEach((s) => {
+          if (!state.scenes.includes(s)) {
+            state.scenes.push(s);
+          }
+        });
+        
         return;
       }
       state.scenes.push(scene);

@@ -15,9 +15,9 @@
               <div class="plot-header">
                 <div class="scene-name">{{ plot.plotName }}</div>
                 <div class="plot-element">{{ plot.plotStage }}</div>
-                <div class="location">{{ plot.scene }}</div>
+                <div class="location">{{ plot.scene.name }}</div>
                 <div class="characters">
-                  <span v-for="character in plot.characters" :key="character">{{ character }},</span>
+                  <span v-for="character in plot.characters" :key="character">{{ character.name }},</span>
                 </div>
               </div>
               <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
@@ -41,13 +41,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-select v-model="newPlot.scene" placeholder="请选择场景" allow-create filterable>
-            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.label" :value="scene.name" />
+          <el-select v-model="newPlot.scene" placeholder="请选择场景" allow-create filterable value-key="name">
+            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.name" :value="scene" />
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
-          <el-select v-model="newPlot.characters" multiple placeholder="请选择角色">
-            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character.name" />
+          <el-select v-model="newPlot.characters" multiple placeholder="请选择角色" value-key="name">
+            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>
         </el-form-item>
         <el-form-item label="情节梗概">
@@ -71,14 +71,14 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-select v-model="editPlotData.scene" placeholder="请选择场景">
-            <el-option v-for="scene in allScenes" :key="scene.name" :label="scene.name" :value="scene.name" />
+          <el-select v-model="editPlotData.scene" placeholder="请选择场景" value-key="name">
+            <el-option v-for="scene in allScenes" :key="scene" :label="scene.name" :value="scene" />
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
           <!-- TODO 删除角色有问题 -->
-          <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色">
-            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character.name" />
+          <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色" value-key="name">
+            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>
         </el-form-item>
         <el-form-item label="情节梗概">
@@ -257,7 +257,7 @@ export default defineComponent({
           plotName: editPlotData.plotName,
           plotStage: editPlotData.plotStage,
           scene: editPlotData.scene,
-          characters: editPlotData.characters.join(", "),
+          characters: editPlotData.characters,
           beat: editPlotData.beat,
         };
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
@@ -279,8 +279,8 @@ export default defineComponent({
         });
         addPlot(response.data);
         const scenes = response.data.reduce((acc, plot) => {
-          if (!acc.find((scene) => scene.name === plot.scene)) {
-            acc.push({ name: plot.scene, content: "", image: 'empty.png' });
+          if (!acc.find((scene) => scene.name === plot.scene.name)) {
+            acc.push({ name: plot.scene.name, content: plot.scene.content, image: 'empty.png' });
           }
           return acc;
         }, []);

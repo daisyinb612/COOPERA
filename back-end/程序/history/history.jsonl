@@ -2510,4 +2510,388 @@
             "content": "由于我没有收到具体的故事线和角色表，我无法为您编写故事大纲。请提供故事线和角色表的相关信息，这样我才能根据您的要求输出相应的JSON字符串。例如：\n\n###故事线###\n1. 一个年轻的英雄发现了一个神秘的地图，指向传说中的宝藏。\n2. 英雄决定追寻这个宝藏，但必须面对各种挑战和竞争对手。\n3. 在旅途中，英雄结识了几位盟友，他们一起克服困难。\n4. 最终，他们到达了宝藏所在地，但发现宝藏并非他们所想象。\n\n###角色表###\n1. 主角 - 年轻的探险家，对未知充满好奇。\n2. 导师 - 老练的探险家，给予主角指导和建议。\n3. 竞争者 - 同样寻找宝藏的探险家，与主角发生冲突。\n4. 盟友1 - 忠诚的朋友，擅长野外生存。\n5. 盟友2 - 热心的陌生人，拥有关键信息。\n\n如果您提供了类似的信息，我将为您编写符合要求的故事大纲。"
         }
     ]
+}{
+    "time": "2024-08-09_19-37-20",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于您还没有提供具体的故事线和角色表，我无法为您编写故事大纲。请提供故事的基本概念和角色列表，我将按照您的要求输出JSON格式的情节概要。例如：\n\n###故事线###:\n一位年轻的科学家发现了改变时间的秘密公式。但他发现，每次使用这个公式都会带来意想不到的后果。他的生活因此变得混乱，他必须在不同的时间线中寻找正确的道路。\n\n###角色表###:\n1. 李明 - 年轻的科学家\n2. 张丽 - 李明的女朋友，一位医生\n3. 王教授 - 李明的导师，著名物理学家\n4. 小黑 - 李明的宠物狗\n\n以下是根据这些信息编写的输出示例：\n\n```json\n[\n  {\n    \"plotName\": \"发现秘密\",\n    \"plotStage\": \"展示\",\n    \"scene\": \"李明的实验室\",\n    \"beat\": \"李明在实验中意外发现了改变时间的公式\",\n    \"characters\": [\"李明\", \"王教授\", \"小黑\"]\n  },\n  {\n    \"plotName\": \"时间混乱\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": \"李明的家\",\n    \"beat\": \"李明首次使用公式，导致时间线混乱\",\n    \"characters\": [\"李明\", \"张丽\", \"小黑\"]\n  },\n  {\n    \"plotName\": \"寻找出路\",\n    \"plotStage\": \"冲突\",\n    \"scene\": \"不同的时间线\",\n    \"beat\": \"李明在不同的时间线中尝试修正错误\",\n    \"characters\": [\"李明\", \"张丽\", \"王教授\"]\n  },\n  {\n    \"plotName\": \"真爱力量\",\n    \"plotStage\": \"高潮\",\n    \"scene\": \"过去的关键时刻\",\n    \"beat\": \"李明和张丽共同面对过去的挑战\",\n    \"characters\": [\"李明\", \"张丽\"]\n  },\n  {\n    \"plotName\": \"修正时间\",\n    \"plotStage\": \"解决\",\n    \"scene\": \"李明的实验室\",\n    \"beat\": \"李明成功修正时间线，避免了灾难性后果\",\n    \"characters\": [\"李明\", \"王教授\"]\n  },\n  {\n    \"plotName\": \"美好未来\",\n    \"plotStage\": \"结局\",\n    \"scene\": \"李明和张丽的婚礼\",\n    \"beat\": \"李明和张丽幸福地生活在一起，时间线恢复正常\",\n    \"characters\": [\"李明\", \"张丽\", \"王教授\", \"小黑\"]\n  }\n]\n```\n\n请注意，这只是一个示例。当您提供具体的故事线和角色表时，我将为您编写相应的故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-38-03",
+    "history": [
+        {
+            "role": "system",
+            "content": ""
+        },
+        {
+            "role": "user",
+            "content": "请生成场景图片， 场景的名称为：李明的实验室场景的描述为：aa"
+        },
+        {
+            "role": "assistant",
+            "content": ""
+        }
+    ]
+}{
+    "time": "2024-08-09_19-38-19",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###本章大纲###编写本章的场景对话，注意对话为中文。\n        输出时参照###输出示例###只输出json字符串,\n        ###输出示例###\n        [\n        {\"number\": \"1\",\n        \"character\": \"***\",\n        \"content\":\"***\"\n        },\n        {\"number\": \"2\",\n        \"character\": \"***\",\n        \"content\":\"***\"\n        },\n        {\"number\": \"3\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        },\n        {\"number\": \"4\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        },\n        {\"number\": \"5\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###故事大纲###：章节：发现秘密，情节阶段展示，场景名字李明的实验室, 场景描述aa，梗概李明在实验中意外发现了改变时间的公式，角色表李明 王教授 小黑 "
+        },
+        {
+            "role": "assistant",
+            "content": "[\n    {\"number\": \"1\",\n    \"character\": \"李明\",\n    \"content\":\"今天真是令人兴奋，我在实验中似乎发现了一些不得了的东西…\"\n    },\n    {\"number\": \"2\",\n    \"character\": \"王教授\",\n    \"content\":\"李明，你那边的实验怎么样了？有没有什么新的发现？\"\n    },\n    {\"number\": \"3\",\n    \"character\": \"李明\",\n    \"content\":\"教授，您过来一下，我有些东西想给您看看，这可能是个巨大的突破。\"\n    },\n    {\"number\": \"4\",\n    \"character\": \"王教授\",\n    \"content\":\"哦？这么神秘？我马上过去。\"\n    },\n    {\"number\": \"5\",\n    \"character\": \"小黑\",\n    \"content\":\"李明，我刚才好像听到你说什么突破，是不是咱们能提前下班了？\"\n    },\n    {\"number\": \"6\",\n    \"character\": \"李明\",\n    \"content\":\"哈哈，小黑，这可比提前下班重要多了。不过你等会儿也能知道。\"\n    },\n    {\"number\": \"7\",\n    \"character\": \"王教授\",\n    \"content\":\"李明，你给我看的是什么？这个公式，难道你是说…\"\n    },\n    {\"number\": \"8\",\n    \"character\": \"李明\",\n    \"content\":\"是的，教授，我认为这可能是一个改变时间的公式。至少在理论上是这样的。\"\n    },\n    {\"number\": \"9\",\n    \"character\": \"王教授\",\n    \"content\":\"这…这可真是个惊人的发现！我们必须马上进行验证！\"\n    }\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-38-47",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,\n        \"content\"指角色的简介，\"name\"指角色的名字, per指角色音色码:标准女音，标准男音，斯文男音，小萌萌，知性女音，老教授，播音员，京腔，温柔大叔，请根据人物特征选取合适音色\n        ###输出示例###\n        [{\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准女音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"斯文男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"小萌萌\"\n\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"知性女音\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:nihao"
+        },
+        {
+            "role": "assistant",
+            "content": "Based on the simple story line you've provided (\"nihao\" which translates to \"hello\" in English), I will create a set of characters. Since the story line is not detailed, I will make assumptions to flesh out the characters.\n\nHere is the output in the format you've requested:\n\n```json\n[\n    {\n        \"name\": \"Li Mei\",\n        \"content\": \"A young and energetic schoolteacher who is passionate about education and has a warm personality. She is well-liked by her students and always greets them with a 'nihao'.\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"Wang Feng\",\n        \"content\": \"A local businessman who is very outgoing and friendly. He uses 'nihao' to greet his customers and to make everyone feel welcome in his shop.\",\n        \"per\": \"标准男音\"\n    },\n    {\n        \"name\": \"Zhang Wei\",\n        \"content\": \"A quiet and thoughtful librarian who is always ready to help with a soft-spoken 'nihao'. He is well-read and enjoys recommending books to patrons.\",\n        \"per\": \"斯文男音\"\n    },\n    {\n        \"name\": \"Liu Bingbing\",\n        \"content\": \"A cute and lively elementary school student who says 'nihao' with excitement every morning to her classmates and teachers.\",\n        \"per\": \"小萌萌\"\n    },\n    {\n        \"name\": \"Chen Xiang\",\n        \"content\": \"A wise and intellectual author who greets her readers with 'nihao' at book signings. She writes about the power of kindness and simple greetings.\",\n        \"per\": \"知性女音\"\n    }\n]\n```\n\nThese characters are designed to represent a diverse group of people who might use the greeting \"nihao\" in different contexts."
+        }
+    ]
+}{
+    "time": "2024-08-09_19-39-22",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": \"***\",\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:nihao\n###角色表###:Li Mei: A young and energetic schoolteacher who is passionate about education and has a warm personality. She is well-liked by her students and always greets them with a 'nihao'.\nWang Feng: A local businessman who is very outgoing and friendly. He uses 'nihao' to greet his customers and to make everyone feel welcome in his shop.\nZhang Wei: A quiet and thoughtful librarian who is always ready to help with a soft-spoken 'nihao'. He is well-read and enjoys recommending books to patrons.\nLiu Bingbing: A cute and lively elementary school student who says 'nihao' with excitement every morning to her classmates and teachers.\nChen Xiang: A wise and intellectual author who greets her readers with 'nihao' at book signings. She writes about the power of kindness and simple greetings.\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```json\n[\n  {\n    \"plotName\": \"A New Day Begins\",\n    \"plotStage\": \"展示\",\n    \"scene\": \"Schoolyard\",\n    \"beat\": \"Li Mei greets her students with 'nihao' as they arrive at school, setting a positive tone for the day.\",\n    \"characters\": [\"Li Mei\", \"Liu Bingbing\", \"Classmates\"]\n  },\n  {\n    \"plotName\": \"Warm Greetings at the Shop\",\n    \"plotStage\": \"展示\",\n    \"scene\": \"Local Shop\",\n    \"beat\": \"Wang Feng uses 'nihao' to welcome customers, fostering a friendly atmosphere in his business.\",\n    \"characters\": [\"Wang Feng\", \"Customers\", \"Li Mei\"]\n  },\n  {\n    \"plotName\": \"The Quiet Hello\",\n    \"plotStage\": \"展示\",\n    \"scene\": \"Library\",\n    \"beat\": \"Zhang Wei helps library patrons with a gentle 'nihao', showing his helpful and caring nature.\",\n    \"characters\": [\"Zhang Wei\", \"Patrons\", \"Li Mei\"]\n  },\n  {\n    \"plotName\": \"The Power of a Greeting\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": \"School Classroom\",\n    \"beat\": \"Liu Bingbing's enthusiastic 'nihao' inspires Li Mei to start a school project promoting kindness through simple greetings.\",\n    \"characters\": [\"Liu Bingbing\", \"Li Mei\", \"Classmates\"]\n  },\n  {\n    \"plotName\": \"Spreading the Word\",\n    \"plotStage\": \"上升动作\",\n    \"scene\": \"Community Center\",\n    \"beat\": \"Li Mei, Wang Feng, and Zhang Wei team up to host an event about the importance of 'nihao' in community interactions.\",\n    \"characters\": [\"Li Mei\", \"Wang Feng\", \"Zhang Wei\", \"Community Members\"]\n  },\n  {\n    \"plotName\": \"The Author's Insight\",\n    \"plotStage\": \"冲突\",\n    \"scene\": \"Book Signing\",\n    \"beat\": \"Chen Xiang discusses the impact of 'nihao' in her books, but encounters skepticism from some readers, leading to a deeper discussion about cultural values.\",\n    \"characters\": [\"Chen Xiang\", \"Readers\", \"Li Mei\"]\n  },\n  {\n    \"plotName\": \"A Community United\",\n    \"plotStage\": \"高潮\",\n    \"scene\": \"Town Square\",\n    \"beat\": \"The town comes together for a 'nihao' day, where everyone greets each other with warmth and respect, showing the transformative power of a simple greeting.\",\n    \"characters\": [\"Li Mei\", \"Wang Feng\", \"Zhang Wei\", \"Liu Bingbing\", \"Chen Xiang\", \"Town Residents\"]\n  },\n  {\n    \"plotName\": \"The Legacy of 'Nihao'\",\n    \"plotStage\": \"结局\",\n    \"scene\": \"School Assembly\",\n    \"beat\": \"Li Mei's initiative is celebrated, and 'nihao' becomes a lasting part of the community's culture, reminding everyone of the importance of kindness in daily life.\",\n    \"characters\": [\"Li Mei\", \"Liu Bingbing\", \"School Faculty\", \"Community Leaders\"]\n  }\n]\n```"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-39-42",
+    "history": [
+        {
+            "role": "system",
+            "content": ""
+        },
+        {
+            "role": "user",
+            "content": "请生成场景图片， 场景的名称为：Schoolyard场景的描述为：aa"
+        },
+        {
+            "role": "assistant",
+            "content": ""
+        }
+    ]
+}{
+    "time": "2024-08-09_19-40-05",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###本章大纲###编写本章的场景对话，注意对话为中文。\n        输出时参照###输出示例###只输出json字符串,\n        ###输出示例###\n        [\n        {\"number\": \"1\",\n        \"character\": \"***\",\n        \"content\":\"***\"\n        },\n        {\"number\": \"2\",\n        \"character\": \"***\",\n        \"content\":\"***\"\n        },\n        {\"number\": \"3\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        },\n        {\"number\": \"4\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        },\n        {\"number\": \"5\",\n        \"character\": \"***\",\n        \"content\": \"***\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:nihao\n###故事大纲###：章节：A New Day Begins，情节阶段展示，场景名字Schoolyard, 场景描述aa，梗概Li Mei greets her students with 'nihao' as they arrive at school, setting a positive tone for the day.，角色表Li Mei Liu Bingbing Classmates "
+        },
+        {
+            "role": "assistant",
+            "content": "[\n{\"number\": \"1\",\n\"character\": \"Li Mei\",\n\"content\":\"早上好，同学们！['nihao', '同学们！'] 今天也是充满希望的一天呢！\"\n},\n{\"number\": \"2\",\n\"character\": \"Liu Bingbing\",\n\"content\":\"老师，早上好！['老师，早上好！'] 我们也觉得今天会是很棒的一天。\"\n},\n{\"number\": \"3\",\n\"character\": \"Li Mei\",\n\"content\":\"很好，Liu Bingbing。大家的精神看起来都不错。让我们一起努力，让今天在校园里留下美好的回忆吧！['很好，Liu Bingbing。']\"\n},\n{\"number\": \"4\",\n\"character\": \"Classmates\",\n\"content\":\"是的，老师！['是的，老师！']\"\n},\n{\"number\": \"5\",\n\"character\": \"Li Mei\",\n\"content\":\"那么，让我们开始新的一天吧。同学们，到教室里集合，我们准备上课了。['那么，让我们开始新的一天吧。']\"\n}\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-44-31",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,\n        \"content\"指角色的简介，\"name\"指角色的名字, per指角色音色码:标准女音，标准男音，斯文男音，小萌萌，知性女音，老教授，播音员，京腔，温柔大叔，请根据人物特征选取合适音色\n        ###输出示例###\n        [{\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准女音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"斯文男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"小萌萌\"\n\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"知性女音\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好"
+        },
+        {
+            "role": "assistant",
+            "content": "###输出示例###\n[\n    {\n        \"name\": \"林晓曦\",\n        \"content\": \"一个乐观开朗的电台主持人，总是用她热情的声音给听众带来温暖和快乐。\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"张伟民\",\n        \"content\": \"一位严肃认真的新闻主播，他的声音代表着权威与信任。\",\n        \"per\": \"标准男音\"\n    },\n    {\n        \"name\": \"李子墨\",\n        \"content\": \"一位温文尔雅的大学讲师，他的声音总是那么斯文有礼。\",\n        \"per\": \"斯文男音\"\n    },\n    {\n        \"name\": \"糖糖\",\n        \"content\": \"一个活泼可爱的小学生，她的声音充满了童真和活力。\",\n        \"per\": \"小萌萌\"\n    },\n    {\n        \"name\": \"周静文\",\n        \"content\": \"一位理智沉稳的心理咨询师，她的声音让人感到安心和信赖。\",\n        \"per\": \"知性女音\"\n    }\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-45-00",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:林晓曦: 一个乐观开朗的电台主持人，总是用她热情的声音给听众带来温暖和快乐。\n张伟民: 一位严肃认真的新闻主播，他的声音代表着权威与信任。\n李子墨: 一位温文尔雅的大学讲师，他的声音总是那么斯文有礼。\n糖糖: 一个活泼可爱的小学生，她的声音充满了童真和活力。\n周静文: 一位理智沉稳的心理咨询师，她的声音让人感到安心和信赖。\n"
+        },
+        {
+            "role": "assistant",
+            "content": "[\n{\n\"plotName\": \"晨曦的温度\",\n\"plotStage\": \"展示\",\n\"scene\": {\n\"name\": \"电台直播间\",\n\"content\": \"林晓曦在电台直播间用她热情的声音迎接新的一天，与听众分享励志故事和天气预报。\"\n},\n\"beat\": \"日常广播\",\n\"characters\":[\"林晓曦\"]\n},\n{\n\"plotName\": \"权威之声\",\n\"plotStage\": \"展示\",\n\"scene\": {\n\"name\": \"电视台新闻直播间\",\n\"content\": \"张伟民正襟危坐，严肃认真地播报着国内外重要新闻，展现出他的专业素养。\"\n},\n\"beat\": \"新闻播报\",\n\"characters\":[\"张伟民\"]\n},\n{\n\"plotName\": \"知识的魅力\",\n\"plotStage\": \"展示\",\n\"scene\": {\n\"name\": \"大学教室\",\n\"content\": \"李子墨站在讲台上，用温文尔雅的声音为学生讲解文学作品的魅力，引发学生的思考。\"\n},\n\"beat\": \"文学讲座\",\n\"characters\":[\"李子墨\"]\n},\n{\n\"plotName\": \"童真的力量\",\n\"plotStage\": \"展示\",\n\"scene\": {\n\"name\": \"小学教室\",\n\"content\": \"糖糖在课堂上用她那充满童真的声音回答问题，为同学们带来欢笑。\"\n},\n\"beat\": \"课堂互动\",\n\"characters\":[\"糖糖\"]\n},\n{\n\"plotName\": \"心灵之窗\",\n\"plotStage\": \"展示\",\n\"scene\": {\n\"name\": \"心理咨询室\",\n\"content\": \"周静文坐在咨询室里，用她理智沉稳的声音为求助者提供心理支持，帮助他们走出困境。\"\n},\n\"beat\": \"心理辅导\",\n\"characters\":[\"周静文\"]\n},\n{\n\"plotName\": \"声音的交汇\",\n\"plotStage\": \"激励事件\",\n\"scene\": {\n\"name\": \"广播大厦\",\n\"content\": \"一场特别的广播活动邀请了林晓曦、张伟民、李子墨、糖糖和周静文，他们需要合作完成一场跨界的广播节目。\"\n},\n\"beat\": \"跨界合作\",\n\"characters\":[\"林晓曦\", \"张伟民\", \"李子墨\", \"糖糖\", \"周静文\"]\n},\n{\n\"plotName\": \"冲突与和谐\",\n\"plotStage\": \"冲突\",\n\"scene\": {\n\"name\": \"广播节目彩排\",\n\"content\": \"在彩排过程中，不同职业背景的他们产生了意见分歧，争吵起来。\"\n},\n\"beat\": \"意见分歧\",\n\"characters\":[\"林晓曦\", \"张伟民\", \"李子墨\", \"糖糖\", \"周静文\"]\n},\n{\n\"plotName\": \"共同的目标\",\n\"plotStage\": \"解决\",\n\"scene\": {\n\"name\": \"广播节目直播\",\n\"content\": \"经过沟通和理解，他们化解了矛盾，共同完成了一场精彩的广播节目，传递出和谐与爱。\"\n},\n\"beat\": \"化解矛盾\",\n\"characters\":[\"林晓曦\", \"张伟民\", \"李子墨\", \"糖糖\", \"周静文\"]\n}\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-52-11",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "既然还没有提供具体的故事线和角色表，我无法直接生成故事大纲。不过，我可以给你一个虚构的示例，以展示如何按照你给出的格式构建一个故事大纲。以下是一个完全虚构的例子：\n\n```json\n[\n  {\n    \"plotName\": \"意外的遗产\",\n    \"plotStage\": \"展示\",\n    \"scene\": {\n      \"name\": \"老宅内部\",\n      \"content\": \"主人公艾米丽回到她祖父母留下的老宅，回忆起童年时光。\"\n    },\n    \"beat\": \"怀旧与发现\",\n    \"characters\": [\"艾米丽\", \"老宅\"]\n  },\n  {\n    \"plotName\": \"神秘的信\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": {\n      \"name\": \"老宅书房\",\n      \"content\": \"艾米丽在书房里找到了一封神秘的信，信中透露她有一个未知的遗产。\"\n    },\n    \"beat\": \"好奇与探索\",\n    \"characters\": [\"艾米丽\", \"神秘信件\"]\n  },\n  {\n    \"plotName\": \"追寻线索\",\n    \"plotStage\": \"冲突\",\n    \"scene\": {\n      \"name\": \"市区图书馆\",\n      \"content\": \"艾米丽开始在图书馆中追寻线索，试图解开遗产的秘密。\"\n    },\n    \"beat\": \"研究与挑战\",\n    \"characters\": [\"艾米丽\", \"图书管理员\", \"神秘陌生人\"]\n  },\n  {\n    \"plotName\": \"真相大白\",\n    \"plotStage\": \"高潮\",\n    \"scene\": {\n      \"name\": \"老宅地下室\",\n      \"content\": \"艾米丽发现了通往地下室的秘密通道，并在那里找到了遗产——一件古老的艺术品。\"\n    },\n    \"beat\": \"揭露与震惊\",\n    \"characters\": [\"艾米丽\", \"神秘陌生人\", \"艺术品\"]\n  },\n  {\n    \"plotName\": \"遗产之争\",\n    \"plotStage\": \"上升动作\",\n    \"scene\": {\n      \"name\": \"律师办公室\",\n      \"content\": \"艾米丽发现遗产引起了家族成员之间的争执，她必须证明自己是合法继承人。\"\n    },\n    \"beat\": \"争斗与坚持\",\n    \"characters\": [\"艾米丽\", \"律师\", \"家族成员\"]\n  },\n  {\n    \"plotName\": \"和解与继承\",\n    \"plotStage\": \"解决\",\n    \"scene\": {\n      \"name\": \"法院\",\n      \"content\": \"艾米丽成功证明了她的继承权，并与家族和解，决定共同保管遗产。\"\n    },\n    \"beat\": \"和谐与继承\",\n    \"characters\": [\"艾米丽\", \"家族成员\", \"法官\"]\n  },\n  {\n    \"plotName\": \"新的开始\",\n    \"plotStage\": \"结局\",\n    \"scene\": {\n      \"name\": \"老宅花园\",\n      \"content\": \"艾米丽和家族一起在老宅花园庆祝，开始了新的人生篇章。\"\n    },\n    \"beat\": \"庆典与展望\",\n    \"characters\": [\"艾米丽\", \"家族成员\", \"老宅\"]\n  }\n]\n```\n\n请注意，这只是一个示例，用于展示如何构建符合你给定格式的故事大纲。你可以根据实际的故事线和角色信息来替换上述内容。"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-58-39",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法为您提供故事的JSON大纲。请提供故事线和角色表的具体信息，我将会根据您的要求编写相应的故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-59-00",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法为您编写故事大纲。请提供故事的基本情节和角色列表，我才能按照您的要求输出JSON格式的剧情大纲。例如：\n\n###故事线###:\n1. 一个年轻的科学家发现了时间旅行的秘密。\n2. 他不小心改变了一个关键历史事件，导致现实世界发生混乱。\n3. 他必须找到方法修复时间线，同时避免被邪恶势力利用。\n\n###角色表###:\n1. 李小明 - 年轻的科学家，意外发现时间旅行的秘密。\n2. 王小红 - 李小明的恋人，一名勇敢的记者。\n3. 黑暗博士 - 想要利用时间旅行来统治世界的邪恶科学家。\n\n如果您提供了类似的信息，我将能够根据###输出示例###的格式来编写故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_19-59-29",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有接到具体的故事线和角色表，我无法为您提供直接的故事大纲。但是，我可以给出一个虚构的示例，以展示如何根据您的要求输出JSON字符串。\n\n假设我们有以下的故事线和角色表：\n\n###故事线###\n- 一个年轻的发明家发现了一个可以穿越时空的装置。\n- 他试图修复过去的错误，但引发了新的连锁反应。\n- 最后，他必须决定是保留改变后的现实，还是回到原来的时间线。\n\n###角色表###\n- 阿力：年轻的发明家\n- 小梅：阿力的前女友，因误会而分手\n- 王博士：阿力的导师，对时空理论有深入研究\n\n以下是根据这些信息构建的输出示例：\n\n```json\n[\n  {\n    \"plotName\": \"时空之旅的开始\",\n    \"plotStage\": \"展示\",\n    \"scene\": {\n      \"name\": \"阿力的实验室\",\n      \"content\": \"阿力展示他的时空穿越装置给观众\"\n    },\n    \"beat\": \"阿力介绍时空理论\",\n    \"characters\":[\"阿力\"]\n  },\n  {\n    \"plotName\": \"误会的裂痕\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": {\n      \"name\": \"咖啡馆\",\n      \"content\": \"阿力穿越回与小梅分手的前一天，试图改变历史\"\n    },\n    \"beat\": \"阿力无意中加剧了误会\",\n    \"characters\":[\"阿力\", \"小梅\"]\n  },\n  {\n    \"plotName\": \"连锁反应\",\n    \"plotStage\": \"冲突\",\n    \"scene\": {\n      \"name\": \"城市的未来\",\n      \"content\": \"阿力发现他的行为导致了一个完全不同的现实\"\n    },\n    \"beat\": \"阿力寻求王博士的帮助\",\n    \"characters\":[\"阿力\", \"王博士\"]\n  },\n  {\n    \"plotName\": \"决定的时刻\",\n    \"plotStage\": \"高潮\",\n    \"scene\": {\n      \"name\": \"实验室的再穿越\",\n      \"content\": \"阿力必须在两个现实之间做出选择\"\n    },\n    \"beat\": \"阿力面临艰难的选择\",\n    \"characters\":[\"阿力\", \"小梅\", \"王博士\"]\n  },\n  {\n    \"plotName\": \"时空的抉择\",\n    \"plotStage\": \"解决\",\n    \"scene\": {\n      \"name\": \"时间的尽头\",\n      \"content\": \"阿力接受现实，决定不改变过去\"\n    },\n    \"beat\": \"阿力学会了珍惜当下\",\n    \"characters\":[\"阿力\"]\n  },\n  {\n    \"plotName\": \"新的开始\",\n    \"plotStage\": \"结局\",\n    \"scene\": {\n      \"name\": \"公园的长椅\",\n      \"content\": \"阿力和小梅在和解后一起走向未来\"\n    },\n    \"beat\": \"两人共同展望未来\",\n    \"characters\":[\"阿力\", \"小梅\"]\n  }\n]\n```\n\n请注意，这是一个虚构的示例，用于说明如何根据您的要求构造输出。如果您提供具体的故事线和角色表，我可以为您编写一个相应的故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-01-57",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法为您编写故事大纲。请提供故事的概要和角色列表，以便我能够按照您的要求输出JSON格式的剧情大纲。例如：\n\n###故事线###\n一个年轻的科学家发现了时间旅行的秘密，但他的发明落入了一个邪恶的商业巨头手中，他计划利用这项技术来统治世界。年轻的科学家必须阻止他。\n\n###角色表###\n1. 李小明 - 年轻的科学家\n2. 霍华德 - 邪恶的商业巨头\n3. 艾米 - 李小明的爱人，记者\n4. 王博士 - 李小明的导师\n\n提供这些信息后，我将能根据您的要求编写故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-02-33",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n        \"name\": \"***\",\n        \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法直接为您编写故事大纲。不过，我可以提供一个虚构的示例，以展示如何根据您提供的格式构建一个故事大纲。请您根据需要替换以下内容为实际的故事线和角色信息。\n\n```json\n[\n  {\n    \"plotName\": \"命运的改变\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": {\n      \"name\": \"市图书馆\",\n      \"content\": \"主角李明在图书馆偶然发现一本古老的魔法书，这本书将彻底改变他的命运。\"\n    },\n    \"beat\": \"发现魔法书\",\n    \"characters\": [\"李明\", \"图书馆管理员\"]\n  },\n  {\n    \"plotName\": \"隐秘的学习\",\n    \"plotStage\": \"冲突\",\n    \"scene\": {\n      \"name\": \"李明的房间\",\n      \"content\": \"李明开始研究魔法书，但发现书中有些内容难以理解，他必须找到一位导师。\"\n    },\n    \"beat\": \"研究魔法书\",\n    \"characters\": [\"李明\", \"神秘导师（未出现）\"]\n  },\n  {\n    \"plotName\": \"导师的指引\",\n    \"plotStage\": \"上升动作\",\n    \"scene\": {\n      \"name\": \"城市公园\",\n      \"content\": \"在公园的长椅上，李明遇到了神秘的导师，开始学习更多关于魔法的知识。\"\n    },\n    \"beat\": \"遇见导师\",\n    \"characters\": [\"李明\", \"神秘导师\"]\n  },\n  {\n    \"plotName\": \"力量的觉醒\",\n    \"plotStage\": \"高潮\",\n    \"scene\": {\n      \"name\": \"李明的实验室\",\n      \"content\": \"经过一系列的挑战和练习，李明终于觉醒了自己的魔法力量。\"\n    },\n    \"beat\": \"觉醒魔法力量\",\n    \"characters\": [\"李明\", \"神秘导师\"]\n  },\n  {\n    \"plotName\": \"真相的揭露\",\n    \"plotStage\": \"解决\",\n    \"scene\": {\n      \"name\": \"图书馆地下室\",\n      \"content\": \"李明和导师揭开了魔法书的秘密，发现了一个即将威胁世界的邪恶势力。\"\n    },\n    \"beat\": \"揭露真相\",\n    \"characters\": [\"李明\", \"神秘导师\", \"邪恶势力（未出现）\"]\n  },\n  {\n    \"plotName\": \"最终的对决\",\n    \"plotStage\": \"结局\",\n    \"scene\": {\n      \"name\": \"世界之巅\",\n      \"content\": \"李明运用自己的魔法力量与邪恶势力进行最终的对决，最终拯救了世界。\"\n    },\n    \"beat\": \"最终对决\",\n    \"characters\": [\"李明\", \"神秘导师\", \"邪恶势力\"]\n  }\n]\n```\n\n请根据您的故事线和角色表调整上述内容。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-14-39",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法为您提供故事的JSON大纲。请提供故事的概要和角色信息，以便我能够帮助您构建故事大纲。例如：\n\n###故事线###\n一个年轻的科学家发现了一种能改变世界的能源，但他必须与时间赛跑，防止这项技术落入邪恶势力的手中。\n\n###角色表###\n1. 李明 - 年轻的科学家\n2. 赵敏 - 李明的恋人，同为科学家\n3. 郭强 - 邪恶组织的首领\n4. 王华 - 李明的朋友，警察\n5. 张伟 - 李明的导师\n\n请提供类似的信息，我将为您编写故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-14-57",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法为您编写故事大纲。请提供故事的基本情节和角色信息，我将根据您提供的内容来创作一个故事大纲。例如：\n\n###故事线###\n一个年轻的科学家发现了时间旅行的秘密，但他必须在不同的时代里阻止一个邪恶组织的阴谋。\n\n###角色表###\n1. 李晨 - 年轻的科学家\n2. 王莉 - 李晨的女朋友，记者\n3. 张博士 - 邪恶组织的领导者\n4. 陈探长 - 负责调查神秘事件的警探\n\n如果您提供了类似的信息，我会根据###输出示例###的格式为您编写一个故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-15-22",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:"
+        },
+        {
+            "role": "assistant",
+            "content": "由于我没有收到具体的故事线和角色表，我无法直接为您编写故事大纲。请提供故事的大致情节和角色列表，我将会根据您提供的信息来创作一个故事大纲。例如：\n\n```\n###故事线###:\n一个年轻的科学家发现了改变时间的秘密装置。他试图利用这个装置阻止一场即将发生的灾难，但他的行为却意外地引发了一系列的时间扭曲。\n\n###角色表###:\n1. 李明 - 年轻的科学家\n2. 张莉 - 李明的女友，一名记者\n3. 王教授 - 李明的导师，时间物理学权威\n4. 陈警官 - 调查时间扭曲事件的警察\n5. 黑衣人 - 企图夺取时间装置的神秘组织成员\n```\n\n请提供类似的信息，以便我为您编写相应的JSON格式的故事大纲。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-15-49",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,\n        \"content\"指角色的简介，\"name\"指角色的名字, per指角色音色码:标准女音，标准男音，斯文男音，小萌萌，知性女音，老教授，播音员，京腔，温柔大叔，请根据人物特征选取合适音色\n        ###输出示例###\n        [{\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准女音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"斯文男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"小萌萌\"\n\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"知性女音\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:哈哈"
+        },
+        {
+            "role": "assistant",
+            "content": "基于您提供的故事线“哈哈”，这是一个非常开放且模糊的线索，我将创造一组角色，并尝试为他们赋予有趣且多样的背景。以下是我设计的主要角色：\n\n```json\n[\n    {\n        \"name\": \"林笑春\",\n        \"content\": \"一个乐观开朗的女演员，因其独特的幽默感和喜剧天赋在娱乐圈小有名气。她总是用笑容感染周围的人，让周围的环境充满欢乐。\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"哈瑞\",\n        \"content\": \"一位风趣的脱口秀主持人，以其机智和幽默的风格深受观众喜爱。他的节目总是让人忍俊不禁，欢笑连连。\",\n        \"per\": \"标准男音\"\n    },\n    {\n        \"name\": \"沈斯文\",\n        \"content\": \"一位内向的作家，正在创作一部幽默小说。虽然他本人并不擅长与人交流，但他的文字却充满了讽刺与幽默。\",\n        \"per\": \"斯文男音\"\n    },\n    {\n        \"name\": \"小哈哈\",\n        \"content\": \"一个天真的小学生，总是带着无忧无虑的笑容。他的纯真和幽默感常常让周围的人忘却烦恼。\",\n        \"per\": \"小萌萌\"\n    },\n    {\n        \"name\": \"王知音\",\n        \"content\": \"一位电台主持人，以其知性而幽默的谈吐吸引听众。她的节目涉及各种话题，总能以智慧的方式带给听众欢笑。\",\n        \"per\": \"知性女音\"\n    }\n]\n```\n\n请注意，由于“哈哈”是一个非常简单的提示，我创造的角色和故事线是相对基础和通用的，以便适应各种可能的故事背景。如果需要更具体或深入的角色设定，请提供更多的故事细节。"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-16-16",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述，beat指梗概。故事情节中只出现角色表中提到的人物。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\"**\", \"**\", \"**\"]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:哈哈\n###角色表###:林笑春: 一个乐观开朗的女演员，因其独特的幽默感和喜剧天赋在娱乐圈小有名气。她总是用笑容感染周围的人，让周围的环境充满欢乐。\n哈瑞: 一位风趣的脱口秀主持人，以其机智和幽默的风格深受观众喜爱。他的节目总是让人忍俊不禁，欢笑连连。\n沈斯文: 一位内向的作家，正在创作一部幽默小说。虽然他本人并不擅长与人交流，但他的文字却充满了讽刺与幽默。\n小哈哈: 一个天真的小学生，总是带着无忧无虑的笑容。他的纯真和幽默感常常让周围的人忘却烦恼。\n王知音: 一位电台主持人，以其知性而幽默的谈吐吸引听众。她的节目涉及各种话题，总能以智慧的方式带给听众欢笑。\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```json\n[\n  {\n    \"plotName\": \"意外的合作\",\n    \"plotStage\": \"展示\",\n    \"scene\": {\n      \"name\": \"喜剧大会堂\",\n      \"content\": \"林笑春在喜剧大会堂的表演中获得巨大成功，观众被她的幽默所折服。哈瑞作为主持人，对林笑春的才华印象深刻。\"\n    },\n    \"beat\": \"林笑春的表演让哈瑞产生了合作的念头。\",\n    \"characters\":[\"林笑春\", \"哈瑞\"]\n  },\n  {\n    \"plotName\": \"幽默小说的灵感\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": {\n      \"name\": \"咖啡店\",\n      \"content\": \"沈斯文在咖啡店独自写作，偶然听到林笑春和哈瑞讨论喜剧，激发了他的创作灵感。\"\n    },\n    \"beat\": \"沈斯文决定将这段对话融入自己的小说中。\",\n    \"characters\":[\"沈斯文\", \"林笑春\", \"哈瑞\"]\n  },\n  {\n    \"plotName\": \"电台访谈\",\n    \"plotStage\": \"冲突\",\n    \"scene\": {\n      \"name\": \"电台直播间\",\n      \"content\": \"王知音邀请林笑春和哈瑞做客电台，讨论幽默与生活，但三人在幽默的理解上产生了分歧。\"\n    },\n    \"beat\": \"访谈中的争论让彼此开始反思自己的喜剧理念。\",\n    \"characters\":[\"王知音\", \"林笑春\", \"哈瑞\"]\n  },\n  {\n    \"plotName\": \"幽默的力量\",\n    \"plotStage\": \"上升动作\",\n    \"scene\": {\n      \"name\": \"小学礼堂\",\n      \"content\": \"林笑春和哈瑞参加小哈哈学校的公益活动，通过幽默表演带给孩子们欢笑，也加深了彼此的理解。\"\n    },\n    \"beat\": \"小哈哈的笑容让他们意识到幽默的真正意义。\",\n    \"characters\":[\"林笑春\", \"哈瑞\", \"小哈哈\"]\n  },\n  {\n    \"plotName\": \"喜剧之夜\",\n    \"plotStage\": \"高潮\",\n    \"scene\": {\n      \"name\": \"喜剧剧场\",\n      \"content\": \"林笑春、哈瑞和沈斯文联手举办一场喜剧之夜，将各自的长处结合，创造出一场前所未有的表演。\"\n    },\n    \"beat\": \"表演获得巨大成功，观众的热烈反响让他们明白合作的重要性。\",\n    \"characters\":[\"林笑春\", \"哈瑞\", \"沈斯文\"]\n  },\n  {\n    \"plotName\": \"幽默的传承\",\n    \"plotStage\": \"解决\",\n    \"scene\": {\n      \"name\": \"电台直播间\",\n      \"content\": \"王知音邀请林笑春和哈瑞再次做客电台，这次他们分享了对幽默的全新理解，以及如何传承这种艺术形式。\"\n    },\n    \"beat\": \"通过交流，他们找到了将幽默融入生活的方式。\",\n    \"characters\":[\"王知音\", \"林笑春\", \"哈瑞\"]\n  },\n  {\n    \"plotName\": \"笑容的力量\",\n    \"plotStage\": \"结局\",\n    \"scene\": {\n      \"name\": \"公园\",\n      \"content\": \"故事以林笑春、哈瑞、沈斯文、小哈哈和王知音在公园的聚会结束。每个人的笑容都反映出幽默带给他们的改变。\"\n    },\n    \"beat\": \"他们以笑容传递着幽默的力量，故事在欢声笑语中落下帷幕。\",\n    \"characters\":[\"林笑春\", \"哈瑞\", \"沈斯文\", \"小哈哈\", \"王知音\"]\n  }\n]\n```"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-24-59",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,\n        \"content\"指角色的简介，\"name\"指角色的名字, per指角色音色码:标准女音，标准男音，斯文男音，小萌萌，知性女音，老教授，播音员，京腔，温柔大叔，请根据人物特征选取合适音色\n        ###输出示例###\n        [{\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准女音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"斯文男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"小萌萌\"\n\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"知性女音\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好"
+        },
+        {
+            "role": "assistant",
+            "content": "[\n    {\n        \"name\": \"李晓梅\",\n        \"content\": \"一名热心且充满活力的社区工作者，总是积极帮助他人解决问题。\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"王志刚\",\n        \"content\": \"一位严肃认真的警察，负责维护社区的安全，给人一种可靠的感觉。\",\n        \"per\": \"标准男音\"\n    },\n    {\n        \"name\": \"张文博\",\n        \"content\": \"一位温文尔雅的教师，深受学生喜爱，业余时间喜欢研究历史。\",\n        \"per\": \"斯文男音\"\n    },\n    {\n        \"name\": \"林小梦\",\n        \"content\": \"一个活泼可爱的小学生，好奇心旺盛，总是充满了各种问题。\",\n        \"per\": \"小萌萌\"\n    },\n    {\n        \"name\": \"刘知性\",\n        \"content\": \"一位理智且具有深厚知识底蕴的大学教授，专注于社会学研究。\",\n        \"per\": \"知性女音\"\n    }\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-27-02",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述(仅描述场景，不涉及情节或人物)，beat指梗概。故事情节中只出现角色表中提到的人物。\n        characters指在此情节中出现的角色，其中name为人物名，content为人物在此情节中的对话或行为，per为人物音色码，与角色表中的信息保持一致，不要改变。如需添加角色，请将新角色的name,content,per补充完整。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:角色名： 李晓梅角色描述:  一名热心且充满活力的社区工作者，总是积极帮助他人解决问题。角色音色： 小萌萌\n角色名： 王志刚角色描述:  一位严肃认真的警察，负责维护社区的安全，给人一种可靠的感觉。角色音色： 标准男音\n角色名： 张文博角色描述:  一位温文尔雅的教师，深受学生喜爱，业余时间喜欢研究历史。角色音色： 斯文男音\n角色名： 林小梦角色描述:  一个活泼可爱的小学生，好奇心旺盛，总是充满了各种问题。角色音色： 小萌萌\n角色名： 刘知性角色描述:  一位理智且具有深厚知识底蕴的大学教授，专注于社会学研究。角色音色： 知性女音\n"
+        },
+        {
+            "role": "assistant",
+            "content": "```json\n[\n  {\n    \"plotName\": \"热心社区服务\",\n    \"plotStage\": \"展示\",\n    \"scene\": {\n      \"name\": \"社区活动中心\",\n      \"content\": \"一个宽敞明亮的大厅，墙上挂着各种活动海报，几位老人在角落的长椅上聊天，孩子们在另一边玩着游戏。\"\n    },\n    \"beat\": \"李晓梅在为社区老人组织健康讲座。\",\n    \"characters\": [\n      {\n        \"name\": \"李晓梅\",\n        \"content\": \"大家好，今天我们请来了王医生为大家讲解如何预防高血压，希望大家都能健康长寿。\",\n        \"per\": \"小萌萌\"\n      },\n      {\n        \"name\": \"王志刚\",\n        \"content\": \"我会在这里维持秩序，确保讲座顺利进行。\",\n        \"per\": \"标准男音\"\n      }\n    ]\n  },\n  {\n    \"plotName\": \"历史的魅力\",\n    \"plotStage\": \"展示\",\n    \"scene\": {\n      \"name\": \"学校图书馆\",\n      \"content\": \"书架上摆满了各类书籍，几个学生在书架间浏览，环境安静而专注。\"\n    },\n    \"beat\": \"张文博在和学生分享历史故事。\",\n    \"characters\": [\n      {\n        \"name\": \"张文博\",\n        \"content\": \"同学们，你们知道秦始皇统一六国后，还做了哪些大事吗？\",\n        \"per\": \"斯文男音\"\n      },\n      {\n        \"name\": \"林小梦\",\n        \"content\": \"老师，秦始皇是不是还修建了长城？\",\n        \"per\": \"小萌萌\"\n      }\n    ]\n  },\n  {\n    \"plotName\": \"社区安全讲座\",\n    \"plotStage\": \"激励事件\",\n    \"scene\": {\n      \"name\": \"社区广场\",\n      \"content\": \"居民们围坐在临时搭建的讲台前，几位警察在旁边协助，现场氛围认真而有序。\"\n    },\n    \"beat\": \"王志刚在为大家讲解如何防范入室盗窃。\",\n    \"characters\": [\n      {\n        \"name\": \"王志刚\",\n        \"content\": \"大家晚上睡觉前一定要检查门窗是否锁好，不要给犯罪分子可乘之机。\",\n        \"per\": \"标准男音\"\n      },\n      {\n        \"name\": \"李晓梅\",\n        \"content\": \"王警官说得对，我们大家都要提高警惕。\",\n        \"per\": \"小萌萌\"\n      }\n    ]\n  },\n  {\n    \"plotName\": \"学术沙龙\",\n    \"plotStage\": \"冲突\",\n    \"scene\": {\n      \"name\": \"大学会议室\",\n      \"content\": \"会议室里坐着几位学者，墙上挂着学术研讨的海报，桌上摆放着资料和笔记本电脑。\"\n    },\n    \"beat\": \"刘知性与其他学者就社会现象展开激烈讨论。\",\n    \"characters\": [\n      {\n        \"name\": \"刘知性\",\n        \"content\": \"我认为，社区建设不仅仅是硬件设施的改善，更重要的是居民之间互帮互助的精神。\",\n        \"per\": \"知性女音\"\n      },\n      {\n        \"name\": \"张文博\",\n        \"content\": \"我同意刘教授的观点，社区文化的发展也是不可忽视的。\",\n        \"per\": \"斯文男音\"\n      }\n    ]\n  }\n]\n```"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-29-57",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,\n        \"content\"指角色的简介，\"name\"指角色的名字, per指角色音色码:标准女音，标准男音，斯文男音，小萌萌，知性女音，老教授，播音员，京腔，温柔大叔，请根据人物特征选取合适音色\n        ###输出示例###\n        [{\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准女音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"标准男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"斯文男音\"\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"小萌萌\"\n\n        },\n        {\n            \"name\": \"***\",\n            \"content\": \"***\"\n            \"per\": \"知性女音\"\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好"
+        },
+        {
+            "role": "assistant",
+            "content": "###输出示例###\n[\n    {\n        \"name\": \"李晓梅\",\n        \"content\": \"一位热心的图书管理员，总是愿意帮助别人解决问题，生活中充满正能量。\",\n        \"per\": \"知性女音\"\n    },\n    {\n        \"name\": \"王磊\",\n        \"content\": \"刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。\",\n        \"per\": \"标准男音\"\n    },\n    {\n        \"name\": \"张琴\",\n        \"content\": \"一位有才华的音乐教师，擅长用温柔的琴声治愈学生们的心灵。\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"刘星\",\n        \"content\": \"性格开朗，幽默风趣的电台主播，声音具有感染力。\",\n        \"per\": \"播音员\"\n    },\n    {\n        \"name\": \"陈教授\",\n        \"content\": \"一位博学多才的老教授，总是耐心地解答学生们的疑问。\",\n        \"per\": \"老教授\"\n    }\n]"
+        }
+    ]
+}{
+    "time": "2024-08-09_20-30-27",
+    "history": [
+        {
+            "role": "system",
+            "content": "\n        假设你是一位剧作家，\n        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，\n        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述(仅描述场景，不涉及情节或人物)，beat指梗概。故事情节中只出现角色表中提到的人物。\n        characters指在此情节中出现的角色，其中name为人物名，content为人物描述，per为人物音色码，这些信息请都与角色表中的信息保持一致，不要改变。如需添加角色，请将新角色的name,content,per补充完整。\n        输出时参照###输出示例###只输出json字符串,\"故事阶段\"的值只能取{\"展示\",\"激励事件\",\"冲突\",\"上升动作\",\"高潮\",\"解决\",\"结局\"}其中之一\n        ###输出示例###\n        [{\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        }\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        },\n        {\n        \"plotName\": \"***\",\n        \"plotStage\": \"***\",\n        \"scene\": {\n            \"name\": \"***\",\n            \"content\": \"***\"\n        },\n        \"beat\": \"***\",\n        \"characters\":[\n            {\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准女音\"\n            },{\n                \"name\": \"***\",\n                \"content\": \"***\"\n                \"per\": \"标准男音\"\n            }\n        ]\n        }\n        ]\n        "
+        },
+        {
+            "role": "user",
+            "content": "\n###故事线###:你好\n###角色表###:角色名： 李晓梅角色描述:  一位热心的图书管理员，总是愿意帮助别人解决问题，生活中充满正能量。角色音色： 知性女音\n角色名： 王磊角色描述:  刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。角色音色： 标准男音\n角色名： 张琴角色描述:  一位有才华的音乐教师，擅长用温柔的琴声治愈学生们的心灵。角色音色： 标准女音\n角色名： 刘星角色描述:  性格开朗，幽默风趣的电台主播，声音具有感染力。角色音色： 播音员\n角色名： 陈教授角色描述:  一位博学多才的老教授，总是耐心地解答学生们的疑问。角色音色： 老教授\n"
+        },
+        {
+            "role": "assistant",
+            "content": "[\n{\n\"plotName\": \"初识\",\n\"plotStage\": \"展示\",\n\"scene\": {\n    \"name\": \"图书馆\",\n    \"content\": \"一个充满书香气息的安静场所，书架整齐地排列着，读者们在认真地阅读。\"\n},\n\"beat\": \"王磊初次来到图书馆，李晓梅主动上前帮助他熟悉环境。\",\n\"characters\":[\n    {\n        \"name\": \"李晓梅\",\n        \"content\": \"一位热心的图书管理员，总是愿意帮助别人解决问题，生活中充满正能量。\",\n        \"per\": \"知性女音\"\n    },\n    {\n        \"name\": \"王磊\",\n        \"content\": \"刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。\",\n        \"per\": \"标准男音\"\n    }\n]\n},\n{\n\"plotName\": \"音乐的魅力\",\n\"plotStage\": \"激励事件\",\n\"scene\": {\n    \"name\": \"音乐教室\",\n    \"content\": \"一间布置温馨，充满艺术气息的教室，钢琴旁边摆放着各种乐器。\"\n},\n\"beat\": \"王磊在音乐课上遇到了张琴，被她的琴声所吸引。\",\n\"characters\":[\n    {\n        \"name\": \"张琴\",\n        \"content\": \"一位有才华的音乐教师，擅长用温柔的琴声治愈学生们的心灵。\",\n        \"per\": \"标准女音\"\n    },\n    {\n        \"name\": \"王磊\",\n        \"content\": \"刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。\",\n        \"per\": \"标准男音\"\n    }\n]\n},\n{\n\"plotName\": \"电台的温暖\",\n\"plotStage\": \"冲突\",\n\"scene\": {\n    \"name\": \"电台直播间\",\n    \"content\": \"一个灯光柔和，设备齐全的直播间，墙上挂着各种节目标识。\"\n},\n\"beat\": \"王磊在晚上收听电台，刘星的声音让他感到安慰。\",\n\"characters\":[\n    {\n        \"name\": \"刘星\",\n        \"content\": \"性格开朗，幽默风趣的电台主播，声音具有感染力。\",\n        \"per\": \"播音员\"\n    },\n    {\n        \"name\": \"王磊\",\n        \"content\": \"刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。\",\n        \"per\": \"标准男音\"\n    }\n]\n},\n{\n\"plotName\": \"知识的海洋\",\n\"plotStage\": \"上升动作\",\n\"scene\": {\n    \"name\": \"大学教室\",\n    \"content\": \"一间宽敞明亮的教室，墙上挂着各种学术海报，学生们正认真听讲。\"\n},\n\"beat\": \"王磊在陈教授的课堂上找到了学习的乐趣。\",\n\"characters\":[\n    {\n        \"name\": \"陈教授\",\n        \"content\": \"一位博学多才的老教授，总是耐心地解答学生们的疑问。\",\n        \"per\": \"老教授\"\n    },\n    {\n        \"name\": \"王磊\",\n        \"content\": \"刚转到这所城市的转学生，对周围环境感到好奇，喜欢交朋友。\",\n        \"per\": \"标准男音\"\n    }\n]\n}\n]"
+        }
+    ]
 }

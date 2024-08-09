@@ -80,57 +80,149 @@ class LLM(object):
         self.setting_outline_create = '''
         假设你是一位剧作家，
         你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，
-        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，beat指梗概。故事情节中只出现角色表中提到的人物。
+        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述(仅描述场景，不涉及情节或人物)，beat指梗概。故事情节中只出现角色表中提到的人物。
+        characters指在此情节中出现的角色，其中name为人物名，content为人物描述，per为人物音色码，这些信息请都与角色表中的信息保持一致，不要改变。如需添加角色，请将新角色的name,content,per补充完整。
         输出时参照###输出示例###只输出json字符串,"故事阶段"的值只能取{"展示","激励事件","冲突","上升动作","高潮","解决","结局"}其中之一
         ###输出示例###
         [{
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        }
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         },
         {
         "plotName": "***",
         "plotStage": "***",
-        "scene": "***",
+        "scene": {
+            "name": "***",
+            "content": "***"
+        },
         "beat": "***",
-        "characters":["**", "**", "**"]
+        "characters":[
+            {
+                "name": "***",
+                "content": "***"
+                "per": "标准女音"
+            },{
+                "name": "***",
+                "content": "***"
+                "per": "标准男音"
+            }
+        ]
         }
         ]
         '''

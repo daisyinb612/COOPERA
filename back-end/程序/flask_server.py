@@ -105,9 +105,9 @@ def init_plot_generation():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
     characters = request.get_json()["data"]["characters"]
-    question = "\n###故事线###:" + storyline + "\n###角色表###:" 
+    question = "\n###故事线###:" + storyline + "\n###角色表###:"
     for character in characters:
-        question += character["name"] + ": " + character["content"] + "\n"
+        question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_outline_create)
     plot = l.analyze_answer(answer)
