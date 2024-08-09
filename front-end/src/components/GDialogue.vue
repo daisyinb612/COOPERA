@@ -103,13 +103,13 @@ export default defineComponent({
     const audios = {
       "标准女音": 0,
       "标准男音": 1,
-      "斯文男音": 3,
-      "小萌萌": 4,
-      "知性女音": 5,
-      "老教授": 6,
-      "播音员": 9,
-      "京腔": 10,
-      "温柔大叔": 11,
+      // "斯文男音": 3,
+      // "小萌萌": 4,
+      // "知性女音": 5,
+      // "老教授": 6,
+      // "播音员": 9,
+      // "京腔": 10,
+      // "温柔大叔": 11,
     }
 
     async function generate_audio(content, character, scene, index) {
