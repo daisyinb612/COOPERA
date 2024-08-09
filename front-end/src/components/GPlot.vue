@@ -76,6 +76,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
+          <!-- TODO 删除角色有问题 -->
           <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character.name" />
           </el-select>
@@ -277,13 +278,12 @@ export default defineComponent({
           }
         });
         addPlot(response.data);
-        const scenes = response.data.map((plot) => {
-          return {
-            name: plot.scene,
-            url: 'empty.png',
+        const scenes = response.data.reduce((acc, plot) => {
+          if (!acc.find((scene) => scene.name === plot.scene)) {
+            acc.push({ name: plot.scene, content: "", image: 'empty.png' });
           }
-        }
-        )
+          return acc;
+        }, []);
         store.dispatch('addScene', scenes);
       } catch (error) {
         ElMessage({
