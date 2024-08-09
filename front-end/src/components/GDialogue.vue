@@ -41,7 +41,7 @@
                   <div>Scene name: {{ selectedPlot.scene.name }}</div>
                   <div>Scene discription: {{ selectedPlot.scene.content }}</div>
                   <div>Character:
-                  <span v-for="character in selectedPlot.characters" :key="character">{{ character }},</span>
+                  <span v-for="character in selectedPlot.characters" :key="character">{{ character.name }},</span>
                 </div>
                 <div>Plot beat: {{ selectedPlot.beat }}</div>
                 </el-col>

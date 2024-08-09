@@ -7,11 +7,11 @@
         <el-button @click="generate_script" class="confirm-button">生成</el-button>
         <div class="script-header">
           <el-scrollbar class="script-content">
-          <div class="script-name">Title</div>
+          <div class="script-name">Logline</div>
           {{ script.storylines }}
           <div v-for="plot in script.dialogues" :key="plot.plotName">
             <h3>{{ plot.plotName }}</h3>
-            scene: {{ plot.scene }}
+            scene: {{ plot.scene.name }}
             <div v-for="dialogue in plot.dialogue" :key="dialogue.character">
               <div>{{ dialogue.character }}: {{ dialogue.content }}</div>
               </div>

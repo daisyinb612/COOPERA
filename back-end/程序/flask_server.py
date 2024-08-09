@@ -329,7 +329,8 @@ def generate_dialogue():
     characters = data["characters"]
     question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景名字" + sceneName + ', 场景描述' + sceneContent + "，梗概" + beat + "，角色表"
     for character in characters:
-        question += character + " "
+        question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
+
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_dialogue_create)
     scene = l.analyze_answer(answer)
