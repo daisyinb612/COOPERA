@@ -4,7 +4,7 @@
       <el-header class="header">
         <div>Dialogue</div>
       </el-header>
-      <el-main class="dialogue">
+      <el-main class="dialogue" v-loading="loading">
         <el-header class="button-container-up">
           <el-scrollbar class="plot-name-list">
             <el-button v-for="(plot, index) in plots" :key="index" class="plot-name-button" @click="selectPlot(index)">
@@ -92,6 +92,7 @@ export default defineComponent({
 
   setup() {
     const store = useStore();
+    const loading = ref(false);
     const plots = computed(() => store.state.plot.plots);
     const selectedPlotIndex = ref(null);
     const selectedPlot = computed(() => {
@@ -152,6 +153,7 @@ export default defineComponent({
     }
 
     async function generate_dialogue() {
+      loading.value = true;
       const payload = {
         action: 'generate_dialogue',
         data: {
@@ -166,6 +168,7 @@ export default defineComponent({
       try {
         const response = await axios.post('http://localhost:8000/generate_dialogue', payload);
         console.log(response.data);
+        loading.value = false;
         selectedPlot.value.dialogue = response.data;
         ElMessage({
           message: '对话生成成功',
@@ -207,6 +210,7 @@ export default defineComponent({
       // dialogueNumbers,
       dialogues,
       selectedPlotIndex,
+      loading,
       // filteredDialogues,
       selectPlot,
       UploadDialogue,

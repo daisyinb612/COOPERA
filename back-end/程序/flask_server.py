@@ -27,6 +27,7 @@ info_dict = {
    "picture_path": "./opera_info/img",
    "wav_path": "./opera_info/audio/"
 }
+
  
 @app.route('/upload_storyline', methods=['POST'])
 def upload_storyline():

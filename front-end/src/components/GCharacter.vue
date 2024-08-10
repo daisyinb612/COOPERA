@@ -118,7 +118,7 @@
     </el-dialog>
 
 
-    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content" v-loading="loading">
+    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
       <el-form-item label="分组" :label-width="formLabelWidth">
         角色
       </el-form-item>
@@ -139,7 +139,7 @@
 
 
       <el-form-item label="图片" :label-width="formLabelWidth" >
-        <div>
+        <div v-loading="loading">
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
@@ -539,6 +539,7 @@ export default defineComponent({
     }
 
     async function generate_image() {
+      loading.value = true;
       const imageRequestBody = {
             action: 'create_character_picture',
             data: {
@@ -546,12 +547,12 @@ export default defineComponent({
               content: currentEditAsset.content,
             },
           };
-          // TODO
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
           fileList.value.push({
             name: currentEditAsset.name,
             url: imageResponse.data.image,
           });
+          loading.value = false;
           console.log(fileList.value);
           newAsset.image = imageResponse.data.image;
           currentEditAsset.image = imageResponse.data.image;

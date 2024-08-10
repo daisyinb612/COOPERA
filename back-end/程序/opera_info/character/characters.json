@@ -1,38 +1,12 @@
 [
     {
-        "name": "花木兰",
-        "content": "勇敢、机智的年轻女子，为了替父从军而女扮男装，展现了非凡的战斗力和领导才能。",
-        "per": "标准女音",
-        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-Vxkv22soqgmsNeZhk0iyEjMC/fawefafew/img-Wt1KeA6j9MrmrqFMWxSwOjE3.png?st=2024-08-10T09%3A52%3A32Z&se=2024-08-10T11%3A52%3A32Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T06%3A30%3A42Z&ske=2024-08-11T06%3A30%3A42Z&sks=b&skv=2023-11-03&sig=zlvsCZJCFnbYh4pFbPckhBUdtXlyMijWzLq%2BEw6ey7A%3D"
-    },
-    {
-        "name": "花父",
-        "content": "花木兰的父亲，年老体弱，但曾是一位英勇的战士，对女儿充满爱和支持。",
+        "name": "李小明",
+        "content": "一个乐观开朗的年轻人，总是充满活力和好奇心，对未来充满希望。",
         "per": "标准男音"
     },
     {
-        "name": "花母",
-        "content": "花木兰的母亲，温柔慈爱，关心家人的安全和幸福，对木兰的决定既担心又骄傲。",
+        "name": "王小红",
+        "content": "一个温柔善良的女孩，喜欢帮助别人，总是微笑面对生活。",
         "per": "标准女音"
-    },
-    {
-        "name": "花弟",
-        "content": "花木兰的弟弟，年幼天真，崇拜姐姐，渴望成为像她一样的英雄。",
-        "per": "标准男音"
-    },
-    {
-        "name": "将军",
-        "content": "花木兰所在军队的将军，严厉但公正，逐渐发现木兰的才华并给予重任。",
-        "per": "标准男音"
-    },
-    {
-        "name": "战友",
-        "content": "花木兰在军中的好友，开始时对她的身份有所怀疑，但最终成为她最坚定的支持者。",
-        "per": "标准男音"
-    },
-    {
-        "name": "皇帝",
-        "content": "国家的统治者，睿智仁慈，在战后对花木兰的贡献给予高度赞扬和奖励。",
-        "per": "标准男音"
     }
 ]

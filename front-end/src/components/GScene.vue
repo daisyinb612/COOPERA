@@ -71,7 +71,7 @@
       </el-form-item>
 
       <el-form-item label="图片" :label-width="formLabelWidth">
-        <div>
+        <div v-loading="loading">
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
@@ -127,6 +127,7 @@ export default defineComponent({
     const inputMessage = ref('');
     const selectedTab = ref('scene');
     const history = ref([]);
+    const loading = ref(false);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
     const sceneList=computed(()=>{
@@ -430,6 +431,7 @@ export default defineComponent({
     }
 
     async function generate_image() {
+      loading.value = true;
       const imageRequestBody = {
             action: 'create_scene_picture',
             data: {
@@ -443,6 +445,7 @@ export default defineComponent({
             name: currentEditAsset.name,
             url: imageResponse.data.image,
           }
+          loading.value = false;
           currentEditAsset.image = imageResponse.data.image;
           fileList.value.push({
             name: currentEditAsset.name,
@@ -462,6 +465,7 @@ export default defineComponent({
       filteredAssets,
       showSaveDialog,
       curSaveType,
+      loading,
       curSaveThing,
       showEditDialog,
       curEditAssetIndex,

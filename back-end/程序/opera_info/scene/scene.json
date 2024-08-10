@@ -1,49 +1,50 @@
 [
     {
-        "group": "scenes",
-        "name": "花家庭院",
-        "content": "庭院中，花木兰的家人围坐在一起，氛围温馨。远处传来战鼓声，预示着即将到来的战争。",
-        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-YGfAcqWcuIbaaPARdQTwe0ZN.png?st=2024-08-10T09%3A58%3A48Z&se=2024-08-10T11%3A58%3A48Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T06%3A17%3A44Z&ske=2024-08-11T06%3A17%3A44Z&sks=b&skv=2023-11-03&sig=N3ZkZ1RmvDsJCOl5lIYGtxKBYkiyeY4heNJvRlUiXIU%3D"
-    },
-    {
         "name": {
-            "name": "军营",
-            "content": "简陋的军营中，士兵们正在训练。气氛紧张而充满活力。"
+            "name": "公园",
+            "content": "一个阳光明媚的下午，公园里人来人往，鸟儿在树梢歌唱，花草散发着淡淡的香气。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "战场",
-            "content": "硝烟弥漫的战场上，士兵们奋勇杀敌。战马嘶鸣，刀光剑影。"
+            "name": "咖啡馆",
+            "content": "咖啡馆里，空气中弥漫着咖啡的香气，柔和的音乐在耳边环绕，顾客们低声交谈，气氛温馨而宁静。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "军营",
-            "content": "夜晚的军营，灯火通明，士兵们正在休息和交流。"
+            "name": "街道",
+            "content": "繁忙的街道上，车水马龙，人们行色匆匆，路边的商店和摊贩热闹非凡。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "军营",
-            "content": "军营中，士兵们集结在一起，气氛紧张。将军站在前方，木兰站在他的身边。"
+            "name": "公园",
+            "content": "傍晚的公园，夕阳余晖洒在湖面上，树影婆娑，宁静而美丽。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "皇宫",
-            "content": "宏伟的皇宫中，皇帝坐在宝座上，士兵们列队站立，气氛庄严肃穆。"
+            "name": "图书馆",
+            "content": "图书馆里，书架整齐排列，书香四溢，读者们安静地翻阅书籍，气氛庄重而安静。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "花家庭院",
-            "content": "庭院中，花木兰的家人欢聚一堂，气氛温馨。远处传来喜庆的音乐声。"
+            "name": "工作室",
+            "content": "一个温馨的工作室，墙上挂满了各种创意作品，桌上摆满了绘图工具和材料，充满了艺术气息。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "展览馆",
+            "content": "展览馆里，人们络绎不绝，墙上展示着李小明和王小红的作品，大家纷纷赞赏，气氛热烈。"
         },
         "url": ""
     }
