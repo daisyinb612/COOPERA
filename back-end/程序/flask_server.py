@@ -234,13 +234,14 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["user_input"]
+            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
             fileName=name+'.'+image.format.lower()
+            print(picture)
             with open(info_dict['characters_image_path']+'/'+fileName, 'wb') as f:
                 f.write(req.content)
             return jsonify({"image": picture})

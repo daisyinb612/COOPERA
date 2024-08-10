@@ -57,7 +57,7 @@
       </el-container>
     </el-container>
 
-    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
+    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content" v-loading="loading">
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
         <el-form-item label="分组">
           角色
@@ -118,7 +118,8 @@
       </el-footer>
     </el-dialog>
 
-    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
+
+    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content" v-loading="loading">
       <el-form-item label="分组" :label-width="formLabelWidth">
         角色
       </el-form-item>
@@ -137,7 +138,8 @@
           </el-select>
         </el-form-item>
 
-      <el-form-item label="图片" :label-width="formLabelWidth">
+
+      <el-form-item label="图片" :label-width="formLabelWidth" >
         <div>
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
@@ -193,6 +195,7 @@ export default defineComponent({
     const showEditDialog = ref(false);
     const curSaveType = ref('');
     const curSaveThing = ref('');
+    const loading = ref(false);
     const curEditAssetIndex = ref('');
     const fileList = ref([]);
     const inputMessage = ref('');
@@ -224,7 +227,23 @@ export default defineComponent({
       per: '',
       image: '',
     });
-
+    const tableData = [
+  {
+    date: '2016-05-02',
+    name: 'John Smith',
+    address: 'No.1518,  Jinshajiang Road, Putuo District',
+  },
+  {
+    date: '2016-05-04',
+    name: 'John Smith',
+    address: 'No.1518,  Jinshajiang Road, Putuo District',
+  },
+  {
+    date: '2016-05-01',
+    name: 'John Smith',
+    address: 'No.1518,  Jinshajiang Road, Putuo District',
+  },
+]
     // Computed properties
     // const currentEditAsset = computed(() => {
     //   return charList[curEditAssetIndex.value] || { name: '', content: '', image: '' };
@@ -514,8 +533,8 @@ export default defineComponent({
       const imageRequestBody = {
             action: 'create_character_picture',
             data: {
-              name: newAsset.name,
-              user_input: newAsset.content,
+              name: currentEditAsset.name,
+              content: currentEditAsset.content,
             },
           };
 
@@ -546,6 +565,7 @@ export default defineComponent({
       showDeleteConfirm,
       handleSaveClose,
       handleRemove,
+      tableData,
       handleExceed,
       sendMessage,
       showAddDialog,
@@ -564,6 +584,7 @@ export default defineComponent({
       cancelDelete,
       confirmDelete,
       generate_image,
+      loading,
       charList,
       audios,
     };
@@ -844,5 +865,12 @@ body {
 .confirm-button {
   background-color: #5973FF;
   color: white;
+}
+
+body {
+  margin: 0;
+}
+.example-showcase .el-loading-mask {
+  z-index: 9;
 }
 </style>
