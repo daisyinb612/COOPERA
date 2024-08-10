@@ -86,8 +86,16 @@
         </el-form-item>
         <el-footer class="dialog-footer">
           <el-button @click="handleEditDialogClose" class="cancel-button">取消</el-button>
+          <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>
           <el-button type="primary" @click="saveEditedPlot" class="confirm-button">确认</el-button>
         </el-footer>
+        <el-dialog v-model="showDeleteConfirm">
+        <div>你确认删除该资产吗？</div>
+        <span class="dialog-footer">
+          <el-button @click="cancelDelete" class="cancel-button">取消</el-button>
+          <el-button type="danger" @click="confirmDelete" class="confirm-button">确定</el-button>
+        </span>
+      </el-dialog>
       </el-form>
     </el-dialog>
   </el-container>
@@ -106,6 +114,7 @@ export default defineComponent({
 
     const addDialogVisible = ref(false);
     const editDialogVisible = ref(false);
+    const showDeleteConfirm = ref(false);
     const newPlot = reactive({
       plotName: '',
       plotStage: '',
@@ -136,6 +145,29 @@ export default defineComponent({
 
     function AddPlot() {
       addDialogVisible.value = true;
+    }
+    
+    function showDeleteDialog() {
+      showDeleteConfirm.value = true;
+    }
+
+    function cancelDelete() {
+      showDeleteConfirm.value = false;
+    }
+
+    
+    function handleEditClose() {
+      editDialogVisible.value = false;
+    }
+
+    function confirmDelete() {
+      store.dispatch('deletePlot', plotToEditIndex.value);
+      showDeleteConfirm.value = false;
+      handleEditClose();
+      ElMessage({
+        type: 'success',
+        message: `成功删除情节`,
+      });
     }
 
     function handleAddDialogClose() {
@@ -326,6 +358,7 @@ export default defineComponent({
       newPlot,
       stageList,
       editPlotData,
+      showDeleteConfirm,
       allScenes,
       allCharacters,
       AddPlot,
@@ -334,6 +367,9 @@ export default defineComponent({
       addNewPlot,
       editPlot,
       saveEditedPlot,
+      showDeleteDialog,
+      cancelDelete,
+      confirmDelete,
       generatePlot,
       UploadPlot,
     };
