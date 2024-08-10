@@ -208,7 +208,7 @@ def create_scene_picture():
 
         action = data.get("action")
         if action == "create_scene_picture":
-            prompt = "请生成场景图片， 场景的名称为："+data["data"]["name"]
+            prompt = "请使用统一清新的平面插画风格生成场景图片， 场景的名称为："+data["data"]["name"]
             if data["data"]["user_input"] != "":
                 prompt += "场景的描述为："+data["data"]["user_input"]
             name = data["data"]["name"]
@@ -234,7 +234,7 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "请生成角色图片， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
+            prompt = "请使用清新统一的色调，用类似迪士尼的插画风格生成白色背景的单人角色图片，图片中仅出现完整的人物，不要有文字和其他装饰， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
