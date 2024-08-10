@@ -116,6 +116,8 @@ export default defineComponent({
       const filename = `scene${scene}_${index}.wav`;
       console.log(character);
       let id_speaker = store.state.character.characters.find(c => c.name === character).per;
+      // 忽略（）中的内容
+      content = content.replace(/\(.*?\)/g, '');
       // per是字符串，需要通过audios转换成数字
       id_speaker = audios[id_speaker];
       const payload = {

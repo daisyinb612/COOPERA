@@ -325,7 +325,7 @@ export default defineComponent({
     }
 
     function editAsset(index) {
-      if(sceneList.value[index].image){
+      if(sceneList.value[index].image !== '') {
         fileList.value = [{
           name: sceneList.value[index].name,
           url: sceneList.value[index].image,

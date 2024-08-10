@@ -1,50 +1,49 @@
 [
     {
+        "group": "scenes",
+        "name": "花家庭院",
+        "content": "庭院中，花木兰的家人围坐在一起，氛围温馨。远处传来战鼓声，预示着即将到来的战争。",
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-YGfAcqWcuIbaaPARdQTwe0ZN.png?st=2024-08-10T09%3A58%3A48Z&se=2024-08-10T11%3A58%3A48Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T06%3A17%3A44Z&ske=2024-08-11T06%3A17%3A44Z&sks=b&skv=2023-11-03&sig=N3ZkZ1RmvDsJCOl5lIYGtxKBYkiyeY4heNJvRlUiXIU%3D"
+    },
+    {
         "name": {
-            "name": "李明的家",
-            "content": "一个简洁温馨的小公寓，窗外阳光明媚，桌上摆放着王阿姨送来的点心。"
+            "name": "军营",
+            "content": "简陋的军营中，士兵们正在训练。气氛紧张而充满活力。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "公司办公室",
-            "content": "一个现代化的办公室，张小丽和陈强正在各自的工位上忙碌，气氛轻松愉快。"
+            "name": "战场",
+            "content": "硝烟弥漫的战场上，士兵们奋勇杀敌。战马嘶鸣，刀光剑影。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "张小丽的家",
-            "content": "一个装饰温馨的小公寓，张小丽坐在沙发上，神情有些疲惫和迷茫。"
+            "name": "军营",
+            "content": "夜晚的军营，灯火通明，士兵们正在休息和交流。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "公司茶水间",
-            "content": "一个现代化的茶水间，陈强和张小丽在这里偶遇，正在泡咖啡。"
+            "name": "军营",
+            "content": "军营中，士兵们集结在一起，气氛紧张。将军站在前方，木兰站在他的身边。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "王阿姨的家",
-            "content": "一个温馨的家庭厨房，王阿姨正在烤箱前忙碌，桌上摆满了各式各样的点心。"
+            "name": "皇宫",
+            "content": "宏伟的皇宫中，皇帝坐在宝座上，士兵们列队站立，气氛庄严肃穆。"
         },
         "url": ""
     },
     {
         "name": {
-            "name": "公司会议室",
-            "content": "一个宽敞明亮的会议室，张小丽正在做一个重要的项目汇报，陈强在一旁支持她。"
-        },
-        "url": ""
-    },
-    {
-        "name": {
-            "name": "小区花园",
-            "content": "一个绿意盎然的小区花园，邻里们在这里散步、聊天，氛围和谐温馨。"
+            "name": "花家庭院",
+            "content": "庭院中，花木兰的家人欢聚一堂，气氛温馨。远处传来喜庆的音乐声。"
         },
         "url": ""
     }
