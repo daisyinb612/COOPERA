@@ -541,7 +541,7 @@ export default defineComponent({
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
           fileList.value.push({
             name: 'image',
-            url: imageResponse.data.image,
+            url: 'http://localhost:8000/get_character_image?filename=' + imageResponse.data.image,
           });
           newAsset.image = imageResponse.data.image;
           currentEditAsset.image = imageResponse.data.image;

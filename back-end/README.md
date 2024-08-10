@@ -6,6 +6,9 @@ First create a new environment: `conda create -n coopera python=3.10.14`
 Then run:
 
 ```
+pip install flask
+pip install flask_cors
+pip install jupyter
 pip install openai==1.35.10
 pip install zhipuai==2.1.2
 pip install  XlsxWriter==3.2.0

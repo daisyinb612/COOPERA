@@ -249,6 +249,21 @@ def create_character_picture():
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route('/get_character_image', methods=['GET'])
+def get_character_image():
+    # 从前端请求中获取音频文件名
+    filename = request.args.get('filename')
+    image_directory = f'./opera_info/character/'
+
+    if not filename:
+        return jsonify({"error": "No filename provided"}), 400
+
+    file_path = os.path.join(image_directory, filename)
+    if os.path.exists(file_path):
+        return send_from_directory(image_directory, filename)
+    else:
+        return abort(404, description="File not found")
     
 
 @app.route("/update_character", methods=['POST'])
@@ -432,8 +447,6 @@ def get_audio():
     AUDIO_DIRECTORY = f'./opera_info/audio/'
     file_path = os.path.join(AUDIO_DIRECTORY, filename)
     if os.path.exists(file_path):
-        # 返回音频文件
-        print('res')
         return send_from_directory(AUDIO_DIRECTORY, filename)
     else:
         return abort(404, description="File not found")
