@@ -11,6 +11,8 @@ from datetime import datetime
 import json
 from openpyxl import Workbook, load_workbook
 
+model = 'openai'  # 'openai' or 'zhipu'
+
 class LLM(object):
     def __init__(self,apikey=None):
         self.fix_json = '''
@@ -301,9 +303,9 @@ class LLM(object):
             
         # self.save_json_to_excel(json_object=new_history,filepath=filepath)
         
-    def ask(self,question,prompt,history=None,model_name='openai'):##model_name改为其他值（例如None）时，默认使用GLM
+    def ask(self,question,prompt,history=None):##model_name改为其他值（例如None）时，默认使用GLM
         if history is None:
-            if model_name=="openai":
+            if model=="openai":
                 client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
                 response = client.chat.completions.create(
                     model="gpt-4o",
@@ -332,7 +334,7 @@ class LLM(object):
             for row in history:
                 new_message.append(row)
             new_message.append({"role": "user", "content": question})
-            if model_name=="openai":
+            if model=="openai":
                 client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
                 response = client.chat.completions.create(
                     model="gpt-4o",
@@ -368,37 +370,31 @@ class LLM(object):
         return answer
 
     def create_picture(self,prompt,history=None):
-        '''
-        url = 'https://api.openai.com/v1/images/generations'
-        headers = {
-            'Authorization': f'Bearer {self.apikey}',
-            'Content-Type': 'application/json'
-        }
-        data = {
-            'prompt': prompt,
-            'n': 1,  # 生成图片的数量
-            'size': '256x256'  # 图片尺寸
-        }
-        response = requests.post(url, headers=headers, json=data)
-        if response.status_code == 200:
-            image_data = response.json()
-            image_b64 = image_data['data'][0]['b64_json']
-            image_bytes = base64.b64decode(image_b64)
-            with open(filepath, 'wb') as f:
-                f.write(image_bytes)
-            print("图片已生成并保存")
-        else:
-            print("请求失败：", response.status_code, response.text)
-        self.save_history(question=prompt,answer="",prompt="",history=history)
-        return image_b64'''
-        client = ZhipuAI(api_key=self.apikey)
-        response = client.images.generations(
-            model="cogview-3", 
-            prompt=prompt,
-        )
-        print(response.data[0].url)
-        self.save_history(question=prompt,answer="",prompt="",history=history)
-        return response.data[0].url
+        # if model == 'openai':
+        #     client = OpenAI(
+        #         base_url="https://xiaoai.plus/v1",
+        #         api_key="sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74"
+        #     )   
+        #     response = client.images.generate(
+        #         model="dall-e-3",
+        #         prompt=prompt,
+        #         size="1024x1024",
+        #         quality="standard",
+        #         n=1,
+        #     )
+        #     print(response)
+        #     image_url = response.data[0].url
+        #     self.save_history(question=prompt,answer="",prompt="",history=history)
+        #     return image_url
+        # else:
+            client = ZhipuAI(api_key='4562c624dd266627559909358043af62.fCv9jl2UB63Qgomi')
+            response = client.images.generations(
+                model="cogview-3", 
+                prompt=prompt,
+            )
+            print(response.data[0].url)
+            self.save_history(question=prompt,answer="",prompt="",history=history)
+            return response.data[0].url
 
     def analyze_answer(self,text):
         try:
