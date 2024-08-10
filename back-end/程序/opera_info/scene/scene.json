@@ -1,0 +1,92 @@
+[
+    {
+        "number": "1",
+        "character": "花母",
+        "content": "弧，你身体怎么样了？要不要我去给你熬点药？"
+    },
+    {
+        "number": "2",
+        "character": "花弧",
+        "content": "不必了，我这身体啊，怕是再也好不起来了。"
+    },
+    {
+        "number": "3",
+        "character": "花母",
+        "content": "别这么说，木兰还需要你呢。"
+    },
+    {
+        "number": "4",
+        "character": "花弧",
+        "content": "说到木兰，她在哪儿？"
+    },
+    {
+        "number": "5",
+        "character": "花母",
+        "content": "她在房里呢，估计是在练武吧。"
+    },
+    {
+        "number": "6",
+        "character": "花弧",
+        "content": "唉，这孩子，心里总想着为家里分担。"
+    },
+    {
+        "number": "7",
+        "character": "花母",
+        "content": "是啊，她是个懂事的孩子。"
+    },
+    {
+        "number": "8",
+        "character": "花木兰",
+        "content": "父亲，母亲，我有话要说。"
+    },
+    {
+        "number": "9",
+        "character": "花弧",
+        "content": "木兰，有什么事？"
+    },
+    {
+        "number": "10",
+        "character": "花木兰",
+        "content": "父亲，朝廷又来征兵了，我决定替您从军。"
+    },
+    {
+        "number": "11",
+        "character": "花弧",
+        "content": "什么？你怎么能去？那是战场，不是儿戏！"
+    },
+    {
+        "number": "12",
+        "character": "花母",
+        "content": "木兰，你可要想清楚啊。"
+    },
+    {
+        "number": "13",
+        "character": "花木兰",
+        "content": "我已经决定了，父亲年事已高，不能再上战场。我年轻力壮，可以为家里分担这份责任。"
+    },
+    {
+        "number": "14",
+        "character": "花弧",
+        "content": "木兰，这不是你一个女子该去的地方。"
+    },
+    {
+        "number": "15",
+        "character": "花木兰",
+        "content": "父亲，母亲，请相信我。我会照顾好自己，也会为家里争光。"
+    },
+    {
+        "number": "16",
+        "character": "花母",
+        "content": "唉，孩子，既然你决定了，我们也不拦你。只是一定要多加小心。"
+    },
+    {
+        "number": "17",
+        "character": "花弧",
+        "content": "木兰，保重自己，早日归来。"
+    },
+    {
+        "number": "18",
+        "character": "花木兰",
+        "content": "谢谢父亲母亲，我一定会平安归来的。"
+    }
+]

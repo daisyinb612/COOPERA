@@ -360,6 +360,7 @@ class LLM(object):
                 base_url="https://xiaoai.plus/v1",
                 api_key="sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74"
             )   
+            # TODO
             response = client.images.generate(
                 model="dall-e-3",
                 prompt=prompt,

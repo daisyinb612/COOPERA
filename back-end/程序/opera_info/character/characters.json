@@ -1,0 +1,23 @@
+[
+    {
+        "name": "王阿姨",
+        "content": "李明的邻居，一个热心肠的中年妇女，经常给李明送自家做的点心。",
+        "per": "标准女音",
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-Vxkv22soqgmsNeZhk0iyEjMC/fawefafew/img-UQA6Yds9jBS9liQfXYu1N5tt.png?st=2024-08-10T08%3A03%3A13Z&se=2024-08-10T10%3A03%3A13Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T05%3A35%3A36Z&ske=2024-08-11T05%3A35%3A36Z&sks=b&skv=2023-11-03&sig=doW9WAO9UNePDkDdXbxiSM9EkJqNGiMXK/2qTrAYd9o%3D"
+    },
+    {
+        "name": "张小丽",
+        "content": "一个年轻的职场女性，性格开朗，热爱生活，但内心有些许迷茫。",
+        "per": "标准女音"
+    },
+    {
+        "name": "王阿姨",
+        "content": "李明的邻居，一个热心肠的中年妇女，经常给李明送自家做的点心。",
+        "per": "标准女音"
+    },
+    {
+        "name": "陈强",
+        "content": "李明的同事，幽默风趣，总是能给周围的人带来欢乐。",
+        "per": "标准男音"
+    }
+]

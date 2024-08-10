@@ -203,12 +203,12 @@ export default defineComponent({
     const history = ref([]);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
-    const newAsset = reactive({
+    const newAsset = {
       group: 'characters',
       name: '',
       content: '',
       image: '',
-    });
+    };
     const store=useStore()
     const audios = {
       0:"标准女音",
@@ -435,6 +435,7 @@ export default defineComponent({
       currentEditAsset.content = charList.value[index].content;
       currentEditAsset.per = charList.value[index].per;
       currentEditAsset.image = charList.value[index].image;
+      console.log(currentEditAsset);
       showEditDialog.value = true;
     }
 
@@ -500,7 +501,8 @@ export default defineComponent({
 
     async function saveEditedAsset() {
       // const editedAsset = charList.value[curEditAssetIndex.value];
-      const editedAsset = currentEditAsset;
+      // 深拷贝
+      const editedAsset = JSON.parse(JSON.stringify(currentEditAsset));
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
@@ -537,13 +539,16 @@ export default defineComponent({
               content: currentEditAsset.content,
             },
           };
-
+          // TODO
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
           fileList.value.push({
             name: 'image',
             url: 'http://localhost:8000/get_character_image?filename=' + imageResponse.data.image,
           });
           newAsset.image = imageResponse.data.image;
+          console.log(newAsset);
+          console.log(currentEditAsset);
+          console.log(charList.value[curEditAssetIndex.value]);
           currentEditAsset.image = imageResponse.data.image;
           charList.value[curEditAssetIndex.value].image = imageResponse.data.image;
       }
