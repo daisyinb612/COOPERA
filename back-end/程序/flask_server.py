@@ -5,7 +5,10 @@ from excel import ExcelOp
 from llm import LLM
 from flask_cors import CORS
 import json
- 
+from PIL import Image
+from io import BytesIO
+import uuid
+
 app = Flask(__name__)
 CORS(app)
 
@@ -16,8 +19,10 @@ info_dict = {
    "apikey": "sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74",
    "world_setting_path": "./opera_info/storyline/storyline.txt",
    "characters_path": "./opera_info/character/characters.json",
+   "characters_image_path": "./opera_info/character",
    "outline_path": "./opera_info/outline/outline.json",
    "scene_path": "./opera_info/scene/scene.json",
+   "scene_image_path": "./opera_info/scene",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
    "wav_path": "./opera_info/audio/"
@@ -168,12 +173,6 @@ def delete_scene_asset():
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
 
-@app.route("/generate_audio", methods=['POST'])
-def generate_audio():
-    data = request.get_json()
-    text = data["data"]["text"]
-    wav = get_wav(text)
-    return jsonify({"wav": wav})
     
 
  
@@ -215,6 +214,11 @@ def create_scene_picture():
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
+            req=requests.get(picture)
+            image=Image.open(BytesIO(req.content))
+            fileName=name+'.'+image.format.lower()
+            with open(info_dict['scene_image_path']+'/'+fileName, 'wb') as f:
+                f.write(req.content)
             return jsonify({"image": picture})
         else:
             return jsonify({"error": "Invalid action type."}), 401
@@ -234,6 +238,11 @@ def create_character_picture():
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
+            req=requests.get(picture)
+            image=Image.open(BytesIO(req.content))
+            fileName=name+'.'+image.format.lower()
+            with open(info_dict['characters_image_path']+'/'+fileName, 'wb') as f:
+                f.write(req.content)
             return jsonify({"image": picture})
         else:
             return jsonify({"error": "Invalid action type."}), 401

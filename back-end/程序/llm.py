@@ -4,12 +4,12 @@ import os
 from openai import OpenAI
 import requests
 from zhipuai import ZhipuAI
-from history import create_xlsx_file
 import xlsxwriter
 import csv
 from datetime import datetime
 import json
 from openpyxl import Workbook, load_workbook
+
 
 model = 'openai'  # 'openai' or 'zhipu'
 
