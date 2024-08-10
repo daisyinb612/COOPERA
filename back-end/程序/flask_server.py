@@ -381,6 +381,7 @@ def do_tts():
         text = data["data"]["text"]
         print('do_tts text', text)
         id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
+        print('id_speaker', id_speaker)
         url = "http://tsn.baidu.com/text2audio"
         header = {
             "Content-Type": "application/x-www-form-urlencoded",

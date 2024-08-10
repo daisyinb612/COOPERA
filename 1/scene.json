@@ -1,0 +1,57 @@
+[
+    {
+        "number": "1",
+        "character": "李华",
+        "content": "王芳？是你吗？"
+    },
+    {
+        "number": "2",
+        "character": "王芳",
+        "content": "李华！好久不见，你怎么会在这里？"
+    },
+    {
+        "number": "3",
+        "character": "李华",
+        "content": "我最近迷上了历史书，听说这里的藏书很丰富，就常来看看。你呢？"
+    },
+    {
+        "number": "4",
+        "character": "王芳",
+        "content": "我也是，最近在研究古代文化，这里真是个好地方。"
+    },
+    {
+        "number": "5",
+        "character": "陈明",
+        "content": "你们好，我是这儿的管理员陈明，有什么需要帮忙的吗？"
+    },
+    {
+        "number": "6",
+        "character": "李华",
+        "content": "谢谢陈先生，我们只是碰巧遇见，聊聊天。"
+    },
+    {
+        "number": "7",
+        "character": "王芳",
+        "content": "对了，李华，你最近有没有读过什么特别推荐的书？"
+    },
+    {
+        "number": "8",
+        "character": "李华",
+        "content": "有啊，《史记》你看过吗？非常有意思，尤其是关于项羽的部分。"
+    },
+    {
+        "number": "9",
+        "character": "王芳",
+        "content": "真的？我正好也对那段历史很感兴趣。"
+    },
+    {
+        "number": "10",
+        "character": "李华",
+        "content": "那太好了，我们可以一起讨论讨论。"
+    },
+    {
+        "number": "11",
+        "character": "陈明",
+        "content": "看你们聊得这么开心，真是令人羡慕。希望你们在这里度过愉快的时光。"
+    }
+]
