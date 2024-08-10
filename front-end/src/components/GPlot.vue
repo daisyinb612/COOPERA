@@ -76,7 +76,6 @@
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
-          <!-- TODO 删除角色有问题 -->
           <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色" value-key="name">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>

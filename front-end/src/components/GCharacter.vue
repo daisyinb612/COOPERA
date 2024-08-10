@@ -62,7 +62,6 @@
         <el-form-item label="分组">
           角色
         </el-form-item>
-
         <el-form-item label="资产名" :label-width="formLabelWidth">
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
@@ -70,15 +69,15 @@
         <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
           <el-input v-model="newAsset.content" autocomplete="off" />
         </el-form-item>
-
+        
         <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
           <div>
             <el-upload :http-request="uploadFile"
                        list-type="picture-card"
                        :on-success="handleUploadSuccess"
-                       :file-list="fileList"
-                       :limit="1"
+                       v-model:file-list="fileList"
                        :on-remove="handleRemove"
+                        :on-preview="handlePictureCardPreview"
                        :on-exceed="handleExceed">
               <i class="el-icon-plus"></i>
             </el-upload>
@@ -144,12 +143,9 @@
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
-                   :file-list="[{
-                    name: currentEditAsset.name,
-                    url: currentEditAsset.image? currentEditAsset.image : '@/assets/images/logo.png',
-                   }]"
+                   :file-list="fileList"
                    show-file-list="true"
-                   :limit="1"
+                   :on-preview="handlePictureCardPreview"
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
@@ -253,6 +249,7 @@ export default defineComponent({
       return charList;
     });
 
+
     const charList=computed(()=>{
       console.log(store.state.character.characters);
       return store.state.character.characters
@@ -348,6 +345,10 @@ export default defineComponent({
       addDialogVisible.value = true;
     }
 
+    function handlePictureCardPreview(file){
+      charList.value[curEditAssetIndex.value].image = file.url;
+    }
+
     function handleAddDialogClose() {
       newAsset.group = 'characters';
       newAsset.name = '';
@@ -430,6 +431,12 @@ export default defineComponent({
     }
 
     function editAsset(index) {
+      if(charList.value[index].image){
+        fileList.value = [{
+          name: charList.value[index].name,
+          url: charList.value[index].image,
+        }]
+      }
       curEditAssetIndex.value = index;
       currentEditAsset.name = charList.value[index].name;
       currentEditAsset.content = charList.value[index].content;
@@ -542,13 +549,11 @@ export default defineComponent({
           // TODO
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
           fileList.value.push({
-            name: 'image',
-            url: 'http://localhost:8000/get_character_image?filename=' + imageResponse.data.image,
+            name: currentEditAsset.name,
+            url: imageResponse.data.image,
           });
+          console.log(fileList.value);
           newAsset.image = imageResponse.data.image;
-          console.log(newAsset);
-          console.log(currentEditAsset);
-          console.log(charList.value[curEditAssetIndex.value]);
           currentEditAsset.image = imageResponse.data.image;
           charList.value[curEditAssetIndex.value].image = imageResponse.data.image;
       }
@@ -588,6 +593,7 @@ export default defineComponent({
       showDeleteDialog,
       cancelDelete,
       confirmDelete,
+      handlePictureCardPreview,
       generate_image,
       loading,
       charList,

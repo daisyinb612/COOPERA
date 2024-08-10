@@ -1,23 +1,38 @@
 [
     {
-        "name": "王阿姨",
-        "content": "李明的邻居，一个热心肠的中年妇女，经常给李明送自家做的点心。",
+        "name": "花木兰",
+        "content": "勇敢、机智的年轻女子，为了替父从军而女扮男装，展现了非凡的战斗力和领导才能。",
         "per": "标准女音",
-        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-Vxkv22soqgmsNeZhk0iyEjMC/fawefafew/img-UQA6Yds9jBS9liQfXYu1N5tt.png?st=2024-08-10T08%3A03%3A13Z&se=2024-08-10T10%3A03%3A13Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T05%3A35%3A36Z&ske=2024-08-11T05%3A35%3A36Z&sks=b&skv=2023-11-03&sig=doW9WAO9UNePDkDdXbxiSM9EkJqNGiMXK/2qTrAYd9o%3D"
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-Vxkv22soqgmsNeZhk0iyEjMC/fawefafew/img-Wt1KeA6j9MrmrqFMWxSwOjE3.png?st=2024-08-10T09%3A52%3A32Z&se=2024-08-10T11%3A52%3A32Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T06%3A30%3A42Z&ske=2024-08-11T06%3A30%3A42Z&sks=b&skv=2023-11-03&sig=zlvsCZJCFnbYh4pFbPckhBUdtXlyMijWzLq%2BEw6ey7A%3D"
     },
     {
-        "name": "张小丽",
-        "content": "一个年轻的职场女性，性格开朗，热爱生活，但内心有些许迷茫。",
+        "name": "花父",
+        "content": "花木兰的父亲，年老体弱，但曾是一位英勇的战士，对女儿充满爱和支持。",
+        "per": "标准男音"
+    },
+    {
+        "name": "花母",
+        "content": "花木兰的母亲，温柔慈爱，关心家人的安全和幸福，对木兰的决定既担心又骄傲。",
         "per": "标准女音"
     },
     {
-        "name": "王阿姨",
-        "content": "李明的邻居，一个热心肠的中年妇女，经常给李明送自家做的点心。",
-        "per": "标准女音"
+        "name": "花弟",
+        "content": "花木兰的弟弟，年幼天真，崇拜姐姐，渴望成为像她一样的英雄。",
+        "per": "标准男音"
     },
     {
-        "name": "陈强",
-        "content": "李明的同事，幽默风趣，总是能给周围的人带来欢乐。",
+        "name": "将军",
+        "content": "花木兰所在军队的将军，严厉但公正，逐渐发现木兰的才华并给予重任。",
+        "per": "标准男音"
+    },
+    {
+        "name": "战友",
+        "content": "花木兰在军中的好友，开始时对她的身份有所怀疑，但最终成为她最坚定的支持者。",
+        "per": "标准男音"
+    },
+    {
+        "name": "皇帝",
+        "content": "国家的统治者，睿智仁慈，在战后对花木兰的贡献给予高度赞扬和奖励。",
         "per": "标准男音"
     }
 ]
