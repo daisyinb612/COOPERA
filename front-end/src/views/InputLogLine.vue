@@ -4,7 +4,7 @@
       <el-header class="header">
         <div>“故事概要”</div>
       </el-header>
-      <el-main class="editlogline">
+      <el-main class="editlogline" v-loading="loading">
         <el-input v-model="loglineData" :rows="5" type="textarea" placeholder="请输入你的故事概要" />
       </el-main>
 
@@ -140,6 +140,7 @@ export default defineComponent({
       }
     },
     async UploadLogLine() {
+      this.loading = true;
       if (!this.loglineData) {
         ElMessage({
           message: '输入不能为空',
@@ -159,6 +160,7 @@ export default defineComponent({
         const response = await axios.post('http://localhost:8000/upload_storyline', requestBody);
         this.$store.dispatch('addCharacter', response.data);
         if (response.status === 200) {
+          this.loading = false;
           ElMessage({
             message: '保存成功',
             type: 'success',
@@ -192,6 +194,7 @@ export default defineComponent({
     const store=useStore()
     const inputMessage = ref('');
     const messages = ref([]);
+    const loading = ref(false);
     const history = ref([]);
     const loglineData = computed({
       get: () => store.getters.loglineData,
@@ -202,6 +205,7 @@ export default defineComponent({
     return {
       inputMessage,
       messages,
+      loading,
       history,
       loglineData, // 返回 loglineData
     }

@@ -71,15 +71,12 @@
       </el-form-item>
 
       <el-form-item label="图片" :label-width="formLabelWidth">
-        <div>
+        <div v-loading="loading">
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
                    :on-success="handleUploadSuccess"
-                   :file-list="[{
-                    name: currentEditAsset.name,
-                    url: currentEditAsset.image? currentEditAsset.image : '@/assets/images/logo.png',
-                   }]"
-                   :limit="1"
+                   v-model:file-list="fileList"
+                   :on-preview="handlePictureCardPreview"
                    :on-remove="handleRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
@@ -130,6 +127,7 @@ export default defineComponent({
     const inputMessage = ref('');
     const selectedTab = ref('scene');
     const history = ref([]);
+    const loading = ref(false);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
     const sceneList=computed(()=>{
@@ -161,6 +159,11 @@ export default defineComponent({
     const scenes=computed(()=>{
       return store.state.scene.scenes
     });
+
+    
+    function handlePictureCardPreview(file){
+      sceneList.value[curEditAssetIndex.value].image = file.url;
+    }
 
 
     const actions = mapActions('scene', [
@@ -323,6 +326,12 @@ export default defineComponent({
     }
 
     function editAsset(index) {
+      if(sceneList.value[index].image !== '') {
+        fileList.value = [{
+          name: sceneList.value[index].name,
+          url: sceneList.value[index].image,
+        }]
+      }
       curEditAssetIndex.value = index
       currentEditAsset.name = scenes.value[index].name;
       currentEditAsset.content = scenes.value[index].content;
@@ -422,6 +431,7 @@ export default defineComponent({
     }
 
     async function generate_image() {
+      loading.value = true;
       const imageRequestBody = {
             action: 'create_scene_picture',
             data: {
@@ -435,7 +445,12 @@ export default defineComponent({
             name: currentEditAsset.name,
             url: imageResponse.data.image,
           }
+          loading.value = false;
           currentEditAsset.image = imageResponse.data.image;
+          fileList.value.push({
+            name: currentEditAsset.name,
+            url: imageResponse.data.image,
+          });
           newAsset.image = imageResponse.data.image;
       }
 
@@ -450,6 +465,7 @@ export default defineComponent({
       filteredAssets,
       showSaveDialog,
       curSaveType,
+      loading,
       curSaveThing,
       showEditDialog,
       curEditAssetIndex,
@@ -459,6 +475,7 @@ export default defineComponent({
       handleExceed,
       sendMessage,
       showAddDialog,
+      handlePictureCardPreview,
       handleAddDialogClose,
       selectTab,
       saveAsset,

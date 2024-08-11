@@ -1,5 +1,5 @@
 <template>
-  <el-container class="main-container">
+  <el-container class="main-container" >
     <el-main class="plot">
       <el-header class="header">
         <div>PLOT</div>
@@ -9,7 +9,7 @@
           <el-button class="button" @click="generatePlot">生成</el-button>
           <el-button class="button" @click="AddPlot">添加</el-button>
         </el-header>
-        <el-main class="plot-list-container">
+        <el-main class="plot-list-container" v-loading="loading">
           <el-scrollbar class="plots-list">
             <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
               <div class="plot-header">
@@ -76,7 +76,6 @@
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
-          <!-- TODO 删除角色有问题 -->
           <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色" value-key="name">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>
@@ -111,6 +110,7 @@ export default defineComponent({
   name: 'GPlot',
   setup() {
     const store = useStore();
+    const loading = ref(false);
 
     const addDialogVisible = ref(false);
     const editDialogVisible = ref(false);
@@ -303,12 +303,14 @@ export default defineComponent({
 
     async function generatePlot() {
       try {
+        loading.value = true;
         const response = await axios.post('http://localhost:8000/init_plot_generation', {
           action: 'init_plot_generation',
           data: {
             characters: store.state.character.characters
           }
         });
+        loading.value = false;
         addPlot(response.data);
         const scenes = response.data.reduce((acc, plot) => {
           if (!acc.find((scene) => scene.name === plot.scene.name)) {
@@ -361,6 +363,7 @@ export default defineComponent({
       showDeleteConfirm,
       allScenes,
       allCharacters,
+      loading,
       AddPlot,
       handleAddDialogClose,
       handleEditDialogClose,
