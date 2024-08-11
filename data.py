@@ -1,6 +1,6 @@
 import os
 
-user_id = 3
+user_id = 'wangshining'
 
 user_file_name = f'./experiment_data/{user_id}'
 os.makedirs(user_file_name, exist_ok=True)
@@ -64,7 +64,7 @@ for f in scene_files:
     os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
 
 for f in scene_image_files:
-    os.rename(f'{scene_path}/{f}', user_file_name + f'{f}')
+    os.rename(f'{scene_path}/{f}', user_file_name + f'/scene_image/{f}')
 
 storyline_path = "./back-end/程序/opera_info/storyline"
 storyline_files = os.listdir(storyline_path)

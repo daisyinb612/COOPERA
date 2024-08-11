@@ -1,0 +1,528 @@
+[
+    {
+        "plotName": "木兰的决定",
+        "plotStage": "展示",
+        "scene": {
+            "group": "scenes",
+            "name": "花家院子",
+            "content": "一个古朴的农家小院，院子里种满了花草，木制的房屋显得温馨而宁静。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-6HdIyaiaB4yaWaV8Y58arJLV.png?st=2024-08-11T05%3A25%3A48Z&se=2024-08-11T07%3A25%3A48Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T06%3A47%3A21Z&ske=2024-08-11T06%3A47%3A21Z&sks=b&skv=2023-11-03&sig=NYJLtNMM2oScuj0iMeEuBeu1KrFpjMzboBGDP3kHQOU%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花弧是花木兰的父亲，一位年迈且有病在身的老兵，他曾经也是一名英勇的战士，因年老多病无法再次从军。",
+                "name": "花弧",
+                "per": "标准男音"
+            },
+            {
+                "content": "花母是花木兰的母亲，一位慈爱且坚强的女性，她支持木兰的决定并为她的安全担忧。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "弟弟是一位年轻且充满朝气的少年",
+                "name": "木兰的弟弟",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰决定代父从军，女扮男装，离开家乡。",
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "爹，娘，我已经决定了，我要代父从军。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_0.wav"
+            },
+            {
+                "character": "花弧",
+                "content": "木兰，这怎么行？你是女子，军营里危险重重。",
+                "number": "2"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，你真的考虑清楚了吗？我们都担心你的安全。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "爹，娘，弟弟还小，家里需要有人照顾，我已经练好了武艺，我可以保护自己。",
+                "number": "4"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，我也想去，但我知道我还不够强大。",
+                "number": "5"
+            },
+            {
+                "character": "花弧",
+                "content": "唉，木兰，你真是个好孩子。既然你已经决定了，那就去吧。但一定要小心，保护好自己。",
+                "number": "6"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，记得时时想着家里，我们会在这里等你平安归来。",
+                "number": "7"
+            },
+            {
+                "character": "花木兰",
+                "content": "我会的，娘。爹，您放心，我一定会好好照顾自己，也会为家族争光。",
+                "number": "8"
+            },
+            {
+                "character": "花弧",
+                "content": "木兰，去吧，家里的一切我们会照顾好的。",
+                "number": "9"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢爹娘。弟弟，你要听话，照顾好父母。",
+                "number": "10"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，你放心，我会的。",
+                "number": "11"
+            },
+            {
+                "character": "花木兰",
+                "content": "那我走了。",
+                "number": "12"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，保重！",
+                "number": "13"
+            },
+            {
+                "character": "花弧",
+                "content": "一路顺风，木兰！",
+                "number": "14"
+            }
+        ]
+    },
+    {
+        "plotName": "木兰的出征",
+        "plotStage": "激励事件",
+        "scene": {
+            "group": "scenes",
+            "name": "村庄出口",
+            "content": "村庄的出口，晨曦微露，远处是连绵的山脉和即将启程的军队。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-0eLerozTktHHnfWhXFJUNsPr.png?st=2024-08-11T05%3A26%3A51Z&se=2024-08-11T07%3A26%3A51Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T03%3A47%3A55Z&ske=2024-08-12T03%3A47%3A55Z&sks=b&skv=2023-11-03&sig=HQfC2WwANY4Xt9qYYpoPTQCUb3wn0erg7miIrNmznUk%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花弧是花木兰的父亲，一位年迈且有病在身的老兵，他曾经也是一名英勇的战士，因年老多病无法再次从军。",
+                "name": "花弧",
+                "per": "标准男音"
+            },
+            {
+                "content": "花母是花木兰的母亲，一位慈爱且坚强的女性，她支持木兰的决定并为她的安全担忧。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "弟弟是一位年轻且充满朝气的少年",
+                "name": "木兰的弟弟",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰告别家人，加入即将出征的军队。",
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "爹，娘，弟弟，我要走了。你们一定要保重身体。",
+                "number": "1"
+            },
+            {
+                "character": "花弧",
+                "content": "木兰，记住，你是为了家族的荣耀而战。照顾好自己，别让爹娘担心。",
+                "number": "2"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，娘知道你是个勇敢的孩子，但一定要小心。",
+                "number": "3"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，你一定要早点回来，我会等着你教我练武功。",
+                "number": "4"
+            },
+            {
+                "character": "花木兰",
+                "content": "我会的，弟弟。爹，娘，你们放心，我一定会平安归来的。",
+                "number": "5"
+            },
+            {
+                "character": "花弧",
+                "content": "去吧，木兰，爹以你为荣。",
+                "number": "6"
+            },
+            {
+                "character": "花木兰",
+                "content": "爹，娘，弟弟，再见。",
+                "number": "7"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，保重！",
+                "number": "8"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，加油！",
+                "number": "9"
+            },
+            {
+                "character": "花木兰",
+                "content": "嗯，我会的。",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "plotName": "战场初体验",
+        "plotStage": "冲突",
+        "scene": {
+            "group": "scenes",
+            "name": "战场",
+            "content": "一片广阔的战场，木兰奋勇杀敌，硝烟弥漫，战马嘶鸣，刀光剑影交织。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-QfHnIcnUR0InRk6FUkXKJG8F.png?st=2024-08-11T05%3A28%3A32Z&se=2024-08-11T07%3A28%3A32Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T03%3A51%3A30Z&ske=2024-08-12T03%3A51%3A30Z&sks=b&skv=2023-11-03&sig=MwupeKN2x7OaBQ1J8Qn1bvAkF09XAs4azkrpz5lwZ/o%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "将军是一位英勇且有智慧的军事领导，他在战场上指挥若定，但因其勇敢和能力而尊重她。",
+                "name": "将军",
+                "per": "标准男音"
+            },
+            {
+                "content": "战友是一位与木兰在战场上并肩作战的士兵，他身材魁梧，对木兰的能力和勇气非常敬佩，最终成为她的好友。",
+                "name": "战友",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰在战场上初次体验战争的残酷，与战友并肩作战。",
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "（握紧手中的长枪，望向远处的敌军）今天，我们必须全力以赴，保家卫国！",
+                "number": "1"
+            },
+            {
+                "character": "战友",
+                "content": "（拍了拍木兰的肩膀）木兰兄，别担心，我们一定能赢！",
+                "number": "2"
+            },
+            {
+                "character": "将军",
+                "content": "（高声指挥）所有人听令，准备迎敌！保持阵型，不要慌乱！",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "（深吸一口气，眼神坚定）我不会让父亲失望，也不会让战友们失望。",
+                "number": "4"
+            },
+            {
+                "character": "战友",
+                "content": "（挥动大刀，冲向敌军）杀啊！为了我们的家园！",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "（紧随其后，勇猛地冲入敌阵）杀啊！",
+                "number": "6"
+            },
+            {
+                "character": "将军",
+                "content": "（注视着木兰和战友们的英勇表现，微微点头）好样的，勇士们！继续保持！",
+                "number": "7"
+            },
+            {
+                "character": "战友",
+                "content": "（在战斗中与木兰并肩作战，满身是汗）木兰，你真勇猛。",
+                "number": "8"
+            },
+            {
+                "character": "花木兰",
+                "content": "（喘着粗气，挥动长枪）我们一起努力，胜利就在眼前！",
+                "number": "9"
+            },
+            {
+                "character": "将军",
+                "content": "（高声鼓舞士气）勇士们，胜利就在眼前，冲啊！",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "plotName": "最终决战",
+        "plotStage": "高潮",
+        "scene": {
+            "group": "scenes",
+            "name": "战场",
+            "content": "一片广阔的战场，木兰奋勇杀敌，硝烟弥漫，战马嘶鸣，刀光剑影交织。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-QfHnIcnUR0InRk6FUkXKJG8F.png?st=2024-08-11T05%3A28%3A32Z&se=2024-08-11T07%3A28%3A32Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T03%3A51%3A30Z&ske=2024-08-12T03%3A51%3A30Z&sks=b&skv=2023-11-03&sig=MwupeKN2x7OaBQ1J8Qn1bvAkF09XAs4azkrpz5lwZ/o%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "将军是一位英勇且有智慧的军事领导，他在战场上指挥若定，但因其勇敢和能力而尊重她。",
+                "name": "将军",
+                "per": "标准男音"
+            },
+            {
+                "content": "战友是一位与木兰在战场上并肩作战的士兵，他身材魁梧，对木兰的能力和勇气非常敬佩，最终成为她的好友。",
+                "name": "战友",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰与将军带领军队进行最后的决战，木兰展现出非凡的勇气和智慧。",
+        "dialogue": [
+            {
+                "character": "将军",
+                "content": "兄弟们！今天是我们最后的决战！无论前方多么险恶，我们都要一往无前！",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军，前方敌军已集结完毕，正向我们逼近。我们该如何应对？",
+                "number": "2"
+            },
+            {
+                "character": "将军",
+                "content": "木兰，你率领左翼，我率领右翼。记住，勇敢和智慧是我们最大的武器！",
+                "number": "3"
+            },
+            {
+                "character": "战友",
+                "content": "木兰，我跟随你！你每次都能带领我们冲破敌阵，今天也一定能！",
+                "number": "4"
+            },
+            {
+                "character": "花木兰",
+                "content": "大家听令！保持阵型，不要慌乱！我们一定能胜利！",
+                "number": "5"
+            },
+            {
+                "character": "将军",
+                "content": "冲啊！为了我们的家园和亲人！",
+                "number": "6"
+            },
+            {
+                "character": "花木兰",
+                "content": "敌军阵型出现破绽！战友们，跟我冲！",
+                "number": "7"
+            },
+            {
+                "character": "战友",
+                "content": "好！木兰，跟紧你，我们无所畏惧！",
+                "number": "8"
+            },
+            {
+                "character": "花木兰",
+                "content": "杀！",
+                "number": "9"
+            },
+            {
+                "character": "将军",
+                "content": "敌军已经溃败！我们胜利了！",
+                "number": "10"
+            },
+            {
+                "character": "战友",
+                "content": "木兰，真是太厉害了！没有你，我们不可能赢得这么漂亮！",
+                "number": "11"
+            },
+            {
+                "character": "花木兰",
+                "content": "这是大家共同的努力。",
+                "number": "12"
+            },
+            {
+                "character": "将军",
+                "content": "是的，木兰，你立下了大功，回去之后一定要好好庆祝！",
+                "number": "13"
+            }
+        ]
+    },
+    {
+        "plotName": "胜利与回归",
+        "plotStage": "解决",
+        "scene": {
+            "group": "scenes",
+            "name": "决战之地",
+            "content": "一片开阔的平原，两军对峙，战鼓雷鸣，气氛紧张。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-fW7tD1RJKYPqDIHXdtvDP3We.png?st=2024-08-11T05%3A31%3A50Z&se=2024-08-11T07%3A31%3A50Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-10T23%3A02%3A47Z&ske=2024-08-11T23%3A02%3A47Z&sks=b&skv=2024-08-04&sig=ysk68fr7EYvHJhaRHT3ypkeF/N8XOxzSE8cf7Bo%2B6H8%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "将军是一位英勇且有智慧的军事领导，他在战场上指挥若定，但因其勇敢和能力而尊重她。",
+                "name": "将军",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰在皇宫接受表彰，拒绝了高官厚禄，决定回家与家人团聚。",
+        "dialogue": [
+            {
+                "character": "将军",
+                "content": "木兰，战斗已经结束，你立下了赫赫战功。皇上已经知道了你的事迹，特地召你进宫接受表彰。",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军，这都是大家共同努力的结果，我只是尽了自己的本分。",
+                "number": "2"
+            },
+            {
+                "character": "将军",
+                "content": "木兰，你的谦虚让人钦佩。但这次的胜利，你功不可没。走吧，皇上在等着你。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "是，将军。",
+                "number": "4"
+            },
+            {
+                "character": "皇上",
+                "content": "花木兰，你在战场上的英勇表现让朕深感敬佩。朕决定封你为大将军，并赐你金银财宝。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "皇上，木兰心领了。只是木兰自幼在乡间长大，习惯了简朴的生活。如今战事已平，木兰只想回家与家人团聚，过平静的日子。",
+                "number": "6"
+            },
+            {
+                "character": "皇上",
+                "content": "木兰，你的孝心朕甚为感动。既然如此，朕便准你回乡。但若有需要，你随时可以回到朝廷，朕永远欢迎你。",
+                "number": "7"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢皇上恩典。木兰一定不负皇上期望。",
+                "number": "8"
+            },
+            {
+                "character": "将军",
+                "content": "木兰，愿你在家乡安享天伦之乐。若有机会，希望还能与你并肩作战。",
+                "number": "9"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军，多谢您的照顾。若有需要，木兰必定再披战甲。",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "plotName": "荣归故里",
+        "plotStage": "结局",
+        "scene": {
+            "group": "scenes",
+            "name": "皇宫",
+            "content": "金碧辉煌的皇宫，殿内灯火通明，士兵们整齐列队，气氛庄严，木兰接受赏赐",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-2TzpKhMlLqEWRzdvgz08vvC0.png?st=2024-08-11T05%3A33%3A31Z&se=2024-08-11T07%3A33%3A31Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T00%3A47%3A23Z&ske=2024-08-12T00%3A47%3A23Z&sks=b&skv=2023-11-03&sig=HymqQsFdZql52terNBGYzufLMlMFmGH%2BbCqQcc4PbeE%3D"
+        },
+        "characters": [
+            {
+                "content": "花木兰是一位勇敢、聪明且孝顺的年轻女子，为了替年迈的父亲从军，她女扮男装，英勇作战，最终立下战功，荣归故里。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花弧是花木兰的父亲，一位年迈且有病在身的老兵，他曾经也是一名英勇的战士，因年老多病无法再次从军。",
+                "name": "花弧",
+                "per": "标准男音"
+            },
+            {
+                "content": "花母是花木兰的母亲，一位慈爱且坚强的女性，她支持木兰的决定并为她的安全担忧。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "弟弟是一位年轻且充满朝气的少年",
+                "name": "木兰的弟弟",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰回到家乡，与家人团聚，享受宁静的生活。",
+        "dialogue": [
+            {
+                "character": "皇帝",
+                "content": "花木兰，你在战场上表现英勇，立下赫赫战功，朕特赐你金银财宝，封你为将军。",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢陛下隆恩，但木兰只愿回乡与家人团聚，过平凡生活。",
+                "number": "2"
+            },
+            {
+                "character": "皇帝",
+                "content": "如此孝心，朕甚感欣慰。准你归乡，享天伦之乐。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢陛下！",
+                "number": "4"
+            },
+            {
+                "character": "花弧",
+                "content": "木兰，你回来了，父亲为你感到骄傲。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "父亲，女儿不孝，让您担心了。",
+                "number": "6"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，你平安归来就是我们最大的安慰。",
+                "number": "7"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "（正在宰羊的弟弟看到木兰回来）姐姐，你真厉害！以后我也要像你一样英勇！",
+                "number": "8"
+            },
+            {
+                "character": "花木兰",
+                "content": "弟弟，你要好好读书，孝顺父母，这才是最重要的。",
+                "number": "9"
+            },
+            {
+                "character": "花弧",
+                "content": "木兰说得对，家和万事兴。",
+                "number": "10"
+            }
+        ]
+    }
+]

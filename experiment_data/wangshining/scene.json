@@ -1,0 +1,52 @@
+[
+    {
+        "number": "1",
+        "character": "皇帝",
+        "content": "花木兰，你在战场上表现英勇，立下赫赫战功，朕特赐你金银财宝，封你为将军。"
+    },
+    {
+        "number": "2",
+        "character": "花木兰",
+        "content": "谢陛下隆恩，但木兰只愿回乡与家人团聚，过平凡生活。"
+    },
+    {
+        "number": "3",
+        "character": "皇帝",
+        "content": "如此孝心，朕甚感欣慰。准你归乡，享天伦之乐。"
+    },
+    {
+        "number": "4",
+        "character": "花木兰",
+        "content": "谢陛下！"
+    },
+    {
+        "number": "5",
+        "character": "花弧",
+        "content": "木兰，你回来了，父亲为你感到骄傲。"
+    },
+    {
+        "number": "6",
+        "character": "花木兰",
+        "content": "父亲，女儿不孝，让您担心了。"
+    },
+    {
+        "number": "7",
+        "character": "花母",
+        "content": "木兰，你平安归来就是我们最大的安慰。"
+    },
+    {
+        "number": "8",
+        "character": "木兰的弟弟",
+        "content": "姐姐，你真厉害！以后我也要像你一样英勇！"
+    },
+    {
+        "number": "9",
+        "character": "花木兰",
+        "content": "弟弟，你要好好读书，孝顺父母，这才是最重要的。"
+    },
+    {
+        "number": "10",
+        "character": "花弧",
+        "content": "木兰说得对，家和万事兴。"
+    }
+]

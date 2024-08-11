@@ -145,8 +145,8 @@
                    :on-success="handleUploadSuccess"
                    :file-list="fileList"
                    show-file-list="true"
-                   :on-preview="handlePictureCardPreview"
-                   :on-remove="handleRemove"
+
+                   :on-remove="handleEditRemove"
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
 
@@ -362,6 +362,10 @@ export default defineComponent({
       newAsset.image = '';
     };
 
+    const handleEditRemove = () => {
+      currentEditAsset.image = '';
+    };
+
     const handleExceed = () => {
       proxy.$message.warning('只能上传一个附件');
     };
@@ -437,6 +441,7 @@ export default defineComponent({
           url: charList.value[index].image,
         }]
       }
+
       curEditAssetIndex.value = index;
       currentEditAsset.name = charList.value[index].name;
       currentEditAsset.content = charList.value[index].content;
@@ -532,7 +537,6 @@ export default defineComponent({
         data: {
           index: curEditAssetIndex.value, character: editedAsset 
         },
-        
       });
       proxy.$message.success('资产更新成功');
       showEditDialog.value = false;   
@@ -576,6 +580,7 @@ export default defineComponent({
       showDeleteConfirm,
       handleSaveClose,
       handleRemove,
+      handleEditRemove,
       tableData,
       handleExceed,
       sendMessage,
