@@ -208,7 +208,7 @@ def create_scene_picture():
 
         action = data.get("action")
         if action == "create_scene_picture":
-            prompt = "请使用统一清新的平面插画风格生成场景图片， 场景的名称为："+data["data"]["name"]
+            prompt = "请使用统一清新的平面插画风格生成中国古代的场景图片，可以使用以下颜色,注意主色调的选择和面积比例的使用，使得背景符合场景描述和表达的氛围:淡紫色#DDA0DD 浅绿色#90EE90 淡蓝色#ADD8E6 暗紫色#4B0082 深灰色#696969 米色 #F5F5DC 场景的名称为："+data["data"]["name"]
             if data["data"]["user_input"] != "":
                 prompt += "场景的描述为："+data["data"]["user_input"]
             name = data["data"]["name"]
@@ -234,7 +234,7 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "请使用清新统一的色调，用类似迪士尼的插画风格生成白色背景的单人角色图片，图片中仅出现完整的人物，不要有文字和其他装饰， 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
+            prompt = "通过角色描述先提取和完善角色视觉层面的信息，请使用清新统一的色调，用类似迪士尼描述插画风格生成白色背景的中国古代的单人角色图片，图片中仅出现完整的人物，不要有文字和其他装饰，在以下颜色中进行选择：主色调红色#CC0000 辅助色金色#FFD700 辅助深蓝色#191970 辅助色银色#C0C0C0 辅助色白色 #FFFFFF 辅助色深红色#8B0000 角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
