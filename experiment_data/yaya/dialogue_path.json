@@ -1,0 +1,402 @@
+[
+    {
+        "plotName": "木兰归乡",
+        "plotStage": "解决",
+        "scene": {
+            "group": "scenes",
+            "name": "朝廷大殿",
+            "content": "宏伟的朝廷大殿，金碧辉煌，气氛庄严肃穆。朝堂上，群臣列队，皇帝端坐于龙椅之上，神情威严。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-56H2mF6WCzRs1zruTstyLfKN.png?st=2024-08-12T03%3A22%3A57Z&se=2024-08-12T05%3A22%3A57Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T04%3A49%3A23Z&ske=2024-08-12T04%3A49%3A23Z&sks=b&skv=2023-11-03&sig=F6HdAHFQXm3edVuPhYyUO9uwZVmItaFvguyFGLYcWpw%3D"
+        },
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "beat": "木兰立下赫赫战功，皇帝问她想要什么奖励，但木兰表示她什么都不需要，只愿回到故乡。",
+        "dialogue": [
+            {
+                "character": "皇帝",
+                "content": "木兰，你在战场上英勇无畏，立下了赫赫战功，朕心甚慰。今日召你上殿，便是要问你，想要什么赏赐？",
+                "number": "1"
+            },
+            {
+                "character": "木兰",
+                "content": "皇上，臣女不敢当。臣女并不求什么赏赐，只愿回到故乡，与家人团聚。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_1.wav"
+            },
+            {
+                "character": "皇帝",
+                "content": "木兰，你的功劳非同小可，不求赏赐实在让朕难以置信。难道真的什么都不需要？",
+                "number": "3"
+            },
+            {
+                "character": "木兰",
+                "content": "皇上，臣女一心只愿与家人团聚，过平静的生活。请皇上成全。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_3.wav"
+            },
+            {
+                "character": "皇帝",
+                "content": "好吧，既然如此，朕就准你归乡。木兰，你的忠诚与勇敢，朕铭记在心。",
+                "number": "5"
+            }
+        ]
+    },
+    {
+        "beat": "木兰辞别朝廷，骑上战马，踏上归乡的路途。",
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "辞别朝廷",
+        "plotStage": "解决",
+        "scene": {
+            "group": "scenes",
+            "name": "皇宫大门",
+            "content": "高大的皇宫大门，庄严肃穆，金色的阳光洒在大门上，显得格外辉煌。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-TlRnRil2G0FGPaps2EjQPNeQ.png?st=2024-08-12T03%3A24%3A29Z&se=2024-08-12T05%3A24%3A29Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-12T03%3A51%3A57Z&ske=2024-08-13T03%3A51%3A57Z&sks=b&skv=2023-11-03&sig=C3iH02SdPXu4uJMGsRLoD00jEMnJj2/9fnupqMUO5VU%3D"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "多谢陛下厚爱，木兰只是想回到故乡，陪伴父母。",
+                "number": "1"
+            },
+            {
+                "character": "皇帝",
+                "content": "木兰，你为国家立下如此大功，真的不愿接受封赏吗？",
+                "number": "2"
+            },
+            {
+                "character": "木兰",
+                "content": "陛下，木兰不贪图荣华富贵，只愿回家过平静的生活。",
+                "number": "3"
+            },
+            {
+                "character": "皇帝",
+                "content": "既然如此，朕便成全你。希望你在故乡一切安好。",
+                "number": "4"
+            },
+            {
+                "character": "木兰",
+                "content": "谢陛下，木兰告辞。",
+                "number": "5"
+            },
+            {
+                "character": "侍卫",
+                "content": "木兰将军，请上马。",
+                "number": "6"
+            },
+            {
+                "character": "木兰",
+                "content": "多谢。",
+                "number": "7"
+            },
+            {
+                "character": "木兰",
+                "content": "（心中默念）终于可以回家了。",
+                "number": "8"
+            },
+            {
+                "character": "旁白",
+                "content": "木兰骑上战马，缓缓离开皇宫大门，金色的阳光洒在她的身上，显得格外辉煌。",
+                "number": "9"
+            }
+        ]
+    },
+    {
+        "beat": "木兰骑马回到故乡，看到家乡的美丽景色，心中充满了温暖和安宁。",
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰归乡",
+        "plotStage": "结局",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰的故乡",
+            "content": "一个宁静的乡村，青山绿水环绕，村庄里的房屋错落有致，田野间稻谷飘香。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-9CKIGfLgltYeq6nBH1Rt9Vc6/user-wkyz8OwyRtlBChx1z3s6dCeJ/img-6NumRhCSvpkCnMTRMmdLuomy.png?st=2024-08-12T03%3A25%3A16Z&se=2024-08-12T05%3A25%3A16Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T05%3A43%3A49Z&ske=2024-08-12T05%3A43%3A49Z&sks=b&skv=2023-11-03&sig=qU88ga8mtUlY952Zn0nxKdpuBG1PchYGQ7xbCyNc44c%3D"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "终于回到家乡了，这里的一草一木，依然那么熟悉。",
+                "number": "1"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "兰儿，你回来了！我们天天盼着你回来，终于见到你了！",
+                "number": "2"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "是啊，兰儿，看到你平安回来，我们心里的石头总算落地了。",
+                "number": "3"
+            },
+            {
+                "character": "木兰",
+                "content": "爹，娘，让你们担心了。我现在只想好好陪你们，再也不离开了。",
+                "number": "4"
+            },
+            {
+                "character": "木兰的姐姐",
+                "content": "兰儿回来啦，我得赶紧去梳妆打扮一下，好好迎接你。",
+                "number": "5"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐回来了，我去杀猪宰羊，今天我们要好好庆祝一下！",
+                "number": "6"
+            },
+            {
+                "character": "木兰",
+                "content": "弟弟，不用这么麻烦，有你们在我身边，就是最好的庆祝了。",
+                "number": "7"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "兰儿，家里的一切都好，你放心吧。你立下这么多功劳，为什么不愿意留在朝廷呢？",
+                "number": "8"
+            },
+            {
+                "character": "木兰",
+                "content": "爹，娘，我只是一个普通的女孩，替父从军是我的职责。现在战事平息，我只想回到这片宁静的乡村，陪伴你们。",
+                "number": "9"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "兰儿，你的心愿我们都理解。无论你做什么决定，我们都会支持你。",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "beat": "木兰的父母看到她回来后，互相搀扶着走出来迎接她，泪流满面。",
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的父亲，年迈体弱，但心中充满对女儿的骄傲和思念。在木兰归来时，他与妻子互相搀扶着迎接她。",
+                "name": "木兰的父亲",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈祥温柔。尽管年事已高，但在得知女儿平安归来时，她与丈夫一起迎接木兰，心中充满了喜悦。",
+                "name": "木兰的母亲",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "父母迎接",
+        "plotStage": "结局",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰家门口",
+            "content": "木兰家的门口，一片温馨的氛围。父母互相搀扶着，满脸喜悦地站在门口迎接木兰。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-QG8zjpZT81nhIz2lOrdnIcmS.png?st=2024-08-12T03%3A26%3A00Z&se=2024-08-12T05%3A26%3A00Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T07%3A01%3A54Z&ske=2024-08-12T07%3A01%3A54Z&sks=b&skv=2023-11-03&sig=rRz%2B08lEnJzQrnblUWHuyuy/eFMa93Fs36QXO1GhJhM%3D"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "爹，娘，我回来了！",
+                "number": "1"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "木兰！你终于回来了，爹娘天天盼着你啊！",
+                "number": "2"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "木兰，快让娘看看，你受苦了……",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_2.wav"
+            },
+            {
+                "character": "木兰",
+                "content": "娘，我很好，您别担心。",
+                "number": "4"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "回来就好，回来就好……",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_4.wav"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "快进屋吧，咱们一家团聚，娘给你做好吃的。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_5.wav"
+            },
+            {
+                "character": "木兰",
+                "content": "好，爹娘，我回来了，再也不走了。",
+                "number": "7"
+            }
+        ]
+    },
+    {
+        "beat": "木兰的姐姐看到木兰回来后，赶紧去梳妆打扮，准备迎接木兰。",
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，爱美善良。在得知妹妹归来后，思念木兰，她赶紧梳妆打扮，准备迎接木兰。",
+                "name": "木兰的姐姐",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "姐姐梳妆",
+        "plotStage": "结局",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰家内",
+            "content": "木兰家的内室，简单而整洁，窗外阳光透过窗户洒进来，温暖而明亮。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-euEcZxfcQNHdpTTVkGx70aLw.png?st=2024-08-12T03%3A26%3A33Z&se=2024-08-12T05%3A26%3A33Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-12T01%3A55%3A12Z&ske=2024-08-13T01%3A55%3A12Z&sks=b&skv=2024-08-04&sig=tI5RF4J54RCMn7/svzbTKvCUJGpLAT4UQ2wF3hgVhvw%3D"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "姐姐，我回来了！",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_0.wav"
+            },
+            {
+                "character": "木兰的姐姐",
+                "content": "木兰！你真的回来了！",
+                "number": "2"
+            },
+            {
+                "character": "木兰",
+                "content": "是的，姐姐。我终于回来了。",
+                "number": "3"
+            },
+            {
+                "character": "木兰的姐姐",
+                "content": "等一下，我得赶紧去梳妆打扮一下，迎接你这个大英雄回来。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_3.wav"
+            },
+            {
+                "character": "木兰",
+                "content": "姐姐，不用那么麻烦，我只是想回家看看你们。",
+                "number": "5"
+            },
+            {
+                "character": "木兰的姐姐",
+                "content": "不行，木兰，你可是我们家的骄傲，我一定要好好打扮一下。",
+                "number": "6"
+            },
+            {
+                "character": "木兰",
+                "content": "姐姐，你还是一如既往的爱美。",
+                "number": "7"
+            },
+            {
+                "character": "木兰的姐姐",
+                "content": "当然啦，木兰。你先坐一会儿，我马上就好。",
+                "number": "8"
+            },
+            {
+                "character": "木兰",
+                "content": "好，我等你。",
+                "number": "9"
+            }
+        ]
+    },
+    {
+        "beat": "木兰的弟弟看到木兰回来后，赶紧去杀猪宰羊，准备庆祝木兰的归来。",
+        "characters": [
+            {
+                "content": "一个勇敢无畏的女英雄，曾女扮男装替父从军，立下赫赫战功。尽管获得了许多奖赏，她只愿回到故乡，过平静的生活。",
+                "name": "木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的弟弟，年轻活泼。在得知姐姐归来后，他赶紧杀猪宰羊，准备庆祝木兰的归来。",
+                "name": "木兰的弟弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "弟弟庆祝",
+        "plotStage": "结局",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰家院子",
+            "content": "木兰家的院子，宽敞明亮，四周种满了花草，空气中弥漫着清新的花香。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-s7MhupMBZ70SuZm9xjhxUNT6.png?st=2024-08-12T03%3A27%3A10Z&se=2024-08-12T05%3A27%3A10Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T06%3A13%3A56Z&ske=2024-08-12T06%3A13%3A56Z&sks=b&skv=2023-11-03&sig=pw72ri67oo/OS12%2BhBruacq4wE%2BxoRHxIaWu9n02f0g%3D"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "爹，娘，我回来了！",
+                "number": "1"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "木兰，你终于回来了！我们天天盼着你平安归来。",
+                "number": "2"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "木兰，快进屋，快进屋。",
+                "number": "3"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，你回来了！我这就去杀猪宰羊，庆祝你的归来！",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_3.wav"
+            },
+            {
+                "character": "木兰",
+                "content": "弟弟，不用这么麻烦，能和家人在一起就已经是最好的庆祝了。",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_4.wav"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "不行不行，姐姐，你为国家立了这么多功劳，咱们一定要好好庆祝！",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_5.wav"
+            },
+            {
+                "character": "木兰的母亲",
+                "content": "木兰，别拦着你弟弟，他也是一片心意。",
+                "number": "7"
+            },
+            {
+                "character": "木兰的父亲",
+                "content": "是啊，木兰，今天我们全家团聚，确实该好好庆祝一下。",
+                "number": "8"
+            },
+            {
+                "character": "木兰",
+                "content": "好吧，那就依你们。",
+                "number": "9"
+            },
+            {
+                "character": "木兰的弟弟",
+                "content": "姐姐，你先休息一下，我这就去准备！",
+                "number": "10"
+            }
+        ]
+    }
+]

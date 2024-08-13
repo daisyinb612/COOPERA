@@ -1,0 +1,603 @@
+[
+    {
+        "beat": "木兰在战场上立下赫赫战功，将军向她表示敬意，并提议给她高官厚禄。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰在军中的上司，对她的能力和勇气非常欣赏，曾提议给她高官厚禄，但被木兰拒绝。",
+                "name": "将军",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "木兰凯旋",
+        "plotStage": "展示",
+        "scene": {
+            "group": "scenes",
+            "name": "村口",
+            "content": "一个宁静的村庄入口，四周绿树成荫，田野中稻谷飘香。远处可以看到几间简朴的农舍。",
+            "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-G85TBspBo273MhMIlryi1jMs/user-ePwynup6f1YMfIFv4xfLBBFJ/img-9PGpz2NI8sT1WcoZM7mj3vHD.png?st=2024-08-12T02%3A37%3A43Z&se=2024-08-12T04%3A37%3A43Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-11T03%3A47%3A57Z&ske=2024-08-12T03%3A47%3A57Z&sks=b&skv=2023-11-03&sig=IF%2BgzWtSltEQpTcVmgDoE/E8jE9Ev8eOjrh5XrN4Tls%3D"
+        },
+        "dialogue": [
+            {
+                "character": "将军",
+                "content": "木兰，战场上你屡次立下大功，真是国家的栋梁。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_0.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军过奖了，这都是我应尽的职责。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_1.wav"
+            },
+            {
+                "character": "将军",
+                "content": "国家不会忘记你的功劳。朝廷已经决定给你高官厚禄，以表彰你的英勇表现。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_2.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "多谢将军和朝廷的厚爱，但木兰只愿回到故乡，与家人团聚。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_3.wav"
+            },
+            {
+                "character": "将军",
+                "content": "你真是难得的忠义之士。既然如此，我也不再勉强。希望你在家乡一切安好。",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_4.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢将军的理解。木兰告辞。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_5.wav"
+            },
+            {
+                "character": "将军",
+                "content": "一路顺风，木兰。",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_6.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "再会，将军。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_7.wav"
+            },
+            {
+                "character": "旁白",
+                "content": "木兰转身走向村口，宁静的村庄入口处，四周绿树成荫，田野中稻谷飘香。远处可以看到几间简朴的农舍。",
+                "number": "9"
+            },
+            {
+                "character": "村民甲",
+                "content": "快看，是木兰回来了！",
+                "number": "10"
+            },
+            {
+                "character": "村民乙",
+                "content": "木兰，你真的回来了！我们都在等你！",
+                "number": "11"
+            },
+            {
+                "character": "花木兰",
+                "content": "乡亲们，我回来了！",
+                "number": "12"
+            },
+            {
+                "character": "村民丙",
+                "content": "木兰，欢迎回家！",
+                "number": "13"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家，我也很想念你们。",
+                "number": "14"
+            },
+            {
+                "character": "旁白",
+                "content": "木兰在乡亲们的簇拥下，慢慢走向家门，家人们早已在门口等候，热切地迎接她的归来。",
+                "number": "15"
+            }
+        ]
+    },
+    {
+        "beat": "将军向木兰提议高官厚禄，但木兰婉拒，表示只愿回到故乡与家人团聚。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰在军中的上司，对她的能力和勇气非常欣赏，曾提议给她高官厚禄，但被木兰拒绝。",
+                "name": "将军",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "木兰拒绝高官厚禄",
+        "plotStage": "激励事件",
+        "scene": {
+            "content": "宽敞的军营帐篷内，四周挂满了战旗和武器，桌上摆放着地图和战术书。将军坐在主位，木兰站在一旁。",
+            "name": "军营帐篷"
+        },
+        "dialogue": [
+            {
+                "character": "将军",
+                "content": "木兰，你在战场上立下了赫赫战功，朝廷决定封你为上将，赐予你高官厚禄。这是你应得的荣誉。",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军，多谢您的厚爱。但木兰并非为了荣华富贵而战，我只愿回到故乡，与家人团聚。",
+                "number": "2"
+            },
+            {
+                "character": "将军",
+                "content": "木兰，你可知道这是多么难得的机会？你为国家做出了巨大的贡献，这些都是你应得的。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "将军，木兰深知您的好意，但我的心早已归于故乡。我思念我的父母和家人，愿意回到他们身边，过平凡的生活。",
+                "number": "4"
+            },
+            {
+                "character": "将军",
+                "content": "唉，木兰，你真是让人敬佩。既然你心意已决，我也不再强求。愿你回乡后，一切安好。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "多谢将军的理解和成全。木兰会永远铭记在军中的日子，铭记您的教诲。",
+                "number": "6"
+            },
+            {
+                "character": "将军",
+                "content": "好，木兰，祝你一路顺风。若有需要，随时可以回来，军营的大门永远为你敞开。",
+                "number": "7"
+            },
+            {
+                "character": "花木兰",
+                "content": "多谢将军，木兰告辞。",
+                "number": "8"
+            }
+        ]
+    },
+    {
+        "beat": "木兰离开军营，踏上归乡的路途，心中充满了对家人的思念。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰归乡",
+        "plotStage": "冲突",
+        "scene": {
+            "content": "乡村的小路上，青翠的田野和盛开的花朵环绕着，远处可以看到木兰的家。木兰身穿便服，背着行囊，步履坚定地走在回家的路上。",
+            "name": "乡村小路"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "终于可以回家了……",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "这一路走来，心中只想着父母兄弟，不知他们是否安好。",
+                "number": "2"
+            },
+            {
+                "character": "花木兰",
+                "content": "这些年，战场上的风霜雪雨，让我更明白家的温暖。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "不管高官厚禄有多诱人，我只愿回到那片青翠的田野，回到亲人身边。",
+                "number": "4"
+            },
+            {
+                "character": "花木兰",
+                "content": "前方就是家了，我已经闻到了家的味道。",
+                "number": "5"
+            }
+        ]
+    },
+    {
+        "beat": "花家的家人们在院落里等待木兰的归来，每个人都怀着激动的心情。",
+        "characters": [
+            {
+                "content": "花木兰的父亲，年老体弱，因无法上战场而由木兰替他从军。对女儿的勇敢和决心感到无比自豪。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "花木兰的母亲，温柔贤惠，一直担心女儿在战场上的安危。木兰归来后，她热泪盈眶，满心欢喜。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的弟弟，年幼但非常崇拜姐姐的勇敢行为。期待姐姐的归来，并希望有朝一日能像她一样勇敢。",
+                "name": "花弟",
+                "per": "标准男音"
+            },
+            {
+                "content": "温柔善良，虽然未能上战场，但在家中默默支持和照顾家人。",
+                "name": "姐姐",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "家人的等待",
+        "plotStage": "上升动作",
+        "scene": {
+            "content": "花家的院落，干净整洁，四周种满了花草。花父、花母、花弟和姐姐在院子里忙碌着，显得既紧张又期待。",
+            "name": "花家院落"
+        },
+        "dialogue": [
+            {
+                "character": "花父",
+                "content": "木兰应该快回来了吧？这些年她在外面吃了不少苦，咱们得好好迎接她。",
+                "number": "1"
+            },
+            {
+                "character": "花母",
+                "content": "是啊，木兰在外面受了多少风霜，我天天都在担心她。今天终于能见到她了，我这心里真是又高兴又紧张。",
+                "number": "2"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐一定变得更厉害了！我真想听她讲讲战场上的故事。",
+                "number": "3"
+            },
+            {
+                "character": "姐姐",
+                "content": "木兰回来后，我们一家总算能团聚了。爹娘，你们看，这些花儿开得多漂亮，就像是专门为迎接木兰而开的。",
+                "number": "4"
+            },
+            {
+                "character": "花父",
+                "content": "对啊，木兰一回来，这院子都显得更有生气了。我们得让她感受到家的温暖。",
+                "number": "5"
+            },
+            {
+                "character": "花母",
+                "content": "我已经准备好了她最爱吃的饭菜，就等她回来，我们一家好好吃顿团圆饭。",
+                "number": "6"
+            },
+            {
+                "character": "花弟",
+                "content": "我去门口看看，姐姐是不是已经到了。",
+                "number": "7"
+            },
+            {
+                "character": "姐姐",
+                "content": "别急，弟弟。木兰路上也辛苦，咱们耐心等她回来。",
+                "number": "8"
+            },
+            {
+                "character": "花父",
+                "content": "是啊，等木兰回来，我们要让她知道，她的付出没有白费，家里人都以她为荣。",
+                "number": "9"
+            },
+            {
+                "character": "花母",
+                "content": "是的，木兰是我们的骄傲。希望她回来后，能好好休息，不再操心外面的事。",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "beat": "木兰终于回到家中，家人们热烈地迎接她，场面温馨感人。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的父亲，年老体弱，因无法上战场而由木兰替他从军。对女儿的勇敢和决心感到无比自豪。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "花木兰的母亲，温柔贤惠，一直担心女儿在战场上的安危。木兰归来后，她热泪盈眶，满心欢喜。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的弟弟，年幼但非常崇拜姐姐的勇敢行为。期待姐姐的归来，并希望有朝一日能像她一样勇敢。",
+                "name": "花弟",
+                "per": "标准男音"
+            },
+            {
+                "content": "温柔善良，虽然未能上战场，但在家中默默支持和照顾家人。",
+                "name": "姐姐",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰归来",
+        "plotStage": "高潮",
+        "scene": {
+            "content": "花家的院落，阳光明媚，花草芬芳。木兰推开院门，家人们纷纷迎上前来，气氛温馨感人。",
+            "name": "花家院落"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "（推开院门，眼含热泪）爹，娘，我回来了！",
+                "number": "1"
+            },
+            {
+                "character": "花母",
+                "content": "（快步迎上前，泪流满面）木兰，终于回来了，娘天天盼着你平安归来。",
+                "number": "2"
+            },
+            {
+                "character": "花父",
+                "content": "（颤抖着站起来，眼中含泪）木兰，我的好女儿，你辛苦了。",
+                "number": "3"
+            },
+            {
+                "character": "花弟",
+                "content": "（兴奋地跑上前）姐姐，你真厉害！我也要像你一样勇敢！",
+                "number": "4"
+            },
+            {
+                "character": "姐姐",
+                "content": "（温柔地拥抱木兰）木兰，欢迎回家。我们都为你感到骄傲。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "（含泪微笑）谢谢大家。我只想回到家，和你们在一起。",
+                "number": "6"
+            },
+            {
+                "character": "花母",
+                "content": "（擦去眼泪）来，木兰，家里早就为你准备好了你最爱吃的菜。",
+                "number": "7"
+            },
+            {
+                "character": "花父",
+                "content": "（点头）是啊，木兰，这次回来就好好休息，不要再离开了。",
+                "number": "8"
+            },
+            {
+                "character": "花木兰",
+                "content": "（坚定地）爹，娘，我这次回来，不会再走了。",
+                "number": "9"
+            },
+            {
+                "character": "花弟",
+                "content": "（开心地跳起来）太好了，姐姐以后可以教我练武了！",
+                "number": "10"
+            },
+            {
+                "character": "姐姐",
+                "content": "（笑着）是啊，木兰，你回来了，家里又恢复了往日的欢乐。",
+                "number": "11"
+            },
+            {
+                "character": "花木兰",
+                "content": "（感动地看着家人）有你们在，才是我最大的幸福。",
+                "number": "12"
+            }
+        ]
+    },
+    {
+        "beat": "木兰与家人团聚，大家一起分享她在战场上的经历，气氛欢快温馨。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的父亲，年老体弱，因无法上战场而由木兰替他从军。对女儿的勇敢和决心感到无比自豪。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "花木兰的母亲，温柔贤惠，一直担心女儿在战场上的安危。木兰归来后，她热泪盈眶，满心欢喜。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的弟弟，年幼但非常崇拜姐姐的勇敢行为。期待姐姐的归来，并希望有朝一日能像她一样勇敢。",
+                "name": "花弟",
+                "per": "标准男音"
+            },
+            {
+                "content": "温柔善良，虽然未能上战场，但在家中默默支持和照顾家人。",
+                "name": "姐姐",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "家人团聚",
+        "plotStage": "解决",
+        "scene": {
+            "content": "花家的客厅，布置温馨，桌上摆满了丰盛的饭菜。全家人围坐在一起，脸上洋溢着幸福的笑容。",
+            "name": "花家客厅"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "父亲，母亲，我回来了！",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_0.wav"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，欢迎回家！你在战场上立下赫赫战功，我们都为你感到无比自豪。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_1.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，你终于回来了！这些年你在战场上，我们天天为你担心。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_2.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，你真是太厉害了！我以后也要像你一样勇敢！",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_3.wav"
+            },
+            {
+                "character": "姐姐",
+                "content": "木兰，欢迎回家！我们都很想你。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家，我在战场上也一直想着你们。现在我只想好好陪伴家人，再也不想离开了。",
+                "number": "6"
+            },
+            {
+                "character": "花父",
+                "content": "好，好！你能平安归来，就是我们最大的幸福。",
+                "number": "7"
+            },
+            {
+                "character": "花母",
+                "content": "这些年你在战场上辛苦了，快坐下来吃饭吧，木兰，这些都是你最喜欢的菜。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_7.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢母亲，真的好久没吃到家里的味道了。",
+                "number": "9"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，快给我们讲讲你在战场上的故事吧！",
+                "number": "10"
+            },
+            {
+                "character": "花木兰",
+                "content": "好啊，有一次我们遇到敌军伏击……",
+                "number": "11"
+            },
+            {
+                "character": "姐姐",
+                "content": "木兰，你真是太勇敢了！",
+                "number": "12"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，你的勇敢和智慧真是我们花家的骄傲。",
+                "number": "13"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，虽然你在战场上经历了那么多，但你依然是我们心中的那个好女儿。",
+                "number": "14"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢你们的支持和理解，我只希望能和你们一起度过每一个平凡的日子。",
+                "number": "15"
+            }
+        ]
+    },
+    {
+        "beat": "木兰与家人一起享受宁静的时光，心中充满了对未来的希望。",
+        "characters": [
+            {
+                "content": "一位勇敢无畏的女战士，替父从军，在战场上立下赫赫战功。她拒绝高官厚禄，只愿回到故乡与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的父亲，年老体弱，因无法上战场而由木兰替他从军。对女儿的勇敢和决心感到无比自豪。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "花木兰的母亲，温柔贤惠，一直担心女儿在战场上的安危。木兰归来后，她热泪盈眶，满心欢喜。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "花木兰的弟弟，年幼但非常崇拜姐姐的勇敢行为。期待姐姐的归来，并希望有朝一日能像她一样勇敢。",
+                "name": "花弟",
+                "per": "标准男音"
+            },
+            {
+                "content": "温柔善良，虽然未能上战场，但在家中默默支持和照顾家人。",
+                "name": "姐姐",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "新的开始",
+        "plotStage": "结局",
+        "scene": {
+            "content": "花家的院落，阳光明媚，花草芬芳。木兰和家人们在院子里享受着宁静的时光，脸上洋溢着幸福的笑容。",
+            "name": "花家院落"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "终于回到家了，这里的一草一木都让我觉得如此亲切。",
+                "number": "1"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，你辛苦了。你在战场上的英勇事迹，爹爹都听说了，真是我们的骄傲。",
+                "number": "2"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，看到你平安归来，娘的心总算放下了。",
+                "number": "3"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，你真厉害！我也要像你一样勇敢，将来保家卫国。",
+                "number": "4"
+            },
+            {
+                "character": "姐姐",
+                "content": "木兰，家里一切都好，你不用担心。我们都为你感到骄傲。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家的支持和关心。我现在只想和你们在一起，享受这宁静的时光。",
+                "number": "6"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，未来的路还很长，但无论你选择什么，我们都会支持你。",
+                "number": "7"
+            },
+            {
+                "character": "花母",
+                "content": "是啊，家永远是你的港湾。",
+                "number": "8"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，我们一起种花吧！这样每天都能看到你喜欢的花开。",
+                "number": "9"
+            },
+            {
+                "character": "花木兰",
+                "content": "好啊，弟弟，我们一起努力，让这个院子变得更加美丽。",
+                "number": "10"
+            }
+        ]
+    }
+]

@@ -1,0 +1,52 @@
+[
+    {
+        "number": "1",
+        "character": "木兰",
+        "content": "爹，娘，我回来了！"
+    },
+    {
+        "number": "2",
+        "character": "木兰的父亲",
+        "content": "木兰，你终于回来了！我们天天盼着你平安归来。"
+    },
+    {
+        "number": "3",
+        "character": "木兰的母亲",
+        "content": "木兰，快进屋，快进屋。"
+    },
+    {
+        "number": "4",
+        "character": "木兰的弟弟",
+        "content": "姐姐，你回来了！我这就去杀猪宰羊，庆祝你的归来！"
+    },
+    {
+        "number": "5",
+        "character": "木兰",
+        "content": "弟弟，不用这么麻烦，能和家人在一起就已经是最好的庆祝了。"
+    },
+    {
+        "number": "6",
+        "character": "木兰的弟弟",
+        "content": "不行不行，姐姐，你为国家立了这么多功劳，咱们一定要好好庆祝！"
+    },
+    {
+        "number": "7",
+        "character": "木兰的母亲",
+        "content": "木兰，别拦着你弟弟，他也是一片心意。"
+    },
+    {
+        "number": "8",
+        "character": "木兰的父亲",
+        "content": "是啊，木兰，今天我们全家团聚，确实该好好庆祝一下。"
+    },
+    {
+        "number": "9",
+        "character": "木兰",
+        "content": "好吧，那就依你们。"
+    },
+    {
+        "number": "10",
+        "character": "木兰的弟弟",
+        "content": "姐姐，你先休息一下，我这就去准备！"
+    }
+]
