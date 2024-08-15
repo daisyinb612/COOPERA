@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-container class="character_panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">角色艺术资产</div>
+        <div class="art-asset">艺术资产-角色</div>
       </el-header>
       <el-container class="rightcontainer">
         <!-- <el-button-group class="button-container">
@@ -11,10 +11,13 @@
         </el-button-group> -->
         <el-scrollbar class="assets-list">
           <el-card v-for="(asset, index) in charList" :key="index" 
-            class="asset-item" shadow="hover"
+            class="asset-item" 
+            shadow="hover"
            @click="editAsset(index)" >
-            <div class="asset-name">{{ asset.name }}</div>
-            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" />
+         <el-row :gutter="20" style="width: 100%;">
+              <el-col :span="4" style="text-align: center"><img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" /></el-col>
+              <el-col :span="20"><div>{{ asset.name }}</div></el-col>
+         </el-row>
           </el-card>
         </el-scrollbar>
 
@@ -648,6 +651,7 @@ body {
   border-radius: 20px;
   overflow: hidden;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .rightcontainer {
@@ -770,16 +774,19 @@ body {
 
 .assets-list {
   height: 100%;
+  width:100%;
   flex: 1;
   overflow: hidden;
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
 }
 
 .asset-item {
-  
+  /* display: flex; */
+  align-items: center; 
   margin-bottom: 10px;
   padding: 10px;
+  height: 80px;
 }
 
 .asset-name {
@@ -800,8 +807,10 @@ body {
   border-radius: 10px;
 }
 .asset-image {
-  max-width: 100%;
-  border-radius: 10px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px; 
+  border: 2px solid #ddd
 }
 
 .add-button-container {
