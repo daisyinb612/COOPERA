@@ -1,6 +1,31 @@
 <template>
   <el-container class="main-container">
-    <el-aside class="left-panel">
+    <el-container class="character_panel">
+      <el-header class="art-asset-header">
+        <div class="art-asset">角色艺术资产</div>
+      </el-header>
+      <el-container class="rightcontainer">
+        <!-- <el-button-group class="button-container">
+          <el-button class="asset-button" @click="selectTab('characters')"
+                     :class="{ active: selectedTab === 'characters' }">角色</el-button>
+        </el-button-group> -->
+        <el-scrollbar class="assets-list">
+          <el-card v-for="(asset, index) in charList" :key="index" 
+            class="asset-item" shadow="hover"
+           @click="editAsset(index)" >
+            <div class="asset-name">{{ asset.name }}</div>
+            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" />
+          </el-card>
+        </el-scrollbar>
+
+        <el-footer class="add-button-container">
+          <el-button class="addasset-button" @click="showAddDialog">新增</el-button>
+          <el-button class="addasset-button" @click="upload">保存</el-button>
+        </el-footer>
+      </el-container>
+    </el-container>
+
+    <el-aside class="chatgpt_panel">
       <div class="chat">
         <el-header class="header">
           <div class="asset-name">“CHAT”</div>
@@ -33,29 +58,6 @@
         </el-footer>
       </div>
     </el-aside>
-
-    <el-container class="right-panel">
-      <el-header class="art-asset-header">
-        <div class="art-asset">艺术资产</div>
-      </el-header>
-      <el-container class="rightcontainer">
-        <el-button-group class="button-container">
-          <el-button class="asset-button" @click="selectTab('characters')"
-                     :class="{ active: selectedTab === 'characters' }">角色</el-button>
-        </el-button-group>
-        <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in charList" :key="index" class="asset-item" @click="editAsset(index)">
-            <div class="asset-name">{{ asset.name }}</div>
-            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" />
-          </el-card>
-        </el-scrollbar>
-
-        <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="showAddDialog">新增</el-button>
-          <el-button class="addasset-button" @click="upload">保存</el-button>
-        </el-footer>
-      </el-container>
-    </el-container>
 
     <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content" v-loading="loading">
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
@@ -199,12 +201,12 @@ export default defineComponent({
     const history = ref([]);
     const messages = ref([]);
     const showDeleteConfirm = ref(false);
-    const newAsset = {
+    const newAsset = reactive({
       group: 'characters',
       name: '',
       content: '',
       image: '',
-    };
+    });
     const store=useStore()
     const audios = {
       0:"标准女音",
@@ -628,8 +630,8 @@ body {
   background-color: #F1f1f1;
 }
 
-.left-panel {
-  flex: 3;
+.chatgpt_panel {
+  flex: 1;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -638,8 +640,8 @@ body {
   box-sizing: border-box;
 }
 
-.right-panel {
-  flex: 1;
+.character_panel {
+  flex: 3;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -766,14 +768,6 @@ body {
   color: white;
 }
 
-.assets-list-container {
-  flex: 1;
-  height: calc(100vh - 200px);
-  overflow: hidden;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
 .assets-list {
   height: 100%;
   flex: 1;
@@ -782,13 +776,8 @@ body {
   box-sizing: border-box;
 }
 
-.assets-list .el-scrollbar__wrap {
-  height: 100% !important;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
 .asset-item {
+  
   margin-bottom: 10px;
   padding: 10px;
 }
