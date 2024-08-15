@@ -23,18 +23,16 @@
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
             <el-row>
-              <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length"></el-col>
-              <el-col :span="message.prompt.length > 35 ?20: message.prompt.length"><div class="human-iutput"  :style="{  }">
+              <el-col :span="message.prompt.length > 35 ?2: 24-message.prompt.length"></el-col>
+              <el-col :span="message.prompt.length > 35 ?22: message.prompt.length"><div class="human-iutput"  :style="{  }">
                 {{ message.prompt }}</div></el-col>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
             </el-row>
             <br>
             <br>
             <br>
             <el-row>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
-              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
-            
+              <el-col :span="2"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
+              <el-col :span="22"><div class="AI-output">{{ message.content }}</div></el-col>
             </el-row>
           </div>
         </el-main>
