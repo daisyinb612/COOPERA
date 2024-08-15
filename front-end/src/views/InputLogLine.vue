@@ -2,10 +2,12 @@
    <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div>“故事概要”</div>
+        <div>剧本故事概要输入区</div>
       </el-header>
       <el-main class="editlogline" v-loading="loading">
-        <el-input v-model="loglineData" :rows="5" type="textarea" placeholder="请输入你的故事概要" />
+        <el-scrollbar>
+        <el-input v-model="loglineData" :rows="4" type="textarea" placeholder="请输入你的故事概要" />
+        </el-scrollbar>
       </el-main>
 
       <el-footer class="button-container">
@@ -16,7 +18,7 @@
     <el-footer class="down-panel">
       <div class="chat">
         <el-header class="header">
-          <div class="asset-name">“chat”</div>
+          <div class="asset-name">【剧本概要】智能助手</div>
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
@@ -37,7 +39,7 @@
           </div>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="来向【剧本概要】智能助手提问吧..." v-model="inputMessage" class="input-field"
             @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
@@ -234,6 +236,12 @@ export default defineComponent({
   overflow: hidden;
   box-sizing: border-box;
   padding: 0;
+}
+
+.editlogline {
+  height: 80px;
+  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .header {
