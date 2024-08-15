@@ -6,7 +6,7 @@
       </el-header>
       <el-main class="editlogline" v-loading="loading">
         <el-scrollbar>
-        <el-input v-model="loglineData" :rows="4" type="textarea" placeholder="请输入你的故事概要" />
+        <el-input v-model="loglineData" :rows="3" type="textarea" placeholder="请输入你的剧本故事概要" />
         </el-scrollbar>
       </el-main>
 
