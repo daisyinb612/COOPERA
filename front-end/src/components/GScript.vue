@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="script">
       <el-header class="header">
-        <div>剧本</div>
+        <div>剧本展示</div>
       </el-header>
         <el-button @click="generate_script" class="confirm-button">生成</el-button>
         <div class="script-header">

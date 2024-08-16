@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="dialogue">
       <el-header class="header">
-        <div>Dialogue</div>
+        <div>对话创作</div>
       </el-header>
       <el-main class="dialogue" v-loading="loading">
         <el-header class="button-container-up">
