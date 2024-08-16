@@ -104,6 +104,7 @@
 import { defineComponent, ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
+import * as diff from 'diff';
 import { ElMessage } from 'element-plus';
 
 export default defineComponent({
@@ -116,6 +117,14 @@ export default defineComponent({
     const editDialogVisible = ref(false);
     const showDeleteConfirm = ref(false);
     const newPlot = reactive({
+      plotName: '',
+      plotStage: '',
+      scene: '',
+      characters: [],
+      beat: '',
+      dialogue: [],
+    });
+    const beforeEditAsset = reactive({
       plotName: '',
       plotStage: '',
       scene: '',
@@ -246,6 +255,13 @@ export default defineComponent({
     }
 
     function editPlot(index) {
+      beforeEditAsset.plotName = plots.value[index].plotName;
+      beforeEditAsset.plotStage = plots.value[index].plotStage;
+      beforeEditAsset.scene = plots.value[index].scene;
+      beforeEditAsset.characters = plots.value[index].characters;
+      beforeEditAsset.beat = plots.value[index].beat;
+      beforeEditAsset.dialogue = plots.value[index].dialogue;
+
       const plotToEdit = plots.value[index];
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotStage = plotToEdit.plotStage;
@@ -257,7 +273,25 @@ export default defineComponent({
       editDialogVisible.value = true;
     }
 
-    function saveEditedPlot() {
+    async function saveEditedPlot() {
+      let changes = ""
+      diff.diffChars(beforeEditAsset.beat, editPlotData.beat).forEach((part) => {
+        const value = part.value.replace(/\n/g, '');
+        if (part.added) {
+          changes += `[${value}]`;
+        } else if (part.removed) {
+          changes += `{${value}}`;
+        } else {
+          changes += value;
+        }
+      });
+      // 保存修改的记录,
+      await axios.post('http://localhost:8000/save_changes', {
+        action: 'save_changes',
+        data: {
+          changes: changes,
+        },
+      });
 
       if (!editPlotData.plotName) {
         ElMessage({

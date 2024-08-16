@@ -25,9 +25,24 @@ info_dict = {
    "scene_image_path": "./opera_info/scene",
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
-   "wav_path": "./opera_info/audio/"
+   "wav_path": "./opera_info/audio/",
+   "change_path": "./opera_info/change/change.json"
 }
 
+@app.route('/save_changes', methods=['POST'])
+def save_changes():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON"}), 402
+    action = data.get("action")
+    if action == "save_changes":
+        if not os.path.exists(info_dict['change_path']):
+            os.makedirs(os.path.dirname(info_dict['change_path']), exist_ok=True)
+        with open(info_dict['change_path'], 'a', encoding='utf-8') as f:
+            f.write(data["data"]["changes"] + "\n")
+        return jsonify({"message": "Changes saved successfully."})
+    else:
+        return jsonify({"error": "Invalid action type."}), 401
  
 @app.route('/upload_storyline', methods=['POST'])
 def upload_storyline():
@@ -118,9 +133,13 @@ def init_plot_generation():
     l = LLM(apikey=info_dict["apikey"])
     answer = l.ask(question=question, prompt=l.setting_outline_create)
     plot = l.analyze_answer(answer)
+    if not os.path.exists(info_dict['outline_path']):
+        os.makedirs(os.path.dirname(info_dict['outline_path']), exist_ok=True)
     with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
         json.dump(plot, f, indent=4, ensure_ascii=False)
     scene = [{"name": x["scene"], "url": ""} for x in plot]
+    if not os.path.exists(info_dict['scene_path']):
+        os.makedirs(os.path.dirname(info_dict['scene_path']), exist_ok=True)
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         print('scene', scene)
         json.dump(scene, f, indent=4, ensure_ascii=False)
@@ -376,6 +395,8 @@ def upload_dialogue():
         return jsonify({"error": "Invalid JSON"}), 402
     action = data.get("action")
     if action == "upload_dialogue":
+        if not os.path.exists(info_dict['dialogue_path']):
+            os.makedirs(os.path.dirname(info_dict['dialogue_path']), exist_ok=True)
         with open(info_dict['dialogue_path'], 'w', encoding='utf-8') as f:
             json.dump(data["data"], f, indent=4, ensure_ascii=False)
 

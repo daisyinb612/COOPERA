@@ -82,10 +82,11 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, computed} from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
+import * as diff from 'diff';
 
 export default defineComponent({
   name: 'GDialogue',
@@ -101,6 +102,7 @@ export default defineComponent({
     const dialogues = computed(() => {
       return selectedPlot.value.dialogue ?? [];
     });
+    const beforeEditAssets = ref([])
     const audios = {
       "标准女音": 0,
       "标准男音": 1,
@@ -170,6 +172,9 @@ export default defineComponent({
         console.log(response.data);
         loading.value = false;
         selectedPlot.value.dialogue = response.data;
+        // 深拷贝对话，用于上传对话时比较对话的差异
+        beforeEditAssets.value = [...beforeEditAssets.value, ...JSON.parse(JSON.stringify(selectedPlot.value.dialogue))]
+        console.log('beforeEditAssets', beforeEditAssets.value);
         ElMessage({
           message: '对话生成成功',
           type: 'success'
@@ -183,6 +188,37 @@ export default defineComponent({
     }
 
     async function UploadDialogue() {
+      // 比较beforeEditAssets和plots的差异
+      // beforeEditAssets都是数组，元素为对象，对象的属性有character, content, audio
+      // plots是数组，元素为对象，对象的属性有plotName, plotStage, scene, beat, characters, dialogue
+      // dialogue是数组，元素为对象，对象的属性有character, content, audio
+      // 对比beforeEditAssets的content和plots的dialogue的content
+      const beforEditDialogues = beforeEditAssets.value.map(d => d.content);
+      const currentDialogues = plots.value.flatMap(p => p.dialogue? p.dialogue.map(d => d.content) : []);
+      console.log('beforeEditDialogues', beforEditDialogues);
+      console.log('currentDialogues', currentDialogues);
+      beforEditDialogues.forEach(async (d, i) => {
+      let changes = '';
+        diff.diffChars(d, currentDialogues[i]).forEach(part => {
+          const value = part.value.replace(/\n/g, '');
+          if (part.added) {
+            changes += `[${value}]`;
+          } else if (part.removed) {
+            changes += `{${value}}`;
+          } else {
+            changes += value;
+          }
+        });
+        // 保存修改的记录,
+        await axios.post('http://localhost:8000/save_changes', {
+          action: 'save_changes',
+          data: {
+            changes: changes,
+          },
+        });
+      });
+      
+     
       const payload = {
         action: 'upload_dialogue',
         data: plots.value

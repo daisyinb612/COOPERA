@@ -183,6 +183,7 @@ import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vu
 import { useStore } from 'vuex';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
+import * as diff from 'diff';
 
 export default defineComponent({
   name: 'GCharacter',
@@ -209,6 +210,10 @@ export default defineComponent({
       name: '',
       content: '',
       image: '',
+    });
+    const beforeEditAsset = reactive({
+      name: '',
+      content: '',
     });
     const store=useStore()
     const audios = {
@@ -452,6 +457,9 @@ export default defineComponent({
       currentEditAsset.content = charList.value[index].content;
       currentEditAsset.per = charList.value[index].per;
       currentEditAsset.image = charList.value[index].image;
+      beforeEditAsset.name = charList.value[index].name;
+      beforeEditAsset.content = charList.value[index].content;
+    
       console.log(currentEditAsset);
       showEditDialog.value = true;
     }
@@ -516,9 +524,29 @@ export default defineComponent({
       }
     }
 
+    
+
     async function saveEditedAsset() {
-      // const editedAsset = charList.value[curEditAssetIndex.value];
-      // 深拷贝
+      console.log(beforeEditAsset);
+      // add的用[]包裹, remove的用{}包裹
+      let changes = ""
+      diff.diffChars(beforeEditAsset.content, currentEditAsset.content).forEach((part) => {
+        const value = part.value.replace(/\n/g, '');
+        if (part.added) {
+          changes += `[${value}]`;
+        } else if (part.removed) {
+          changes += `{${value}}`;
+        } else {
+          changes += value;
+        }
+      });
+      // 保存修改的记录,
+      await axios.post('http://localhost:8000/save_changes', {
+        action: 'save_changes',
+        data: {
+          changes: changes,
+        },
+      });
       const editedAsset = JSON.parse(JSON.stringify(currentEditAsset));
       if (!editedAsset.name) {
         proxy.$message.warning('资产名不能为空');

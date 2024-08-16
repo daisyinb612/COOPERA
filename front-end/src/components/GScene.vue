@@ -108,6 +108,7 @@
 import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
 import { mapActions,useStore } from 'vuex';
 import axios from 'axios';
+import * as diff from 'diff';
 import { ElMessage } from 'element-plus';
 
 export default defineComponent({
@@ -138,6 +139,10 @@ export default defineComponent({
       name: '',
       content: '',
       image: '',
+    });
+    const beforeEditAsset = reactive({
+      name: '',
+      content: '',
     });
     const store=useStore();
     const currentEditAsset = reactive({
@@ -326,6 +331,8 @@ export default defineComponent({
     }
 
     function editAsset(index) {
+      beforeEditAsset.name = scenes.value[index].name;
+      beforeEditAsset.content = scenes.value[index].content;
       if(sceneList.value[index].image !== '') {
         fileList.value = [{
           name: sceneList.value[index].name,
@@ -401,7 +408,24 @@ export default defineComponent({
 
     async function saveEditedAsset() {
       // const editedAsset = Scenedata[curEditAssetIndex.value];
-
+      let changes = ""
+      diff.diffChars(beforeEditAsset.content, currentEditAsset.content).forEach((part) => {
+        const value = part.value.replace(/\n/g, '');
+        if (part.added) {
+          changes += `[${value}]`;
+        } else if (part.removed) {
+          changes += `{${value}}`;
+        } else {
+          changes += value;
+        }
+      });
+      // 保存修改的记录,
+      await axios.post('http://localhost:8000/save_changes', {
+        action: 'save_changes',
+        data: {
+          changes: changes,
+        },
+      });
       if (!currentEditAsset.name) {
         proxy.$message.warning('资产名不能为空');
         return;
