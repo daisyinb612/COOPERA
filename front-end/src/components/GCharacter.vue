@@ -14,7 +14,7 @@
             class="asset-item" 
             shadow="hover"
            @click="editAsset(index)" >
-         <el-row :gutter="20" style="width: 100%;">
+         <el-row :gutter="10" style="width: 100%;" align="middle">
               <el-col :span="4" style="text-align: center">
                 <img v-if="asset.image" class="asset-image" :src="asset.image" />
                 <img v-else class="asset-image" :src="require('@/assets/images/empty.png')"/>
@@ -38,7 +38,7 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row>
+            <el-row align="middle">
               <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length*2"></el-col>
               <el-col :span="message.prompt.length > 35 ?20: message.prompt.length*2"><div class="human-iutput"  :style="{  }">
                 {{ message.prompt }}</div></el-col>
@@ -50,7 +50,6 @@
             <el-row>
               <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
               <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
-            
             </el-row>
           </div>
         </el-main>
@@ -813,14 +812,14 @@ body {
   width:100%;
   flex: 1;
   overflow: hidden;
-  /* padding: 10px; */
+  padding: 20px;
   box-sizing: border-box;
 }
 
 .asset-item {
   /* display: flex; */
   align-items: center; 
-  margin-bottom: 10px;
+  margin: 15px;
   padding: 10px;
   height: 80px;
 }
@@ -852,7 +851,7 @@ body {
 .add-button-container {
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: right;
   padding: 10px;
 }
 

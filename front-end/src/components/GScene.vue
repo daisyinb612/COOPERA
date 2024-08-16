@@ -39,10 +39,10 @@
         <div class="art-asset">艺术资产</div>
       </el-header>
       <el-container class="rightcontainer">
-        <el-button-group class="button-container">
-          <el-button class="asset-button" @click="selectTab('scene')"
-                     :class="{ active: selectedTab === 'scene' }">场景</el-button>
-        </el-button-group>
+<!--        <el-button-group class="button-container">-->
+<!--          <el-button class="asset-button" @click="selectTab('scene')"-->
+<!--                     :class="{ active: selectedTab === 'scene' }">场景</el-button>-->
+<!--        </el-button-group>-->
 
         <el-scrollbar class="assets-list">
           <el-card v-for="(asset, index) in sceneList" :key="index" class="asset-item" @click="editAsset(index)">
@@ -711,7 +711,7 @@ body {
 .add-button-container {
   display: flex;
   position: relative;
-  justify-content: center;
+  justify-content: right;
   padding: 10px;
 }
 
