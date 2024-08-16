@@ -53,7 +53,7 @@
           </div>
         </el-main>
         <el-footer>
-          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="向【角色】智能助手提问吧..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>

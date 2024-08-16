@@ -42,7 +42,7 @@
           </div>
         </el-main>
         <el-footer>
-          <el-input placeholder="来向【剧本概要】智能助手提问吧..." v-model="inputMessage"
+          <el-input placeholder="向【剧本概要】智能助手提问吧..." v-model="inputMessage"
             @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>

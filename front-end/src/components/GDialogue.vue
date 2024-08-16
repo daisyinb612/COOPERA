@@ -73,7 +73,7 @@
         </el-main>
 
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadDialogue">Upload</el-button>
+          <el-button class="button" @click="UploadDialogue">上传</el-button>
 
         </el-footer>
       </el-main>
