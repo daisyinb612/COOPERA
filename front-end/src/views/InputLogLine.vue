@@ -22,10 +22,15 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row align="middle">
-              <el-col :span="message.prompt.length > 35 ?2: 24-message.prompt.length"></el-col>
-              <el-col :span="message.prompt.length > 35 ?22: message.prompt.length"><div class="human-iutput"  :style="{  }">
-                {{ message.prompt }}</div></el-col>
+            <el-row :gutter="5" align="middle">
+              <el-col :span="message.prompt.length > 35 ?0: 24-message.prompt.length"></el-col>
+              <el-col :span="message.prompt.length > 35 ?24: message.prompt.length">
+                <div class="human-iutput-container">
+                 <div class="human-iutput" >
+                  {{ message.prompt }}
+                 </div>
+                </div>
+              </el-col>
             </el-row>
             <br>
             <br>
@@ -36,7 +41,7 @@
             </el-row>
           </div>
         </el-main>
-        <el-footer class="inputfooter">
+        <el-footer>
           <el-input placeholder="来向【剧本概要】智能助手提问吧..." v-model="inputMessage"
             @keyup.enter="sendMessage" clearable>
             <template #append>
@@ -225,6 +230,11 @@ export default defineComponent({
   width: 80px;
 }
 
+.human-iutput-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .main-container {
   display: flex;
   height: 88vh;
@@ -321,6 +331,9 @@ export default defineComponent({
 
 
 .human-iutput{
+  max-width: 90%;
+  display: inline-block;
+  word-wrap:break-word;
   padding: 15px;
   line-height: 20px;
   border-radius: 10px;

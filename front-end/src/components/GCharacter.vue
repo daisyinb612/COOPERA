@@ -38,17 +38,16 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row align="middle">
-              <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length*2"></el-col>
-              <el-col :span="message.prompt.length > 35 ?20: message.prompt.length*2"><div class="human-iutput"  :style="{  }">
+            <el-row :gutter="5" align="middle">
+              <el-col :span="message.prompt.length > 24 ?0: 22-message.prompt.length"></el-col>
+              <el-col :span="message.prompt.length > 24 ?24: 2+message.prompt.length"><div class="human-iutput" >
                 {{ message.prompt }}</div></el-col>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
             </el-row>
             <br>
             <br>
             <br>
-            <el-row>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
+            <el-row align="middle">
+              <el-col :span="4"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
               <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
             </el-row>
           </div>
@@ -652,6 +651,11 @@ body {
   overflow: hidden;
 }
 
+.llm{
+  height: 40px;
+  width: 40px;
+}
+
 .main-container {
   display: flex;
   height: 88vh;
@@ -750,11 +754,6 @@ body {
   text-align: center;
 }
 
-.inputfooter {
-  padding: 10px;
-  border-top: 1px solid #ddd;
-}
-
 .input-field {
   width: 100%;
 }
@@ -830,14 +829,17 @@ body {
 }
 
 .human-iutput{
+  max-width: 90%;
+  display: inline-block;
+  word-wrap:break-word;
   padding: 15px;
   line-height: 20px;
   border-radius: 10px;
-  background-color: grey
+  background-color: #D5DCFF;
 }
 
 .AI-output{
-  padding: 15px;
+  padding: 5px;
   line-height: 20px;
   border-radius: 10px;
 }
