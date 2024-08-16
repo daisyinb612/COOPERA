@@ -22,7 +22,7 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row>
+            <el-row align="middle">
               <el-col :span="message.prompt.length > 35 ?2: 24-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 35 ?22: message.prompt.length"><div class="human-iutput"  :style="{  }">
                 {{ message.prompt }}</div></el-col>
@@ -30,17 +30,17 @@
             <br>
             <br>
             <br>
-            <el-row>
+            <el-row align="middle">
               <el-col :span="2"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
               <el-col :span="22"><div class="AI-output">{{ message.content }}</div></el-col>
             </el-row>
           </div>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="来向【剧本概要】智能助手提问吧..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="来向【剧本概要】智能助手提问吧..." v-model="inputMessage"
             @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
             </template>
           </el-input>
         </el-footer>
@@ -214,6 +214,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+.upload-image {
+  width: 15px;
+  height: auto;
+}
+
+.llm{
+  height: 80px;
+  width: 80px;
+}
+
 .main-container {
   display: flex;
   height: 88vh;
@@ -313,7 +324,7 @@ export default defineComponent({
   padding: 15px;
   line-height: 20px;
   border-radius: 10px;
-  background-color: grey
+  background-color: #D5DCFF;
 }
 
 .AI-output{

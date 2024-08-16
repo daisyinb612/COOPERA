@@ -27,7 +27,7 @@
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
             </template>
           </el-input>
         </el-footer>
@@ -540,6 +540,11 @@ body {
   overflow: hidden;
   box-sizing: border-box;
   background-color: #F1F1F1;
+}
+
+.upload-image {
+  width: 15px;
+  height: auto;
 }
 
 .left-panel {

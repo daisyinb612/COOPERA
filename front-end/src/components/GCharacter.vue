@@ -15,7 +15,10 @@
             shadow="hover"
            @click="editAsset(index)" >
          <el-row :gutter="20" style="width: 100%;">
-              <el-col :span="4" style="text-align: center"><img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" /></el-col>
+              <el-col :span="4" style="text-align: center">
+                <img v-if="asset.image" class="asset-image" :src="asset.image" />
+                <img v-else class="asset-image" :src="require('@/assets/images/empty.png')"/>
+              </el-col>
               <el-col :span="20"><div>{{ asset.name }}</div></el-col>
          </el-row>
           </el-card>
@@ -55,7 +58,7 @@
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button icon="el-icon-upload2" @click="sendMessage"></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
             </template>
           </el-input>
         </el-footer>
@@ -403,7 +406,7 @@ export default defineComponent({
       const character = {
         name: newAsset.name,
         content: newAsset.content,
-        image: newAsset.image || 'empty.png',
+        image: newAsset.image || null,
       };
       store.dispatch('addCharacter',character)
       handleAddDialogClose();
@@ -435,7 +438,7 @@ export default defineComponent({
         console.log(curSaveThing.value);
         const newAsset = {
           name: name,
-          image: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
+          image: curSaveType.value === 'image' ? curSaveThing.value : null,
           content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
         store.dispatch('addCharacter',newAsset)
@@ -686,6 +689,11 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+.upload-image {
+  width: 15px;
+  height: auto;
 }
 
 .header {
