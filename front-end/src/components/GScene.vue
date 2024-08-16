@@ -1,42 +1,8 @@
 <template>
   <el-container class="main-container">
-    <el-aside class="left-panel">
-      <div class="chat">
-        <el-header class="header">
-          <div class="asset-name">“CHAT”</div>
-        </el-header>
-        <el-main>
-          <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row>
-              <el-col :span="message.prompt.length > 35 ?2: 22-message.prompt.length*2"></el-col>
-              <el-col :span="message.prompt.length > 35 ?20: message.prompt.length*2"><div class="human-iutput"  :style="{  }">
-                {{ message.prompt }}</div></el-col>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
-            </el-row>
-            <br>
-            <br>
-            <br>
-            <el-row>
-              <el-col :span="2"><el-avatar icon="el-icon-user" class="llm"></el-avatar></el-col>
-              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
-            
-            </el-row>
-          </div>
-        </el-main>
-        <el-footer class="inputfooter">
-          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
-                    @keyup.enter="sendMessage" clearable>
-            <template #append>
-              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
-            </template>
-          </el-input>
-        </el-footer>
-      </div>
-    </el-aside>
-
-    <el-container class="right-panel">
+    <el-container class="scene-panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">艺术资产</div>
+        <div class="art-asset">艺术资产-场景</div>
       </el-header>
       <el-container class="rightcontainer">
 <!--        <el-button-group class="button-container">-->
@@ -56,6 +22,38 @@
         </el-footer>
       </el-container>
     </el-container>
+
+    <el-aside class="chat-panel">
+      <div class="chat">
+        <el-header class="header">
+          <div>【场景】智能助手</div>
+        </el-header>
+        <el-main>
+          <div class="message" v-for="(message, index) in messages" :key="index">
+            <el-row :gutter="5" align="middle">
+              <el-col :span="message.prompt.length > 24 ?0: 22-message.prompt.length"></el-col>
+              <el-col :span="message.prompt.length > 24 ?24: 2+message.prompt.length"><div class="human-iutput" >
+                {{ message.prompt }}</div></el-col>
+            </el-row>
+            <br>
+            <br>
+            <br>
+            <el-row align="middle">
+              <el-col :span="4"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
+              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
+            </el-row>
+          </div>
+        </el-main>
+        <el-footer class="inputfooter">
+          <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
+                    @keyup.enter="sendMessage" clearable>
+            <template #append>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
+            </template>
+          </el-input>
+         </el-footer>
+      </div>
+    </el-aside>
 
     <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
       <el-form-item label="分组" :label-width="formLabelWidth">
@@ -547,8 +545,8 @@ body {
   height: auto;
 }
 
-.left-panel {
-  flex: 3;
+.chat-panel {
+  flex: 1;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -557,8 +555,8 @@ body {
   box-sizing: border-box;
 }
 
-.right-panel {
-  flex: 1;
+.scene-panel {
+  flex: 3;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -593,10 +591,6 @@ body {
   padding: 10px;
 }
 
-.asset-name {
-  font-size: 24px;
-}
-
 .message {
   margin: 10px;
 }
@@ -625,11 +619,6 @@ body {
 .loading-wrapper {
   width: 100%;
   text-align: center;
-}
-
-.inputfooter {
-  padding: 10px;
-  border-top: 1px solid #ddd;
 }
 
 .input-field {
@@ -698,11 +687,6 @@ body {
   padding: 10px;
 }
 
-.asset-name {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
 .asset-image {
   max-width: 100%;
   border-radius: 10px;
@@ -769,14 +753,17 @@ body {
 
 
 .human-iutput{
+  max-width: 90%;
+  display: inline-block;
+  word-wrap:break-word;
   padding: 15px;
   line-height: 20px;
   border-radius: 10px;
-  background-color: grey
+  background-color: #D5DCFF;
 }
 
 .AI-output{
-  padding: 15px;
+  padding: 5px;
   line-height: 20px;
   border-radius: 10px;
 }

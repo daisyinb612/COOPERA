@@ -34,7 +34,7 @@
     <el-aside class="chatgpt_panel">
       <div class="chat">
         <el-header class="header">
-          <div class="asset-name">“CHAT”</div>
+          <div>【角色】智能助手</div>
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
@@ -52,7 +52,7 @@
             </el-row>
           </div>
         </el-main>
-        <el-footer class="inputfooter">
+        <el-footer>
           <el-input placeholder="向gpt发送消息..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
@@ -719,11 +719,6 @@ body {
   padding: 10px;
 }
 
-
-.asset-name {
-  font-size: 24px;
-}
-
 .message {
   margin: 10px;
 }
@@ -823,11 +818,6 @@ body {
   height: 80px;
 }
 
-.asset-name {
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
 .human-iutput{
   max-width: 90%;
   display: inline-block;
@@ -843,6 +833,7 @@ body {
   line-height: 20px;
   border-radius: 10px;
 }
+
 .asset-image {
   border-radius: 50%;
   width: 50px;

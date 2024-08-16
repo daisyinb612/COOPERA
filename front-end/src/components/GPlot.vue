@@ -2,7 +2,7 @@
   <el-container class="main-container" >
     <el-main class="plot">
       <el-header class="header">
-        <div>PLOT</div>
+        <div>情节创作</div>
       </el-header>
       <el-main class="plot">
         <el-header class="button-container-up">
