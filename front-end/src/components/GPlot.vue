@@ -444,18 +444,21 @@ export default defineComponent({
   padding: 0;
 }
 
-.button-container-up,
-.button-container-down {
+.button-container-up{
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+}
+
+.button-container-down {
+  display: flex;
+  justify-content: flex-end;
   padding: 5px;
   gap: 20px;
   text-align: center;
   box-sizing: border-box;
-}
-
-.button-container-down {
-  justify-content: flex-end;
 }
 
 .button {
@@ -480,22 +483,27 @@ export default defineComponent({
 }
 
 .plot-list-container {
-  flex: 1;
   overflow: hidden;
-  padding: 10px;
   box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px; 
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .plots-list {
   height: 100%;
   overflow-y: auto;
+  padding: 20px;
+  border-radius: 20px;
+  background-color:#F1F1F1
 }
 
 .plot-item {
   margin-bottom: 10px;
   padding: 20px;
   border-radius: 10px;
-  background-color: #e6e6e6;
+  background-color: #D5DCFF;
 }
 
 .plot-header {
