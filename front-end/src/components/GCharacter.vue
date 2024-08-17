@@ -78,9 +78,9 @@
 
         <el-form-item label="音色">
           <el-select v-model="newAsset.per" placeholder="请选择角色音色">
-
             <el-option v-for="audio in audios" :key="audio" :label="audio" :value="audio" />
-        </el-form-item>
+         </el-select>
+       </el-form-item>
         
         <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
           <div>
@@ -418,10 +418,6 @@ export default defineComponent({
         per: newAsset.per,
       };
       store.dispatch('addCharacter',character)
-      axios.post('http://localhost:8000/add_character', {
-        action: 'add_character',
-        data: character,
-      });
       handleAddDialogClose();
       proxy.$message.success('资产新增成功');
     }
