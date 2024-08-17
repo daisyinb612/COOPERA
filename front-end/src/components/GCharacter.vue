@@ -56,7 +56,7 @@
           <el-input placeholder="向【角色】智能助手提问吧..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/empty.png')"/></el-button>
             </template>
           </el-input>
         </el-footer>
@@ -74,6 +74,11 @@
 
         <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
           <el-input v-model="newAsset.content" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item label="音色">
+          <el-select v-model="newAsset.per" placeholder="请选择角色音色">
+            <el-option v-for="audio in audios" :key="audio" :label="audio" :value="audio" />
         </el-form-item>
         
         <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
@@ -400,11 +405,16 @@ export default defineComponent({
         proxy.$message.warning('资产名已存在');
         return;
       }
+      if (!newAsset.per) {
+        proxy.$message.warning('请选择音色');
+        return;
+      }
 
       const character = {
         name: newAsset.name,
         content: newAsset.content,
         image: newAsset.image || null,
+        per: newAsset.per,
       };
       store.dispatch('addCharacter',character)
       handleAddDialogClose();

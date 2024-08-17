@@ -45,7 +45,7 @@
           <el-input placeholder="向【剧本概要】智能助手提问吧..." v-model="inputMessage"
             @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/empty.png')"/></el-button>
             </template>
           </el-input>
         </el-footer>

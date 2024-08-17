@@ -1,6 +1,6 @@
 import os
 
-user_id = 'yaya'
+user_id = 4
 
 user_file_name = f'./experiment_data/{user_id}'
 os.makedirs(user_file_name, exist_ok=True)
@@ -14,6 +14,21 @@ os.makedirs(f'./back-end/程序/opera_info/outline', exist_ok=True)
 os.makedirs(f'./back-end/程序/opera_info/scene', exist_ok=True)
 os.makedirs(f'./back-end/程序/opera_info/storyline', exist_ok=True)
 os.makedirs(f'./back-end/程序/opera_info/audio', exist_ok=True)
+
+
+history_path = "./back-end/程序/history"
+history_files = os.listdir(history_path)
+history_files = [f for f in history_files if f.endswith('.json')]
+for f in history_files:
+    os.rename(f'{history_path}/{f}', user_file_name + f'/{f}')
+
+change_path = "./back-end/程序/opera_info/change"
+change_files = os.listdir(change_path)
+change_files = [f for f in change_files if f.endswith('.json')]
+for f in change_files:
+    os.rename(f'{change_path}/{f}', user_file_name + f'/{f}')
+
+
 
 wav_path = './back-end/程序/opera_info/audio'
 wav_files = os.listdir(wav_path)
@@ -64,7 +79,7 @@ for f in scene_files:
     os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
 
 for f in scene_image_files:
-    os.rename(f'{scene_path}/{f}', user_file_name + f'/scene_image/{f}')
+    os.rename(f'{scene_path}/{f}', user_file_name + f'{f}')
 
 storyline_path = "./back-end/程序/opera_info/storyline"
 storyline_files = os.listdir(storyline_path)
