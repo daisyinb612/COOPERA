@@ -145,6 +145,17 @@ def init_plot_generation():
         json.dump(scene, f, indent=4, ensure_ascii=False)
         
     return jsonify(plot)
+
+@app.route('/add_character', methods=['POST'])
+def add_character():
+    data = request.get_json()
+    character = data["data"]
+    with open(info_dict['characters_path'], 'r', encoding='utf-8') as f:
+        old_data = json.load(f)
+    old_data.append(character)
+    with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
+        json.dump(old_data, f, indent=4, ensure_ascii=False)
+    return jsonify({})
  
 @app.route('/update_plot', methods=['POST'])
 def update_plot():
