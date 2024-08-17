@@ -48,7 +48,7 @@
           <el-input placeholder="向【场景】智能助手提问吧..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
-              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/empty.png')"/></el-button>
+              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
             </template>
           </el-input>
          </el-footer>
