@@ -356,6 +356,7 @@ export default defineComponent({
     }
 
     function showAddDialog() {
+      fileList.value = [];
       addDialogVisible.value = true;
     }
 
