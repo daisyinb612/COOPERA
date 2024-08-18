@@ -219,6 +219,19 @@ export default defineComponent({
         return;
       }
 
+      console.log(newPlot.scene);
+
+      // 如果scene不是一个对象，说明是新建的场景
+      if (typeof newPlot.scene !== 'object') {
+        const newScene = {
+          name: newPlot.scene,
+          content: "",
+          image: 'empty.png',
+        };
+        newPlot.scene = newScene;
+        addScene({ ...newScene });
+      }
+
       if (newPlot.characters.length === 0) {
         console.log(newPlot)
         ElMessage({
@@ -226,7 +239,8 @@ export default defineComponent({
           type: 'warning',
         });
         return;
-      }
+      } 
+
 
       const existingPlotIndex = plots.value.findIndex((plot) => plot.plotName === newPlot.plotName);
       if (existingPlotIndex !== -1) {
