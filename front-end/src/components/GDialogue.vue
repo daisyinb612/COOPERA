@@ -48,7 +48,7 @@
               <!-- 根据对话编号显示角色和对话内容 -->
               <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index">
                 <div class="dialogue-header">
-                  <div class="dialogue-number">Dialogue {{ index + 1 }}</div>
+                  <!-- <div class="dialogue-number">Dialogue {{ index + 1 }}</div> -->
                 </div>
                 <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
                 <div class="character">{{ dialogue.character }}: </div>
