@@ -1,27 +1,33 @@
 [
     {
         "name": "花木兰",
-        "content": "花木兰是一位勇敢且聪明的年轻女子，为了替年迈的父亲从军，她女扮男装，表现出非凡的军事才能和领导能力。",
+        "content": "花木兰是一位勇敢的年轻女子，为了替父从军，她女扮男装，经历了无数的战斗，最终成为一名英雄。",
         "per": "标准女音"
     },
     {
-        "name": "花父",
-        "content": "花父是花木兰的父亲，一位年迈的退役士兵，他因身体状况无法再次从军，但深知家族荣誉的重要性。",
+        "name": "花弧",
+        "content": "花弧是木兰的父亲，一位年迈但有智慧的老人。他虽然身体虚弱，但心中依然怀有对国家的忠诚。",
         "per": "标准男音"
     },
     {
-        "name": "将军李",
-        "content": "将军李是花木兰所在部队的指挥官，他是一位严厉但公正的领导，后来逐渐发现木兰的才能并给予她机会。",
+        "name": "刘将军",
+        "content": "刘将军是一位经验丰富的将领，他在战场上遇到了木兰，成为了她的导师和朋友。",
         "per": "标准男音"
+    },
+    {
+        "name": "木兰的母亲",
+        "content": "木兰的母亲是一位温柔而坚强的女性，她在家中默默支持着木兰的决定。",
+        "per": "标准女音"
     },
     {
         "name": "小花",
-        "content": "小花是花木兰的妹妹，天真活泼，常常为姐姐的安全担忧，但也深感骄傲。",
+        "content": "小花是木兰的妹妹，一个天真无邪的小女孩，她崇拜着木兰，梦想着有一天也能像她一样勇敢。",
         "per": "标准女音"
     },
     {
-        "name": "军医张",
-        "content": "军医张是部队中的军医，善良且医术高超，他在木兰受伤时提供了重要的帮助。",
-        "per": "标准男音"
+        "name": "aa",
+        "content": "aa",
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-gNwpJngXHkSmy8a34y19xRAr/user-T6B2mDvo6NVlJGuvNB8wbtHH/img-XCXN6po9exSquYYICkxPJU5V.png?st=2024-08-18T07%3A46%3A57Z&se=2024-08-18T09%3A46%3A57Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-18T03%3A33%3A59Z&ske=2024-08-19T03%3A33%3A59Z&sks=b&skv=2024-08-04&sig=2ZtPGN5qM3bn4qEy0/ipIzswkenmZBvHzVyn2pvrsig%3D",
+        "per": "标准女音"
     }
 ]

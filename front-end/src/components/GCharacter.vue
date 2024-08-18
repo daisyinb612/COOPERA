@@ -458,11 +458,16 @@ export default defineComponent({
     }
 
     function editAsset(index) {
+      console.log(charList.value);
+      console.log(index);
       if(charList.value[index].image){
         fileList.value = [{
           name: charList.value[index].name,
           url: charList.value[index].image,
         }]
+      }
+      else{
+        fileList.value = []
       }
 
       curEditAssetIndex.value = index;
