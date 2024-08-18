@@ -503,7 +503,7 @@ export default defineComponent({
 }
 
 .plot-item {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   padding: 20px;
   border-radius: 10px;
   background-color: #D5DCFF;
