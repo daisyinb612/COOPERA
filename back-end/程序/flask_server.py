@@ -197,6 +197,7 @@ def save_scene_asset():
 def delete_scene_asset():
     data = request.get_json()
     index = data["data"]["index"]
+    print('index', index)
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data.pop(index)

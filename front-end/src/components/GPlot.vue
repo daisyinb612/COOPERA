@@ -75,7 +75,18 @@
         </el-form-item>
         <el-form-item label="场景">
           <el-select v-model="editPlotData.scene" placeholder="请选择场景" value-key="name">
-            <el-option v-for="scene in allScenes" :key="scene" :label="scene.name" :value="scene" />
+            <el-option v-for="(scene, index) in allScenes" :key="scene" :label="scene.name" :value="scene" >
+              <span style="float: left">{{ scene.name }}</span>
+              <el-tag
+                      size="mini"
+                      effect="dark"
+                      type="danger"
+                      style="float: right; margin-top: 8px; margin-left: 3px"
+                      @click.stop="handleDelete(index)"
+                    >
+                      删除
+              </el-tag>
+            </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="角色">
@@ -179,6 +190,17 @@ export default defineComponent({
       ElMessage({
         type: 'success',
         message: `成功删除情节`,
+      });
+    }
+
+    async function handleDelete(index){
+      store.dispatch('deleteScene', index);
+
+      await axios.post('http://localhost:8000/delete_scene_asset', {
+        action: 'delete_scene_asset',
+        data: {
+          index: index,
+        },
       });
     }
 
@@ -398,6 +420,7 @@ export default defineComponent({
       addDialogVisible,
       editDialogVisible,
       plots,
+      handleDelete,
       newPlot,
       stageList,
       editPlotData,
