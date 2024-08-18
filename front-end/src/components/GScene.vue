@@ -144,7 +144,7 @@ export default defineComponent({
       group: 'scenes',
       name: '',
       content: '',
-      image: '',
+      image: null,
     });
     const beforeEditAsset = reactive({
       name: '',
@@ -155,7 +155,7 @@ export default defineComponent({
       group: 'scenes',
       name: '',
       content: '',
-      image: '',
+      image: null,
     });
 
     // Computed properties
@@ -280,13 +280,13 @@ export default defineComponent({
       newAsset.group = 'scenes';
       newAsset.name = '';
       newAsset.content = '';
-      newAsset.image = '';
+      newAsset.image = null;
       fileList.value = [];
       addDialogVisible.value = false;
     }
 
     const handleRemove = () => {
-      newAsset.image = '';
+      newAsset.image = null;
     };
 
     const handleExceed = () => {
