@@ -41,20 +41,19 @@
                     <div>情节梗概: {{ selectedPlot.beat }}</div>
                   </el-col>
                 </el-row>
-
-
               </el-card>
+              
               <!-- 根据对话编号显示角色和对话内容 -->
               <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index">
-                <div class="dialogue-header">
-                  <!-- <div class="dialogue-number">Dialogue {{ index + 1 }}</div> -->
+                <!-- <div class="dialogue-header">
+                  <div class="dialogue-number">Dialogue {{ index + 1 }}</div>
                 </div>
-                <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
+                <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"></div> -->
                 <el-row align="middle">
                   <el-col :span="2">
                   <div class="character">{{ dialogue.character }}: </div>
                  </el-col>
-                  <el-col :span="1">
+                  <el-col :span="2">
                     <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
                       xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                       <g fill="none">
@@ -64,7 +63,7 @@
                       </g>
                     </svg>
                   </el-col>
-                  <el-col :span="3">
+                  <el-col :span="20">
                     <audio ref="audioPlayer" controls v-if="dialogue.audio">
                       <source :src="dialogue.audio" type="audio/wav">
                       Your browser does not support the audio element.
@@ -344,8 +343,8 @@ export default defineComponent({
 
 .dialogue-item {
   margin-bottom: 20px;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 5px;
+  border-radius: 5px;
   background-color: #F1F1F1
 }
 
@@ -404,7 +403,7 @@ export default defineComponent({
 
 .plot-item {
   margin-bottom: 40px;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
   background-color: #F1F1F1
 }
