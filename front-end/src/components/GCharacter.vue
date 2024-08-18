@@ -63,7 +63,7 @@
       </div>
     </el-aside>
 
-    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content" v-loading="loading">
+    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
         <el-form-item label="分组">
           角色
@@ -83,7 +83,7 @@
        </el-form-item>
         
         <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
-          <div>
+          <div v-loading="loading">
             <el-upload :http-request="uploadFile"
                        list-type="picture-card"
                        :on-success="handleUploadSuccess"
@@ -93,7 +93,7 @@
                        :on-exceed="handleExceed">
               <i class="el-icon-plus"></i>
             </el-upload>
-            <el-button @click="generate_image" class="confirm-button">生成</el-button>
+            <el-button @click="generate_new_image" class="confirm-button">生成</el-button>
             <el-button @click="save_image" class="confirm-button">保存</el-button>
           </div>
         </el-form-item>
@@ -415,6 +415,10 @@ export default defineComponent({
         per: newAsset.per,
       };
       store.dispatch('addCharacter',character)
+      axios.post('http://localhost:8000/add_character', {
+        action: 'add_character',
+        data: character,
+      });
       handleAddDialogClose();
       proxy.$message.success('资产新增成功');
     }
@@ -605,6 +609,27 @@ export default defineComponent({
           charList.value[curEditAssetIndex.value].image = imageResponse.data.image;
       }
 
+      async function generate_new_image() {
+      loading.value = true;
+      const imageRequestBody = {
+            action: 'create_character_picture',
+            data: {
+              name: newAsset.name,
+              content: newAsset.content,
+            },
+          };
+          const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
+          fileList.value.push({
+            name: newAsset.name,
+            url: imageResponse.data.image,
+          });
+          loading.value = false;
+          console.log(fileList.value);
+          newAsset.image = imageResponse.data.image;
+          newAsset.image = imageResponse.data.image;
+
+      }
+
     return {
       currentEditAsset,
       fileList,
@@ -620,6 +645,7 @@ export default defineComponent({
       showEditDialog,
       curEditAssetIndex,
       showDeleteConfirm,
+      generate_new_image,
       handleSaveClose,
       handleRemove,
       handleEditRemove,
