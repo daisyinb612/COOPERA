@@ -13,11 +13,14 @@
           <el-scrollbar class="plots-list">
             <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
               <div class="plot-header">
-                <div class="scene-name">{{ plot.plotName }}</div>
-                <div class="plot-element">{{ plot.plotStage }}</div>
-                <div class="location">{{ plot.scene.name }}</div>
+                <div class="plot-name"><div>情节名称:</div>{{ plot.plotName }}</div>
+                <div class="plot-element"><div>情节阶段:</div>{{ plot.plotStage }}</div>
+                <div class="location"><div>地点:</div>{{plot.scene.name }}</div>
                 <div class="characters">
-                  <span v-for="character in plot.characters" :key="character">{{ character.name }},</span>
+                  <div>出现角色:</div>
+                  <span v-for="character in plot.characters" :key="character">
+                    {{ character.name }}
+                  </span>
                 </div>
               </div>
               <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
@@ -513,7 +516,8 @@ export default defineComponent({
   margin-bottom: 10px;
 }
 
-.scene-name {
+.plot-name {
+  display: flex;
   font-size: 18px;
   font-weight: bold;
 }
@@ -521,6 +525,8 @@ export default defineComponent({
 .plot-element,
 .location,
 .characters {
+  display: flex;
+  align-items: center;
   font-size: 14px;
 }
 
