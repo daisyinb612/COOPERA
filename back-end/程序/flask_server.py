@@ -256,12 +256,13 @@ def create_scene_picture():
             name = data["data"]["name"]
             
             picture = global_llm.create_picture(prompt=prompt)
+            print('generating picture done')
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
             fileName=name+'.'+image.format.lower()
             with open(info_dict['scene_image_path']+'/'+fileName, 'wb') as f:
                 f.write(req.content)
-            return jsonify({"image": picture})
+            return jsonify({"image": fileName})
         else:
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
@@ -440,6 +441,17 @@ def generate_script():
     res["dialogues"] = dialogue
     return jsonify(res)
 
+def del_brackets(s: str):
+    left_bracket = -1
+    for i in range(len(s)):
+        if s[i] == '（':
+            left_bracket=i
+            continue
+        if s[i] == '）':
+            new_s = s[0:left_bracket] + s[i+1:]
+            return new_s
+    return s
+
 @app.route("/do_tts", methods=['POST'])
 def do_tts():
     data = request.get_json()
@@ -448,6 +460,7 @@ def do_tts():
     action = data.get("action")
     if action == "do_tts":
         text = data["data"]["text"]
+        text = del_brackets(text)
         print('do_tts text', text)
         id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
         print('id_speaker', id_speaker)
