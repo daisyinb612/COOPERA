@@ -52,21 +52,26 @@
                 </div>
                 <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
                 <div class="character">{{ dialogue.character }}: </div>
-                <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
-                  xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
-                  <g fill="none">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M5.08 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h.08a2 2 0 0 1 1.519.698l3.642 4.25c.604.704 1.759.277 1.759-.651V4.703c0-.928-1.155-1.355-1.76-.65L6.6 8.301A2 2 0 0 1 5.08 9zm13.556-4.725a1 1 0 1 0-1.377 1.45c3.655 3.472 3.655 9.078 0 12.55a1 1 0 1 0 1.377 1.45c4.485-4.26 4.485-11.19 0-15.45zm-2.947 2.8a1 1 0 1 0-1.378 1.45c2.027 1.925 2.027 5.025 0 6.95a1 1 0 1 0 1.378 1.45c2.857-2.714 2.857-7.136 0-9.85z"
-                      fill="currentColor" />
-                  </g>
-                </svg>
-                <audio controls v-if="dialogue.audio">
-                  <source :src="dialogue.audio" type="audio/wav">
-                  Your browser does not support the audio element.
-                </audio>
-                <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
-                  class="beat-input"></el-input>
-
+                <el-row>
+                  <el-col :span="2">
+                    <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
+                      xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
+                      <g fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M5.08 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h.08a2 2 0 0 1 1.519.698l3.642 4.25c.604.704 1.759.277 1.759-.651V4.703c0-.928-1.155-1.355-1.76-.65L6.6 8.301A2 2 0 0 1 5.08 9zm13.556-4.725a1 1 0 1 0-1.377 1.45c3.655 3.472 3.655 9.078 0 12.55a1 1 0 1 0 1.377 1.45c4.485-4.26 4.485-11.19 0-15.45zm-2.947 2.8a1 1 0 1 0-1.378 1.45c2.027 1.925 2.027 5.025 0 6.95a1 1 0 1 0 1.378 1.45c2.857-2.714 2.857-7.136 0-9.85z"
+                          fill="currentColor" />
+                      </g>
+                    </svg>
+                    <audio controls v-if="dialogue.audio">
+                      <source :src="dialogue.audio" type="audio/wav">
+                      Your browser does not support the audio element.
+                    </audio>
+                  </el-col>
+                  <el-col :span="22">
+                    <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
+                      class="beat-input"></el-input>
+                  </el-col>
+                </el-row>
 
               </el-card>
             </template>
@@ -83,7 +88,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, computed} from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
@@ -195,11 +200,11 @@ export default defineComponent({
       // dialogue是数组，元素为对象，对象的属性有character, content, audio
       // 对比beforeEditAssets的content和plots的dialogue的content
       const beforEditDialogues = beforeEditAssets.value.map(d => d.content);
-      const currentDialogues = plots.value.flatMap(p => p.dialogue? p.dialogue.map(d => d.content) : []);
+      const currentDialogues = plots.value.flatMap(p => p.dialogue ? p.dialogue.map(d => d.content) : []);
       console.log('beforeEditDialogues', beforEditDialogues);
       console.log('currentDialogues', currentDialogues);
       beforEditDialogues.forEach(async (d, i) => {
-      let changes = '';
+        let changes = '';
         diff.diffChars(d, currentDialogues[i]).forEach(part => {
           const value = part.value.replace(/\n/g, '');
           if (part.added) {
@@ -218,8 +223,8 @@ export default defineComponent({
           },
         });
       });
-      
-     
+
+
       const payload = {
         action: 'upload_dialogue',
         data: plots.value
@@ -328,7 +333,7 @@ export default defineComponent({
   overflow: hidden;
   box-sizing: border-box;
   padding-top: 5px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -337,7 +342,7 @@ export default defineComponent({
   margin-bottom: 40px;
   padding: 20px;
   border-radius: 20px;
-  background-color:#F1F1F1
+  background-color: #F1F1F1
 }
 
 .dialogue-header {
@@ -397,7 +402,7 @@ export default defineComponent({
   margin-bottom: 40px;
   padding: 20px;
   border-radius: 10px;
-  background-color:#F1F1F1
+  background-color: #F1F1F1
 }
 
 .plot-header {
@@ -425,7 +430,7 @@ export default defineComponent({
 .scene-image {
   border-radius: 10px;
   width: 120px;
-  height: 120px; 
+  height: 120px;
   border: 2px solid #ddd
 }
 </style>
