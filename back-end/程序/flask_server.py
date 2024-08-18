@@ -12,11 +12,10 @@ import uuid
 app = Flask(__name__)
 CORS(app)
 
-
+global_llm = LLM()
  
 # Configuration dictionary
 info_dict = {
-   "apikey": "sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74",
    "world_setting_path": "./opera_info/storyline/storyline.txt",
    "characters_path": "./opera_info/character/characters.json",
    "characters_image_path": "./opera_info/character",
@@ -55,9 +54,9 @@ def upload_storyline():
             f.write(data["data"]["storyline"])
         storyline = data["data"]["storyline"]
         question = "\n###故事线###:" + storyline
-        l = LLM(apikey=info_dict["apikey"])
-        answer = l.ask(question=question, prompt=l.setting_role_create)
-        plot = l.analyze_answer(answer)
+        # 
+        answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
+        plot = global_llm.analyze_answer(answer)
         with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
             json.dump(plot, f, indent=4, ensure_ascii=False)
         return jsonify(plot)
@@ -75,8 +74,8 @@ def get_storyline_help():
     user_input = data["data"]["user_input"]
 
     question = "\n###故事线###:" + storyline + "\n###我的问题###:" + user_input
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.storyline_help, history=history)
+    
+    answer = global_llm.ask(question=question, prompt=global_llm.storyline_help, history=history)
     print("Yes")
 
     return jsonify({"answer": answer})
@@ -92,10 +91,10 @@ def get_saved_storyline():
 #     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
 #         storyline = f.read()
 #     question = "###故事线###:" + storyline
-#     l = LLM(apikey=info_dict["apikey"])
-#     answer = l.ask(question=question, prompt=l.setting_role_create)
-#     characters = l.analyze_answer(answer)
-#     l.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
+#     
+#     answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
+#     characters = global_llm.analyze_answer(answer)
+#     global_llm.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
 #     return jsonify(characters)
  
 @app.route('/get_character_help', methods=['POST'])
@@ -111,15 +110,15 @@ def get_character_help():
     for character in characters:
         question += character["name"] + ": " + character["content"] + "\n"
     question += "\n###我的问题###:" + user_input
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.role_help, history=history)
+    
+    answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
  
 # @app.route('/save_character_asset', methods=['POST'])
 # def save_character_asset():
 #     data = request.get_json()
-#     l = LLM(apikey=info_dict["apikey"])
-#     l.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
+#     
+#     global_llm.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
 #     return jsonify({})
  
 @app.route('/init_plot_generation', methods=['POST'])
@@ -130,9 +129,9 @@ def init_plot_generation():
     question = "\n###故事线###:" + storyline + "\n###角色表###:"
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_outline_create)
-    plot = l.analyze_answer(answer)
+    
+    answer = global_llm.ask(question=question, prompt=global_llm.setting_outline_create)
+    plot = global_llm.analyze_answer(answer)
     if not os.path.exists(info_dict['outline_path']):
         os.makedirs(os.path.dirname(info_dict['outline_path']), exist_ok=True)
     with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
@@ -161,7 +160,7 @@ def add_character():
 def update_plot():
     data = request.get_json()
     plot = data["data"]
-    l = LLM(apikey=info_dict["apikey"])
+    
     with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
         json.dump(plot, f, indent=4, ensure_ascii=False)
     return jsonify({})
@@ -173,10 +172,10 @@ def update_plot():
 #     with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
 #         plot = json.load(f)
 #     question = "\n###故事线###:" + storyline + "\n###角色表###:" + plot
-#     l = LLM(apikey=info_dict["apikey"])
-#     answer = l.ask(question=question, prompt=l.setting_scene_create)
-#     scene = l.analyze_answer(answer)
-#     l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+#     
+#     answer = global_llm.ask(question=question, prompt=global_llm.setting_scene_create)
+#     scene = global_llm.analyze_answer(answer)
+#     global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
 #     return jsonify(scene)
  
 @app.route('/save_scene_asset', methods=['POST'])
@@ -184,7 +183,7 @@ def save_scene_asset():
     data = request.get_json()
     index = data["data"]["index"]
     scene = data["data"]["scene"]
-    l = LLM(apikey=info_dict["apikey"])
+    
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data[index] = scene
@@ -227,10 +226,10 @@ def init_dialogue_generation():
     outline_pass = e.get_json_by_row(number + 1) if number >= 2 else "无"
     outline_now = e.get_json_by_row(number + 1)
     question = "\n###前情提要###:" + outline_pass + "\n###本章大纲###:" + outline_now
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_dialogue_create)
-    dialogue = l.analyze_answer(answer)
-    l.add_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"])
+    global_llm
+    answer = global_llm.ask(question=question, prompt=global_llm.setting_dialogue_create)
+    dialogue = global_llm.analyze_answer(answer)
+    global_llm.add_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"])
     return jsonify(dialogue)
  
 @app.route('/save_dialogue_asset', methods=['POST'])
@@ -238,8 +237,8 @@ def save_dialogue_asset():
     data = request.get_json()
     number = int(data["data"]["plot_number"])
     dialogue = data["data"]["dialogue"]
-    l = LLM(apikey=info_dict["apikey"])
-    l.update_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"], sheet_index=number - 1)
+    
+    global_llm.update_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"], sheet_index=number - 1)
     return jsonify({})
 
 @app.route('/create_scene_picture', methods=['POST'])
@@ -255,8 +254,8 @@ def create_scene_picture():
             if data["data"]["user_input"] != "":
                 prompt += "场景的描述为："+data["data"]["user_input"]
             name = data["data"]["name"]
-            l = LLM(apikey=info_dict["apikey"])
-            picture = l.create_picture(prompt=prompt)
+            
+            picture = global_llm.create_picture(prompt=prompt)
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
             fileName=name+'.'+image.format.lower()
@@ -279,8 +278,8 @@ def create_character_picture():
         if action == "create_character_picture":
             prompt = "通过角色描述先提取和完善角色视觉层面的信息，请使用清新统一的色调，用类似迪士尼描述插画风格生成白色背景的中国古代的单人角色图片，在以下颜色中进行选择：主色调红色#CC0000 辅助色金色#FFD700 辅助深蓝色#191970 辅助色银色#C0C0C0 辅助色白色 #FFFFFF 辅助色深红色#8B0000 图片中请使用白色背景，仅出现完整的人物形象，角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
-            l = LLM(apikey=info_dict["apikey"])
-            picture = l.create_picture(prompt=prompt)
+            
+            picture = global_llm.create_picture(prompt=prompt)
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
             fileName=name+'.'+image.format.lower()
@@ -356,8 +355,8 @@ def delete_character():
 #         action = data.get("action")
 #         if action == "get_character_image_help":
 #             prompt = data["data"]["user_input"]
-#             l = LLM(apikey=info_dict["apikey"])
-#             picture = l.create_picture(filepath=filepath, prompt=prompt)
+#             
+#             picture = global_llm.create_picture(filepath=filepath, prompt=prompt)
 #             return jsonify({"image": picture})
 #         else:
 #             return jsonify({"error": "Invalid action type."}), 401
@@ -382,8 +381,8 @@ def get_scene_help():
         beat = plot[i]["beat"]
         characters = ', '.join(plot[i]["characters"])
         question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.role_help, history=history)
+    
+    answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
 
 @app.route('/generate_dialogue', methods=['POST'])
@@ -401,11 +400,11 @@ def generate_dialogue():
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
 
-    l = LLM(apikey=info_dict["apikey"])
-    answer = l.ask(question=question, prompt=l.setting_dialogue_create)
-    scene = l.analyze_answer(answer)
+    
+    answer = global_llm.ask(question=question, prompt=global_llm.setting_dialogue_create)
+    scene = global_llm.analyze_answer(answer)
     # print('genrate_dialogue scene', scene)
-    # l.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
+    # global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
     with open(info_dict["scene_path"], 'w', encoding='utf-8') as f:
         json.dump(scene, f, indent=4, ensure_ascii=False)
     return jsonify(scene)

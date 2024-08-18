@@ -12,9 +12,12 @@ from openpyxl import Workbook, load_workbook
 
 
 model = 'openai'  # 'openai' or 'zhipu'
+api_key_openai = 'sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74'
+api_key_zhipu = '3847066edd68874c24f3a9dc6a7c5c02.xH11Vl8gBlyeh8yK'
+
 
 class LLM(object):
-    def __init__(self,apikey=None):
+    def __init__(self):
         self.fix_json = '''
         我将给出存在格式问题的文本，你的任务是输出修正格式后的json字符串。
         输出时不要复述任务要求，直接给出修改好的json字符串。
@@ -264,7 +267,6 @@ class LLM(object):
         }
         ]
         '''
-        self.apikey = apikey
         self.history = None
 
     def save_history(self,question,answer,prompt,history=None):
@@ -291,7 +293,7 @@ class LLM(object):
         if history is None:
             if model=="openai":
                 try:
-                    client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
+                    client = OpenAI(api_key=api_key_openai, base_url="https://api.xiaoai.plus/v1")
                     response = client.chat.completions.create(
                         model="gpt-4o",
                         messages=[
@@ -302,9 +304,10 @@ class LLM(object):
                         stream=True,
                     )
                     print('current model is openai')
-                except:
+                except Exception as e:
+                    print('openai error:', e)
                     print('current model is zhipu')
-                    client = ZhipuAI(api_key=self.apikey)
+                    client = ZhipuAI(api_key=api_key_zhipu)
                     response = client.chat.completions.create(
                         model="glm-4",
                         messages=[
@@ -323,7 +326,7 @@ class LLM(object):
             new_message.append({"role": "user", "content": question})
             if model=="openai":
                 try:
-                    client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
+                    client = OpenAI(api_key=api_key_openai, base_url="https://api.xiaoai.plus/v1")
                     response = client.chat.completions.create(
                         model="gpt-4o",
                         messages=[
@@ -334,9 +337,9 @@ class LLM(object):
                         stream=True,
                     )
                     print('current model is openai')
-                except:
-                    print('current model is zhipu')
-                    client = ZhipuAI(api_key=self.apikey)
+                except Exception as e:
+                    print('openai error:', e)
+                    client = ZhipuAI(api_key=api_key_zhipu)
                     response = client.chat.completions.create(
                         model="glm-4",
                         messages=new_message,
@@ -364,7 +367,7 @@ class LLM(object):
         if model == 'openai':
             client = OpenAI(
                 base_url="https://xiaoai.plus/v1",
-                api_key=self.apikey
+                api_key=api_key_openai
             )   
             try:
                 response = client.images.generate(
@@ -380,9 +383,10 @@ class LLM(object):
                 print('current model is openai')
                 return image_url
             # 失败就用ZhipuAI
-            except:
+            except Exception as e:
+                print('openai error:', e)
                 print('current model is zhipu')
-                client = ZhipuAI(api_key='4562c624dd266627559909358043af62.fCv9jl2UB63Qgomi')
+                client = ZhipuAI(api_key=api_key_zhipu)
                 response = client.images.generations(
                     model="cogview-3", 
                     prompt=prompt,
