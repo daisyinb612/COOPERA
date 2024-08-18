@@ -258,16 +258,6 @@ export default defineComponent({
         });
       }
 
-      const newScene = {
-        name: newPlot.scene,
-        content: "",
-        image: 'empty.png',
-      };
-      const existingSceneIndex = allScenes.value.findIndex((scene) => scene.name === newScene.name)
-      if (existingSceneIndex === -1){
-        addScene({...newScene})
-      }
-
       handleAddDialogClose();
     }
 
