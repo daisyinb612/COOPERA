@@ -1,0 +1,77 @@
+[
+    {
+        "number": "1",
+        "character": "木兰",
+        "content": "爹，娘，我回来了！"
+    },
+    {
+        "number": "2",
+        "character": "木兰父亲",
+        "content": "木兰，我的好女儿，快进来，爹想死你了！"
+    },
+    {
+        "number": "3",
+        "character": "木兰母亲",
+        "content": "木兰，娘每天都盼着你平安回来，今天终于见到你了！"
+    },
+    {
+        "number": "4",
+        "character": "木兰姐姐",
+        "content": "木兰，你看我化了妆，你还认得出我吗？"
+    },
+    {
+        "number": "5",
+        "character": "木兰",
+        "content": "姐姐，你化不化妆我都认得出你，还是那么漂亮！"
+    },
+    {
+        "number": "6",
+        "character": "木兰弟弟",
+        "content": "姐姐，你回来啦！我已经长大了，会杀猪宰羊，今天给你做饭！"
+    },
+    {
+        "number": "7",
+        "character": "木兰",
+        "content": "弟弟，真是长大了，能干了！"
+    },
+    {
+        "number": "8",
+        "character": "木兰父亲",
+        "content": "木兰，今天就好好休息，咱们一家人终于团聚了。"
+    },
+    {
+        "number": "9",
+        "character": "木兰母亲",
+        "content": "是啊，木兰，别再操心别的了，咱们现在只要过平静的生活就好。"
+    },
+    {
+        "number": "10",
+        "character": "木兰",
+        "content": "嗯，爹娘，我这次回来就是想和你们一起过平静的日子。"
+    },
+    {
+        "number": "11",
+        "character": "木兰姐姐",
+        "content": "木兰，咱们一起去院子里种花吧，春天来了，花儿开得正好。"
+    },
+    {
+        "number": "12",
+        "character": "木兰",
+        "content": "好啊，姐姐，咱们一起去种花！"
+    },
+    {
+        "number": "13",
+        "character": "木兰弟弟",
+        "content": "我也去，我帮你们浇水。"
+    },
+    {
+        "number": "14",
+        "character": "木兰父亲",
+        "content": "你们去吧，我和你娘就在这儿看着你们，真好，真好。"
+    },
+    {
+        "number": "15",
+        "character": "木兰母亲",
+        "content": "是啊，这样的日子真是幸福。"
+    }
+]

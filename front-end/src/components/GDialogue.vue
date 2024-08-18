@@ -20,7 +20,7 @@
               <el-card class="plot-item">
                 <div class="plot-header">
                   <div class="scene-name">情节名称: {{ selectedPlot.plotName }}</div>
-                  <el-button @click="gen·erate_dialogue" class="confirm-button">生成</el-button>
+                  <el-button @click="generate_dialogue" class="confirm-button">生成</el-button>
                   <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                   <!-- <div class="location">{{ selectedPlot.location }}</div> -->
                 </div>

@@ -290,55 +290,61 @@ class LLM(object):
     def ask(self,question,prompt,history=None):##model_name改为其他值（例如None）时，默认使用GLM
         if history is None:
             if model=="openai":
-                client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
-                response = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {"role": "system", "content": prompt},
-                        {"role": "user", "content": question},
-                    ],
-                    top_p=0.7,
-                    stream=True,
-                )
-            else:
-                client = ZhipuAI(api_key=self.apikey)
-                response = client.chat.completions.create(
-                    model="glm-4",
-                    messages=[
-                        {"role": "system", "content": prompt},
-                        {"role": "user", "content": question},
-                    ],
-                    top_p=0.7,
-                    temperature=0.95,
-                    max_tokens=8192,
-                    stream=True,
-                )
+                try:
+                    client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
+                    response = client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {"role": "system", "content": prompt},
+                            {"role": "user", "content": question},
+                        ],
+                        top_p=0.7,
+                        stream=True,
+                    )
+                    print('current model is openai')
+                except:
+                    print('current model is zhipu')
+                    client = ZhipuAI(api_key=self.apikey)
+                    response = client.chat.completions.create(
+                        model="glm-4",
+                        messages=[
+                            {"role": "system", "content": prompt},
+                            {"role": "user", "content": question},
+                        ],
+                        top_p=0.7,
+                        temperature=0.95,
+                        max_tokens=8192,
+                        stream=True,
+                    )
         else:
             new_message = [{"role": "system", "content": prompt}]
             for row in history:
                 new_message.append(row)
             new_message.append({"role": "user", "content": question})
             if model=="openai":
-                client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
-                response = client.chat.completions.create(
-                    model="gpt-4o",
-                    messages=[
-                        {"role": "system", "content": prompt},
-                        {"role": "user", "content": question},
-                    ],
-                    top_p=0.7,
-                    stream=True,
-                )
-            else:
-                client = ZhipuAI(api_key=self.apikey)
-                response = client.chat.completions.create(
-                    model="glm-4",
-                    messages=new_message,
-                    top_p=0.7,
-                    temperature=0.95,
-                    max_tokens=8192,
-                    stream=True,
-                )
+                try:
+                    client = OpenAI(api_key=self.apikey, base_url="https://api.xiaoai.plus/v1")
+                    response = client.chat.completions.create(
+                        model="gpt-4o",
+                        messages=[
+                            {"role": "system", "content": prompt},
+                            {"role": "user", "content": question},
+                        ],
+                        top_p=0.7,
+                        stream=True,
+                    )
+                    print('current model is openai')
+                except:
+                    print('current model is zhipu')
+                    client = ZhipuAI(api_key=self.apikey)
+                    response = client.chat.completions.create(
+                        model="glm-4",
+                        messages=new_message,
+                        top_p=0.7,
+                        temperature=0.95,
+                        max_tokens=8192,
+                        stream=True,
+                    )
         answer = ''
         print('思考中', end='')
         for trunk in response:
@@ -358,7 +364,7 @@ class LLM(object):
         if model == 'openai':
             client = OpenAI(
                 base_url="https://xiaoai.plus/v1",
-                api_key="sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74"
+                api_key=self.apikey
             )   
             try:
                 response = client.images.generate(
@@ -371,9 +377,11 @@ class LLM(object):
                 print(response)
                 image_url = response.data[0].url
                 self.save_history(question=prompt,answer="",prompt="",history=history)
+                print('current model is openai')
                 return image_url
             # 失败就用ZhipuAI
             except:
+                print('current model is zhipu')
                 client = ZhipuAI(api_key='4562c624dd266627559909358043af62.fCv9jl2UB63Qgomi')
                 response = client.images.generations(
                     model="cogview-3", 
