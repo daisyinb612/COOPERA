@@ -193,6 +193,17 @@ def save_scene_asset():
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
 
+@app.route('/add_scene', methods=['POST'])
+def add_scene():
+    data = request.get_json()
+    scene = data["data"]
+    with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
+        old_data = json.load(f)
+    old_data.append(scene)
+    with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+        json.dump(old_data, f, indent=4, ensure_ascii=False)
+    return jsonify({})
+
 @app.route("/delete_scene_asset", methods=['POST'])
 def delete_scene_asset():
     data = request.get_json()

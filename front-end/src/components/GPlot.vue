@@ -74,7 +74,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="场景">
-          <el-select v-model="editPlotData.scene" placeholder="请选择场景" value-key="name">
+          <el-select v-model="editPlotData.scene" placeholder="请选择场景" value-key="name" clearable filterable  allow-create>
             <el-option v-for="(scene, index) in allScenes" :key="scene" :label="scene.name" :value="scene" >
               <span style="float: left">{{ scene.name }}</span>
               <el-tag
@@ -224,7 +224,7 @@ export default defineComponent({
       editDialogVisible.value = false;
     }
 
-    function addNewPlot() {
+    async function addNewPlot() {
       if (!newPlot.plotName) {
         ElMessage({
           message: '情节名称不能为空',
@@ -252,6 +252,12 @@ export default defineComponent({
         };
         newPlot.scene = newScene;
         addScene({ ...newScene });
+        await axios.post('http://localhost:8000/add_scene', {
+          action: 'add_scene',
+          data: {
+            scene: newScene,
+          },
+        });
       }
 
       if (newPlot.characters.length === 0) {
@@ -336,6 +342,23 @@ export default defineComponent({
           type: 'warning',
         });
         return;
+      }
+      console.log(editPlotData.scene);
+      // 如果scene不是一个对象，说明是新建的场景
+      if (typeof editPlotData.scene !== 'object') {
+        const newScene = {
+          name: editPlotData.scene,
+          content: "",
+          image: 'empty.png',
+        };
+        editPlotData.scene = newScene;
+        addScene({ ...newScene });
+        await axios.post('http://localhost:8000/add_scene', {
+          action: 'add_scene',
+          data: {
+            scene: newScene,
+          },
+        });
       }
 
       if (editPlotData.characters.length === 0) {
