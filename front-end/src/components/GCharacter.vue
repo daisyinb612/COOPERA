@@ -14,13 +14,13 @@
             class="asset-item" 
             shadow="hover"
            @click="editAsset(index)" >
-         <el-row :gutter="10" style="width: 100%;" align="middle">
+           <el-row :gutter="10" style="width: 100%;" align="middle">
               <el-col :span="4" style="text-align: center">
                 <img v-if="asset.image" class="asset-image" :src="asset.image" />
                 <img v-else class="asset-image" :src="require('@/assets/images/empty.png')"/>
               </el-col>
               <el-col :span="20"><div>{{ asset.name }}</div></el-col>
-         </el-row>
+           </el-row>
           </el-card>
         </el-scrollbar>
 
@@ -258,9 +258,6 @@ export default defineComponent({
   },
 ]
     // Computed properties
-    // const currentEditAsset = computed(() => {
-    //   return charList[curEditAssetIndex.value] || { name: '', content: '', image: '' };
-    // });
 
     const filteredAssets = computed(() => {
       return charList;

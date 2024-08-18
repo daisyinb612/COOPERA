@@ -11,9 +11,17 @@
 <!--        </el-button-group>-->
 
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in sceneList" :key="index" class="asset-item" @click="editAsset(index)">
-            <div class="asset-name">{{ asset.name }}</div>
-            <img v-if="asset.image" class="asset-image" :src="asset.image" alt="Asset Image" >
+          <el-card v-for="(asset, index) in sceneList" :key="index" 
+           class="asset-item" 
+           shadow="hover"
+          @click="editAsset(index)">
+           <el-row :gutter="10" style="width: 100%;" align="middle">
+              <el-col :span="10" style="text-align: center">
+                <img v-if="asset.image" class="asset-image" :src="asset.image" >
+                <img v-else class="asset-image" :src="require('@/assets/images/empty.png')">
+              </el-col>
+              <el-col :span="14"><div>{{ asset.name }}</div></el-col>
+           </el-row>
           </el-card>
         </el-scrollbar>
 
@@ -674,26 +682,31 @@ body {
 
 .assets-list {
   height: 100%;
+  width:100%;
   flex: 1;
   overflow: hidden;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-.assets-list .el-scrollbar__wrap {
+.el-scrollbar__wrap {
   height: 100% !important;
   max-height: 300px;
   overflow-y: auto;
 }
 
 .asset-item {
-  margin-bottom: 10px;
+  align-items: center; 
+  margin: 15px;
   padding: 10px;
+  height: auto;
 }
 
 .asset-image {
-  max-width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 200px;
+  height: 80px; 
+  border: 2px solid #ddd
 }
 
 .add-button-container {
