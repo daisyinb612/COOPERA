@@ -17,7 +17,7 @@
                 <div class="plot-element"><div>情节阶段:</div>{{ plot.plotStage }}</div>
                 <div class="location"><div>地点:</div>{{plot.scene.name }}</div>
                 <div class="characters">
-                  <div>出现角色:</div>
+                  <div>出场角色:</div>
                   <span v-for="character in plot.characters" :key="character">
                     {{ character.name }}
                   </span>

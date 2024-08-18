@@ -622,12 +622,6 @@ body {
   margin-right: 10px;
 }
 
-.scene-image {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 15px;
-}
-
 .loading-wrapper {
   width: 100%;
   text-align: center;

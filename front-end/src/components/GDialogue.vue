@@ -19,8 +19,8 @@
               <!-- 显示选中情节的剧情卡片 -->
               <el-card class="plot-item">
                 <div class="plot-header">
-                  <div class="scene-name">{{ selectedPlot.plotName }}</div>
-                  <el-button @click="generate_dialogue" class="confirm-button">生成</el-button>
+                  <div class="scene-name">情节名称: {{ selectedPlot.plotName }}</div>
+                  <el-button @click="gen·erate_dialogue" class="confirm-button">生成</el-button>
                   <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                   <!-- <div class="location">{{ selectedPlot.location }}</div> -->
 
@@ -30,16 +30,16 @@
                     <img v-if="selectedPlot.scene.image" class="scene-image" :src="selectedPlot.scene.image"
                       alt="Asset Image" />
                   </el-col>
-                  <el-col :span="3">
+                  <el-col :span="1">
                   </el-col>
-                  <el-col :span="12">
-                    <div>plotElement: {{ selectedPlot.plotStage }}</div>
-                    <div>Scene name: {{ selectedPlot.scene.name }}</div>
-                    <div>Scene discription: {{ selectedPlot.scene.content }}</div>
-                    <div>Character:
+                  <el-col :span="20">
+                    <div>情节阶段: {{ selectedPlot.plotStage }}</div>
+                    <div>地点: {{ selectedPlot.scene.name }}</div>
+                    <div>地点描述: {{ selectedPlot.scene.content }}</div>
+                    <div>出场角色:
                       <span v-for="character in selectedPlot.characters" :key="character">{{ character.name }},</span>
                     </div>
-                    <div>Plot beat: {{ selectedPlot.beat }}</div>
+                    <div>情节梗概: {{ selectedPlot.beat }}</div>
                   </el-col>
                 </el-row>
 
@@ -52,9 +52,6 @@
                 </div>
                 <!-- <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"> -->
                 <div class="character">{{ dialogue.character }}: </div>
-                <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
-                  class="beat-input"></el-input>
-
                 <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
                   xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24">
                   <g fill="none">
@@ -67,6 +64,10 @@
                   <source :src="dialogue.audio" type="audio/wav">
                   Your browser does not support the audio element.
                 </audio>
+                <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
+                  class="beat-input"></el-input>
+
+
               </el-card>
             </template>
           </el-scrollbar>
@@ -290,10 +291,9 @@ export default defineComponent({
 .button-container-up {
   display: flex;
   justify-content: flex-start;
-  padding: 5px;
-  gap: 20px;
-  text-align: center;
-  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  padding: 10px;
 }
 
 .plot-name-list {
@@ -326,15 +326,18 @@ export default defineComponent({
 .dialogue-list-container {
   flex: 1;
   overflow: hidden;
-  padding: 10px;
   box-sizing: border-box;
+  padding-top: 5px;
+  padding-bottom: 5px; 
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .dialogue-item {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   padding: 20px;
-  border-radius: 10px;
-  background-color: #e6e6e6;
+  border-radius: 20px;
+  background-color:#F1F1F1
 }
 
 .dialogue-header {
@@ -391,10 +394,10 @@ export default defineComponent({
 }
 
 .plot-item {
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   padding: 20px;
   border-radius: 10px;
-  background-color: #e6e6e6;
+  background-color:#F1F1F1
 }
 
 .plot-header {
@@ -420,7 +423,9 @@ export default defineComponent({
 }
 
 .scene-image {
-  width: 100%;
-  margin: 10px;
+  border-radius: 10px;
+  width: 120px;
+  height: 120px; 
+  border: 2px solid #ddd
 }
 </style>
