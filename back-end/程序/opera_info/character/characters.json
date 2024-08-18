@@ -1,27 +1,44 @@
 [
     {
         "name": "花木兰",
-        "content": "花木兰是一位勇敢的年轻女子，为了替父从军，她女扮男装，经历了无数的战斗，最终成为一名英雄。",
+        "content": "一位勇敢、聪慧的年轻女子，为了替年迈的父亲从军，女扮男装，表现出非凡的智慧和勇气。",
         "per": "标准女音"
     },
     {
         "name": "花弧",
-        "content": "花弧是木兰的父亲，一位年迈但有智慧的老人。他虽然身体虚弱，但心中依然怀有对国家的忠诚。",
-        "per": "标准男音"
-    },
-    {
-        "name": "刘将军",
-        "content": "刘将军是一位经验丰富的将领，他在战场上遇到了木兰，成为了她的导师和朋友。",
+        "content": "木兰的父亲，一位年迈的退役老兵，虽然身体虚弱，但仍心系国家和家庭。",
         "per": "标准男音"
     },
     {
         "name": "木兰的母亲",
-        "content": "木兰的母亲是一位温柔而坚强的女性，她在家中默默支持着木兰的决定。",
+        "content": "一个温柔而坚强的女性，深深爱着自己的家人，对木兰的决定既担忧又骄傲。",
         "per": "标准女音"
     },
     {
-        "name": "小花",
-        "content": "小花是木兰的妹妹，一个天真无邪的小女孩，她崇拜着木兰，梦想着有一天也能像她一样勇敢。",
-        "per": "标准女音"
+        "name": "木兰的弟弟",
+        "content": "木兰的小弟弟，天真活泼，崇拜姐姐，梦想成为像她一样的英雄。",
+        "per": "标准男音"
+    },
+    {
+        "name": "将军",
+        "content": "木兰在军中的上司，严厉但公正，逐渐发现了木兰的非凡才能。",
+        "per": "标准男音"
+    },
+    {
+        "name": "木兰的战友",
+        "content": "与木兰一起并肩作战的士兵，最初对她有所怀疑，但后来成为她的好朋友。",
+        "per": "标准男音",
+        "image": "https://sfile.chatglm.cn/testpath/066f2a00-cf35-55f1-914a-7f47cfe4c70e_0.png"
+    },
+    {
+        "name": "皇帝",
+        "content": "一位英明的君主，最终发现木兰的真实身份，对她的勇气和智慧深感钦佩。",
+        "per": "标准男音"
+    },
+    {
+        "name": "小弟",
+        "content": "a",
+        "per": "标准女音",
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-gNwpJngXHkSmy8a34y19xRAr/user-T6B2mDvo6NVlJGuvNB8wbtHH/img-OlyQwaWEc3f3jTOKHBjfBl31.png?st=2024-08-18T10%3A19%3A29Z&se=2024-08-18T12%3A19%3A29Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-17T13%3A01%3A39Z&ske=2024-08-18T13%3A01%3A39Z&sks=b&skv=2024-08-04&sig=pon%2B/ASRFp51oB2t10w001rxvylul1nkvn8j5rhy1Vo%3D"
     }
 ]

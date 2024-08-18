@@ -266,14 +266,14 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "通过角色描述先提取和完善角色视觉层面的信息，请使用清新统一的色调，用类似迪士尼描述插画风格生成白色背景的中国古代的单人角色图片，在以下颜色中进行选择：主色调红色#CC0000 辅助色金色#FFD700 辅助深蓝色#191970 辅助色银色#C0C0C0 辅助色白色 #FFFFFF 辅助色深红色#8B0000 图片中请使用白色背景，仅出现完整的人物形象，，角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
+            prompt = "通过角色描述先提取和完善角色视觉层面的信息，请使用清新统一的色调，用类似迪士尼描述插画风格生成白色背景的中国古代的单人角色图片，在以下颜色中进行选择：主色调红色#CC0000 辅助色金色#FFD700 辅助深蓝色#191970 辅助色银色#C0C0C0 辅助色白色 #FFFFFF 辅助色深红色#8B0000 图片中请使用白色背景，仅出现完整的人物形象，角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
             l = LLM(apikey=info_dict["apikey"])
             picture = l.create_picture(prompt=prompt)
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
             fileName=name+'.'+image.format.lower()
-            print(picture)
+            print(fileName)
             with open(info_dict['characters_image_path']+'/'+fileName, 'wb') as f:
                 f.write(req.content)
             return jsonify({"image": picture})

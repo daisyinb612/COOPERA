@@ -360,27 +360,28 @@ class LLM(object):
                 base_url="https://xiaoai.plus/v1",
                 api_key="sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74"
             )   
-            # TODO
-            response = client.images.generate(
-                model="dall-e-3",
-                prompt=prompt,
-                size="1024x1024",
-                quality="standard",
-                n=1,
-            )
-            print(response)
-            image_url = response.data[0].url
-            self.save_history(question=prompt,answer="",prompt="",history=history)
-            return image_url
-        # else:
-        #     client = ZhipuAI(api_key='4562c624dd266627559909358043af62.fCv9jl2UB63Qgomi')
-        #     response = client.images.generations(
-        #         model="cogview-3", 
-        #         prompt=prompt,
-        #     )
-        #     print(response.data[0].url)
-        #     self.save_history(question=prompt,answer="",prompt="",history=history)
-        #     return response.data[0].url
+            try:
+                response = client.images.generate(
+                    model="dall-e-3",
+                    prompt=prompt,
+                    size="1024x1024",
+                    quality="standard",
+                    n=1,
+                )
+                print(response)
+                image_url = response.data[0].url
+                self.save_history(question=prompt,answer="",prompt="",history=history)
+                return image_url
+            # 失败就用ZhipuAI
+            except:
+                client = ZhipuAI(api_key='4562c624dd266627559909358043af62.fCv9jl2UB63Qgomi')
+                response = client.images.generations(
+                    model="cogview-3", 
+                    prompt=prompt,
+                )
+                print(response.data[0].url)
+                self.save_history(question=prompt,answer="",prompt="",history=history)
+                return response.data[0].url
 
     def analyze_answer(self,text):
         try:
