@@ -17,8 +17,9 @@
           @click="editAsset(index)">
            <el-row :gutter="10" style="width: 100%;" align="middle">
               <el-col :span="10" style="text-align: center">
-                <img v-if="asset.image" class="asset-image" :src="asset.image" >
-                <img v-else class="asset-image" :src="require('@/assets/images/empty.png')">
+                <img v-if="asset.image" class="asset-image" :src="asset.image" />
+
+                <img v-else class="asset-image" :src="require('@/assets/images/empty.png')"/>
               </el-col>
               <el-col :span="14"><div>{{ asset.name }}</div></el-col>
            </el-row>
@@ -297,7 +298,7 @@ export default defineComponent({
       newAsset.group = '';
       newAsset.name = '';
       newAsset.content = '';
-      newAsset.image = '';
+      newAsset.image = null;
       fileList.value = [];
       showSaveDialog.value = false;
     }
@@ -334,7 +335,7 @@ export default defineComponent({
       } else {
         const newAsset = {
           name: name,
-          url: curSaveType.value === 'image' ? curSaveThing.value : 'empty.png',
+          url: curSaveType.value === 'image' ? curSaveThing.value : null,
           content: curSaveType.value === 'content' ? curSaveThing.value : '',
         };
         actions.addScene(newAsset);
@@ -352,7 +353,7 @@ export default defineComponent({
     function editAsset(index) {
       beforeEditAsset.name = scenes.value[index].name;
       beforeEditAsset.content = scenes.value[index].content;
-      if(sceneList.value[index].image !== '') {
+      if(sceneList.value[index].image !== null) {
         fileList.value = [{
           name: sceneList.value[index].name,
           url: sceneList.value[index].image,
@@ -712,8 +713,8 @@ body {
 
 .asset-image {
   border-radius: 5px;
-  width: 200px;
-  height: 80px; 
+  width: 150px;
+  height: 150px;
   border: 2px solid #ddd
 }
 

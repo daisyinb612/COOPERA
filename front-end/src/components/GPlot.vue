@@ -248,7 +248,7 @@ export default defineComponent({
         const newScene = {
           name: newPlot.scene,
           content: "",
-          image: 'empty.png',
+          image: null,
         };
         newPlot.scene = newScene;
         addScene({ ...newScene });
@@ -349,7 +349,7 @@ export default defineComponent({
         const newScene = {
           name: editPlotData.scene,
           content: "",
-          image: 'empty.png',
+          image: null,
         };
         editPlotData.scene = newScene;
         addScene({ ...newScene });
@@ -400,7 +400,7 @@ export default defineComponent({
         addPlot(response.data);
         const scenes = response.data.reduce((acc, plot) => {
           if (!acc.find((scene) => scene.name === plot.scene.name)) {
-            acc.push({ name: plot.scene.name, content: plot.scene.content, image: 'empty.png' });
+            acc.push({ name: plot.scene.name, content: plot.scene.content, image: null });
           }
           return acc;
         }, []);
