@@ -308,7 +308,7 @@ export default defineComponent({
       showSaveDialog.value = true;
     }
 
-    function saveAssetConfirm(group, name) {
+    async function saveAssetConfirm(group, name) {
       if (!name) {
         proxy.$message.warning('资产名为空');
         return;
@@ -324,6 +324,13 @@ export default defineComponent({
         actions.updateScene({ index: assetIndex, scene: scenes[assetIndex] });
 
         proxy.$message.success('资产更新成功');
+        await axios.post('http://localhost:8000/update_scene_asset', {
+          action: 'update_scene_asset',
+          data: {
+            scene: scenes[assetIndex],
+            index: assetIndex,
+          },
+        });
       } else {
         const newAsset = {
           name: name,
@@ -332,6 +339,12 @@ export default defineComponent({
         };
         actions.addScene(newAsset);
         proxy.$message.success('新资产添加成功');
+        await axios.post('http://localhost:8000/save_scene_asset', {
+          action: 'save_scene_asset',
+          data: {
+            scene: newAsset,
+          },
+        });
       }
       showSaveDialog.value = false;
     }
