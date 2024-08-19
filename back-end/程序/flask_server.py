@@ -228,7 +228,6 @@ def init_dialogue_generation():
     outline_pass = e.get_json_by_row(number + 1) if number >= 2 else "无"
     outline_now = e.get_json_by_row(number + 1)
     question = "\n###前情提要###:" + outline_pass + "\n###本章大纲###:" + outline_now
-    global_llm
     answer = global_llm.ask(question=question, prompt=global_llm.setting_dialogue_create)
     dialogue = global_llm.analyze_answer(answer)
     global_llm.add_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"])
@@ -533,12 +532,6 @@ def fresh_backend():
         wav_files = [f for f in wav_files if f.endswith('.wav')]
         for f in wav_files:
             os.rename(f'{wav_path}/{f}', user_file_name + f'/wav/{f}')
-
-        audio_path = sub_path + f'/audio'
-        audio_files = os.listdir(audio_path)
-        # 删除所有文件
-        for f in audio_files:
-            os.remove(f'{audio_path}/{f}')
 
         character_path = sub_path + f'/character'
         character_files = os.listdir(character_path)
