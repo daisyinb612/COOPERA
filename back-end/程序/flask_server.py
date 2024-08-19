@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, request, jsonify, send_file, send_from_directory, abort
 import os
 import requests
@@ -42,7 +44,7 @@ def save_changes():
         return jsonify({"message": "Changes saved successfully."})
     else:
         return jsonify({"error": "Invalid action type."}), 401
- 
+
 @app.route('/upload_storyline', methods=['POST'])
 def upload_storyline():
     data = request.get_json()
@@ -54,7 +56,7 @@ def upload_storyline():
             f.write(data["data"]["storyline"])
         storyline = data["data"]["storyline"]
         question = "\n###故事线###:" + storyline
-        # 
+        #
         answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
         plot = global_llm.analyze_answer(answer)
         with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
@@ -62,7 +64,7 @@ def upload_storyline():
         return jsonify(plot)
     else:
         return jsonify({"error": "Invalid action type."}), 401
- 
+
 @app.route('/get_storyline_help', methods=['POST'])
 def get_storyline_help():
     data = request.get_json()
@@ -74,29 +76,29 @@ def get_storyline_help():
     user_input = data["data"]["user_input"]
 
     question = "\n###故事线###:" + storyline + "\n###我的问题###:" + user_input
-    
+
     answer = global_llm.ask(question=question, prompt=global_llm.storyline_help, history=history)
     print("Yes")
 
     return jsonify({"answer": answer})
- 
+
 @app.route('/get_saved_storyline', methods=['GET'])
 def get_saved_storyline():
     with open(info_dict['world_setting_path'], 'r', encoding='utf-8') as f:
         storyline = f.read()
     return jsonify({"storyline": storyline})
- 
+
 # @app.route('/init_character_generation', methods=['POST'])
 # def init_character_generation():
 #     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
 #         storyline = f.read()
 #     question = "###故事线###:" + storyline
-#     
+#
 #     answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
 #     characters = global_llm.analyze_answer(answer)
 #     global_llm.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
 #     return jsonify(characters)
- 
+
 @app.route('/get_character_help', methods=['POST'])
 def get_character_help():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
@@ -110,17 +112,17 @@ def get_character_help():
     for character in characters:
         question += character["name"] + ": " + character["content"] + "\n"
     question += "\n###我的问题###:" + user_input
-    
+
     answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
- 
+
 # @app.route('/save_character_asset', methods=['POST'])
 # def save_character_asset():
 #     data = request.get_json()
-#     
+#
 #     global_llm.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
 #     return jsonify({})
- 
+
 @app.route('/init_plot_generation', methods=['POST'])
 def init_plot_generation():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
@@ -129,7 +131,7 @@ def init_plot_generation():
     question = "\n###故事线###:" + storyline + "\n###角色表###:"
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
-    
+
     answer = global_llm.ask(question=question, prompt=global_llm.setting_outline_create)
     plot = global_llm.analyze_answer(answer)
     if not os.path.exists(info_dict['outline_path']):
@@ -142,7 +144,7 @@ def init_plot_generation():
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         print('scene', scene)
         json.dump(scene, f, indent=4, ensure_ascii=False)
-        
+
     return jsonify(plot)
 
 @app.route('/add_character', methods=['POST'])
@@ -155,16 +157,16 @@ def add_character():
     with open(info_dict['characters_path'], 'w', encoding='utf-8') as f:
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
- 
+
 @app.route('/update_plot', methods=['POST'])
 def update_plot():
     data = request.get_json()
     plot = data["data"]
-    
+
     with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
         json.dump(plot, f, indent=4, ensure_ascii=False)
     return jsonify({})
- 
+
 # @app.route('/init_scene_generation', methods=['POST'])
 # def init_scene_generation():
 #     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
@@ -172,18 +174,18 @@ def update_plot():
 #     with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
 #         plot = json.load(f)
 #     question = "\n###故事线###:" + storyline + "\n###角色表###:" + plot
-#     
+#
 #     answer = global_llm.ask(question=question, prompt=global_llm.setting_scene_create)
 #     scene = global_llm.analyze_answer(answer)
 #     global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
 #     return jsonify(scene)
- 
+
 @app.route('/save_scene_asset', methods=['POST'])
 def save_scene_asset():
     data = request.get_json()
     index = data["data"]["index"]
     scene = data["data"]["scene"]
-    
+
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data[index] = scene
@@ -215,9 +217,9 @@ def delete_scene_asset():
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
 
-    
 
- 
+
+
 @app.route('/init_dialogue_generation', methods=['POST'])
 def init_dialogue_generation():
     data = request.get_json()
@@ -231,13 +233,13 @@ def init_dialogue_generation():
     dialogue = global_llm.analyze_answer(answer)
     global_llm.add_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"])
     return jsonify(dialogue)
- 
+
 @app.route('/save_dialogue_asset', methods=['POST'])
 def save_dialogue_asset():
     data = request.get_json()
     number = int(data["data"]["plot_number"])
     dialogue = data["data"]["dialogue"]
-    
+
     global_llm.update_json_to_excel(json_object=dialogue, filepath=info_dict["dialogue_path"], sheet_index=number - 1)
     return jsonify({})
 
@@ -254,7 +256,7 @@ def create_scene_picture():
             if data["data"]["user_input"] != "":
                 prompt += "场景的描述为："+data["data"]["user_input"]
             name = data["data"]["name"]
-            
+
             picture = global_llm.create_picture(prompt=prompt)
             print('generating picture done')
             req=requests.get(picture)
@@ -267,7 +269,7 @@ def create_scene_picture():
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-    
+
 @app.route('/create_character_picture', methods=['POST'])
 def create_character_picture():
     try:
@@ -279,7 +281,7 @@ def create_character_picture():
         if action == "create_character_picture":
             prompt = "通过角色描述先提取和完善角色视觉层面的信息，请使用清新统一的色调，用类似迪士尼描述插画风格生成白色背景的中国古代的单人角色图片，在以下颜色中进行选择：主色调红色#CC0000 辅助色金色#FFD700 辅助深蓝色#191970 辅助色银色#C0C0C0 辅助色白色 #FFFFFF 辅助色深红色#8B0000 图片中请使用白色背景，仅出现完整的人物形象，角色的名称为："+data["data"]["name"]+"，角色的描述为"+data["data"]["content"]
             name = data["data"]["name"]
-            
+
             picture = global_llm.create_picture(prompt=prompt)
             req=requests.get(picture)
             image=Image.open(BytesIO(req.content))
@@ -287,17 +289,17 @@ def create_character_picture():
             print(fileName)
             with open(info_dict['characters_image_path']+'/'+fileName, 'wb') as f:
                 f.write(req.content)
-            return jsonify({"image": picture})
+            return jsonify({"image": fileName})
         else:
             return jsonify({"error": "Invalid action type."}), 401
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/get_character_image', methods=['GET'])
-def get_character_image():
-    # 从前端请求中获取音频文件名
+@app.route('/get_image', methods=['GET'])
+def get_image():
     filename = request.args.get('filename')
-    image_directory = f'./opera_info/character/'
+    path = request.args.get('path')
+    image_directory = f'./opera_info/' + str(path) + '/'
 
     if not filename:
         return jsonify({"error": "No filename provided"}), 400
@@ -307,7 +309,7 @@ def get_character_image():
         return send_from_directory(image_directory, filename)
     else:
         return abort(404, description="File not found")
-    
+
 
 @app.route("/update_character", methods=['POST'])
 def update_character():
@@ -327,7 +329,7 @@ def update_character():
         return jsonify({"message": "Characters updated successfully."})
     else:
         return jsonify({"error": "Invalid action type."}), 401
-    
+
 
 @app.route("/delete_character", methods=['POST'])
 def delete_character():
@@ -346,7 +348,7 @@ def delete_character():
         return jsonify({"message": "Characters updated successfully."})
     else:
         return jsonify({"error": "Invalid action type."}), 401
-    
+
 # @app.route('/get_character_image_help', methods=['POST'])
 # def get_character_image_help():
 #     try:
@@ -356,13 +358,13 @@ def delete_character():
 #         action = data.get("action")
 #         if action == "get_character_image_help":
 #             prompt = data["data"]["user_input"]
-#             
+#
 #             picture = global_llm.create_picture(filepath=filepath, prompt=prompt)
 #             return jsonify({"image": picture})
 #         else:
 #             return jsonify({"error": "Invalid action type."}), 401
 #     except Exception as e:
-#         return jsonify({"error": str(e)}), 500  
+#         return jsonify({"error": str(e)}), 500
 
 @app.route('/get_scene_help', methods=['POST'])
 def get_scene_help():
@@ -382,7 +384,7 @@ def get_scene_help():
         beat = plot[i]["beat"]
         characters = ', '.join(plot[i]["characters"])
         question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
-    
+
     answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
 
@@ -401,7 +403,7 @@ def generate_dialogue():
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
 
-    
+
     answer = global_llm.ask(question=question, prompt=global_llm.setting_dialogue_create)
     scene = global_llm.analyze_answer(answer)
     # print('genrate_dialogue scene', scene)
@@ -426,7 +428,7 @@ def upload_dialogue():
         return jsonify({"message": "Dialogue uploaded successfully."})
     else:
         return jsonify({"error": "Invalid action type."}), 401
-    
+
 @app.route("/generate_script", methods=['GET'])
 def generate_script():
     res = {
@@ -484,13 +486,102 @@ def do_tts():
             with open(info_dict['wav_path'] + data["data"]["filename"], 'wb') as f:
                 f.write(response.content)
             return send_file(info_dict['wav_path'] + data["data"]["filename"], mimetype="audio/wav")
-        
+
         else:
             print(f'Failed to retrieve the file. Status code: {response.status_code}')
             print(response.text)
     else:
         return jsonify({"error": "Invalid action type."}), 401
 
+@app.route('/fresh_backend', methods=['GET'])
+def fresh_backend():
+    try:
+        from datetime import datetime
+        now = datetime.now()
+        user_id = now.strftime("%d-%m-%Y %H-%M-%S")
+        print('user_id', user_id)
+        print(os.listdir('./'))
+
+        sub_path = './opera_info'
+        user_file_name = f'../../experiment_data/{user_id}'
+        os.makedirs(user_file_name, exist_ok=True)
+        os.makedirs(user_file_name + '/wav', exist_ok=True)
+        os.makedirs(user_file_name + '/character_image', exist_ok=True)
+        os.makedirs(user_file_name + '/scene_image', exist_ok=True)
+        os.makedirs(f'/history', exist_ok=True)
+        os.makedirs(sub_path + f'/character', exist_ok=True)
+        os.makedirs(sub_path + f'/dialog', exist_ok=True)
+        os.makedirs(sub_path + f'/outline', exist_ok=True)
+        os.makedirs(sub_path + f'/scene', exist_ok=True)
+        os.makedirs(sub_path + f'/storyline', exist_ok=True)
+        os.makedirs(sub_path + f'/audio', exist_ok=True)
+
+        history_path = sub_path + f'/history'
+        history_files = os.listdir(history_path)
+        history_files = [f for f in history_files if f.endswith('.json')]
+        for f in history_files:
+            os.rename(f'{history_path}/{f}', user_file_name + f'/{f}')
+
+        change_path = sub_path + f'/change'
+        change_files = os.listdir(change_path)
+        change_files = [f for f in change_files if f.endswith('.json')]
+        for f in change_files:
+            os.rename(f'{change_path}/{f}', user_file_name + f'/{f}')
+
+        wav_path = sub_path + f'/audio'
+        wav_files = os.listdir(wav_path)
+        wav_files = [f for f in wav_files if f.endswith('.wav')]
+        for f in wav_files:
+            os.rename(f'{wav_path}/{f}', user_file_name + f'/wav/{f}')
+
+        audio_path = sub_path + f'/audio'
+        audio_files = os.listdir(audio_path)
+        # 删除所有文件
+        for f in audio_files:
+            os.remove(f'{audio_path}/{f}')
+
+        character_path = sub_path + f'/character'
+        character_files = os.listdir(character_path)
+        character_image_files = [f for f in character_files if f.endswith('.jpeg') or f.endswith('.png')]
+
+        character_files = [f for f in character_files if f.endswith('.json')]
+        for f in character_files:
+            os.rename(f'{character_path}/{f}', user_file_name + f'/{f}')
+
+        for f in character_image_files:
+            os.rename(f'{character_path}/{f}', user_file_name + f'/character_image/{f}')
+
+        dialogue_path = sub_path + f"/dialog"
+        dialogue_files = os.listdir(dialogue_path)
+        dialogue_files = [f for f in dialogue_files if f.endswith('.json')]
+        for f in dialogue_files:
+            os.rename(f'{dialogue_path}/{f}', user_file_name + f'/{f}')
+
+        outline_path = sub_path + f"/outline"
+        outline_files = os.listdir(outline_path)
+        outline_files = [f for f in outline_files if f.endswith('.json')]
+        for f in outline_files:
+            os.rename(f'{outline_path}/{f}', user_file_name + f'/{f}')
+
+        scene_path = sub_path + f"/scene"
+        scene_files = os.listdir(scene_path)
+        scene_image_files = [f for f in scene_files if f.endswith('.jpeg') or f.endswith('.png')]
+        scene_files = [f for f in scene_files if f.endswith('.json')]
+        for f in scene_files:
+            os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
+
+        for f in scene_image_files:
+            os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
+
+        storyline_path = sub_path + f"/storyline"
+        storyline_files = os.listdir(storyline_path)
+        for f in storyline_files:
+            os.rename(f'{storyline_path}/{f}', user_file_name + f'/{f}')
+
+        return jsonify({'result': True, 'filename': str(user_id)}), 200
+    except Exception as e:
+        print(e)
+        return jsonify({"result": str(e)}), 400
 
 @app.route('/get_audio', methods=['GET'])
 def get_audio():

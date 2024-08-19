@@ -604,15 +604,16 @@ export default defineComponent({
             },
           };
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
+          const pic_url = 'http://localhost:8000/get_image?filename=' + imageResponse.data.image + '&path=character'
           fileList.value.push({
             name: currentEditAsset.name,
-            url: imageResponse.data.image,
+            url: pic_url,
           });
           loading.value = false;
           console.log(fileList.value);
-          newAsset.image = imageResponse.data.image;
-          currentEditAsset.image = imageResponse.data.image;
-          charList.value[curEditAssetIndex.value].image = imageResponse.data.image;
+          newAsset.image = pic_url;
+          currentEditAsset.image = pic_url;
+          charList.value[curEditAssetIndex.value].image = pic_url;
       }
 
       async function generate_new_image() {

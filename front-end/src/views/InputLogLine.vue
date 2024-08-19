@@ -11,6 +11,7 @@
       </el-main>
 
       <el-footer class="button-container">
+        <el-button class="upload-button" @click="FreshBackend">刷新</el-button>
         <el-button class="upload-button" @click="UploadLogLine">保存</el-button>
       </el-footer>
     </el-main>
@@ -143,6 +144,24 @@ export default defineComponent({
           });
         }
       }
+    },
+    async FreshBackend(){
+      const Response = await axios.get('http://localhost:8000/fresh_backend');
+      if (Response.data.result === true) {
+        ElMessage({
+          message: '刷新成功，文件名：' + Response.data.filename,
+          type: 'success',
+        });
+        return;
+      }
+      else {
+        ElMessage({
+          message: '刷新失败',
+          type: 'error',
+        });
+        return;
+      }
+
     },
     async UploadLogLine() {
       this.loading = true;
