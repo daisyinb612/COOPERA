@@ -484,17 +484,18 @@ export default defineComponent({
           };
 
           const imageResponse = await axios.post('http://localhost:8000/create_scene_picture', imageRequestBody);
+          const pic_url = 'http://localhost:8000/get_image?filename=' + imageResponse.data.image + '&path=scene'
           sceneList.value[curEditAssetIndex.value] = {
             name: currentEditAsset.name,
-            url: imageResponse.data.image,
+            url: pic_url,
           }
           loading.value = false;
-          currentEditAsset.image = imageResponse.data.image;
+          currentEditAsset.image = pic_url;
           fileList.value.push({
             name: currentEditAsset.name,
-            url: imageResponse.data.image,
+            url: pic_url,
           });
-          newAsset.image = imageResponse.data.image;
+          newAsset.image = pic_url;
       }
 
     return {

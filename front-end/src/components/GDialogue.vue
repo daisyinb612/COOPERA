@@ -405,7 +405,7 @@ export default defineComponent({
   margin-bottom: 40px;
   padding: 5px;
   border-radius: 10px;
-  background-color: #F1F1F1
+  background-color: #D5DCFF;
 }
 
 .plot-header {
