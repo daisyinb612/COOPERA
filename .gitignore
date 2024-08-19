@@ -3,6 +3,7 @@ node_modules
 /dist
 /audio
 /opera_info
+/__pycache__
 
 
 # local env files
