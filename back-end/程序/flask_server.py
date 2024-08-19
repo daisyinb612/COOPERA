@@ -407,8 +407,8 @@ def generate_dialogue():
     scene = global_llm.analyze_answer(answer)
     # print('genrate_dialogue scene', scene)
     # global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
-    with open(info_dict["scene_path"], 'w', encoding='utf-8') as f:
-        json.dump(scene, f, indent=4, ensure_ascii=False)
+    # with open(info_dict["scene_path"], 'w', encoding='utf-8') as f:
+    #     json.dump(scene, f, indent=4, ensure_ascii=False)
     return jsonify(scene)
 
 
