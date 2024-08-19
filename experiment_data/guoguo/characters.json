@@ -1,0 +1,36 @@
+[
+    {
+        "name": "花木兰",
+        "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+        "per": "标准女音",
+        "image": "https://sfile.chatglm.cn/testpath/31ad8d0f-bf6c-5a38-9f87-c8fa49e88b43_0.png"
+    },
+    {
+        "name": "花父",
+        "content": "木兰的父亲，年迈体弱，但对女儿的勇敢和孝顺感到无比自豪。一直盼望着女儿平安归来。",
+        "per": "标准男音",
+        "image": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-gNwpJngXHkSmy8a34y19xRAr/user-T6B2mDvo6NVlJGuvNB8wbtHH/img-KjKVos1RBssSHitt037WjDrl.png?st=2024-08-19T01%3A13%3A45Z&se=2024-08-19T03%3A13%3A45Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-08-18T04%3A16%3A15Z&ske=2024-08-19T04%3A16%3A15Z&sks=b&skv=2024-08-04&sig=YMPrNKD8N4C8qms3HVxIsr5jSY5BKOZMrN4LBlHXajk%3D"
+    },
+    {
+        "name": "花母",
+        "content": "木兰的母亲，慈爱温柔，时刻牵挂着远在战场上的女儿。她为女儿的归来感到无比欣慰。",
+        "per": "标准女音",
+        "image": "https://sfile.chatglm.cn/testpath/6d2fcf3e-5309-5652-ab6c-6155d8af5333_0.png"
+    },
+    {
+        "name": "花姐",
+        "content": "木兰的姐姐，温柔贤淑，听闻妹妹凯旋归来，激动不已，精心打扮自己，准备迎接木兰。",
+        "per": "标准女音",
+        "image": "https://sfile.chatglm.cn/testpath/e87a4aa2-18b6-5d02-a004-d40934c9f04c_0.png"
+    },
+    {
+        "name": "花弟",
+        "content": "木兰的弟弟，活泼好动，充满了对姐姐的崇拜。为了庆祝姐姐的归来，他特意杀猪宰羊，准备丰盛的饭菜。",
+        "per": "标准男音"
+    },
+    {
+        "name": "可汗",
+        "content": "尊贵的君主，赏识木兰的勇气和才智，在木兰打了胜仗后询问她的愿望。",
+        "per": "标准男音"
+    }
+]

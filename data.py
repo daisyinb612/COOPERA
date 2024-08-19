@@ -1,6 +1,6 @@
 import os
 
-user_id = 'lailai'
+user_id = 'guoguo'
 
 user_file_name = f'./experiment_data/{user_id}'
 os.makedirs(user_file_name, exist_ok=True)

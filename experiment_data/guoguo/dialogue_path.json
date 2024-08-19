@@ -1,0 +1,641 @@
+[
+    {
+        "beat": "花木兰在可汗面前展示了她的英勇战绩，可汗问她想要什么奖赏。花木兰表示什么都不想要，只想骑马回家。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "尊贵的君主，赏识木兰的勇气和才智，在木兰打了胜仗后询问她的愿望。",
+                "name": "可汗",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "凯旋归来",
+        "plotStage": "展示",
+        "scene": {
+            "content": "豪华的大帐内，金碧辉煌，四周悬挂着战旗和武器。可汗坐在高高的宝座上，周围是众多大臣和将军。",
+            "name": "可汗大帐"
+        },
+        "dialogue": [
+            {
+                "character": "可汗",
+                "content": "花将军，你的英勇和智慧为我们赢得了这场胜利，你想要什么奖赏？",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_0.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "多谢可汗。木兰无功不受禄，只愿能骑马回家，与家人团聚。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_1.wav"
+            },
+            {
+                "character": "可汗",
+                "content": "你的忠诚和勇气令人敬佩。既然如此，我准许你回家，愿你一路平安。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_2.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢可汗恩典。木兰告辞。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_3.wav"
+            },
+            {
+                "character": "可汗",
+                "content": "保重，花将军。",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_4.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花木兰告别了她的战友们，大家纷纷祝福她一路平安。木兰骑上战马，踏上了回家的路。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "告别战友",
+        "plotStage": "激励事件",
+        "scene": {
+            "content": "军营内，战士们正在收拾行装，准备各自回家。战马在一旁嘶鸣，营帐外的旌旗在风中飘扬。",
+            "name": "军营"
+        },
+        "dialogue": [
+            {
+                "character": "战士甲",
+                "content": "木兰，真舍不得你走啊！你可是咱们的英雄！",
+                "number": "1"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家，能和你们并肩作战，是我的荣幸。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_1.wav"
+            },
+            {
+                "character": "战士乙",
+                "content": "木兰，一路平安，回家好好休息，别忘了我们这些兄弟。",
+                "number": "3"
+            },
+            {
+                "character": "花木兰",
+                "content": "放心吧，我永远不会忘记你们。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_3.wav"
+            },
+            {
+                "character": "战士丙",
+                "content": "木兰，这匹战马是你的功劳，你带它回家吧。",
+                "number": "5"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢，这是我最好的伙伴。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_5.wav"
+            },
+            {
+                "character": "战士丁",
+                "content": "木兰，祝你一路顺风，早日和家人团聚。",
+                "number": "7"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家，我会珍惜这段时光的。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_7.wav"
+            },
+            {
+                "character": "战士们",
+                "content": "木兰，保重！",
+                "number": "9"
+            },
+            {
+                "character": "花木兰",
+                "content": "保重！",
+                "number": "10",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_9.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花父花母思念女儿成疾，盼望她早日归来。花姐花弟也时刻挂念着木兰。",
+        "characters": [
+            {
+                "content": "木兰的父亲，年迈体弱，但对女儿的勇敢和孝顺感到无比自豪。一直盼望着女儿平安归来。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈爱温柔，时刻牵挂着远在战场上的女儿。她为女儿的归来感到无比欣慰。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，温柔贤淑，听闻妹妹凯旋归来，激动不已，精心打扮自己，准备迎接木兰。",
+                "name": "花姐",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的弟弟，活泼好动，充满了对姐姐的崇拜。为了庆祝姐姐的归来，他特意杀猪宰羊，准备丰盛的饭菜。",
+                "name": "花弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "思念成疾",
+        "plotStage": "冲突",
+        "scene": {
+            "content": "花家院落，古朴典雅，庭院中种满了花草。屋内，花母正在忙碌，花父坐在椅子上，目光望向远方，满是对女儿的思念。",
+            "name": "花家"
+        },
+        "dialogue": [
+            {
+                "character": "花父",
+                "content": "木兰这孩子，已经好久没消息了。希望她平安无事。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_0.wav"
+            },
+            {
+                "character": "花母",
+                "content": "老爷，别担心。木兰是个有福气的孩子，她一定会平安归来的。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_1.wav"
+            },
+            {
+                "character": "花父",
+                "content": "但愿如此。每次想到她在战场上，我这心就揪得紧。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_2.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "爹，娘，听说木兰姐姐凯旋归来了！我去打扮一下，准备迎接她。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_3.wav"
+            },
+            {
+                "character": "花母",
+                "content": "真的吗？木兰真的回来了？太好了！",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_4.wav"
+            },
+            {
+                "character": "花父",
+                "content": "老天保佑，总算是盼到这一天了。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_5.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "爹，娘，我已经杀了猪，宰了羊，等木兰姐姐回来，我们一起庆祝！",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_6.wav"
+            },
+            {
+                "character": "花母",
+                "content": "好孩子，你真是懂事。木兰回来看到你们这么用心，一定会很高兴的。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_7.wav"
+            },
+            {
+                "character": "花父",
+                "content": "是啊，木兰一定会很高兴的。我们一起等她回来。",
+                "number": "9",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_8.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花木兰骑马行走在归乡的路上，心中充满了对家乡和亲人的思念。她加快了脚步，迫不及待地想要见到家人。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "归乡途中",
+        "plotStage": "上升动作",
+        "scene": {
+            "content": "乡间小路，两旁是青翠的田野和山林。远处的村庄隐约可见，路边的花草随风摇曳。",
+            "name": "乡间小路"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "终于快到家了，离开这么久，真是想死你们了。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_0.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "这一路上，山林和田野还是那么熟悉，真好。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_1.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "再快一点，再快一点，我已经迫不及待想见到父亲和母亲了。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_2.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "不知道姐姐和弟弟现在怎么样了？希望他们一切都好。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_3.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "村庄就在前面了，终于到家了！",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_4.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花木兰到达城门口，看到父母和姐弟前来迎接。家人们激动地相拥，场面温馨感人。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的父亲，年迈体弱，但对女儿的勇敢和孝顺感到无比自豪。一直盼望着女儿平安归来。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈爱温柔，时刻牵挂着远在战场上的女儿。她为女儿的归来感到无比欣慰。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，温柔贤淑，听闻妹妹凯旋归来，激动不已，精心打扮自己，准备迎接木兰。",
+                "name": "花姐",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的弟弟，活泼好动，充满了对姐姐的崇拜。为了庆祝姐姐的归来，他特意杀猪宰羊，准备丰盛的饭菜。",
+                "name": "花弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "城门相见",
+        "plotStage": "高潮",
+        "scene": {
+            "content": "城门口，人来人往，熙熙攘攘。城墙上挂满了彩旗，象征着胜利和凯旋。",
+            "name": "城门口"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "（骑马缓缓进入城门，看到城墙上挂满了彩旗，心中感慨）终于回家了。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_0.wav"
+            },
+            {
+                "character": "花母",
+                "content": "（激动地跑上前，眼含泪光）木兰，木兰，你终于回来了！",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_1.wav"
+            },
+            {
+                "character": "花父",
+                "content": "（拄着拐杖，微微颤抖地走上前）好孩子，你辛苦了，父亲为你感到无比自豪。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_2.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "（精心打扮，满脸喜悦）妹妹，快过来，让姐姐好好看看你！",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_3.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "（兴奋地挥舞着手中的刀）姐姐，今天我特意为你杀猪宰羊，咱们要好好庆祝一番！",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_4.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "（下马，拥抱父母和姐弟，眼中闪烁着泪光）我终于回来了，家里的一切都好吧？",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_5.wav"
+            },
+            {
+                "character": "花母",
+                "content": "（抚摸着木兰的脸颊）一切都好，只是每天都在盼着你平安归来。",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_6.wav"
+            },
+            {
+                "character": "花父",
+                "content": "（点点头）是啊，家里一切安好，我们都等着你回来。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_7.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "（拉着木兰的手）快回家吧，妹妹，家里已经准备好了丰盛的饭菜。",
+                "number": "9",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_8.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "（兴奋地跑在前面）走，姐姐，我给你准备了你最喜欢的菜！",
+                "number": "10",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_9.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "（微笑着看着家人）好，我们回家。（家人们一起往家里走）",
+                "number": "11",
+                "audio": "http://localhost:8000/get_audio?filename=scene4_10.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花木兰和家人们团聚，大家一起分享战场上的故事，欢声笑语不断。花弟为姐姐准备了丰盛的饭菜，花姐也精心打扮迎接妹妹。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的父亲，年迈体弱，但对女儿的勇敢和孝顺感到无比自豪。一直盼望着女儿平安归来。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈爱温柔，时刻牵挂着远在战场上的女儿。她为女儿的归来感到无比欣慰。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，温柔贤淑，听闻妹妹凯旋归来，激动不已，精心打扮自己，准备迎接木兰。",
+                "name": "花姐",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的弟弟，活泼好动，充满了对姐姐的崇拜。为了庆祝姐姐的归来，他特意杀猪宰羊，准备丰盛的饭菜。",
+                "name": "花弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "团聚时刻",
+        "plotStage": "解决",
+        "scene": {
+            "content": "花家院落，布置得喜气洋洋。院子里摆满了丰盛的饭菜，家人们围坐在一起，其乐融融。",
+            "name": "花家院落"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "爹，娘，我回来了！",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_0.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，木兰，你终于回来了！",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_1.wav"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，你辛苦了。快进来，快进来。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_2.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "妹妹，你真是太厉害了！快让我看看你！",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_3.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，你回来就好了！我特意为你准备了丰盛的饭菜，快来尝尝！",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_4.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "弟弟，你真是长大了，竟然会做饭了。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_5.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，快坐下，今天我们一家人团聚，好好吃一顿。",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_6.wav"
+            },
+            {
+                "character": "花父",
+                "content": "是啊，木兰，你在战场上经历了那么多，一定有很多故事要讲吧？",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_7.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "爹，娘，姐姐，弟弟，我在战场上确实经历了很多，不过最开心的就是现在能和你们在一起。",
+                "number": "9",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_8.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "妹妹，你真是我们的骄傲。来，大家一起举杯，庆祝木兰凯旋归来！（举杯）",
+                "number": "10",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_9.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，来尝尝我做的菜！",
+                "number": "11",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_10.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "好，弟弟，我尝尝看（尝一口菜）。嗯，真好吃！",
+                "number": "12",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_11.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，回到家就好，家里永远是你的港湾。",
+                "number": "13",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_12.wav"
+            },
+            {
+                "character": "花父",
+                "content": "是啊，木兰，我们一家人终于团聚了。",
+                "number": "14",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_13.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢你们，我也终于能安心了。",
+                "number": "15",
+                "audio": "http://localhost:8000/get_audio?filename=scene5_14.wav"
+            }
+        ]
+    },
+    {
+        "beat": "花木兰回到了平静的生活中，她和家人们一起度过了幸福的时光。木兰的心中充满了对未来的希望和对家人的爱。",
+        "characters": [
+            {
+                "content": "勇敢无畏的女战士，为了替父从军，女扮男装，经历了无数艰险，最终打了胜仗。她只希望能够回到家乡，与家人团聚。",
+                "name": "花木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的父亲，年迈体弱，但对女儿的勇敢和孝顺感到无比自豪。一直盼望着女儿平安归来。",
+                "name": "花父",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈爱温柔，时刻牵挂着远在战场上的女儿。她为女儿的归来感到无比欣慰。",
+                "name": "花母",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，温柔贤淑，听闻妹妹凯旋归来，激动不已，精心打扮自己，准备迎接木兰。",
+                "name": "花姐",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的弟弟，活泼好动，充满了对姐姐的崇拜。为了庆祝姐姐的归来，他特意杀猪宰羊，准备丰盛的饭菜。",
+                "name": "花弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "重归平静",
+        "plotStage": "结局",
+        "scene": {
+            "content": "花家屋内，温馨舒适。木兰和家人们坐在一起，享受着久违的家庭时光。",
+            "name": "花家屋内"
+        },
+        "dialogue": [
+            {
+                "character": "花木兰",
+                "content": "爹，娘，我回来了。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_0.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，快进来，快进来！",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_1.wav"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，回来就好，回来就好。",
+                "number": "3",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_2.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "妹妹，你终于回来了！你看，我特意打扮了一番，就等你回来呢。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_3.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，今天我们杀猪宰羊，准备了好多好吃的，快来尝尝！",
+                "number": "5",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_4.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢大家，能和你们在一起真好。",
+                "number": "6",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_5.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，这些年你辛苦了，快坐下歇歇，吃点东西。",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_6.wav"
+            },
+            {
+                "character": "花父",
+                "content": "木兰，爹知道你不容易。如今你平安归来，爹心里总算踏实了。",
+                "number": "8",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_7.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "爹，娘，我只希望我们一家人能平平安安地在一起。",
+                "number": "9",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_8.wav"
+            },
+            {
+                "character": "花姐",
+                "content": "妹妹，你以后有什么打算？",
+                "number": "10",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_9.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "我想好好陪陪你们，然后找个合适的机会，再为家乡做些力所能及的事情。",
+                "number": "11",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_10.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐，我相信你，无论你做什么，我们都会支持你！",
+                "number": "12",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_11.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "谢谢你们，有你们在，我心里踏实。",
+                "number": "13",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_12.wav"
+            },
+            {
+                "character": "花母",
+                "content": "木兰，来，尝尝这道菜，是你弟弟特意为你做的。",
+                "number": "14",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_13.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "好香啊！弟弟，你真是越来越厉害了。",
+                "number": "15",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_14.wav"
+            },
+            {
+                "character": "花弟",
+                "content": "姐姐喜欢就好，等你多教教我，我一定能做得更好！",
+                "number": "16",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_15.wav"
+            },
+            {
+                "character": "花父",
+                "content": "好，好，大家一起吃，一起聊。今天是我们一家团聚的好日子。",
+                "number": "17",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_16.wav"
+            },
+            {
+                "character": "花木兰",
+                "content": "是啊，今天真是个好日子。",
+                "number": "18",
+                "audio": "http://localhost:8000/get_audio?filename=scene6_17.wav"
+            }
+        ]
+    }
+]
