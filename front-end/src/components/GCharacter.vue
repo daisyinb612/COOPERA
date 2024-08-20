@@ -626,14 +626,15 @@ export default defineComponent({
             },
           };
           const imageResponse = await axios.post('http://localhost:8000/create_character_picture', imageRequestBody);
+          const pic_url = 'http://localhost:8000/get_image?filename=' + imageResponse.data.image + '&path=character'
           fileList.value.push({
             name: newAsset.name,
-            url: imageResponse.data.image,
+            url: pic_url,
           });
           loading.value = false;
           console.log(fileList.value);
-          newAsset.image = imageResponse.data.image;
-          newAsset.image = imageResponse.data.image;
+          newAsset.image = pic_url;
+          newAsset.image = pic_url;
 
       }
 
