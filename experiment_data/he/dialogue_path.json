@@ -1,0 +1,509 @@
+[
+    {
+        "beat": "木兰因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。",
+        "characters": [
+            {
+                "content": "女主人公，因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。她勇敢、智慧，心系家庭。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰拒绝高官厚禄",
+        "plotStage": "激励事件",
+        "scene": {
+            "group": "scenes",
+            "name": "可汗的大帐",
+            "content": "可汗的大帐内，装饰华丽，烛光摇曳。可汗坐在宝座上，身旁站立着几位大臣。",
+            "image": "http://localhost:8000/get_image?filename=可汗的大帐.png&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "可汗",
+                "content": "木兰，你在战场上英勇无畏，立下了赫赫战功，朕决定赏赐你高官厚禄，以示朕的嘉奖。",
+                "number": "1"
+            },
+            {
+                "character": "木兰",
+                "content": "多谢可汗厚爱，木兰只是一介女子，能为国家效力已是荣幸，不敢贪图高官厚禄。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_1.wav"
+            },
+            {
+                "character": "可汗",
+                "content": "木兰，你为国效命，功不可没。为何不愿接受朕的赏赐？",
+                "number": "3"
+            },
+            {
+                "character": "木兰",
+                "content": "可汗，木兰自幼家贫，父母年迈，姐姐与小弟也需照顾。木兰只求一匹快马，能早日回家侍奉双亲。",
+                "number": "4",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_3.wav"
+            },
+            {
+                "character": "大臣甲",
+                "content": "木兰，你为国立下如此大功，实在令人敬佩。可汗，是否应允她的请求？",
+                "number": "5"
+            },
+            {
+                "character": "可汗",
+                "content": "木兰心系家庭，忠孝两全，实在难得。好，朕应允你，赐你一匹快马，愿你早日与家人团聚。",
+                "number": "6"
+            },
+            {
+                "character": "木兰",
+                "content": "谢可汗恩典，木兰感激不尽。愿国家永远繁荣昌盛，百姓安居乐业。",
+                "number": "7",
+                "audio": "http://localhost:8000/get_audio?filename=scene0_6.wav"
+            }
+        ]
+    },
+    {
+        "plotName": "木兰父母得知消息",
+        "plotStage": "冲突",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰家",
+            "content": "木兰家的院子里，花草繁茂，阳光明媚。木兰的父母正在忙碌着，准备迎接女儿的归来。",
+            "image": "http://localhost:8000/get_image?filename=木兰家.jpeg&path=scene"
+        },
+        "characters": [
+            {
+                "content": "木兰的父亲，年迈体弱，但为木兰的英勇感到无比自豪，急切地盼望女儿归来。",
+                "name": "木兰父亲",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈祥温柔，深深为女儿的安全和荣誉感到欣慰，精心准备迎接木兰的归来。",
+                "name": "木兰母亲",
+                "per": "标准女音"
+            }
+        ],
+        "beat": "木兰父母得知木兰即将归来，父亲为女儿的英勇感到自豪，母亲则深深为女儿的安全和荣誉感到欣慰。木兰父母互相搀扶出门迎接木兰。",
+        "dialogue": [
+            {
+                "character": "木兰父亲",
+                "content": "夫人，你听说了吗？我们的木兰，她终于要回来了！",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene1_0.wav"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "是啊，老爷，我刚刚收到信，木兰说她拒绝了可汗的高官厚禄，只求一匹快马回家。",
+                "number": "2"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "真是我的好女儿！她在战场上英勇无比，如今却只想回家。",
+                "number": "3"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "我一直担心她的安全，现在总算可以放下心来。她平安归来，就是我们最大的福气。",
+                "number": "4"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "夫人，我们得好好准备，迎接我们的英雄女儿凯旋。",
+                "number": "5"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "是啊，老爷，院子里的花草都开得正好，我们也要打扫得干干净净，让木兰一回来就能感受到家的温暖。",
+                "number": "6"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "我会亲自去迎接她，虽然我年迈体弱，但这是我唯一的心愿。",
+                "number": "7"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "老爷，我陪你一起去。木兰见到我们，一定会很高兴的。",
+                "number": "8"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "好，夫人，我们一起去迎接我们的木兰。",
+                "number": "9"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "木兰这一路辛苦了，我们要让她感受到家的温暖和爱。",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "plotName": "木兰姐姐的准备",
+        "plotStage": "上升动作",
+        "scene": {
+            "group": "scenes",
+            "name": "木兰家的厨房",
+            "content": "木兰家的厨房里，炊烟袅袅，木兰的姐姐正在准备丰盛的饭菜，忙碌而有条不紊。",
+            "image": "http://localhost:8000/get_image?filename=木兰家的厨房.jpeg&path=scene"
+        },
+        "characters": [
+            {
+                "content": "木兰的姐姐，贤淑端庄，对妹妹的勇敢和荣誉充满敬佩，积极参与准备迎接木兰的工作。",
+                "name": "木兰姐姐",
+                "per": "标准女音"
+            },
+            {
+                "name": "木兰小弟",
+                "content": "木兰的小弟，活泼好动，对姐姐的英雄事迹充满崇拜，兴奋地等待姐姐归来。",
+                "per": "标准男音",
+                "image": "http://localhost:8000/get_image?filename=木兰小弟.jpeg&path=character"
+            }
+        ],
+        "beat": "木兰的姐姐和木兰的小弟积极参与准备迎接木兰的工作。",
+        "dialogue": [
+            {
+                "character": "木兰姐姐",
+                "content": "小弟，快来帮我摘些菜，木兰马上就要回来了，我们得准备好丰盛的饭菜迎接她。",
+                "number": "1",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_0.wav"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "好啊，姐姐！我已经把院子里的菜都摘好了，就等你来处理了。",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene2_1.wav"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "真是个好孩子。来，把这些菜洗干净，我们要做最好的饭菜给姐姐吃。",
+                "number": "3"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "姐姐，你说木兰姐姐会不会带回什么战利品？她一定很厉害吧！",
+                "number": "4"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "木兰妹妹可是我们家的骄傲，她不但勇敢，而且聪明。无论她带不带战利品回来，她都是我们的英雄。",
+                "number": "5"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "我也要像木兰姐姐一样勇敢，将来也要为家里争光！",
+                "number": "6"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "好好好，你也要努力学习，将来一定会有出息的。来，先帮我把这些菜洗干净。",
+                "number": "7"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "嗯，我马上去洗菜。姐姐，你说我们做些什么菜好呢？",
+                "number": "8"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "我们做些木兰喜欢吃的菜吧，比如红烧肉和清蒸鱼。她在外面吃了那么多苦，一定很想念家里的味道。",
+                "number": "9"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "好啊，我最喜欢吃红烧肉了。木兰姐姐一定也会喜欢的！",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "plotName": "木兰小弟的兴奋",
+        "plotStage": "上升动作",
+        "scene": {
+            "content": "木兰家的院子里，木兰的小弟在玩耍，四处奔跑，兴奋地等待姐姐归来。",
+            "name": "木兰家的院子"
+        },
+        "characters": [
+            {
+                "content": "木兰的小弟，活泼好动，对姐姐的英雄事迹充满崇拜，兴奋地等待姐姐归来。",
+                "name": "木兰小弟",
+                "per": "标准男音"
+            }
+        ],
+        "beat": "木兰的小弟活泼好动，对姐姐的英雄事迹充满崇拜，兴奋地等待姐姐归来，磨刀霍霍准备杀猪宰羊做顿好饭迎接木兰归来。",
+        "dialogue": [
+            {
+                "character": "木兰小弟",
+                "content": "爹，娘！姐姐要回来了！我刚刚听到村口的消息，她已经快到家了！",
+                "number": "1"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "我要去准备迎接她！磨刀霍霍，咱们要杀猪宰羊，好好庆祝一番！",
+                "number": "2",
+                "audio": "http://localhost:8000/get_audio?filename=scene3_1.wav"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "姐姐可是咱们家的英雄！我一定要告诉村里的小伙伴们，让他们也来看看我的英雄姐姐！",
+                "number": "3"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "我得赶紧去找些干柴，咱们今晚要点起篝火，好好热闹热闹！",
+                "number": "4"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "姐姐回来了，我要亲手给她做一碗她最喜欢的鸡汤！",
+                "number": "5"
+            }
+        ]
+    },
+    {
+        "beat": "木兰骑着快马，身披战甲，凯旋归来，村民们纷纷出来迎接，欢呼雀跃。",
+        "characters": [
+            {
+                "content": "女主人公，因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。她勇敢、智慧，心系家庭。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰凯旋归来",
+        "plotStage": "高潮",
+        "scene": {
+            "group": "scenes",
+            "name": "村口",
+            "content": "村口的路上，尘土飞扬，木兰骑着一匹快马，身披战甲，凯旋归来。村民们纷纷出来迎接，欢呼雀跃。",
+            "image": "http://localhost:8000/get_image?filename=村口.jpeg&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "村民甲",
+                "content": "快看，快看！那不是木兰吗？她回来了！",
+                "number": "1"
+            },
+            {
+                "character": "村民乙",
+                "content": "真的是木兰！她骑着快马，身披战甲，真是威风凛凛！",
+                "number": "2"
+            },
+            {
+                "character": "木兰",
+                "content": "乡亲们，我木兰回来了！",
+                "number": "3"
+            },
+            {
+                "character": "村民丙",
+                "content": "木兰，你真是我们村的骄傲！",
+                "number": "4"
+            },
+            {
+                "character": "村民丁",
+                "content": "木兰，快来看看，大家都在等你呢！",
+                "number": "5"
+            },
+            {
+                "character": "木兰",
+                "content": "谢谢大家，我只是尽了自己的一份力。",
+                "number": "6"
+            },
+            {
+                "character": "村民甲",
+                "content": "木兰，你拒绝了可汗的赏赐，只求一匹快马，真是让人敬佩！",
+                "number": "7"
+            },
+            {
+                "character": "木兰",
+                "content": "家人是我最大的牵挂，战场上的荣誉再多，也比不上家乡的温暖。",
+                "number": "8"
+            },
+            {
+                "character": "村民乙",
+                "content": "木兰，快回家吧，你的父母、姐姐和小弟都在等你呢！",
+                "number": "9"
+            },
+            {
+                "character": "木兰",
+                "content": "好的，我这就回去。谢谢大家的欢迎！",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "beat": "木兰回到家中，与家人团聚，家人们围坐在一起，欢声笑语，充满温馨。",
+        "characters": [
+            {
+                "content": "女主人公，因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。她勇敢、智慧，心系家庭。",
+                "name": "木兰",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的父亲，年迈体弱，但为木兰的英勇感到无比自豪，急切地盼望女儿归来。",
+                "name": "木兰父亲",
+                "per": "标准男音"
+            },
+            {
+                "content": "木兰的母亲，慈祥温柔，深深为女儿的安全和荣誉感到欣慰，精心准备迎接木兰的归来。",
+                "name": "木兰母亲",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的姐姐，贤淑端庄，对妹妹的勇敢和荣誉充满敬佩，积极参与准备迎接木兰的工作。",
+                "name": "木兰姐姐",
+                "per": "标准女音"
+            },
+            {
+                "content": "木兰的小弟，活泼好动，对姐姐的英雄事迹充满崇拜，兴奋地等待姐姐归来。",
+                "name": "木兰小弟",
+                "per": "标准男音"
+            }
+        ],
+        "plotName": "家庭团聚",
+        "plotStage": "解决",
+        "scene": {
+            "content": "木兰家的院子里，家人们围坐在一起，欢声笑语，充满温馨。",
+            "name": "木兰家"
+        },
+        "dialogue": [
+            {
+                "character": "木兰母亲",
+                "content": "快，快，把这条红绸带挂在门口。木兰回来看到一定会喜欢。",
+                "number": "1"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "是啊，木兰她从小就喜欢红色，这次一定会让她高兴。",
+                "number": "2"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "母亲，父亲，我已经把木兰最喜欢的糕点准备好了，她回来一定会开心的。",
+                "number": "3"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "姐姐，我能不能第一个见到木兰姐姐？我有好多问题要问她呢！",
+                "number": "4"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "小弟，别急，木兰回来后我们都会有机会和她说话的。",
+                "number": "5"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "听说木兰在战场上立下了不少战功，可汗都亲自赏赐她了呢。",
+                "number": "6"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "是啊，木兰真是我们的骄傲。她不但勇敢，还心系家庭，真是难得。",
+                "number": "7"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "姐姐，你说木兰姐姐回来会不会带回一些战场上的故事？我好想听啊！",
+                "number": "8"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "木兰最懂得照顾人，她一定会和我们分享她的经历的。",
+                "number": "9"
+            },
+            {
+                "character": "木兰",
+                "content": "父亲，母亲，我回来了！",
+                "number": "10"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "木兰！你终于回来了！快进来，快进来。",
+                "number": "11"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "木兰，看到你平安归来，我们心里真是高兴。",
+                "number": "12"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "木兰，欢迎回家。你辛苦了。",
+                "number": "13"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "木兰姐姐，你回来啦！快给我讲讲战场上的故事！",
+                "number": "14"
+            },
+            {
+                "character": "木兰",
+                "content": "大家都好，我这次回来，只想和你们在一起，好好享受这段时光。",
+                "number": "15"
+            },
+            {
+                "character": "木兰母亲",
+                "content": "好，好，大家都坐下，我们一家人终于团聚了。",
+                "number": "16"
+            },
+            {
+                "character": "木兰父亲",
+                "content": "木兰，这次你可要好好休息，不用再担心什么了。",
+                "number": "17"
+            },
+            {
+                "character": "木兰",
+                "content": "谢谢父亲，谢谢母亲，我会好好休息的。",
+                "number": "18"
+            },
+            {
+                "character": "木兰姐姐",
+                "content": "木兰，我们都为你感到骄傲。",
+                "number": "19"
+            },
+            {
+                "character": "木兰小弟",
+                "content": "木兰姐姐，你是我的英雄！",
+                "number": "20"
+            }
+        ]
+    },
+    {
+        "beat": "木兰站在庭院中央，仰望天空，思考未来。她知道，新的生活即将开始。",
+        "characters": [
+            {
+                "content": "女主人公，因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。她勇敢、智慧，心系家庭。",
+                "name": "木兰",
+                "per": "标准女音"
+            }
+        ],
+        "plotName": "木兰的未来",
+        "plotStage": "结局",
+        "scene": {
+            "content": "木兰家的庭院里，花草繁茂，木兰站在庭院中央，仰望天空，思考未来。",
+            "name": "木兰家的庭院"
+        },
+        "dialogue": [
+            {
+                "character": "木兰",
+                "content": "（仰望天空，深吸一口气）终于回到家了，这一切仿佛如梦一般。",
+                "number": "1"
+            },
+            {
+                "character": "木兰",
+                "content": "（低声自语）未来会是什么样子呢？战争的阴影已经过去，但新的生活也将开始。",
+                "number": "2"
+            },
+            {
+                "character": "木兰",
+                "content": "（坚定地）不管未来如何，我都会勇敢面对。为了家人，为了这片土地，我会继续努力。",
+                "number": "3"
+            },
+            {
+                "character": "木兰",
+                "content": "（微笑）希望父母和兄弟姐妹们都好，他们一定很高兴我能平安归来。",
+                "number": "4"
+            },
+            {
+                "character": "木兰",
+                "content": "（转身走向家门）是时候和他们团聚了，这才是我真正的归宿。",
+                "number": "5"
+            }
+        ]
+    }
+]

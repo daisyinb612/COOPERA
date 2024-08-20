@@ -1,0 +1,47 @@
+[
+    {
+        "group": "scenes",
+        "name": "可汗的大帐",
+        "content": "可汗的大帐内，装饰华丽，烛光摇曳。可汗坐在宝座上，身旁站立着几位大臣。",
+        "image": "http://localhost:8000/get_image?filename=可汗的大帐.png&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "木兰家",
+        "content": "木兰家的院子里，花草繁茂，阳光明媚。木兰的父母正在忙碌着，准备迎接女儿的归来。",
+        "image": "http://localhost:8000/get_image?filename=木兰家.jpeg&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "木兰家的厨房",
+        "content": "木兰家的厨房里，炊烟袅袅，木兰的姐姐正在准备丰盛的饭菜，忙碌而有条不紊。",
+        "image": "http://localhost:8000/get_image?filename=木兰家的厨房.jpeg&path=scene"
+    },
+    {
+        "name": {
+            "name": "木兰家的院子",
+            "content": "木兰家的院子里，木兰的小弟在玩耍，四处奔跑，兴奋地等待姐姐归来。"
+        },
+        "url": ""
+    },
+    {
+        "group": "scenes",
+        "name": "村口",
+        "content": "村口的路上，尘土飞扬，木兰骑着一匹快马，身披战甲，凯旋归来。村民们纷纷出来迎接，欢呼雀跃。",
+        "image": "http://localhost:8000/get_image?filename=村口.jpeg&path=scene"
+    },
+    {
+        "name": {
+            "name": "木兰家",
+            "content": "木兰家的院子里，家人们围坐在一起，欢声笑语，充满温馨。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "木兰家的庭院",
+            "content": "木兰家的庭院里，花草繁茂，木兰站在庭院中央，仰望天空，思考未来。"
+        },
+        "url": ""
+    }
+]

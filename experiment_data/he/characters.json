@@ -1,0 +1,32 @@
+[
+    {
+        "name": "木兰",
+        "content": "女主人公，因战功显赫受到可汗赏赐，却拒绝高官厚禄，只求一匹快马回家。她勇敢、智慧，心系家庭。",
+        "per": "标准女音",
+        "image": "http://localhost:8000/get_image?filename=木兰.png&path=character"
+    },
+    {
+        "name": "木兰父亲",
+        "content": "木兰的父亲，年迈体弱，但为木兰的英勇感到无比自豪，急切地盼望女儿归来。",
+        "per": "标准男音",
+        "image": "http://localhost:8000/get_image?filename=木兰父亲.jpeg&path=character"
+    },
+    {
+        "name": "木兰母亲",
+        "content": "木兰的母亲，慈祥温柔，深深为女儿的安全和荣誉感到欣慰，精心准备迎接木兰的归来。",
+        "per": "标准女音",
+        "image": "http://localhost:8000/get_image?filename=木兰母亲.jpeg&path=character"
+    },
+    {
+        "name": "木兰姐姐",
+        "content": "木兰的姐姐，贤淑端庄，对妹妹的勇敢和荣誉充满敬佩，积极参与准备迎接木兰的工作。",
+        "per": "标准女音",
+        "image": "http://localhost:8000/get_image?filename=木兰姐姐.jpeg&path=character"
+    },
+    {
+        "name": "木兰小弟",
+        "content": "木兰的小弟，活泼好动，对姐姐的英雄事迹充满崇拜，兴奋地等待姐姐归来。",
+        "per": "标准男音",
+        "image": "http://localhost:8000/get_image?filename=木兰小弟.jpeg&path=character"
+    }
+]
