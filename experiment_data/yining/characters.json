@@ -1,0 +1,35 @@
+[
+    {
+        "name": "木兰",
+        "content": "女主角是一位英勇善战的英雄，因替父从军立下赫赫战功，虽受赏赐但只愿回归故乡，心地善良，孝顺父母。",
+        "per": "标准女音",
+        "image": "http://localhost:8000/get_image?filename=木兰.jpeg&path=character"
+    },
+    {
+        "name": "可汗",
+        "content": "国家的统治者，赏识木兰的战功，询问她的愿望，心怀仁慈。",
+        "per": "标准男音",
+        "image": "http://localhost:8000/get_image?filename=可汗.jpeg&path=character"
+    },
+    {
+        "name": "木兰的父亲",
+        "content": "木兰的父亲，因年迈不能从军，深爱女儿，感激她的付出，迎接她归来。",
+        "per": "标准男音",
+        "image": "http://localhost:8000/get_image?filename=木兰的父亲.png&path=character"
+    },
+    {
+        "name": "木兰的母亲",
+        "content": "木兰的母亲，慈祥温柔，心疼女儿的辛苦，盼望她平安归来。",
+        "per": "标准女音"
+    },
+    {
+        "name": "木兰的姐姐",
+        "content": "木兰的姐姐，为木兰的归来感到高兴，为她打扮，希望她恢复女儿身。",
+        "per": "标准女音"
+    },
+    {
+        "name": "木兰的小弟",
+        "content": "木兰的小弟，年幼活泼，崇拜姐姐，准备庆祝她的归来。",
+        "per": "标准男音"
+    }
+]
