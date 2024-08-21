@@ -24,3 +24,5 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+back-end/程序/__pycache__/excel.cpython-310.pyc
+back-end/程序/__pycache__/llm.cpython-310.pyc
