@@ -16,6 +16,11 @@ os.makedirs(f'./back-end/程序/opera_info/change', exist_ok=True)
 os.makedirs(f'./back-end/程序/opera_info/storyline', exist_ok=True)
 os.makedirs(f'./back-end/程序/opera_info/audio', exist_ok=True)
 
+script_path = "./back-end/程序/opera_info"
+script_files = os.listdir(script_path)
+script_files = [f for f in script_files if f.endswith('.txt')]
+for f in script_files:
+    os.rename(f'{script_path}/{f}', user_file_name + f'/{f}')
 
 history_path = "./back-end/程序/opera_info/history"
 history_files = os.listdir(history_path)
