@@ -27,6 +27,7 @@ info_dict = {
    "dialogue_path": "./opera_info/dialog/dialogue_path.json",
    "picture_path": "./opera_info/img",
    "wav_path": "./opera_info/audio/",
+   "script_path": "./opera_info/script.txt",
    "change_path": "./opera_info/change/change.json"
 }
 
@@ -439,7 +440,21 @@ def generate_script():
     res["storylines"] = storyline
     with open(info_dict['dialogue_path'], "r", encoding="utf-8") as f:
         dialogue = json.load(f)
+    with open(info_dict['characters_path'], "r", encoding="utf-8") as f:
+        characters_info = json.load(f)
     res["dialogues"] = dialogue
+    with open(info_dict["script_path"], 'w', encoding='utf-8') as f:
+        f.write("Storyline: "+storyline + "\n")
+        for i in range(len(characters_info)):
+            f.write(characters_info[i]["name"] + ": " + characters_info[i]["content"] + "\n")
+        f.write("\n")
+        for i in range(len(dialogue)):
+            f.write("第" + str(i + 1) + "章节：" + dialogue[i]["plotName"] + "，情节阶段：" + dialogue[i]["plotStage"] + "，场景：" + dialogue[i]["scene"]["name"] + "，梗概：" + dialogue[i]["beat"] + "\n")
+            # 如果dialogue是属性
+            if "dialogue" in dialogue[i]:
+
+                for character in dialogue[i]["dialogue"]:
+                    f.write(character["character"] + "：" + character["content"] + "\n")
     return jsonify(res)
 
 def del_brackets(s: str):
