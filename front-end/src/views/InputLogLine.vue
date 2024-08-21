@@ -23,23 +23,22 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-            <el-row :gutter="5" align="middle">
+                        <el-row :gutter="5" align="middle">
               <el-col :span="message.prompt.length > 35 ?0: 24-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 35 ?24: message.prompt.length">
                 <div class="human-iutput-container">
-                 <div class="human-iutput" >
+                  <div class="human-iutput" >
                   {{ message.prompt }}
                  </div>
                 </div>
               </el-col>
             </el-row>
             <br>
-            <br>
-            <br>
-            <el-row align="middle">
+                        <el-row align="middle">
               <el-col :span="2"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
-              <el-col :span="22"><div class="AI-output">{{ message.content }}</div></el-col>
+              <el-col :span="22"><div class="AI-output" v-html="message.content"></div></el-col>
             </el-row>
+
           </div>
         </el-main>
         <el-footer>
@@ -217,7 +216,17 @@ export default defineComponent({
   setup() {
     const store=useStore()
     const inputMessage = ref('');
-    const messages = ref([]);
+    const messages = ref([
+            {
+            role: 'assistant',
+            prompt: '',
+            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
+                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
+                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            image: 'logo.png',
+            downloadIcon: true,
+          }
+    ]);
     const loading = ref(false);
     const history = ref([]);
     const loglineData = computed({

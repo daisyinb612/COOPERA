@@ -871,7 +871,7 @@ body {
 .human-iutput{
   display: inline-flex;
   justify-content: flex-start; 
-  word-wrap: break-all; 
+  word-wrap: break-word;
   padding: 10px;
   line-height: 20px;
   border-radius: 5px;
