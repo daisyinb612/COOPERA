@@ -1,0 +1,49 @@
+[
+    {
+        "group": "scenes",
+        "name": "战场",
+        "content": "战场上，硝烟弥漫，战鼓声震天。木兰身披铠甲，骑着战马，英勇无畏地冲锋陷阵。",
+        "image": "http://localhost:8000/get_image?filename=战场.jpeg&path=scene"
+    },
+    {
+        "name": {
+            "name": "乡间小道",
+            "content": "乡间小道上，木兰骑着千里马，身穿简单的布衣，背着行囊，满怀思念地朝着故乡的方向行进。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "城门外",
+            "content": "城门外，人群熙熙攘攘。木兰的父母站在城门口，眼中满是期待和激动。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "家门口",
+            "content": "家门口，木兰的姐姐正在整理红妆，细心地为迎接妹妹的归来做准备。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "家中",
+            "content": "家中，木兰的弟弟正在磨刀，准备杀猪宰羊，为姐姐的归来庆祝。"
+        },
+        "url": ""
+    },
+    {
+        "group": "scenes",
+        "name": "军营",
+        "content": "一个大帐篷里，可汗和士兵围着花木兰，赞扬花木兰的功绩。",
+        "image": "http://localhost:8000/get_image?filename=军营.png&path=scene"
+    },
+    {
+        "scene": {
+            "name": "军营",
+            "content": "",
+            "image": null
+        }
+    }
+]
