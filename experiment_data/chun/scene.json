@@ -1,0 +1,49 @@
+[
+    {
+        "group": "scenes",
+        "name": "战场",
+        "content": "战场上硝烟弥漫，旗帜飘扬，木兰身披战甲，手持长剑，站在战场中央。",
+        "image": "http://localhost:8000/get_image?filename=战场.jpeg&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "皇宫",
+        "content": "金碧辉煌的皇宫大殿，四周挂满了绚丽的帷幕，皇帝坐在龙椅上，神情庄重。",
+        "image": "http://localhost:8000/get_image?filename=皇宫.png&path=scene"
+    },
+    {
+        "name": {
+            "name": "皇宫",
+            "content": "金碧辉煌的皇宫大殿，四周挂满了绚丽的帷幕，皇帝坐在龙椅上，神情庄重。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "木兰的家",
+            "content": "一个宁静的小村庄，木兰的家是一座古朴的农家小院，院子里种满了花草。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "木兰的家",
+            "content": "一个宁静的小村庄，木兰的家是一座古朴的农家小院，院子里种满了花草。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "木兰的家",
+            "content": "一个宁静的小村庄，木兰的家是一座古朴的农家小院，院子里种满了花草。"
+        },
+        "url": ""
+    },
+    {
+        "name": {
+            "name": "木兰的家",
+            "content": "一个宁静的小村庄，木兰的家是一座古朴的农家小院，院子里种满了花草。"
+        },
+        "url": ""
+    }
+]
