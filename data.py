@@ -1,6 +1,6 @@
 import os
 
-user_id = '1'
+user_id = 'chun'
 
 user_file_name = f'./experiment_data/{user_id}'
 os.makedirs(user_file_name, exist_ok=True)
@@ -36,21 +36,22 @@ for f in change_files:
 
 
 
-wav_path = './back-end/程序/opera_info/audio'
-wav_files = os.listdir(wav_path)
-wav_files = [f for f in wav_files if f.endswith('.wav')]
-for f in wav_files:
-    os.rename(f'{wav_path}/{f}', user_file_name + f'/wav/{f}')
+# wav_path = './back-end/程序/opera_info/audio'
+# wav_files = os.listdir(wav_path)
+# wav_files = [f for f in wav_files if f.endswith('.wav')]
+# for f in wav_files:
+#     os.rename(f'{wav_path}/{f}', user_file_name + f'/wav/{f}')
 
-# audio_path = "./back-end/程序/opera_info/audio"
-# audio_files = os.listdir(audio_path)
-# # 删除所有文件
-# for f in audio_files:
-#     os.remove(f'{audio_path}/{f}')
+audio_path = "./back-end/程序/opera_info/audio"
+audio_files = os.listdir(audio_path)
+audio_files = [f for f in audio_files if f.endswith('.wav')]
+# 删除所有文件
+for f in audio_files:
+    os.remove(f'{audio_path}/{f}')
 
 character_path = "./back-end/程序/opera_info/character"
 character_files = os.listdir(character_path)
-character_image_files = [f for f in character_files if f.endswith('.jpeg') or f.endswith('.png')]
+character_image_files = [f for f in character_files if f.endswith('.jpeg') or f.endswith('.png') or f.endswith('.jpg')]
 
 character_files = [f for f in character_files if f.endswith('.json')]
 for f in character_files:
@@ -73,13 +74,13 @@ for f in outline_files:
 
 scene_path = "./back-end/程序/opera_info/scene"
 scene_files = os.listdir(scene_path)
-scene_image_files = [f for f in scene_files if f.endswith('.jpeg') or f.endswith('.png')]
+scene_image_files = [f for f in scene_files if f.endswith('.jpeg') or f.endswith('.png') or f.endswith('.jpg')]
 scene_files = [f for f in scene_files if f.endswith('.json')]
 for f in scene_files:
     os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
 
 for f in scene_image_files:
-    os.rename(f'{scene_path}/{f}', user_file_name + f'/{f}')
+    os.rename(f'{scene_path}/{f}', user_file_name + f'/scene_image/{f}')
 
 storyline_path = "./back-end/程序/opera_info/storyline"
 storyline_files = os.listdir(storyline_path)
