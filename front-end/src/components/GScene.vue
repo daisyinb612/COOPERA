@@ -42,14 +42,14 @@
             <el-row :gutter="5" align="middle">
               <!-- <el-col :span="message.prompt.length > 0 ?0: 19-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 0 ?24: 5+message.prompt.length"> -->
-                <div class="human-iutput" >
+                <div v-if="message.prompt" class="human-iutput" >
                 {{ message.prompt }} </div>
               <!-- </el-col> -->
             </el-row>
             <br>
             <el-row align="top">
               <el-col :span="4"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
-              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
+              <el-col :span="20"><div class="AI-output" v-html="message.content"></div></el-col>
             </el-row>
           </div>
         </el-main>
@@ -107,6 +107,12 @@
         </span>
       </el-dialog>
     </el-dialog>
+
+        <!-- 图片预览对话框 -->
+    <el-dialog v-model="previewVisible" :append-to-body="true">
+      <img width="100%" :src="previewImage" alt="图片预览" />
+    </el-dialog>
+
   </el-container>
 </template>
 
@@ -122,6 +128,10 @@ export default defineComponent({
   name: 'GScene',
 
   setup() {
+    // preview
+    const previewVisible = ref(false);
+    const previewImage = ref('');
+
     const { proxy } = getCurrentInstance();
 
     // State and reactive properties
@@ -136,7 +146,17 @@ export default defineComponent({
     const selectedTab = ref('scene');
     const history = ref([]);
     const loading = ref(false);
-    const messages = ref([]);
+    const messages = ref([
+        {
+            role: 'assistant',
+            prompt: '',
+            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
+                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
+                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            image: 'logo.png',
+            downloadIcon: true,
+          }
+    ]);
     const showDeleteConfirm = ref(false);
     const sceneList=computed(()=>{
       return store.state.scene.scenes
@@ -174,7 +194,8 @@ export default defineComponent({
 
     
     function handlePictureCardPreview(file){
-      sceneList.value[curEditAssetIndex.value].image = file.url;
+      previewImage.value = file.url;
+      previewVisible.value = true;
     }
 
 
@@ -538,6 +559,8 @@ export default defineComponent({
       ...actions,
       scenes,
       sceneList,
+      previewVisible,
+      previewImage,
       // ...mapState('scene', ['scenes']),
     };
   },

@@ -23,7 +23,7 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
-                        <el-row :gutter="5" align="middle">
+            <el-row :gutter="5" align="middle">
               <el-col :span="message.prompt.length > 35 ?0: 24-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 35 ?24: message.prompt.length">
                 <div class="human-iutput-container">
@@ -34,11 +34,10 @@
               </el-col>
             </el-row>
             <br>
-                        <el-row align="middle">
+            <el-row align="middle">
               <el-col :span="2"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
               <el-col :span="22"><div class="AI-output" v-html="message.content"></div></el-col>
             </el-row>
-
           </div>
         </el-main>
         <el-footer>

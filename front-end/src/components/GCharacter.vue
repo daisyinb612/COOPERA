@@ -38,18 +38,21 @@
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
+
             <el-row :gutter="5" align="middle">
               <!-- <el-col :span="message.prompt.length > 0 ?0: 19-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 0 ?24: 5+message.prompt.length"> -->
-                <div class="human-iutput" >
+                <div v-if="message.prompt" class="human-iutput" >
                 {{ message.prompt }} </div>
               <!-- </el-col> -->
             </el-row>
             <br>
             <el-row align="top">
               <el-col :span="4"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
-              <el-col :span="20"><div class="AI-output">{{ message.content }}</div></el-col>
+              <el-col :span="20"><div class="AI-output" v-html="message.content"></div></el-col>
             </el-row>
+
+
           </div>
         </el-main>
         <el-footer>
@@ -210,7 +213,17 @@ export default defineComponent({
     const inputMessage = ref('');
     const selectedTab = ref('characters');
     const history = ref([]);
-    const messages = ref([]);
+    const messages = ref([
+        {
+            role: 'assistant',
+            prompt: '',
+            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
+                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
+                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            image: 'logo.png',
+            downloadIcon: true,
+          }
+    ]);
     const showDeleteConfirm = ref(false);
     const newAsset = reactive({
       group: 'characters',
@@ -240,25 +253,8 @@ export default defineComponent({
       per: '',
       image: '',
     });
-    const tableData = [
-  {
-    date: '2016-05-02',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-04',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-  {
-    date: '2016-05-01',
-    name: 'John Smith',
-    address: 'No.1518,  Jinshajiang Road, Putuo District',
-  },
-]
-    // Computed properties
 
+    // Computed properties
     const filteredAssets = computed(() => {
       return charList;
     });
@@ -657,7 +653,6 @@ export default defineComponent({
       handleSaveClose,
       handleRemove,
       handleEditRemove,
-      tableData,
       handleExceed,
       sendMessage,
       showAddDialog,

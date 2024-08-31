@@ -13,13 +13,13 @@
           <el-scrollbar class="plots-list">
             <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
               <div class="plot-header">
-                <div class="plot-name"><div>情节名称:</div>{{ plot.plotName }}</div>
+                <div class="plot-name"><div>情节{{index+1}}:</div>{{ plot.plotName }}</div>
                 <div class="plot-element"><div>情节阶段:</div>{{ plot.plotStage }}</div>
                 <div class="location"><div>地点:</div>{{plot.scene.name }}</div>
                 <div class="characters">
                   <div>出场角色:</div>
                   <span v-for="character in plot.characters" :key="character">
-                    {{ character.name }}
+                    <span style="padding: 3px">{{ character.name}}</span>
                   </span>
                 </div>
               </div>
@@ -65,6 +65,9 @@
 
     <el-dialog title="编辑情节" v-model="editDialogVisible" custom-class="dialog-content">
       <el-form :model="editPlotData" label-width="100px" class="add-plot-form">
+        <el-form-item label="情节序号">
+          <el-input v-model="editPlotData.No" autocomplete="off" />
+        </el-form-item>
         <el-form-item label="情节名称">
           <el-input v-model="editPlotData.plotName" autocomplete="off" />
         </el-form-item>
@@ -118,6 +121,7 @@
 import { defineComponent, ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
+// eslint-disable-next-line no-unused-vars
 import * as diff from 'diff';
 import { ElMessage } from 'element-plus';
 
@@ -139,14 +143,16 @@ export default defineComponent({
       dialogue: [],
     });
     const beforeEditAsset = reactive({
-      plotName: '',
-      plotStage: '',
-      scene: '',
-      characters: [],
+      No: '',
+    //   plotName: '',
+    //   plotStage: '',
+    //   scene: '',
+    //   characters: [],
       beat: '',
-      dialogue: [],
+    //   dialogue: [],
     });
     const editPlotData = reactive({
+      No: '',
       plotName: '',
       plotStage: '',
       scene: '',
@@ -165,11 +171,12 @@ export default defineComponent({
     const addPlot = (plot) => store.dispatch('addPlot', plot);
     const addScene = (scene) => store.dispatch('addScene', scene);
     const updatePlot = (payload) => store.dispatch('updatePlot', payload);
+    const movePlot = (payload) => store.dispatch('movePlot', payload);
 
     function AddPlot() {
       addDialogVisible.value = true;
     }
-    
+
     function showDeleteDialog() {
       showDeleteConfirm.value = true;
     }
@@ -210,11 +217,12 @@ export default defineComponent({
       newPlot.scene = '';
       newPlot.characters = [];
       newPlot.beat = '';
-      editPlotData.dialogue = [];
+      newPlot.dialogue = [];
       addDialogVisible.value = false;
     }
 
     function handleEditDialogClose() {
+      editPlotData.No = '';
       editPlotData.plotName = '';
       editPlotData.plotStage = '';
       editPlotData.scene = '';
@@ -224,7 +232,20 @@ export default defineComponent({
       editDialogVisible.value = false;
     }
 
+    // eslint-disable-next-line no-unused-vars
+    function changeSerial(No) {
+      if(isNaN(Number(No,10))){
+        ElMessage({
+          message: '数字',
+          type: 'warning',
+        });
+        return;
+    }
+    }
+
     async function addNewPlot() {
+
+
       if (!newPlot.plotName) {
         ElMessage({
           message: '情节名称不能为空',
@@ -243,6 +264,15 @@ export default defineComponent({
 
       console.log(newPlot.scene);
 
+      if (newPlot.characters.length === 0) {
+        console.log(newPlot)
+        ElMessage({
+          message: '角色不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
       // 如果scene不是一个对象，说明是新建的场景
       if (typeof newPlot.scene !== 'object') {
         const newScene = {
@@ -259,15 +289,6 @@ export default defineComponent({
           },
         });
       }
-
-      if (newPlot.characters.length === 0) {
-        console.log(newPlot)
-        ElMessage({
-          message: '角色不能为空',
-          type: 'warning',
-        });
-        return;
-      } 
 
 
       const existingPlotIndex = plots.value.findIndex((plot) => plot.plotName === newPlot.plotName);
@@ -290,14 +311,16 @@ export default defineComponent({
     }
 
     function editPlot(index) {
-      beforeEditAsset.plotName = plots.value[index].plotName;
-      beforeEditAsset.plotStage = plots.value[index].plotStage;
-      beforeEditAsset.scene = plots.value[index].scene;
-      beforeEditAsset.characters = plots.value[index].characters;
+      beforeEditAsset.No = index+1
+      // beforeEditAsset.plotName = plots.value[index].plotName;
+      // beforeEditAsset.plotStage = plots.value[index].plotStage;
+      // beforeEditAsset.scene = plots.value[index].scene;
+      // beforeEditAsset.characters = plots.value[index].characters;
       beforeEditAsset.beat = plots.value[index].beat;
-      beforeEditAsset.dialogue = plots.value[index].dialogue;
+      // beforeEditAsset.dialogue = plots.value[index].dialogue;
 
       const plotToEdit = plots.value[index];
+      editPlotData.No = index+1
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotStage = plotToEdit.plotStage;
       editPlotData.scene = plotToEdit.scene;
@@ -309,6 +332,39 @@ export default defineComponent({
     }
 
     async function saveEditedPlot() {
+      if (!editPlotData.plotName) {
+        ElMessage({
+          message: '情节名称不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if (!editPlotData.scene) {
+        ElMessage({
+          message: '场景不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if (editPlotData.characters.length === 0) {
+        ElMessage({
+          message: '角色不能为空',
+          type: 'warning',
+        });
+        return;
+      }
+
+      if(isNaN(Number(editPlotData.No,10))) {
+        ElMessage({
+          message: '序号必须为数字',
+          type: 'warning',
+        });
+        return;
+      }
+
+      // plots.value[]
       let changes = ""
       diff.diffChars(beforeEditAsset.beat, editPlotData.beat).forEach((part) => {
         const value = part.value.replace(/\n/g, '');
@@ -328,22 +384,6 @@ export default defineComponent({
         },
       });
 
-      if (!editPlotData.plotName) {
-        ElMessage({
-          message: '情节名称不能为空',
-          type: 'warning',
-        });
-        return;
-      }
-
-      if (!editPlotData.scene) {
-        ElMessage({
-          message: '场景不能为空',
-          type: 'warning',
-        });
-        return;
-      }
-      console.log(editPlotData.scene);
       // 如果scene不是一个对象，说明是新建的场景
       if (typeof editPlotData.scene !== 'object') {
         const newScene = {
@@ -361,30 +401,43 @@ export default defineComponent({
         });
       }
 
-      if (editPlotData.characters.length === 0) {
-        ElMessage({
-          message: '角色不能为空',
-          type: 'warning',
-        });
-        return;
-      }
-
-
-      if (plotToEditIndex.value !== null) {
-        const updatedPlot = {
+      const updatedPlot = {
           plotName: editPlotData.plotName,
           plotStage: editPlotData.plotStage,
           scene: editPlotData.scene,
           characters: editPlotData.characters,
           beat: editPlotData.beat,
         };
+
+      if(Number(editPlotData.No,10) !== beforeEditAsset.No){
+        movePlot({fromIndex: beforeEditAsset.No-1, toIndex: editPlotData.No-1})
+        updatePlot({ index: editPlotData.No-1, plot: updatedPlot });
+      }
+      else{
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
-        ElMessage({
+
+      }
+      ElMessage({
           message: '情节更新成功',
           type: 'success',
         });
-        handleEditDialogClose();
-      }
+      handleEditDialogClose();
+
+      // if (plotToEditIndex.value !== null) {
+      //   const updatedPlot = {
+      //     plotName: editPlotData.plotName,
+      //     plotStage: editPlotData.plotStage,
+      //     scene: editPlotData.scene,
+      //     characters: editPlotData.characters,
+      //     beat: editPlotData.beat,
+      //   };
+      //   updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
+      //   ElMessage({
+      //     message: '情节更新成功',
+      //     type: 'success',
+      //   });
+      //   handleEditDialogClose();
+      // }
     }
 
     async function generatePlot() {
