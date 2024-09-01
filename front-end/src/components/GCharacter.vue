@@ -237,8 +237,8 @@ export default defineComponent({
     });
     const store=useStore()
     const audios = {
-      0:"标准女音",
-      1:"标准男音",
+      0:"Female Voice",
+      1:"Male Voice",
       // 3:"斯文男音",
       // 4:"小萌萌",
       // 5:"知性女音",

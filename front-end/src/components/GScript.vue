@@ -5,7 +5,7 @@
         <div>Playwriting</div>
       </el-header>
        <el-header class="button-container-up">
-        <el-button class="button" @click="generate_script">生成</el-button>
+        <el-button class="button" @click="generate_script">Generate</el-button>
         </el-header>
         <div class="script-header">
           <el-scrollbar class="script-content">

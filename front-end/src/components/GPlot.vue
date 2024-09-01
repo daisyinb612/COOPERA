@@ -57,8 +57,8 @@
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
-          <el-button type="primary" @click="addNewPlot" class="confirm-button">确认</el-button>
+          <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
+          <el-button type="primary" @click="addNewPlot" class="confirm-button">confirm</el-button>
         </el-footer>
       </el-form>
     </el-dialog>
