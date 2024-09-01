@@ -1,0 +1,435 @@
+[
+    {
+        "beat": "Mulan learns that her father, Fa Zhou, has been called to serve in the army again despite his ailing health. Determined to protect him, Mulan decides to disguise herself as a man and take his place.",
+        "characters": [
+            {
+                "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+                "name": "Mulan",
+                "per": "Female Voice"
+            },
+            {
+                "content": "Mulan's aging and ailing father who is a former soldier. He is honorable and proud, but physically unable to serve in the army again.",
+                "name": "Fa Zhou",
+                "per": "Male Voice"
+            }
+        ],
+        "plotName": "Mulan's Decision",
+        "plotStage": "exposition",
+        "scene": {
+            "group": "scenes",
+            "name": "Fa Zhou's Home",
+            "content": "A modest home in a small village, surrounded by fields and mountains. The interior is simple but well-kept, reflecting the humble and honorable life of Fa Zhou and his family.",
+            "image": "http://localhost:8000/get_image?filename=Fa Zhou's Home.png&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "Mulan",
+                "content": "Father, you can't go. Your health won't allow it.",
+                "number": "1"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "It is my duty, Mulan. Our family has always served the Emperor.",
+                "number": "2"
+            },
+            {
+                "character": "Mulan",
+                "content": "But you can barely walk without pain. How can you fight?",
+                "number": "3"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "I must try. Honor demands it.",
+                "number": "4"
+            },
+            {
+                "character": "Mulan",
+                "content": "Then let me go in your place. I can do this, Father.",
+                "number": "5"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "No, Mulan. It is too dangerous. You are my daughter, not a soldier.",
+                "number": "6"
+            },
+            {
+                "character": "Mulan",
+                "content": "I am more than capable. I have trained my whole life for moments like this.",
+                "number": "7"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "You do not understand the horrors of war. I cannot let you face them.",
+                "number": "8"
+            },
+            {
+                "character": "Mulan",
+                "content": "I understand the risk, but I cannot stand by and watch you suffer. Please, let me do this for our family.",
+                "number": "9"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "(sighs) You are determined, just like your mother. But this is not a choice I can allow.",
+                "number": "10"
+            },
+            {
+                "character": "Mulan",
+                "content": "Then I will find a way, with or without your blessing.",
+                "number": "11"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "Mulan...",
+                "number": "12"
+            },
+            {
+                "character": "Mulan",
+                "content": "I love you, Father. I will return home safe, I promise.",
+                "number": "13"
+            },
+            {
+                "character": "Fa Zhou",
+                "content": "(softly) May the ancestors protect you, my child.",
+                "number": "14"
+            }
+        ]
+    },
+    {
+        "beat": "Mulan, now disguised as a man, arrives at the army camp and meets Captain Li Shang. She begins her training and struggles to keep her true identity hidden.",
+        "characters": [
+            {
+                "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+                "name": "Mulan",
+                "per": "Female Voice"
+            },
+            {
+                "content": "A competent and disciplined army captain who becomes Mulan's commanding officer. He is initially unaware of Mulan's true identity and respects her for her courage and skill.",
+                "name": "Li Shang",
+                "per": "Male Voice"
+            },
+            {
+                "content": "A small, comical dragon who serves as Mulan's guardian and guide. Though often bumbling, he is fiercely loyal and provides both comic relief and wisdom.",
+                "name": "Mushu",
+                "per": "Male Voice"
+            }
+        ],
+        "plotName": "Joining the Army",
+        "plotStage": "incident",
+        "scene": {
+            "group": "scenes",
+            "name": "Army Camp",
+            "content": "A bustling military camp with rows of tents, training grounds, and soldiers preparing for battle. The atmosphere is tense but disciplined.",
+            "image": "http://localhost:8000/get_image?filename=Army Camp.png&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "Mulan",
+                "content": "This is it, Mushu. The army camp. We have to make sure no one finds out who I really am.",
+                "number": "1"
+            },
+            {
+                "character": "Mushu",
+                "content": "Don't worry, Mulan. With me by your side, you'll be the toughest soldier here. Now, let's find this Captain Li Shang.",
+                "number": "2"
+            },
+            {
+                "character": "Li Shang",
+                "content": "You there! New recruit! State your name and rank.",
+                "number": "3"
+            },
+            {
+                "character": "Mulan",
+                "content": "Uh, yes, sir! My name is Ping. I'm here to serve in the Emperor's army.",
+                "number": "4"
+            },
+            {
+                "character": "Li Shang",
+                "content": "Welcome, Ping. Training starts at dawn. Make sure you're ready. We don't tolerate weakness here.",
+                "number": "5"
+            },
+            {
+                "character": "Mushu",
+                "content": "Phew, that was close. Remember, Mulan, keep your head down and your voice low.",
+                "number": "6"
+            },
+            {
+                "character": "Mulan",
+                "content": "Got it, Mushu. I won't let my father down.",
+                "number": "7"
+            },
+            {
+                "character": "Li Shang",
+                "content": "Alright, recruits, fall in! Today we begin with basic combat training. Ping, show me what you've got.",
+                "number": "8"
+            },
+            {
+                "character": "Mulan",
+                "content": "Yes, sir! I'll do my best.",
+                "number": "9"
+            },
+            {
+                "character": "Mushu",
+                "content": "You got this, Mulan. Just remember, be a man!",
+                "number": "10"
+            }
+        ]
+    },
+    {
+        "beat": "During a fierce battle, Mulan's true identity is accidentally revealed. Despite the initial shock and disapproval, her bravery and skill earn her the respect of her fellow soldiers and Captain Li Shang.",
+        "characters": [
+            {
+                "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+                "name": "Mulan",
+                "per": "Female Voice"
+            },
+            {
+                "content": "A competent and disciplined army captain who becomes Mulan's commanding officer. He is initially unaware of Mulan's true identity and respects her for her courage and skill.",
+                "name": "Li Shang",
+                "per": "Male Voice"
+            },
+            {
+                "content": "A small, comical dragon who serves as Mulan's guardian and guide. Though often bumbling, he is fiercely loyal and provides both comic relief and wisdom.",
+                "name": "Mushu",
+                "per": "Male Voice"
+            }
+        ],
+        "plotName": "Battle and Revelation",
+        "plotStage": "conflict",
+        "scene": {
+            "group": "scenes",
+            "name": "Battlefield",
+            "content": "A vast and rugged terrain where the army faces off against enemy forces. The environment is harsh, with the sounds of clashing weapons and battle cries filling the air.",
+            "image": "http://localhost:8000/get_image?filename=Battlefield.png&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "Li Shang",
+                "content": "Hold the line! We cannot let them break through!",
+                "number": "1"
+            },
+            {
+                "character": "Mulan",
+                "content": "Yes, Captain! We must protect our flank!",
+                "number": "2"
+            },
+            {
+                "character": "Mushu",
+                "content": "Mulan, watch out! Behind you!",
+                "number": "3"
+            },
+            {
+                "character": "Mulan",
+                "content": "(dodging an enemy's strike) Thanks, Mushu! That was close.",
+                "number": "4"
+            },
+            {
+                "character": "Li Shang",
+                "content": "Everyone, push forward! We can turn the tide!",
+                "number": "5"
+            },
+            {
+                "character": "Enemy Soldier",
+                "content": "You think you can win? Not a chance!",
+                "number": "6"
+            },
+            {
+                "character": "Mulan",
+                "content": "(struggling with an enemy soldier) I won't let you harm my comrades!",
+                "number": "7"
+            },
+            {
+                "character": "Mulan",
+                "content": "(her helmet falls off, revealing her long hair) No...!",
+                "number": "8"
+            },
+            {
+                "character": "Li Shang",
+                "content": "(stunned) You're a woman...?",
+                "number": "9"
+            },
+            {
+                "character": "Soldier 1",
+                "content": "What? How can this be?",
+                "number": "10"
+            },
+            {
+                "character": "Soldier 2",
+                "content": "She deceived us!",
+                "number": "11"
+            },
+            {
+                "character": "Mulan",
+                "content": "I did it for my father... I couldn't let him fight.",
+                "number": "12"
+            },
+            {
+                "character": "Li Shang",
+                "content": "(after a pause) You fought bravely... more bravely than many men.",
+                "number": "13"
+            },
+            {
+                "character": "Mushu",
+                "content": "Yeah, and she saved all your butts more than once!",
+                "number": "14"
+            },
+            {
+                "character": "Soldier 1",
+                "content": "She's right. She's one of us.",
+                "number": "15"
+            },
+            {
+                "character": "Soldier 2",
+                "content": "We follow you, Mulan!",
+                "number": "16"
+            },
+            {
+                "character": "Li Shang",
+                "content": "Let's finish this battle! For victory!",
+                "number": "17"
+            },
+            {
+                "character": "All Soldiers",
+                "content": "For victory!",
+                "number": "18"
+            }
+        ]
+    },
+    {
+        "beat": "Mulan leads a daring plan to save the Emperor and the Imperial City from an enemy attack. Her strategic thinking and courage turn the tide of the battle, securing victory for her people.",
+        "characters": [
+            {
+                "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+                "name": "Mulan",
+                "per": "Female Voice"
+            },
+            {
+                "content": "A competent and disciplined army captain who becomes Mulan's commanding officer. He is initially unaware of Mulan's true identity and respects her for her courage and skill.",
+                "name": "Li Shang",
+                "per": "Male Voice"
+            },
+            {
+                "content": "A small, comical dragon who serves as Mulan's guardian and guide. Though often bumbling, he is fiercely loyal and provides both comic relief and wisdom.",
+                "name": "Mushu",
+                "per": "Male Voice"
+            },
+            {
+                "content": "The wise and benevolent ruler of China who recognizes Mulan's bravery and contributions to the war effort.",
+                "name": "The Emperor",
+                "per": "Male Voice"
+            }
+        ],
+        "plotName": "The Final Battle",
+        "plotStage": "climax",
+        "scene": {
+            "group": "scenes",
+            "name": "Imperial City",
+            "content": "The grand and majestic capital of China, with towering walls, ornate buildings, and bustling streets. The palace stands at the center, symbolizing the power and authority of the Emperor.",
+            "image": "http://localhost:8000/get_image?filename=Imperial City.png&path=scene"
+        },
+        "dialogue": [
+            {
+                "character": "Mulan",
+                "content": "We must act quickly. The enemy is advancing towards the palace. If we don’t stop them now, the Imperial City will fall.",
+                "number": "1"
+            },
+            {
+                "character": "Li Shang",
+                "content": "Mulan, what do you propose? We’re outnumbered and our forces are scattered.",
+                "number": "2"
+            },
+            {
+                "character": "Mulan",
+                "content": "We need to create a diversion. Mushu, can you create enough noise and chaos to draw their attention away from the palace gates?",
+                "number": "3"
+            },
+            {
+                "character": "Mushu",
+                "content": "Chaos is my middle name! Leave it to me, Mulan.",
+                "number": "4"
+            },
+            {
+                "character": "Li Shang",
+                "content": "While Mushu distracts them, we’ll regroup our forces and launch a surprise attack from the rear. It’s risky, but it might just work.",
+                "number": "5"
+            },
+            {
+                "character": "Mulan",
+                "content": "I’ll lead the charge. We have to protect the Emperor at all costs. For China!",
+                "number": "6"
+            },
+            {
+                "character": "The Emperor",
+                "content": "Mulan, your bravery and leadership have saved us all. You have brought honor to your family and to your country.",
+                "number": "7"
+            },
+            {
+                "character": "Mulan",
+                "content": "Thank you, Your Majesty. It was an honor to serve.",
+                "number": "8"
+            }
+        ]
+    },
+    {
+        "beat": "The Emperor publicly honors Mulan for her bravery and contributions to the war effort. Mulan returns home with newfound respect and a sense of fulfillment, having protected her family and her country.",
+        "characters": [
+            {
+                "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+                "name": "Mulan",
+                "per": "Female Voice"
+            },
+            {
+                "content": "The wise and benevolent ruler of China who recognizes Mulan's bravery and contributions to the war effort.",
+                "name": "The Emperor",
+                "per": "Male Voice"
+            }
+        ],
+        "plotName": "Recognition and Return",
+        "plotStage": "falling",
+        "scene": {
+            "content": "The opulent and grand residence of the Emperor, filled with intricate decorations, lush gardens, and a sense of regal authority.",
+            "name": "Imperial Palace"
+        },
+        "dialogue": [
+            {
+                "character": "The Emperor",
+                "content": "Brave warrior, step forward.",
+                "number": "1"
+            },
+            {
+                "character": "Mulan",
+                "content": "Your Majesty.",
+                "number": "2"
+            },
+            {
+                "character": "The Emperor",
+                "content": "You have shown unparalleled courage and wisdom in battle. It is time the world knows the hero who saved China.",
+                "number": "3"
+            },
+            {
+                "character": "Mulan",
+                "content": "I am honored, Your Majesty, but I only did what was necessary to protect my family and my country.",
+                "number": "4"
+            },
+            {
+                "character": "The Emperor",
+                "content": "Your humility speaks volumes. From this day forth, let it be known that Mulan, daughter of Hua Zhou, is a hero of China.",
+                "number": "5"
+            },
+            {
+                "character": "Mulan",
+                "content": "Thank you, Your Majesty. This honor means everything to me and my family.",
+                "number": "6"
+            },
+            {
+                "character": "The Emperor",
+                "content": "Return to your home with pride, Mulan. You have earned the respect and gratitude of the entire nation.",
+                "number": "7"
+            },
+            {
+                "character": "Mulan",
+                "content": "I will, Your Majesty. Thank you.",
+                "number": "8"
+            }
+        ]
+    }
+]

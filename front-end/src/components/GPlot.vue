@@ -166,7 +166,7 @@ export default defineComponent({
     const plots = computed(() => store.getters['plots']);
     const allScenes = computed(() => store.state.scene.scenes);
     const allCharacters = computed(() => store.state.character.characters);
-    const stageList = ["展示","激励事件","冲突","上升动作","高潮","解决","结局"]
+    const stageList = ["exposition", "incident", "conflict", "rising", "climax", "falling", "end"]
 
     const addPlot = (plot) => store.dispatch('addPlot', plot);
     const addScene = (scene) => store.dispatch('addScene', scene);

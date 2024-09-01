@@ -1,0 +1,33 @@
+[
+    {
+        "group": "scenes",
+        "name": "Fa Zhou's Home",
+        "content": "A modest home in a small village, surrounded by fields and mountains. The interior is simple but well-kept, reflecting the humble and honorable life of Fa Zhou and his family.",
+        "image": "http://localhost:8000/get_image?filename=Fa Zhou's Home.png&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "Army Camp",
+        "content": "A bustling military camp with rows of tents, training grounds, and soldiers preparing for battle. The atmosphere is tense but disciplined.",
+        "image": "http://localhost:8000/get_image?filename=Army Camp.png&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "Battlefield",
+        "content": "A vast and rugged terrain where the army faces off against enemy forces. The environment is harsh, with the sounds of clashing weapons and battle cries filling the air.",
+        "image": "http://localhost:8000/get_image?filename=Battlefield.png&path=scene"
+    },
+    {
+        "group": "scenes",
+        "name": "Imperial City",
+        "content": "The grand and majestic capital of China, with towering walls, ornate buildings, and bustling streets. The palace stands at the center, symbolizing the power and authority of the Emperor.",
+        "image": "http://localhost:8000/get_image?filename=Imperial City.png&path=scene"
+    },
+    {
+        "name": {
+            "name": "Imperial Palace",
+            "content": "The opulent and grand residence of the Emperor, filled with intricate decorations, lush gardens, and a sense of regal authority."
+        },
+        "url": ""
+    }
+]

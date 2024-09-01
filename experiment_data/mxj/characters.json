@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Mulan",
+        "content": "A brave and determined young woman who disguises herself as a man to take her father's place in the army. She is resourceful, skilled in combat, and deeply cares for her family.",
+        "per": "Female Voice",
+        "image": "http://localhost:8000/get_image?filename=Mulan.png&path=character"
+    },
+    {
+        "name": "Fa Zhou",
+        "content": "Mulan's aging and ailing father who is a former soldier. He is honorable and proud, but physically unable to serve in the army again.",
+        "per": "Male Voice",
+        "image": "http://localhost:8000/get_image?filename=Fa Zhou.png&path=character"
+    },
+    {
+        "name": "Li Shang",
+        "content": "A competent and disciplined army captain who becomes Mulan's commanding officer. He is initially unaware of Mulan's true identity and respects her for her courage and skill.",
+        "per": "Male Voice",
+        "image": "http://localhost:8000/get_image?filename=Li Shang.png&path=character"
+    },
+    {
+        "name": "Mushu",
+        "content": "A small, comical dragon who serves as Mulan's guardian and guide. Though often bumbling, he is fiercely loyal and provides both comic relief and wisdom.",
+        "per": "Male Voice",
+        "image": "http://localhost:8000/get_image?filename=Mushu.png&path=character"
+    },
+    {
+        "name": "The Emperor",
+        "content": "The wise and benevolent ruler of China who recognizes Mulan's bravery and contributions to the war effort.",
+        "per": "Male Voice",
+        "image": "http://localhost:8000/get_image?filename=The Emperor.png&path=character"
+    }
+]
