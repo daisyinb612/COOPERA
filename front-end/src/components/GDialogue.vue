@@ -50,12 +50,13 @@
                 </div>
                 <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"></div> -->
                 <el-row align="middle">
-                  <el-col :span="2">
+                  <div style="position: absolute; right: 0%; top: 1%"><el-icon @click="del_one_dialogue(index)"><CloseBold /> </el-icon></div>
+                  <el-col :span="4">
                   <div class="character">{{ dialogue.character }}: </div>
                  </el-col>
                   <el-col :span="2">
                     <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
-                      xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                      xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
                       <g fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                           d="M5.08 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h.08a2 2 0 0 1 1.519.698l3.642 4.25c.604.704 1.759.277 1.759-.651V4.703c0-.928-1.155-1.355-1.76-.65L6.6 8.301A2 2 0 0 1 5.08 9zm13.556-4.725a1 1 0 1 0-1.377 1.45c3.655 3.472 3.655 9.078 0 12.55a1 1 0 1 0 1.377 1.45c4.485-4.26 4.485-11.19 0-15.45zm-2.947 2.8a1 1 0 1 0-1.378 1.45c2.027 1.925 2.027 5.025 0 6.95a1 1 0 1 0 1.378 1.45c2.857-2.714 2.857-7.136 0-9.85z"
@@ -63,15 +64,16 @@
                       </g>
                     </svg>
                   </el-col>
-                  <el-col :span="20">
-                    <audio ref="audioPlayer" controls v-if="dialogue.audio">
+                  <el-col :span="18">
+                    <audio ref="audioPlayer" controls v-if="dialogue.audio" style="height: 15px">
                       <source :src="dialogue.audio" type="audio/wav">
                       Your browser does not support the audio element.
                     </audio>
                   </el-col>
                 </el-row>
+                <br>
                 <el-row align="middle">
-                  <el-col>
+                  <el-col :span="24">
                     <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
                       class="beat-input"></el-input>
                   </el-col>
@@ -113,8 +115,8 @@ export default defineComponent({
     });
     const beforeEditAssets = ref([])
     const audios = {
-      "标准女音": 0,
-      "标准男音": 1,
+      "Female Voice": 0,
+      "Male Voice": 1,
       // "斯文男音": 3,
       // "小萌萌": 4,
       // "知性女音": 5,
@@ -246,9 +248,17 @@ export default defineComponent({
         });
       }
     }
-    // function filteredDialogues(dialogueNumber) {
-    //   return selectedPlot.value ? selectedPlot.value.dialogue.filter(d => d.number === dialogueNumber) : [];
-    // }
+    // const delOneDialogue = (payload) => store.dispatch('delOneDialogue', payload);
+    function del_one_dialogue(index){
+      // let payload = {
+      //   plotIndex: selectedPlotIndex.value,
+      //   dialogueIndex: index
+      // }
+      // delOneDialogue(payload)
+
+      selectedPlot.value.dialogue.splice(index, 1)
+    }
+
     return {
       plots,
       selectedPlot,
@@ -260,7 +270,8 @@ export default defineComponent({
       selectPlot,
       UploadDialogue,
       generate_audio,
-      generate_dialogue
+      generate_dialogue,
+      del_one_dialogue
     };
   }
 });
@@ -436,4 +447,9 @@ export default defineComponent({
   height: 120px;
   border: 2px solid #ddd
 }
+
+.del-button{
+  height: 100%;
+}
+
 </style>

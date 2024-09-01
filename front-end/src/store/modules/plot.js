@@ -6,10 +6,12 @@ export default {
   mutations: {
     setPlots(state, plots) {
       state.plots = plots
-      // const index = state.plots.findIndex(p => p.id === plot.id);
-      // if (index !== -1) {
-      //   state.plots.splice(index, 1, plot);
-      // }
+    },
+    delOneDialogue(state, {plotIndex, dialogueIndex}){
+      console.log(state.plots)
+      console.log(plotIndex)
+      console.log(dialogueIndex)
+      state.plots[plotIndex]['dialogue'].splice(dialogueIndex, 1)
     },
     movePlot(state, {fromIndex, toIndex}){
       for (let i = 0; i < state.plots.length; i++) {
@@ -50,6 +52,9 @@ export default {
     },
     movePlot({ commit }, payload) {
       commit('movePlot', payload);
+    },
+    delOneDialogue({ commit }, payload) {
+      commit('delOneDialogue', payload);
     },
   },
   getters: {
