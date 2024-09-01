@@ -2,12 +2,14 @@
   <el-container class="main-container">
     <el-main class="script">
       <el-header class="header">
-        <div>剧本展示</div>
+        <div>Playwriting</div>
       </el-header>
-        <el-button @click="generate_script" class="confirm-button">生成</el-button>
+       <el-header class="button-container-up">
+        <el-button class="button" @click="generate_script">生成</el-button>
+        </el-header>
         <div class="script-header">
           <el-scrollbar class="script-content">
-          <div class="script-name">Logline</div>
+          <!-- <div class="script-name">Logline</div> -->
           {{ script.storylines }}
           <div v-for="plot in script.dialogues" :key="plot.plotName">
             <h3>{{ plot.plotName }}</h3>
@@ -80,6 +82,25 @@ export default defineComponent({
   height: 100%;
   overflow-y: auto;
   padding-left: 20px;
+}
+
+.button-container-up{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+}
+
+.button {
+  margin: 0 5px;
+  padding: 10px 20px;
+  background-color: white;
+  border: 2px solid #5973FF;
+  color: #BCCFFF;
+  cursor: pointer;
+  border-radius: 10px !important;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 

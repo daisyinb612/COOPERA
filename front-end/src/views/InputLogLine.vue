@@ -2,24 +2,24 @@
    <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div>剧本故事概要输入区</div>
+        <div>INPUT YOUR lOGLINE </div>
       </el-header>
       <el-main class="editlogline" v-loading="loading">
         <el-scrollbar>
-        <el-input v-model="loglineData" :rows="3" type="textarea" placeholder="请输入你的剧本故事概要" />
+        <el-input v-model="loglineData" :rows="3" type="textarea" placeholder="Please write down your playwriting summary with two or three sentences " />
         </el-scrollbar>
       </el-main>
 
       <el-footer class="button-container">
-        <el-button class="upload-button" @click="FreshBackend">刷新</el-button>
-        <el-button class="upload-button" @click="UploadLogLine">保存</el-button>
+        <el-button class="upload-button" @click="FreshBackend">Refresh</el-button>
+        <el-button class="upload-button" @click="UploadLogLine">Upload</el-button>
       </el-footer>
     </el-main>
 
     <el-footer class="down-panel">
       <div class="chat">
         <el-header class="header">
-          <div class="asset-name">【剧本概要】智能助手</div>
+          <div class="asset-name">LOGLINE Intelligent Assistant</div>
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
@@ -41,7 +41,7 @@
           </div>
         </el-main>
         <el-footer>
-          <el-input placeholder="向【剧本概要】智能助手提问吧..." v-model="inputMessage"
+          <el-input placeholder="You can ask LOGLINE Intelligent Assistant for help here..." v-model="inputMessage"
             @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
@@ -219,9 +219,10 @@ export default defineComponent({
             {
             role: 'assistant',
             prompt: '',
-            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
-                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
-                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            content: `hello, I'm an Intelligent Assistant who can help you with logline writing.
+                You can try asking me like the following questions:<br>
+                What should I pay attention to when writing logline?<br>
+                How can I summarize a specific story in two or three sentences?`,
             image: 'logo.png',
             downloadIcon: true,
           }

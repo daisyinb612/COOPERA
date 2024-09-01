@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-container class="scene-panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">艺术资产-场景</div>
+        <div class="art-asset">Craft the Scenes</div>
       </el-header>
       <el-container class="rightcontainer">
 <!--        <el-button-group class="button-container">-->
@@ -26,16 +26,16 @@
           </el-card>
         </el-scrollbar>
 
-        <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="upload">保存</el-button>
-        </el-footer>
+        <!-- <el-footer class="add-button-container">
+          <el-button class="addasset-button" @click="upload">Upload</el-button>
+        </el-footer> -->
       </el-container>
     </el-container>
 
     <el-aside class="chat-panel">
       <div class="chat">
         <el-header class="header">
-          <div>【场景】智能助手</div>
+          <div>SCENE Assistant</div>
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
@@ -54,7 +54,7 @@
           </div>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="向【场景】智能助手提问吧..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="Ask any questions here..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
@@ -64,20 +64,20 @@
       </div>
     </el-aside>
 
-    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
-      <el-form-item label="分组" :label-width="formLabelWidth">
+    <el-dialog title="Edit Scene" v-model="showEditDialog" custom-class="dialog-content">
+      <!-- <el-form-item label="分组" :label-width="formLabelWidth">
         场景
-      </el-form-item>
+      </el-form-item> -->
 
-      <el-form-item label="资产名" :label-width="formLabelWidth">
+      <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="描述" :label-width="formLabelWidth">
+      <el-form-item label="Description" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="图片" :label-width="formLabelWidth">
+      <el-form-item label="Picture" :label-width="formLabelWidth">
         <div v-loading="loading">
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
@@ -88,15 +88,15 @@
                    :on-exceed="handleExceed">
           <i class="el-icon-plus"></i>
         </el-upload>
-        <el-button @click="generate_image" class="confirm-button">生成</el-button>
-        <el-button @click="save_image" class="confirm-button">保存</el-button>
+        <el-button @click="generate_image" class="confirm-button">Generate Picture</el-button>
+        <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
         </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
-        <el-button @click="handleEditClose" class="cancel-button">取消</el-button>
+        <el-button @click="handleEditClose" class="cancel-button">Cancel</el-button>
 <!--        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>-->
-        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">确定</el-button>
+        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">Confirm</el-button>
       </el-footer>
 
       <el-dialog v-model="showDeleteConfirm">
@@ -150,9 +150,9 @@ export default defineComponent({
         {
             role: 'assistant',
             prompt: '',
-            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
-                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
-                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            content: `hello, I'm an Intelligent Assistant who can help you with scene crafting.You can try asking me like the following questions:<br>
+                What aspects should I consider in terms of suitability for scene creation?<br>
+                What are your creative directions and suggestions for a specific scene?`,
             image: 'logo.png',
             downloadIcon: true,
           }

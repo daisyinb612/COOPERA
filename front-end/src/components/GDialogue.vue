@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="dialogue">
       <el-header class="header">
-        <div>对话创作</div>
+        <div>Creating dialogue</div>
       </el-header>
       <el-main class="dialogue" v-loading="loading">
         <el-header class="button-container-up">
@@ -19,8 +19,8 @@
               <!-- 显示选中情节的剧情卡片 -->
               <el-card class="plot-item">
                 <div class="plot-header">
-                  <div class="scene-name">情节名称: {{ selectedPlot.plotName }}</div>
-                  <el-button @click="generate_dialogue" class="confirm-button">生成</el-button>
+                  <div class="scene-name">Plot Name: {{ selectedPlot.plotName }}</div>
+                  <el-button @click="generate_dialogue" class="confirm-button">Generacte</el-button>
                   <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                   <!-- <div class="location">{{ selectedPlot.location }}</div> -->
                 </div>
@@ -32,13 +32,13 @@
                   <el-col :span="1">
                   </el-col>
                   <el-col :span="20">
-                    <div>情节阶段: {{ selectedPlot.plotStage }}</div>
-                    <div>地点: {{ selectedPlot.scene.name }}</div>
-                    <div>地点描述: {{ selectedPlot.scene.content }}</div>
-                    <div>出场角色:
+                    <div>Plot Name: : {{ selectedPlot.plotStage }}</div>
+                    <div>Scene: {{ selectedPlot.scene.name }}</div>
+                    <div>Description: {{ selectedPlot.scene.content }}</div>
+                    <div>Appearing Characters:
                       <span v-for="character in selectedPlot.characters" :key="character">{{ character.name }},</span>
                     </div>
-                    <div>情节梗概: {{ selectedPlot.beat }}</div>
+                    <div>introduction: {{ selectedPlot.beat }}</div>
                   </el-col>
                 </el-row>
               </el-card>
@@ -82,7 +82,7 @@
         </el-main>
 
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadDialogue">上传</el-button>
+          <el-button class="button" @click="UploadDialogue">Upload</el-button>
 
         </el-footer>
       </el-main>

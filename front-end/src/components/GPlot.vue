@@ -2,22 +2,22 @@
   <el-container class="main-container" >
     <el-main class="plot">
       <el-header class="header">
-        <div>情节创作</div>
+        <div>Create the Plots</div>
       </el-header>
       <el-main class="plot">
         <el-header class="button-container-up">
-          <el-button class="button" @click="generatePlot">生成</el-button>
-          <el-button class="button" @click="AddPlot">添加</el-button>
+          <el-button class="button" @click="generatePlot">Generate</el-button>
+          <el-button class="button" @click="AddPlot">Add New Plot</el-button>
         </el-header>
         <el-main class="plot-list-container" v-loading="loading">
           <el-scrollbar class="plots-list">
             <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
               <div class="plot-header">
-                <div class="plot-name"><div>情节{{index+1}}:</div>{{ plot.plotName }}</div>
-                <div class="plot-element"><div>情节阶段:</div>{{ plot.plotStage }}</div>
-                <div class="location"><div>地点:</div>{{plot.scene.name }}</div>
+                <div class="plot-name"><div>Plot{{index+1}}:</div>{{ plot.plotName }}</div>
+                <div class="plot-element"><div>Plot Stage:</div>{{ plot.plotStage }}</div>
+                <div class="location"><div>Scene:</div>{{plot.scene.name }}</div>
                 <div class="characters">
-                  <div>出场角色:</div>
+                  <div>Appearing Characters:</div>
                   <span v-for="character in plot.characters" :key="character">
                     <span style="padding: 3px">{{ character.name}}</span>
                   </span>
@@ -28,32 +28,32 @@
           </el-scrollbar>
         </el-main>
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadPlot">保存</el-button>
+          <el-button class="button" @click="UploadPlot">Upload</el-button>
         </el-footer>
       </el-main>
     </el-main>
 
-    <el-dialog title="添加情节" v-model="addDialogVisible" custom-class="dialog-content">
+    <el-dialog title="Add New Plot" v-model="addDialogVisible" custom-class="dialog-content">
       <el-form :model="newPlot" label-width="100px" class="add-plot-form">
-        <el-form-item label="情节名称">
+        <el-form-item label="Name">
           <el-input v-model="newPlot.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="情节元素">
+        <el-form-item label="Plot Stage">
           <el-radio-group v-model="newPlot.plotStage">
             <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="场景">
-          <el-select v-model="newPlot.scene" placeholder="请选择场景" allow-create filterable value-key="name">
+        <el-form-item label="Scene">
+          <el-select v-model="newPlot.scene" placeholder="please select or create a scene" allow-create filterable value-key="name">
             <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.name" :value="scene" />
           </el-select>
         </el-form-item>
-        <el-form-item label="角色">
-          <el-select v-model="newPlot.characters" multiple placeholder="请选择角色" value-key="name">
+        <el-form-item label="Characters">
+          <el-select v-model="newPlot.characters" multiple placeholder="please select the appearing characters" value-key="name">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>
         </el-form-item>
-        <el-form-item label="情节梗概">
+        <el-form-item label="introduction">
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
@@ -63,21 +63,21 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="编辑情节" v-model="editDialogVisible" custom-class="dialog-content">
+    <el-dialog title="Edit The Plot" v-model="editDialogVisible" custom-class="dialog-content">
       <el-form :model="editPlotData" label-width="100px" class="add-plot-form">
-        <el-form-item label="情节序号">
+        <el-form-item label="Number">
           <el-input v-model="editPlotData.No" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="情节名称">
+        <el-form-item label="Name">
           <el-input v-model="editPlotData.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="情节元素">
+        <el-form-item label="Plot Stage">
           <el-radio-group v-model="editPlotData.plotStage">
             <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="场景">
-          <el-select v-model="editPlotData.scene" placeholder="请选择场景" value-key="name" clearable filterable  allow-create>
+        <el-form-item label="Scene">
+          <el-select v-model="editPlotData.scene" placeholder="please select or create a scene" value-key="name" clearable filterable  allow-create>
             <el-option v-for="(scene, index) in allScenes" :key="scene" :label="scene.name" :value="scene" >
               <span style="float: left">{{ scene.name }}</span>
               <el-tag
@@ -87,29 +87,29 @@
                       style="float: right; margin-top: 8px; margin-left: 3px"
                       @click.stop="handleDelete(index)"
                     >
-                      删除
+                      Delete
               </el-tag>
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="角色">
-          <el-select v-model="editPlotData.characters" multiple placeholder="请选择角色" value-key="name">
+        <el-form-item label="Characters">
+          <el-select v-model="editPlotData.characters" multiple placeholder="please select the appearing characters" value-key="name">
             <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
           </el-select>
         </el-form-item>
-        <el-form-item label="情节梗概">
+        <el-form-item label="introduction">
           <el-input type="textarea" v-model="editPlotData.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleEditDialogClose" class="cancel-button">取消</el-button>
-          <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>
-          <el-button type="primary" @click="saveEditedPlot" class="confirm-button">确认</el-button>
+          <el-button @click="handleEditDialogClose" class="cancel-button">Cancle</el-button>
+          <el-button type="danger" @click="showDeleteDialog" class="delete-button">Delete</el-button>
+          <el-button type="primary" @click="saveEditedPlot" class="confirm-button">Confirm</el-button>
         </el-footer>
         <el-dialog v-model="showDeleteConfirm">
-        <div>你确认删除该资产吗？</div>
+        <div>Are you sure to remove the plot?</div>
         <span class="dialog-footer">
-          <el-button @click="cancelDelete" class="cancel-button">取消</el-button>
-          <el-button type="danger" @click="confirmDelete" class="confirm-button">确定</el-button>
+          <el-button @click="cancelDelete" class="cancel-button">Cancle</el-button>
+          <el-button type="danger" @click="confirmDelete" class="confirm-button">Confirm</el-button>
         </span>
       </el-dialog>
       </el-form>

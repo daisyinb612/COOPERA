@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-container class="character_panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">艺术资产-角色</div>
+        <div class="art-asset">Craft the Characters</div>
       </el-header>
       <el-container class="rightcontainer">
         <!-- <el-button-group class="button-container">
@@ -24,9 +24,9 @@
           </el-card>
         </el-scrollbar>
 
-        <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="showAddDialog">新增</el-button>
-          <el-button class="addasset-button" @click="upload">保存</el-button>
+        <el-footer class="add-button-container"> 
+          <el-button class="addasset-button" @click="showAddDialog">Add New Character</el-button>
+          <!-- <el-button class="addasset-button" @click="upload">Save</el-button> -->
         </el-footer>
       </el-container>
     </el-container>
@@ -34,7 +34,7 @@
     <el-aside class="chatgpt_panel">
       <div class="chat">
         <el-header class="header">
-          <div>【角色】智能助手</div>
+          <div>CHARACTER Assistant</div>
         </el-header>
         <el-main>
           <div class="message" v-for="(message, index) in messages" :key="index">
@@ -56,7 +56,7 @@
           </div>
         </el-main>
         <el-footer>
-          <el-input placeholder="向【角色】智能助手提问吧..." v-model="inputMessage" class="input-field"
+          <el-input placeholder="Ask any questions here..." v-model="inputMessage" class="input-field"
                     @keyup.enter="sendMessage" clearable>
             <template #append>
               <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
@@ -66,26 +66,26 @@
       </div>
     </el-aside>
 
-    <el-dialog title="新增资产" v-model="addDialogVisible" custom-class="dialog-content">
+    <el-dialog title="Add New Character" v-model="addDialogVisible" custom-class="dialog-content">
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-        <el-form-item label="分组">
+        <!-- <el-form-item label="分组">
           角色
-        </el-form-item>
-        <el-form-item label="资产名" :label-width="formLabelWidth">
+        </el-form-item> -->
+        <el-form-item label="Name" :label-width="formLabelWidth">
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
 
-        <el-form-item v-if="newAsset.group === 'characters'" label="描述" :label-width="formLabelWidth">
+        <el-form-item v-if="newAsset.group === 'characters'" label="Description" :label-width="formLabelWidth">
           <el-input v-model="newAsset.content" autocomplete="off" />
         </el-form-item>
 
-        <el-form-item label="音色">
-          <el-select v-model="newAsset.per" placeholder="请选择角色音色">
+        <el-form-item label="Voice">
+          <el-select v-model="newAsset.per" placeholder="please choose voice gender">
             <el-option v-for="audio in audios" :key="audio" :label="audio" :value="audio" />
          </el-select>
        </el-form-item>
         
-        <el-form-item v-if="newAsset.group === 'characters'" label="图片" :label-width="formLabelWidth">
+        <el-form-item v-if="newAsset.group === 'characters'" label="picture" :label-width="formLabelWidth">
           <div v-loading="loading">
             <el-upload :http-request="uploadFile"
                        list-type="picture-card"
@@ -96,14 +96,14 @@
                        :on-exceed="handleExceed">
               <i class="el-icon-plus"></i>
             </el-upload>
-            <el-button @click="generate_new_image" class="confirm-button">生成</el-button>
-            <el-button @click="save_image" class="confirm-button">保存</el-button>
+            <el-button @click="generate_new_image" class="confirm-button">Generate Picture</el-button>
+            <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
           </div>
         </el-form-item>
 
         <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">取消</el-button>
-          <el-button type="primary" @click="addNewAsset" class="confirm-button">确定</el-button>
+          <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
+          <el-button type="primary" @click="addNewAsset" class="confirm-button">confirm</el-button>
         </el-footer>
       </el-form>
     </el-dialog>
@@ -133,27 +133,27 @@
     </el-dialog>
 
 
-    <el-dialog title="编辑资产" v-model="showEditDialog" custom-class="dialog-content">
-      <el-form-item label="分组" :label-width="formLabelWidth">
+    <el-dialog title="Edit CHaracter" v-model="showEditDialog" custom-class="dialog-content">
+      <!-- <el-form-item label="分组" :label-width="formLabelWidth">
         角色
-      </el-form-item>
+      </el-form-item> -->
 
-      <el-form-item label="资产名" :label-width="formLabelWidth">
+      <el-form-item label="Name" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="描述" :label-width="formLabelWidth">
+      <el-form-item label="Description" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="音色">
-          <el-select v-model="currentEditAsset.per" placeholder="请选择角色音色">
+      <el-form-item label="Voice gender">
+          <el-select v-model="currentEditAsset.per" placeholder="choose voice">
             <el-option v-for="audio in audios" :key="audio" :label="audio" :value="audio" />
           </el-select>
         </el-form-item>
 
 
-      <el-form-item label="图片" :label-width="formLabelWidth" >
+      <el-form-item label="Picture" :label-width="formLabelWidth" >
         <div v-loading="loading">
         <el-upload :http-request="uploadFile"
                    list-type="picture-card"
@@ -166,21 +166,21 @@
           <i class="el-icon-plus"></i>
 
         </el-upload>
-        <el-button @click="generate_image" class="confirm-button">生成</el-button>
+        <el-button @click="generate_image" class="confirm-button">Generate Picture</el-button>
         </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
-        <el-button @click="handleEditClose" class="cancel-button">取消</el-button>
-        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>
-        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">确定</el-button>
+        <el-button @click="handleEditClose" class="cancel-button">Cancel</el-button>
+        <el-button type="danger" @click="showDeleteDialog" class="delete-button">Delete</el-button>
+        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">Confirm</el-button>
       </el-footer>
 
       <el-dialog v-model="showDeleteConfirm">
-        <div>你确认删除该资产吗？</div>
+        <div>Are you sure to remove the character?</div>
         <span class="dialog-footer">
-          <el-button @click="cancelDelete" class="cancel-button">取消</el-button>
-          <el-button type="danger" @click="confirmDelete" class="confirm-button">确定</el-button>
+          <el-button @click="cancelDelete" class="cancel-button">Cancel</el-button>
+          <el-button type="danger" @click="confirmDelete" class="confirm-button">Confirm</el-button>
         </span>
       </el-dialog>
     </el-dialog>
@@ -217,9 +217,9 @@ export default defineComponent({
         {
             role: 'assistant',
             prompt: '',
-            content: `木兰在战场上立下了赫赫战功，皇帝给她记了十二次大功，赏赐了非常丰厚的财物。<br>
-                皇帝问木兰想要什么奖赏，木兰说她不需要做官，只希望能够骑着快马，回到自己的家乡。<br>
-                木兰的父母听说女儿回来了，互相搀扶着走出城外迎接；姐姐听说妹妹回来，赶紧在家里打扮起来；弟弟听说姐姐回来，兴奋地磨刀准备宰杀猪羊庆祝。`,
+            content: `hello, I'm an Intelligent Assistant who can help you with character crafting.You can try asking me like the following questions:<br>
+                What aspects should I consider in terms of suitability for character creation?<br>
+                What are your creative directions and suggestions for a specific character?`,
             image: 'logo.png',
             downloadIcon: true,
           }
