@@ -38,8 +38,8 @@ class Handler(BaseHTTPRequestHandler):
                 history = data["data"]["history"] ##列表格式
                 input = data["data"]["user_input"]
                 question = ""
-                question += "\n###故事线###:"+storyline
-                question += "\n###我的问题###:"+input
+                question += "\n###LOGLINE###:"+storyline
+                question += "\n###MYQUSETION###:"+input
                 l = LLM(apikey=self.config["apikey"])
                 answer = l.ask(question=question,prompt=l.storyline_help,history=history)
                 self.send_response(200)
@@ -61,7 +61,7 @@ class Handler(BaseHTTPRequestHandler):
                     storyline = f.read()
                 f.close()
                 question = ""
-                question += "###故事线###:"+storyline
+                question += "###LOGLINE###:"+storyline
                 l = LLM(apikey=self.config["apikey"])
                 answer = l.ask(question=question,prompt=l.setting_role_create)
                 characters = l.analyze_answer(answer)
@@ -81,9 +81,9 @@ class Handler(BaseHTTPRequestHandler):
                 history = data["data"]["history"] ##列表格式
                 input = data["data"]["user_input"]
                 question = ""
-                question += "\n###故事线###:"+storyline
-                question += "\n###角色表###:"+characters
-                question += "\n###我的问题###:"+input
+                question += "\n###LOGLINE###:"+storyline
+                question += "\n###CHARACTERLISTE###:"+characters
+                question += "\n###MYQUSETION###:"+input
                 l = LLM(apikey=self.config["apikey"])
                 answer = l.ask(question=question,prompt=l.role_help,history=history)
                 self.send_response(200)
@@ -105,8 +105,8 @@ class Handler(BaseHTTPRequestHandler):
                 e = ExcelOp(file=self.config["characters_path"])
                 characters = e.get_json_all()
                 question = ""
-                question += "\n###故事线###:"+storyline
-                question += "\n###角色表###:"+characters
+                question += "\n###LOGLINE###:"+storyline
+                question += "\n###CHARACTERLISTE###:"+characters
                 l = LLM(apikey=self.config["apikey"])
                 answer = l.ask(question=question,prompt=l.setting_outline_create)
                 plot = l.analyze_answer(answer)
@@ -131,8 +131,8 @@ class Handler(BaseHTTPRequestHandler):
                 e = ExcelOp(file=self.config["outline_path"])
                 plot = e.get_json_all()
                 question = ""
-                question += "\n###故事线###:"+storyline
-                question += "\n###角色表###:"+plot
+                question += "\n###LOGLINE###:"+storyline
+                question += "\n###CHARACTERLISTE###:"+plot
                 l = LLM(apikey=self.config["apikey"])
                 answer = l.ask(question=question,prompt=l.setting_scene_create)
                 scene = l.analyze_answer(answer)

@@ -19,60 +19,72 @@ api_key_zhipu = '3847066edd68874c24f3a9dc6a7c5c02.xH11Vl8gBlyeh8yK'
 class LLM(object):
     def __init__(self):
         self.fix_json = '''
-        我将给出存在格式问题的文本，你的任务是输出修正格式后的json字符串。
-        输出时不要复述任务要求，直接给出修改好的json字符串。
+        I will provide text with formatting issues, and your task is to output the corrected JSON string. 
+        When outputting, do not repeat the task requirements, just provide the corrected JSON string.
         '''
         self.storyline_help = '''
-        假设你是一位话剧作家，
-        你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###和###我的问题###。
-        输出时不要复述任务要求。
+        Assume you are a drama playwriting teacher, and your task is to provide me with guidance or help in writing a summary of a playwriting. 
+        Please guide me in using two or three sentences to summarize the story I want to tell. When outputting, do not repeat the task requirements.
+        Please provide concise and effective guidance in three sentences or less.
         '''
         self.role_help = '''
-        假设你是一位话剧作家，
-        你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###、###角色表###和###我的问题###。
-        输出时不要复述任务要求。
+        Assume you are a drama playwriting teacher,and your task is to provide me with guidance or help in crafting characters.
+        I will provide ###LOGLINE###, ###CHARACTERLIST###, and ###MYQUESTION### in the following conversation. When outputting, do not repeat the task requirements.
+        Please provide concise and effective guidance in three sentences or less.
         '''
         self.scene_help = '''
-        假设你是一位话剧作家，
-        你的任务是为我提供写作指导或帮助，我将在接下来的对话中给出###故事线###、###故事大纲###和###我的问题###。
-        故事大纲包括每一个情节的###情节名###、###情节阶段###、###场景名###、###梗概###和###角色表###。
-        输出时不要复述任务要求。
+        Assume you are a drama playwriting teacher,and your task is to provide me with guidance or help in crafting scenes.
+        I will provide ###LOGLINE###、###OUTLINE###和###MYQUSETION### in the following conversation.
+        The story outline includes###PLOTNAME###、###PLOTSTAGE###、###PLOTNAME###、###PLOTBEAT###and###CHARACTERLISTE###for each plot。
+        When outputting, do not repeat the task requirements.
+        Please provide concise and effective guidance in three sentences or less.
         '''
-        self.setting_world_create = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中给出的###主题关键词###，设计一个故事的世界观。
-        输出时不用复述任务要求，直接描述世界观。
-        '''
-        self.create_storyline = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中提出的###要求###，对###现有故事线###进行修改或解答知识性疑问。
-        如果###现有故事线###的内容为无，且###要求###的内容不是知识性提问，则根据###要求###生成一个简短的故事线。
-        输出时不用复述任务要求，直接描述故事线或解答知识性疑问
-        '''
+        # self.setting_world_create = '''
+        # 假设你是一位话剧作家，
+        # 你的任务是根据我在接下来的对话中给出的###主题关键词###，设计一个故事的世界观。
+        # 输出时不用复述任务要求，直接描述世界观。
+        # '''
+        # self.create_storyline = '''
+        # 假设你是一位话剧作家，
+        # 你的任务是根据我在接下来的对话中提出的###要求###，对###现有故事线###进行修改或解答知识性疑问。
+        # 如果###现有故事线###的内容为无，且###要求###的内容不是知识性提问，则根据###要求###生成一个简短的故事线。
+        # 输出时不用复述任务要求，直接描述故事线或解答知识性疑问
+        # '''
         self.setting_role_create = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中给出的###故事线###，设计出多个故事的主要角色，输出时参照###输出示例###只输出json字符串,
-        "content"指角色的简介，"name"指角色的名字, per指角色音色码:标准女音，标准男音，请根据人物特征选取合适音色
-        ###输出示例###
+        Assume you are a playwright. 
+        Our task is to design the main characters of a stage play based on the ###LOGLINE### I provide in the following conversation. When outputting, refer to the ###OutputExample### and only output a JSON string.
+        "content" refers to the character's description, "name" refers to the character's name, and "per" refers to the character's voice code: Female Voice, Male Voice. Please choose the appropriate voice based on the character's traits.
+        ###OutputExample###
         [{
             "name": "***",
             "content": "***"
-            "per": "标准女音"
+            "per": "Female Voice"
         },
         {
             "name": "***",
             "content": "***"
-            "per": "标准男音"
+            "per": "Male Voice"
         }
         ]
         '''
         self.setting_outline_create = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中给出的###故事线###和###角色表###，编写故事大纲，其中plotName指此情节的名字，
-        plotStage指该情节处于整个故事的阶段，scene指情节发生的场景，scene的子属性name为场景名，content为场景描述(仅描述场景，不涉及情节或人物)，beat指梗概。故事情节中只出现角色表中提到的人物。
-        characters指在此情节中出现的角色，其中name为人物名，content为人物描述，per为人物音色码，这些信息请都与角色表中的信息保持一致，不要改变。如需添加角色，请将新角色的name,content,per补充完整。
-        输出时参照###输出示例###只输出json字符串,"故事阶段"的值只能取{"展示","激励事件","冲突","上升动作","高潮","解决","结局"}其中之一
-        ###输出示例###
+        Assume you are a playwright.
+        Our task is to write a drama playwright outline based on the ###LOGLINE### and ###CHARACTERLISTE### I provide in the following conversation. 
+        Outline often contains three plots,five plots or seven plots.
+        The "plotName" refers to the name of this plot.
+        The purpose of the outline is to determine the structure of the play script.
+        Please choose from the common structures: The Three-Act Structure, The Five-Act Structure, and The Seven-Act Structure, based on the story content.
+        Accordingly, The Three-Act Structure should include 3 plots, The Five-Act Structure should include 5 plots, and The Seven-Act Structure should include 7 plots.
+        plotStage refers to the stage of the story in which the plot occurs.scene refers to the setting where the plot takes place. 
+        The sub-properties of scene are name, which is the name of the scene, and content, which is the description of the scene (only describing the setting, without involving the plot or characters). 
+        beat refers to the summary of the plot.
+        Only characters mentioned in the character list should appear in the story plots as protagonist.
+        characters refers to the characters appearing in this plot, with name being the character's name, content being the character's description, and per being the character's voice code.
+        All this information should be consistent with the information in the character list and should not be changed. 
+        If new minor characters are needed, please provide complete information for the new characters, including name, content, and per.
+        The value of "plotStage" can only be one of {"exposition", "incident", "conflict", "rising", "climax", "falling", "end"}.
+        When outputting, refer to ###OutputExample### and only output the JSON string.
+        ###OutputExample###
         [{
         "plotName": "***",
         "plotStage": "***",
@@ -85,11 +97,11 @@ class LLM(object):
             {
                 "name": "***",
                 "content": "***"
-                "per": "标准女音"
+                "per": "Female Voice"
             },{
                 "name": "***",
                 "content": "***"
-                "per": "标准男音"
+                "per": "Male Voice"
             }
         ]
         },
@@ -105,11 +117,11 @@ class LLM(object):
             {
                 "name": "***",
                 "content": "***"
-                "per": "标准女音"
+                "per": "Female Voice"
             },{
                 "name": "***",
                 "content": "***"
-                "per": "标准男音"
+                "per": "Male Voice"
             }
         ]
         },
@@ -125,11 +137,11 @@ class LLM(object):
             {
                 "name": "***",
                 "content": "***"
-                "per": "标准女音"
+                "per": "Female Voice"
             },{
                 "name": "***",
                 "content": "***"
-                "per": "标准男音"
+                "per": "Male Voice"
             }
         ]
         },
@@ -145,11 +157,11 @@ class LLM(object):
             {
                 "name": "***",
                 "content": "***"
-                "per": "标准女音"
+                "per": "Female Voice"
             },{
                 "name": "***",
                 "content": "***"
-                "per": "标准男音"
+                "per": "Male Voice"
             }
         ]
         },
@@ -165,85 +177,38 @@ class LLM(object):
             {
                 "name": "***",
                 "content": "***"
-                "per": "标准女音"
+                "per": "Female Voice"
             },{
                 "name": "***",
                 "content": "***"
-                "per": "标准男音"
-            }
-        ]
-        },
-        {
-        "plotName": "***",
-        "plotStage": "***",
-        "scene": {
-            "name": "***",
-            "content": "***"
-        },
-        "beat": "***",
-        "characters":[
-            {
-                "name": "***",
-                "content": "***"
-                "per": "标准女音"
-            },{
-                "name": "***",
-                "content": "***"
-                "per": "标准男音"
-            }
-        ]
-        },
-        {
-        "plotName": "***",
-        "plotStage": "***",
-        "scene": {
-            "name": "***",
-            "content": "***"
-        },
-        "beat": "***",
-        "characters":[
-            {
-                "name": "***",
-                "content": "***"
-                "per": "标准女音"
-            },{
-                "name": "***",
-                "content": "***"
-                "per": "标准男音"
+                "per": "Male Voice"
             }
         ]
         }
         ]
         '''
-        self.setting_scene_create = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中给出的###故事线###和###故事大纲###，给出多个场景。
-        要求多个场景能够满足故事展开的需要，即所有情节均能找到对应场景。
-        输出时参照###输出示例###只输出json字符串。
-        ###输出示例###
-        [
-        {"场景名称": "***",
-        "场景介绍": "***"
-        },
-        {"场景名称": "***",
-        "场景介绍": "***"
-        },
-        {"场景名称": "***",
-        "场景介绍": "***"
-        },
-        {"场景名称": "***",
-        "场景介绍": "***"
-        },
-        {"场景名称": "***",
-        "场景介绍": "***"
-        }
-        ]
-        '''
+        # self.setting_scene_create = '''
+        # Assume you are a playwright. 
+        # Your task is to provide multiple scenes based on the ###LOGLINE### and ###OUTLINE### I will give in the following conversation. 。
+        # he multiple scenes should meet the needs of the story's development, meaning all plot points should correspond to a scene. 
+        # When outputting, refer to ###OutputExample### and only output the JSON string.
+        # ###OutputExample###
+        # [
+        # {"sceneName": "***",
+        # "sceneDescription": "***"
+        # },
+        # {"sceneName": "***",
+        # "sceneDescription": "***"
+        # },
+        # {"sceneName": "***",
+        # "sceneDescription": "***"
+        # ]
+        # '''
         self.setting_dialogue_create = '''
-        假设你是一位话剧作家，
-        你的任务是根据我在接下来的对话中给出的###故事线###和###本章大纲###编写本章的场景对话，注意对话为中文。
-        输出时参照###输出示例###只输出json字符串,
-        ###输出示例###
+        Assume you are a playwright.
+        Your task is to write the scene dialogue for this chapter based on the ###LOGLINE### and ###Chapter Outline### I will provide in the following conversation. 
+        When outputting, refer to ###OutputExample### and only output the JSON string.
+        ###OutputExample###
         [
         {"number": "1",
         "character": "***",

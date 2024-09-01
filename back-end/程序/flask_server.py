@@ -56,7 +56,7 @@ def upload_storyline():
         with open(info_dict['world_setting_path'], 'w', encoding='utf-8') as f:
             f.write(data["data"]["storyline"])
         storyline = data["data"]["storyline"]
-        question = "\n###故事线###:" + storyline
+        question = "\n###LOGLINE###:" + storyline
         #
         answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
         plot = global_llm.analyze_answer(answer)
@@ -76,7 +76,7 @@ def get_storyline_help():
     history = data["data"]["history"]
     user_input = data["data"]["user_input"]
 
-    question = "\n###故事线###:" + storyline + "\n###我的问题###:" + user_input
+    question = "\n###LOGLINE###:" + storyline + "\n###MYQUSETION###:" + user_input
 
     answer = global_llm.ask(question=question, prompt=global_llm.storyline_help, history=history)
     print("Yes")
@@ -93,7 +93,7 @@ def get_saved_storyline():
 # def init_character_generation():
 #     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
 #         storyline = f.read()
-#     question = "###故事线###:" + storyline
+#     question = "###LOGLINE###:" + storyline
 #
 #     answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
 #     characters = global_llm.analyze_answer(answer)
@@ -109,10 +109,10 @@ def get_character_help():
     data = request.get_json()
     history = data["data"]["history"]
     user_input = data["data"]["user_input"]
-    question = "\n###故事线###:" + storyline + "\n###角色表###:"
+    question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:"
     for character in characters:
         question += character["name"] + ": " + character["content"] + "\n"
-    question += "\n###我的问题###:" + user_input
+    question += "\n###MYQUSETION###:" + user_input
 
     answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
@@ -129,7 +129,7 @@ def init_plot_generation():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
     characters = request.get_json()["data"]["characters"]
-    question = "\n###故事线###:" + storyline + "\n###角色表###:"
+    question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:"
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
 
@@ -174,7 +174,7 @@ def update_plot():
 #         storyline = f.read()
 #     with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
 #         plot = json.load(f)
-#     question = "\n###故事线###:" + storyline + "\n###角色表###:" + plot
+#     question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:" + plot
 #
 #     answer = global_llm.ask(question=question, prompt=global_llm.setting_scene_create)
 #     scene = global_llm.analyze_answer(answer)
@@ -252,9 +252,9 @@ def create_scene_picture():
 
         action = data.get("action")
         if action == "create_scene_picture":
-            prompt = "请使用统一清新的平面插画风格生成中国古代的场景图片，可以使用以下颜色,注意主色调的选择和面积比例的使用，使得背景符合场景描述和表达的氛围:淡紫色#DDA0DD 浅绿色#90EE90 淡蓝色#ADD8E6 暗紫色#4B0082 深灰色#696969 米色 #F5F5DC 场景的名称为："+data["data"]["name"]
+            prompt = "Please create an illustration of an ancient Chinese scene using a unified, refreshing flat illustration style. Use the following colors and pay attention to the choice of main color tones and the proportion of their usage to ensure the background matches the scene description and conveys the appropriate atmosphere: light purple #DDA0DD, light green #90EE90, light blue #ADD8E6, dark purple #4B0082, dark gray #696969, beige #F5F5DC. The name of the scene is: "+data["data"]["name"]
             if data["data"]["user_input"] != "":
-                prompt += "场景的描述为："+data["data"]["user_input"]
+                prompt += "the scene's description is:"+data["data"]["user_input"]
             name = data["data"]["name"]
 
             picture = global_llm.create_picture(prompt=prompt)
@@ -375,7 +375,7 @@ def get_scene_help():
 
     data = request.get_json()
     history = data["data"]["history"]
-    question = "\n###故事线###：" + storyline + "\n###故事大纲###："
+    question = "\n###LOGLINE###：" + storyline + "\n###OUTLINE###："
 
     for i in range(len(plot)):
         plotName = plot[i]["plotName"]
@@ -399,7 +399,7 @@ def generate_dialogue():
     sceneContent = data["scene"]["content"]
     beat = data["beat"]
     characters = data["characters"]
-    question = "\n###故事线###:" + storyline + "\n###故事大纲###：章节：" + plotName + "，情节阶段" + plotStage + "，场景名字" + sceneName + ', 场景描述' + sceneContent + "，梗概" + beat + "，角色表"
+    question = "\n###LOGLINE###:" + storyline + "\n###OUTLINE###：章节：" + plotName + "，情节阶段" + plotStage + "，场景名字" + sceneName + ', 场景描述' + sceneContent + "，梗概" + beat + "，角色表"
     for character in characters:
         question += "角色名： "+character["name"] + "角色描述:  " + character["content"]+"角色音色： " + character["per"] + "\n"
 
