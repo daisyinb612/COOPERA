@@ -133,6 +133,7 @@ export default defineComponent({
       // 忽略（）中的内容
       content = content.replace(/\(.*?\)/g, '');
       // per是字符串，需要通过audios转换成数字
+      dialogues.value[index].audio = ''
       id_speaker = audios[id_speaker];
       const payload = {
         action: 'do_tts',
