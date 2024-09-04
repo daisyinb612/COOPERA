@@ -338,6 +338,7 @@ export default defineComponent({
         //     message: '请求失败',
         //     type: 'error',
         //   });
+          inputMessage.value = ""
         }
       } catch (error) {
         ElMessage({

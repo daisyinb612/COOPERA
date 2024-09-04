@@ -139,11 +139,13 @@ def init_plot_generation():
         os.makedirs(os.path.dirname(info_dict['outline_path']), exist_ok=True)
     with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
         json.dump(plot, f, indent=4, ensure_ascii=False)
-    scene = [{"name": x["scene"], "url": ""} for x in plot]
+    scene = []
+    for x in plot:
+        x['scene']['url'] = ""
+        scene.append(x['scene'])
     if not os.path.exists(info_dict['scene_path']):
         os.makedirs(os.path.dirname(info_dict['scene_path']), exist_ok=True)
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
-        print('scene', scene)
         json.dump(scene, f, indent=4, ensure_ascii=False)
 
     return jsonify(plot)
@@ -349,43 +351,35 @@ def delete_character():
     else:
         return jsonify({"error": "Invalid action type."}), 401
 
-# @app.route('/get_character_image_help', methods=['POST'])
-# def get_character_image_help():
-#     try:
-#         data = request.get_json()
-#         if not data:
-#             return jsonify({"error": "Invalid JSON"}), 402
-#         action = data.get("action")
-#         if action == "get_character_image_help":
-#             prompt = data["data"]["user_input"]
-#
-#             picture = global_llm.create_picture(filepath=filepath, prompt=prompt)
-#             return jsonify({"image": picture})
-#         else:
-#             return jsonify({"error": "Invalid action type."}), 401
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
-
 @app.route('/get_scene_help', methods=['POST'])
 def get_scene_help():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
-    with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
-        plot = json.load(f)
+    with open(info_dict['scene_path'], "r", encoding="utf-8") as f:
+        scene = json.load(f)
 
     data = request.get_json()
     history = data["data"]["history"]
-    question = "\n###LOGLINE###：" + storyline + "\n###OUTLINE###："
+    user_input = data['data']['user_input']
+    question = "\n###LOGLINE###：" + storyline + "\n###SCENELIST###："
 
-    for i in range(len(plot)):
-        plotName = plot[i]["plotName"]
-        plotStage = plot[i]["plotStage"]
-        scene = plot[i]["scene"]
-        beat = plot[i]["beat"]
-        characters = ', '.join(plot[i]["characters"])
-        question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
+    for s in scene:
+        scene_name = s['name']
+        scene_content = s['content']
+        question += "\nScene name: " + scene_name + ", Scene Content: " + scene_content
+    question += '\n' + user_input
 
-    answer = global_llm.ask(question=question, prompt=global_llm.role_help, history=history)
+
+
+    # for i in range(len(plot)):
+    #     plotName = plot[i]["plotName"]
+    #     plotStage = plot[i]["plotStage"]
+    #     scene = plot[i]["scene"]
+    #     beat = plot[i]["beat"]
+    #     characters = ', '.join(str(plot[i]["characters"]))
+    #     question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
+
+    answer = global_llm.ask(question=question, prompt=global_llm.scene_help, history=history)
     return jsonify({"answer": answer})
 
 @app.route('/generate_dialogue', methods=['POST'])

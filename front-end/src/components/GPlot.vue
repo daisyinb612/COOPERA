@@ -101,14 +101,14 @@
           <el-input type="textarea" v-model="editPlotData.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleEditDialogClose" class="cancel-button">Cancle</el-button>
+          <el-button @click="handleEditDialogClose" class="cancel-button">Cancel</el-button>
           <el-button type="danger" @click="showDeleteDialog" class="delete-button">Delete</el-button>
           <el-button type="primary" @click="saveEditedPlot" class="confirm-button">Confirm</el-button>
         </el-footer>
         <el-dialog v-model="showDeleteConfirm">
         <div>Are you sure to remove the plot?</div>
         <span class="dialog-footer">
-          <el-button @click="cancelDelete" class="cancel-button">Cancle</el-button>
+          <el-button @click="cancelDelete" class="cancel-button">Cancel</el-button>
           <el-button type="danger" @click="confirmDelete" class="confirm-button">Confirm</el-button>
         </span>
       </el-dialog>
