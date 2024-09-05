@@ -206,7 +206,7 @@ class LLM(object):
         # '''
         self.setting_dialogue_create = '''
         Assume you are a playwright.
-        Your task is to write the dialogue for this chapter based on the ###LOGLINE###,###Outline### and ###CHARACTERLIST###,I will provide in the following conversation.
+        Your task is to write the dialogue for this chapter based on the ###LOGLINE###,###OUTLINE### and ###CHARACTERLIST###,I will provide in the following conversation.
         Pay attention to ensuring the dialogue matches the characters' personalities. You can appropriately add character actions in parentheses within the dialogue.
         When outputting, refer to ###OutputExample### and only output the JSON string.
         ###OutputExample###
