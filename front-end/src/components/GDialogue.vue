@@ -78,6 +78,16 @@
                       class="beat-input"></el-input>
                   </el-col>
                 </el-row>
+                <el-row align="middle">
+                  <el-col :span="2">
+                    <el-icon @click=""><CaretTop /></el-icon>
+                  </el-col>
+                  <el-col :span="2">
+                    <el-icon @click=""><CaretBottom /></el-icon>
+                  </el-col>
+                  <el-col :span="2">
+                  </el-col>
+                </el-row>
               </el-card>
             </template>
           </el-scrollbar>
