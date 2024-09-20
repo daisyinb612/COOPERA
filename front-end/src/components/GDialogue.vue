@@ -80,13 +80,14 @@
                 </el-row>
                 <el-row align="middle">
                   <el-col :span="2">
-                    <el-icon @click=""><CaretTop /></el-icon>
+                    <el-icon @click="moveUp(dialogueIndex)"><CaretTop /></el-icon>
                   </el-col>
-                  <el-col :span="2">
+                  <!-- <el-col :span="2">
                     <el-icon @click=""><CaretBottom /></el-icon>
                   </el-col>
                   <el-col :span="2">
-                  </el-col>
+                    <el-icon @click=""><Plus /></el-icon>
+                  </el-col> -->
                 </el-row>
               </el-card>
             </template>
@@ -95,8 +96,8 @@
 
         <el-footer class="button-container-down">
           <el-button class="button" @click="UploadDialogue">Upload</el-button>
-
         </el-footer>
+        
       </el-main>
     </el-main>
   </el-container>
@@ -108,6 +109,7 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
 import * as diff from 'diff';
+// import { Plus } from '@element-plus/icons-vue/dist/types';
 
 export default defineComponent({
   name: 'GDialogue',
@@ -259,6 +261,7 @@ export default defineComponent({
         });
       }
     }
+
     // const delOneDialogue = (payload) => store.dispatch('delOneDialogue', payload);
     function del_one_dialogue(index){
       // let payload = {
@@ -268,6 +271,15 @@ export default defineComponent({
       // delOneDialogue(payload)
 
       selectedPlot.value.dialogue.splice(index, 1)
+    }
+
+    function moveUp(index) {
+      if (selectedPlotIndex.value !== null) {
+        store.dispatch('swapWithUpDialogue', {
+          plotIndex: selectedPlotIndex.value,
+          dialogueIndex: index
+        });
+      }
     }
 
     return {
@@ -282,7 +294,8 @@ export default defineComponent({
       UploadDialogue,
       generate_audio,
       generate_dialogue,
-      del_one_dialogue
+      del_one_dialogue,
+      moveUp,
     };
   }
 });
