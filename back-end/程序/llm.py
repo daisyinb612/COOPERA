@@ -12,7 +12,7 @@ from openpyxl import Workbook, load_workbook
 
 
 model = 'openai'  # 'openai' or 'zhipu'
-api_key_openai = 'sk-dfRQfcVLVyr6zKQ522Ed29C7556e4e03B3DdC3D206Ad2a74'
+api_key_openai = 'sk-EKAaP4tPWto6iGcj1fC9493751D040588690679dFcB8D3Aa'
 api_key_zhipu = '3847066edd68874c24f3a9dc6a7c5c02.xH11Vl8gBlyeh8yK'
 
 
