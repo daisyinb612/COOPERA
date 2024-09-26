@@ -7,6 +7,9 @@ export default {
     setScenes(state, scenes) {
       state.scenes = scenes;
     },
+    delScenes(state){
+      state.scenes = []
+    },
     addScene(state, scene) {
       if (Array.isArray(scene)) {
         scene.forEach((s) => {
@@ -38,6 +41,9 @@ export default {
     },
     deleteScene({ commit }, index) {
       commit('deleteScene', index);
+    },
+    delScenes({ commit }) {
+      commit('delScenes');
     },
   },
   getters: {

@@ -168,6 +168,8 @@ export default defineComponent({
     const allCharacters = computed(() => store.state.character.characters);
     const stageList = ["exposition", "incident", "conflict", "rising", "climax", "falling", "end"]
 
+    const delPlots = () => store.dispatch('delPlots')
+    const delScenes = () => store.dispatch('delScenes')
     const addPlot = (plot) => store.dispatch('addPlot', plot);
     const addScene = (scene) => store.dispatch('addScene', scene);
     const updatePlot = (payload) => store.dispatch('updatePlot', payload);
@@ -440,6 +442,11 @@ export default defineComponent({
       // }
     }
 
+    async function refreshData(){
+      delPlots()
+      delScenes()
+    }
+
     async function generatePlot() {
       try {
         loading.value = true;
@@ -450,6 +457,7 @@ export default defineComponent({
           }
         });
         loading.value = false;
+        await refreshData()
         addPlot(response.data);
         const scenes = response.data.reduce((acc, plot) => {
           if (!acc.find((scene) => scene.name === plot.scene.name)) {

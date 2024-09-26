@@ -7,6 +7,9 @@ export default {
     setPlots(state, plots) {
       state.plots = plots
     },
+    delPlots(state){
+      state.plots = []
+    },
     delOneDialogue(state, {plotIndex, dialogueIndex}){
       console.log(state.plots)
       console.log(plotIndex)
@@ -36,13 +39,11 @@ export default {
     deletePlot(state, index) {
       state.plots.splice(index, 1);
     },
-    swapWithUpDialogue(state, { plotIndex, dialogueIndex }) {
+    swapDialogue(state, {plotIndex, dialogueIndex1, dialogueIndex2}){
       const dialogues = state.plots[plotIndex].dialogue;
-      if (dialogueIndex > 0) {
-        const temp = dialogues[dialogueIndex];
-        dialogues[dialogueIndex] = dialogues[dialogueIndex - 1];
-        dialogues[dialogueIndex - 1] = temp;
-      }
+      const temp = dialogues[dialogueIndex1];
+      dialogues[dialogueIndex1] = dialogues[dialogueIndex2];
+      dialogues[dialogueIndex2] = temp;
     },
   },
   actions: {
@@ -64,9 +65,12 @@ export default {
     delOneDialogue({ commit }, payload) {
       commit('delOneDialogue', payload);
     },
-    swapWithUpDialogue({ commit }, payload) {
-      commit('swapWithUpDialogue', payload);
+    swapDialogue({ commit }, payload) {
+      commit('swapDialogue', payload);
     },
+    delPlots({commit}){
+      commit('delPlots');
+    }
   },
   getters: {
     plots: (state) => state.plots,
