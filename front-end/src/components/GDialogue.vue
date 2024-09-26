@@ -44,17 +44,19 @@
               </el-card>
 
               <!-- 根据对话编号显示角色和对话内容 -->
-              <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index" shadow="hover">
-                <!-- <div class="dialogue-header">
-                  <div class="dialogue-number">Dialogue {{ index + 1 }}</div>
-                </div>
-                <div v-for="dialogue in filteredDialogues(dialogueNumber)" :key="dialogue.character" class="character-dialogue"></div> -->
-                <el-row align="middle">
-                  <div style="position: absolute; right: 0%; top: 1%"><el-icon @click="del_one_dialogue(index)"><CloseBold /> </el-icon></div>
-                  <el-col :span="4">
-                  <div class="character">{{ dialogue.character }}: </div>
-                 </el-col>
-                  <el-col :span="2">
+              <el-card class="dialogue-item" shadow="hover" v-for="(dialogue, index) in dialogues" :key="index">
+                <el-row gutter="10" align="middle">
+                  <div style="position: absolute; right: 0%; top: 1%">
+                    <el-button circle>
+                    <el-icon @click="del_one_dialogue(index)">
+                      <CloseBold />
+                    </el-icon>
+                  </el-button>
+                  </div>
+                  <el-col :span="3">
+                    <div class="character">{{ dialogue.character }}: </div>
+                  </el-col>
+                  <el-col :span="3">
                     <svg @click="generate_audio(dialogue.content, dialogue.character, selectedPlotIndex, index)"
                       xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24">
                       <g fill="none">
@@ -64,51 +66,89 @@
                       </g>
                     </svg>
                   </el-col>
-                  <el-col :span="18">
+                  <el-col :span="14">
                     <audio ref="audioPlayer" controls v-if="dialogue.audio" style="height: 15px">
                       <source :src="dialogue.audio" type="audio/wav">
                       Your browser does not support the audio element.
                     </audio>
                   </el-col>
+
+                  <el-col :span="1" v-if="index > 0">
+                    <el-button circle>
+                      <el-icon @click="swapDialogue(index, index - 1)">
+                        <CaretTop />
+                      </el-icon>
+                    </el-button>
+                  </el-col>
+                  <el-col :span="1" v-if="index < dialogues.length - 1">
+                    <el-button circle>
+                    <el-icon @click="swapDialogue(index, index + 1)">
+                      <CaretBottom />
+                    </el-icon>
+                  </el-button>
+                  </el-col>
+                  <el-col :span="1">
+                    <el-button circle>
+                    <el-icon @click="showAddDialog(index)">
+                      <Plus />
+                    </el-icon>
+                  </el-button>
+                  </el-col>
+
                 </el-row>
-                <br>
+
                 <el-row align="middle">
                   <el-col :span="24">
                     <el-input type="textarea" v-model="dialogue.content" placeholder="Enter beat here..."
                       class="beat-input"></el-input>
                   </el-col>
                 </el-row>
-                <el-row align="middle">
-                  <el-col :span="2" v-if="index>0">
-                    <el-icon @click="swapDialogue(index, index-1)"><CaretTop /></el-icon>
+
+                <!-- <el-row  gutter="20" align="middle" justify="end">
+
+                  <el-col span="10" v-if="index > 0">
+                    <el-button circle>
+                      <el-icon @click="swapDialogue(index, index - 1)">
+                        <CaretTop />
+                      </el-icon>
+                    </el-button>
                   </el-col>
-                   <el-col :span="2" v-if="index<dialogues.length-1">
-                    <el-icon @click="swapDialogue(index, index+1)"><CaretBottom /></el-icon>
+                  <el-col span="10" v-if="index < dialogues.length - 1">
+                    <el-button circle>
+                    <el-icon @click="swapDialogue(index, index + 1)">
+                      <CaretBottom />
+                    </el-icon>
+                  </el-button>
                   </el-col>
-                  <el-col :span="2">
-                    <el-icon @click="showAddDialog(index)"><Plus /></el-icon>
+                  <el-col span="10">
+                    <el-button circle>
+                    <el-icon @click="showAddDialog(index)">
+                      <Plus />
+                    </el-icon>
+                  </el-button>
                   </el-col>
-                </el-row>
+                </el-row> -->
+
               </el-card>
             </template>
           </el-scrollbar>
 
           <el-dialog title="Add Dialogue" v-model="addDialogVisible" custom-class="dialog-content">
-      <el-form :model="addDialogue" label-width="100px" class="add-plot-form">
-        <el-form-item label="Character">
-          <el-select v-model="addDialogue.character">
-            <el-option v-for="character in characters" :key="character.name" :value="character.name"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="Content">
-          <el-input v-model="addDialogue.content"/>
-        </el-form-item>
-        <el-footer class="dialog-footer">
-          <el-button @click="addDialogCancel" class="cancel-button">Cancel</el-button>
-          <el-button type="primary" @click="addDialogConfirm" class="confirm-button">Confirm</el-button>
-        </el-footer>
-      </el-form>
-    </el-dialog>
+            <el-form :model="addDialogue" label-width="100px" class="add-plot-form">
+              <el-form-item label="Character">
+                <el-select v-model="addDialogue.character">
+                  <el-option v-for="character in characters" :key="character.name" :value="character.name"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="Content">
+                <el-input v-model="addDialogue.content" />
+              </el-form-item>
+              <el-footer class="dialog-footer">
+                <el-button @click="addDialogCancel" class="cancel-button">Cancel</el-button>
+                <el-button type="primary" @click="addDialogConfirm" class="confirm-button">Confirm</el-button>
+              </el-footer>
+            </el-form>
+          </el-dialog>
 
         </el-main>
 
@@ -124,7 +164,7 @@
 </template>
 
 <script>
-import {defineComponent, ref, computed, reactive} from 'vue';
+import { defineComponent, ref, computed, reactive } from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
@@ -294,7 +334,7 @@ export default defineComponent({
     }
 
     // const delOneDialogue = (payload) => store.dispatch('delOneDialogue', payload);
-    function del_one_dialogue(index){
+    function del_one_dialogue(index) {
       selectedPlot.value.dialogue.splice(index, 1)
     }
 
@@ -308,32 +348,32 @@ export default defineComponent({
       }
     }
 
-    function showAddDialog(index){
-      addDialogueIndex.value = index+1
+    function showAddDialog(index) {
+      addDialogueIndex.value = index + 1
       addDialogVisible.value = true
     }
 
-    function addDialogCancel(){
+    function addDialogCancel() {
       addDialogueIndex.value = 0
       addDialogVisible.value = false
       addDialogue.value = reactive({
-      character: "",
-      content: "",
-      number: 0
+        character: "",
+        content: "",
+        number: 0
       })
     }
 
-    function addDialogConfirm(){
+    function addDialogConfirm() {
       // console.log(addDialogueIndex)
       dialogues.value.splice(addDialogueIndex.value, 0, addDialogue);
-      for(let i=addDialogueIndex.value+1; i<dialogues.value.length;i++){
+      for (let i = addDialogueIndex.value + 1; i < dialogues.value.length; i++) {
         dialogues.value[i].number++
       }
       addDialogue.value = reactive({
-      character: "",
-      content: "",
-      number: 0
-    })
+        character: "",
+        content: "",
+        number: 0
+      })
       addDialogVisible.value = false
     }
 
@@ -427,28 +467,21 @@ export default defineComponent({
   color: white;
 }
 
-.dialogue-list-container {
-  flex: 1;
-  overflow: hidden;
-  box-sizing: border-box;
+.dialogue-item {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
-}
-
-.dialogue-item {
-  margin-bottom: 20px;
-  padding: 5px;
   border-radius: 5px;
   background-color: #F1F1F1
 }
 
-.dialogue-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.dialogue-itemx {
+  margin: px;
 }
 
 .plot-name {
@@ -498,8 +531,8 @@ export default defineComponent({
 }
 
 .plot-item {
-  margin-bottom: 40px;
-  padding: 5px;
+  margin-bottom: 20px;
+  padding: 15px;
   border-radius: 10px;
   background-color: #D5DCFF;
 }
@@ -509,16 +542,6 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-}
-
-.character-dialogue {
-  display: flex;
-  /* 使用flex布局使角色和对话内容横排 */
-}
-
-.dialogue-content {
-  margin-left: 5px;
-  /* 添加左边距，确保对话内容和冒号之间有足够的空间 */
 }
 
 .plots-list {
@@ -533,8 +556,16 @@ export default defineComponent({
   border: 2px solid #ddd
 }
 
-.del-button{
+.del-button {
   height: 100%;
 }
+
+.el-row {
+  margin-bottom: 10px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+
 
 </style>
