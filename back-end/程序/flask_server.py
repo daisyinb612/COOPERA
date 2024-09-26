@@ -467,39 +467,67 @@ def do_tts():
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON"}), 402
+    if os.path.exists(info_dict['wav_path'] + data["data"]["filename"]):
+        os.remove(info_dict['wav_path'] + data["data"]["filename"])
+
     action = data.get("action")
     if action == "do_tts":
         text = data["data"]["text"]
         text = del_brackets(text)
         print('do_tts text', text)
-        id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
-        print('id_speaker', id_speaker)
-        url = "http://tsn.baidu.com/text2audio"
-        header = {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "*/*"
-        }
-        body = {
-            "tex": text,
-            "tok": "24.bdff459dfc2bb287f10a5777d9265c92.2592000.1725624992.282335-102429250",
-            "cuid": "FsvTrRLbtYgKul1z2dAHuO3yorA07eJ1",
-            "ctp": 1,
-            "lan": "zh",
-            "per": id_speaker,
-            "aue": 6
-        }
-        response = requests.post(url, headers=header, data=body)
-        print('Status Code:', response.status_code)
-        if response.status_code == 200:
-            with open(info_dict['wav_path'] + data["data"]["filename"], 'wb') as f:
-                f.write(response.content)
-            return send_file(info_dict['wav_path'] + data["data"]["filename"], mimetype="audio/wav")
+        try:
+            from pathlib import Path
+            from openai import OpenAI
+            from llm import api_key_openai
+            client = OpenAI(
+                base_url="https://xiaoai.plus/v1",
+                api_key=api_key_openai
+            )
 
-        else:
-            print(f'Failed to retrieve the file. Status code: {response.status_code}')
-            print(response.text)
+            speech_file_path = info_dict['wav_path'] + data["data"]["filename"]
+            mapper = {
+                0: 'nova',
+                1: 'onyx'
+            }
+            id_speaker = mapper[data["data"]["id_speaker"]]
+            response = client.audio.speech.create(
+                model="tts-1",
+                voice=id_speaker,
+                input=text
+            )
+            response.stream_to_file(speech_file_path)
+            return jsonify(info_dict['wav_path'] + data["data"]["filename"]), 200
+        except Exception as e:
+            print('openai failed due to: ', e)
+            print('use baidu')
+            id_speaker = data["data"]["id_speaker"] #1为男声，0为女声
+            print('id_speaker', id_speaker)
+            url = "http://tsn.baidu.com/text2audio"
+            header = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept": "*/*"
+            }
+            body = {
+                "tex": text,
+                "tok": "24.bdff459dfc2bb287f10a5777d9265c92.2592000.1725624992.282335-102429250",
+                "cuid": "FsvTrRLbtYgKul1z2dAHuO3yorA07eJ1",
+                "ctp": 1,
+                "lan": "zh",
+                "per": id_speaker,
+                "aue": 6
+            }
+            response = requests.post(url, headers=header, data=body)
+            print('Status Code:', response.status_code)
+            if response.status_code == 200:
+                with open(info_dict['wav_path'] + data["data"]["filename"], 'wb') as f:
+                    f.write(response.content)
+                return jsonify(info_dict['wav_path'] + data["data"]["filename"]), 200
+            else:
+                print(f'Failed to retrieve the file. Status code: {response.status_code}')
+                print(response.text)
     else:
         return jsonify({"error": "Invalid action type."}), 401
+
 
 @app.route('/fresh_backend', methods=['GET'])
 def fresh_backend():
