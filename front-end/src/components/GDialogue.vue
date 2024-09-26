@@ -42,9 +42,9 @@
                   </el-col>
                 </el-row>
               </el-card>
-              
+
               <!-- 根据对话编号显示角色和对话内容 -->
-              <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index">
+              <el-card class="dialogue-item" v-for="(dialogue, index) in dialogues" :key="index" shadow="hover">
                 <!-- <div class="dialogue-header">
                   <div class="dialogue-number">Dialogue {{ index + 1 }}</div>
                 </div>
@@ -79,32 +79,52 @@
                   </el-col>
                 </el-row>
                 <el-row align="middle">
-                  <el-col :span="2">
-                    <el-icon @click="moveUp(dialogueIndex)"><CaretTop /></el-icon>
+                  <el-col :span="2" v-if="index>0">
+                    <el-icon @click="swapDialogue(index, index-1)"><CaretTop /></el-icon>
                   </el-col>
-                  <!-- <el-col :span="2">
-                    <el-icon @click=""><CaretBottom /></el-icon>
+                   <el-col :span="2" v-if="index<dialogues.length-1">
+                    <el-icon @click="swapDialogue(index, index+1)"><CaretBottom /></el-icon>
                   </el-col>
                   <el-col :span="2">
-                    <el-icon @click=""><Plus /></el-icon>
-                  </el-col> -->
+                    <el-icon @click="showAddDialog(index)"><Plus /></el-icon>
+                  </el-col>
                 </el-row>
               </el-card>
             </template>
           </el-scrollbar>
+
+          <el-dialog title="Add Dialogue" v-model="addDialogVisible" custom-class="dialog-content">
+      <el-form :model="addDialogue" label-width="100px" class="add-plot-form">
+        <el-form-item label="Character">
+          <el-select v-model="addDialogue.character">
+            <el-option v-for="character in characters" :key="character.name" :value="character.name"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Content">
+          <el-input v-model="addDialogue.content"/>
+        </el-form-item>
+        <el-footer class="dialog-footer">
+          <el-button @click="addDialogCancel" class="cancel-button">Cancel</el-button>
+          <el-button type="primary" @click="addDialogConfirm" class="confirm-button">Confirm</el-button>
+        </el-footer>
+      </el-form>
+    </el-dialog>
+
         </el-main>
 
         <el-footer class="button-container-down">
           <el-button class="button" @click="UploadDialogue">Upload</el-button>
         </el-footer>
-        
+
+
       </el-main>
     </el-main>
   </el-container>
+
 </template>
 
 <script>
-import { defineComponent, ref, computed } from 'vue';
+import {defineComponent, ref, computed, reactive} from 'vue';
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import { useStore } from 'vuex';
@@ -125,6 +145,9 @@ export default defineComponent({
     const dialogues = computed(() => {
       return selectedPlot.value.dialogue ?? [];
     });
+    const characters = computed(() => {
+      return selectedPlot.value.characters ?? [];
+    })
     const beforeEditAssets = ref([])
     const audios = {
       "Female Voice": 0,
@@ -137,6 +160,14 @@ export default defineComponent({
       // "京腔": 10,
       // "温柔大叔": 11,
     }
+    const addDialogue = reactive({
+      character: "",
+      content: "",
+      number: 0
+    })
+
+    const addDialogVisible = ref(false)
+    const addDialogueIndex = ref(0)
 
     async function generate_audio(content, character, scene, index) {
       const filename = `scene${scene}_${index}.wav`;
@@ -264,22 +295,46 @@ export default defineComponent({
 
     // const delOneDialogue = (payload) => store.dispatch('delOneDialogue', payload);
     function del_one_dialogue(index){
-      // let payload = {
-      //   plotIndex: selectedPlotIndex.value,
-      //   dialogueIndex: index
-      // }
-      // delOneDialogue(payload)
-
       selectedPlot.value.dialogue.splice(index, 1)
     }
 
-    function moveUp(index) {
+    function swapDialogue(index1, index2) {
       if (selectedPlotIndex.value !== null) {
-        store.dispatch('swapWithUpDialogue', {
+        store.dispatch('swapDialogue', {
           plotIndex: selectedPlotIndex.value,
-          dialogueIndex: index
+          dialogueIndex1: index1,
+          dialogueIndex2: index2
         });
       }
+    }
+
+    function showAddDialog(index){
+      addDialogueIndex.value = index+1
+      addDialogVisible.value = true
+    }
+
+    function addDialogCancel(){
+      addDialogueIndex.value = 0
+      addDialogVisible.value = false
+      addDialogue.value = reactive({
+      character: "",
+      content: "",
+      number: 0
+      })
+    }
+
+    function addDialogConfirm(){
+      // console.log(addDialogueIndex)
+      dialogues.value.splice(addDialogueIndex.value, 0, addDialogue);
+      for(let i=addDialogueIndex.value+1; i<dialogues.value.length;i++){
+        dialogues.value[i].number++
+      }
+      addDialogue.value = reactive({
+      character: "",
+      content: "",
+      number: 0
+    })
+      addDialogVisible.value = false
     }
 
     return {
@@ -295,7 +350,13 @@ export default defineComponent({
       generate_audio,
       generate_dialogue,
       del_one_dialogue,
-      moveUp,
+      swapDialogue,
+      characters,
+      addDialogue,
+      addDialogConfirm,
+      addDialogCancel,
+      showAddDialog,
+      addDialogVisible
     };
   }
 });
