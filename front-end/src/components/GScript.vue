@@ -4,11 +4,11 @@
       <el-header class="header">
         <div>Playwriting</div>
       </el-header>
-       <el-header class="button-container-up">
+      <el-header class="button-container-up">
         <el-button class="button" @click="generate_script">Generate</el-button>
-        </el-header>
-        <div class="script-header">
-          <el-scrollbar class="script-content">
+      </el-header>
+      <div class="script-header">
+        <el-scrollbar class="script-content">
           <!-- <div class="script-name">Logline</div> -->
           {{ script.storylines }}
           <div v-for="plot in script.dialogues" :key="plot.plotName">
@@ -16,37 +16,36 @@
             scene: {{ plot.scene.name }}
             <div v-for="dialogue in plot.dialogue" :key="dialogue.character">
               <div>{{ dialogue.character }}: {{ dialogue.content }}</div>
-              </div>
+            </div>
           </div>
-          </el-scrollbar>
-        </div>
+        </el-scrollbar>
+      </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import axios from 'axios';
-import { defineComponent} from 'vue';
-import { ref } from 'vue';
+import axios from "axios";
+import { defineComponent } from "vue";
+import { ref } from "vue";
 
 export default defineComponent({
-  name: 'GScript',
+  name: "GScript",
   setup() {
     const script = ref({
       storylines: "",
       dialogues: "",
-    })
-    async function generate_script(){
-      const res = await axios.get('http://localhost:8000/generate_script')
-      script.value.dialogues = res.data['dialogues']
-      script.value.storylines = res.data['storylines']
+    });
+    async function generate_script() {
+      const res = await axios.get("/api/generate_script");
+      script.value.dialogues = res.data["dialogues"];
+      script.value.storylines = res.data["storylines"];
       console.log(script.value);
     }
-    return {generate_script, script};
+    return { generate_script, script };
   },
 });
 </script>
-
 
 <style scoped>
 .main-container {
@@ -57,11 +56,11 @@ export default defineComponent({
   padding: 30px;
   overflow: hidden;
   box-sizing: border-box;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
 .header {
-  background-color: #5973FF;
+  background-color: #5973ff;
   color: white;
   text-align: center;
   line-height: 60px;
@@ -70,7 +69,7 @@ export default defineComponent({
 
 .script {
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   flex-direction: column;
   border-radius: 20px;
   overflow: hidden;
@@ -84,7 +83,7 @@ export default defineComponent({
   padding-left: 20px;
 }
 
-.button-container-up{
+.button-container-up {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -96,12 +95,12 @@ export default defineComponent({
   margin: 0 5px;
   padding: 10px 20px;
   background-color: white;
-  border: 2px solid #5973FF;
-  color: #BCCFFF;
+  border: 2px solid #5973ff;
+  color: #bccfff;
   cursor: pointer;
   border-radius: 10px !important;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
-
-
 </style>

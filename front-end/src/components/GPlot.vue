@@ -1,5 +1,5 @@
 <template>
-  <el-container class="main-container" >
+  <el-container class="main-container">
     <el-main class="plot">
       <el-header class="header">
         <div>Create the Plots</div>
@@ -11,19 +11,38 @@
         </el-header>
         <el-main class="plot-list-container" v-loading="loading">
           <el-scrollbar class="plots-list">
-            <el-card v-for="(plot, index) in plots" :key="index" class="plot-item" @click="editPlot(index)">
+            <el-card
+              v-for="(plot, index) in plots"
+              :key="index"
+              class="plot-item"
+              @click="editPlot(index)"
+            >
               <div class="plot-header">
-                <div class="plot-name"><div>Plot{{index+1}}:</div>{{ plot.plotName }}</div>
-                <div class="plot-element"><div>Plot Stage:</div>{{ plot.plotStage }}</div>
-                <div class="location"><div>Scene:</div>{{plot.scene.name }}</div>
+                <div class="plot-name">
+                  <div>Plot{{ index + 1 }}:</div>
+                  {{ plot.plotName }}
+                </div>
+                <div class="plot-element">
+                  <div>Plot Stage:</div>
+                  {{ plot.plotStage }}
+                </div>
+                <div class="location">
+                  <div>Scene:</div>
+                  {{ plot.scene.name }}
+                </div>
                 <div class="characters">
                   <div>Appearing Characters:</div>
                   <span v-for="character in plot.characters" :key="character">
-                    <span style="padding: 3px">{{ character.name}}</span>
+                    <span style="padding: 3px">{{ character.name }}</span>
                   </span>
                 </div>
               </div>
-              <el-input type="textarea" v-model="plot.beat" placeholder="输入情节梗概..." class="beat-input"></el-input>
+              <el-input
+                type="textarea"
+                v-model="plot.beat"
+                placeholder="输入情节梗概..."
+                class="beat-input"
+              ></el-input>
             </el-card>
           </el-scrollbar>
         </el-main>
@@ -33,37 +52,76 @@
       </el-main>
     </el-main>
 
-    <el-dialog title="Add New Plot" v-model="addDialogVisible" custom-class="dialog-content">
+    <el-dialog
+      title="Add New Plot"
+      v-model="addDialogVisible"
+      custom-class="dialog-content"
+    >
       <el-form :model="newPlot" label-width="100px" class="add-plot-form">
         <el-form-item label="Name">
           <el-input v-model="newPlot.plotName" autocomplete="off" />
         </el-form-item>
         <el-form-item label="Plot Stage">
           <el-radio-group v-model="newPlot.plotStage">
-            <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
+            <el-radio
+              v-for="stage in stageList"
+              :key="stage"
+              :label="stage"
+              :value="stage"
+              >{{ stage }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Scene">
-          <el-select v-model="newPlot.scene" placeholder="please select or create a scene" allow-create filterable value-key="name">
-            <el-option v-for="scene in allScenes" :key="scene.value" :label="scene.name" :value="scene" />
+          <el-select
+            v-model="newPlot.scene"
+            placeholder="please select or create a scene"
+            allow-create
+            filterable
+            value-key="name"
+          >
+            <el-option
+              v-for="scene in allScenes"
+              :key="scene.value"
+              :label="scene.name"
+              :value="scene"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="Characters">
-          <el-select v-model="newPlot.characters" multiple placeholder="please select the appearing characters" value-key="name">
-            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
+          <el-select
+            v-model="newPlot.characters"
+            multiple
+            placeholder="please select the appearing characters"
+            value-key="name"
+          >
+            <el-option
+              v-for="character in allCharacters"
+              :key="character.name"
+              :label="character.name"
+              :value="character"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="introduction">
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleAddDialogClose" class="cancel-button">cancel</el-button>
-          <el-button type="primary" @click="addNewPlot" class="confirm-button">confirm</el-button>
+          <el-button @click="handleAddDialogClose" class="cancel-button"
+            >cancel</el-button
+          >
+          <el-button type="primary" @click="addNewPlot" class="confirm-button"
+            >confirm</el-button
+          >
         </el-footer>
       </el-form>
     </el-dialog>
 
-    <el-dialog title="Edit The Plot" v-model="editDialogVisible" custom-class="dialog-content">
+    <el-dialog
+      title="Edit The Plot"
+      v-model="editDialogVisible"
+      custom-class="dialog-content"
+    >
       <el-form :model="editPlotData" label-width="100px" class="add-plot-form">
         <el-form-item label="Number">
           <el-input v-model="editPlotData.No" autocomplete="off" />
@@ -73,60 +131,111 @@
         </el-form-item>
         <el-form-item label="Plot Stage">
           <el-radio-group v-model="editPlotData.plotStage">
-            <el-radio v-for="stage in stageList" :key="stage" :label="stage" :value="stage">{{ stage }}</el-radio>
+            <el-radio
+              v-for="stage in stageList"
+              :key="stage"
+              :label="stage"
+              :value="stage"
+              >{{ stage }}</el-radio
+            >
           </el-radio-group>
         </el-form-item>
         <el-form-item label="Scene">
-          <el-select v-model="editPlotData.scene" placeholder="please select or create a scene" value-key="name" clearable filterable  allow-create>
-            <el-option v-for="(scene, index) in allScenes" :key="scene" :label="scene.name" :value="scene" >
+          <el-select
+            v-model="editPlotData.scene"
+            placeholder="please select or create a scene"
+            value-key="name"
+            clearable
+            filterable
+            allow-create
+          >
+            <el-option
+              v-for="(scene, index) in allScenes"
+              :key="scene"
+              :label="scene.name"
+              :value="scene"
+            >
               <span style="float: left">{{ scene.name }}</span>
               <el-tag
-                      size="mini"
-                      effect="dark"
-                      type="danger"
-                      style="float: right; margin-top: 8px; margin-left: 3px"
-                      @click.stop="handleDelete(index)"
-                    >
-                      Delete
+                size="mini"
+                effect="dark"
+                type="danger"
+                style="float: right; margin-top: 8px; margin-left: 3px"
+                @click.stop="handleDelete(index)"
+              >
+                Delete
               </el-tag>
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="Characters">
-          <el-select v-model="editPlotData.characters" multiple placeholder="please select the appearing characters" value-key="name">
-            <el-option v-for="character in allCharacters" :key="character.name" :label="character.name" :value="character" />
+          <el-select
+            v-model="editPlotData.characters"
+            multiple
+            placeholder="please select the appearing characters"
+            value-key="name"
+          >
+            <el-option
+              v-for="character in allCharacters"
+              :key="character.name"
+              :label="character.name"
+              :value="character"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="introduction">
-          <el-input type="textarea" v-model="editPlotData.beat" autocomplete="off" />
+          <el-input
+            type="textarea"
+            v-model="editPlotData.beat"
+            autocomplete="off"
+          />
         </el-form-item>
         <el-footer class="dialog-footer">
-          <el-button @click="handleEditDialogClose" class="cancel-button">Cancel</el-button>
-          <el-button type="danger" @click="showDeleteDialog" class="delete-button">Delete</el-button>
-          <el-button type="primary" @click="saveEditedPlot" class="confirm-button">Confirm</el-button>
+          <el-button @click="handleEditDialogClose" class="cancel-button"
+            >Cancel</el-button
+          >
+          <el-button
+            type="danger"
+            @click="showDeleteDialog"
+            class="delete-button"
+            >Delete</el-button
+          >
+          <el-button
+            type="primary"
+            @click="saveEditedPlot"
+            class="confirm-button"
+            >Confirm</el-button
+          >
         </el-footer>
         <el-dialog v-model="showDeleteConfirm">
-        <div>Are you sure to remove the plot?</div>
-        <span class="dialog-footer">
-          <el-button @click="cancelDelete" class="cancel-button">Cancel</el-button>
-          <el-button type="danger" @click="confirmDelete" class="confirm-button">Confirm</el-button>
-        </span>
-      </el-dialog>
+          <div>Are you sure to remove the plot?</div>
+          <span class="dialog-footer">
+            <el-button @click="cancelDelete" class="cancel-button"
+              >Cancel</el-button
+            >
+            <el-button
+              type="danger"
+              @click="confirmDelete"
+              class="confirm-button"
+              >Confirm</el-button
+            >
+          </span>
+        </el-dialog>
       </el-form>
     </el-dialog>
   </el-container>
 </template>
 
 <script>
-import { defineComponent, ref, reactive, computed } from 'vue';
-import { useStore } from 'vuex';
-import axios from 'axios';
+import { defineComponent, ref, reactive, computed } from "vue";
+import { useStore } from "vuex";
+import axios from "axios";
 // eslint-disable-next-line no-unused-vars
-import * as diff from 'diff';
-import { ElMessage } from 'element-plus';
+import * as diff from "diff";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
-  name: 'GPlot',
+  name: "GPlot",
   setup() {
     const store = useStore();
     const loading = ref(false);
@@ -135,45 +244,53 @@ export default defineComponent({
     const editDialogVisible = ref(false);
     const showDeleteConfirm = ref(false);
     const newPlot = reactive({
-      plotName: '',
-      plotStage: '',
-      scene: '',
+      plotName: "",
+      plotStage: "",
+      scene: "",
       characters: [],
-      beat: '',
+      beat: "",
       dialogue: [],
     });
     const beforeEditAsset = reactive({
-      No: '',
-    //   plotName: '',
-    //   plotStage: '',
-    //   scene: '',
-    //   characters: [],
-      beat: '',
-    //   dialogue: [],
+      No: "",
+      //   plotName: '',
+      //   plotStage: '',
+      //   scene: '',
+      //   characters: [],
+      beat: "",
+      //   dialogue: [],
     });
     const editPlotData = reactive({
-      No: '',
-      plotName: '',
-      plotStage: '',
-      scene: '',
+      No: "",
+      plotName: "",
+      plotStage: "",
+      scene: "",
       characters: [],
-      beat: '',
+      beat: "",
       dialogue: [],
     });
     const plotToEditIndex = ref(null);
 
     // 使用 computed 从 Vuex store 中获取数据
-    const plots = computed(() => store.getters['plots']);
+    const plots = computed(() => store.getters["plots"]);
     const allScenes = computed(() => store.state.scene.scenes);
     const allCharacters = computed(() => store.state.character.characters);
-    const stageList = ["exposition", "incident", "conflict", "rising", "climax", "falling", "end"]
+    const stageList = [
+      "exposition",
+      "incident",
+      "conflict",
+      "rising",
+      "climax",
+      "falling",
+      "end",
+    ];
 
-    const delPlots = () => store.dispatch('delPlots')
-    const delScenes = () => store.dispatch('delScenes')
-    const addPlot = (plot) => store.dispatch('addPlot', plot);
-    const addScene = (scene) => store.dispatch('addScene', scene);
-    const updatePlot = (payload) => store.dispatch('updatePlot', payload);
-    const movePlot = (payload) => store.dispatch('movePlot', payload);
+    const delPlots = () => store.dispatch("delPlots");
+    const delScenes = () => store.dispatch("delScenes");
+    const addPlot = (plot) => store.dispatch("addPlot", plot);
+    const addScene = (scene) => store.dispatch("addScene", scene);
+    const updatePlot = (payload) => store.dispatch("updatePlot", payload);
+    const movePlot = (payload) => store.dispatch("movePlot", payload);
 
     function AddPlot() {
       addDialogVisible.value = true;
@@ -187,26 +304,25 @@ export default defineComponent({
       showDeleteConfirm.value = false;
     }
 
-    
     function handleEditClose() {
       editDialogVisible.value = false;
     }
 
     function confirmDelete() {
-      store.dispatch('deletePlot', plotToEditIndex.value);
+      store.dispatch("deletePlot", plotToEditIndex.value);
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
-        type: 'success',
+        type: "success",
         message: `成功删除情节`,
       });
     }
 
-    async function handleDelete(index){
-      store.dispatch('deleteScene', index);
+    async function handleDelete(index) {
+      store.dispatch("deleteScene", index);
 
-      await axios.post('http://localhost:8000/delete_scene_asset', {
-        action: 'delete_scene_asset',
+      await axios.post("/api/delete_scene_asset", {
+        action: "delete_scene_asset",
         data: {
           index: index,
         },
@@ -214,52 +330,50 @@ export default defineComponent({
     }
 
     function handleAddDialogClose() {
-      newPlot.plotName = '';
-      newPlot.plotStage = '';
-      newPlot.scene = '';
+      newPlot.plotName = "";
+      newPlot.plotStage = "";
+      newPlot.scene = "";
       newPlot.characters = [];
-      newPlot.beat = '';
+      newPlot.beat = "";
       newPlot.dialogue = [];
       addDialogVisible.value = false;
     }
 
     function handleEditDialogClose() {
-      editPlotData.No = '';
-      editPlotData.plotName = '';
-      editPlotData.plotStage = '';
-      editPlotData.scene = '';
+      editPlotData.No = "";
+      editPlotData.plotName = "";
+      editPlotData.plotStage = "";
+      editPlotData.scene = "";
       editPlotData.characters = [];
-      editPlotData.beat = '';
+      editPlotData.beat = "";
       editPlotData.dialogue = [];
       editDialogVisible.value = false;
     }
 
     // eslint-disable-next-line no-unused-vars
     function changeSerial(No) {
-      if(isNaN(Number(No,10))){
+      if (isNaN(Number(No, 10))) {
         ElMessage({
-          message: '数字',
-          type: 'warning',
+          message: "数字",
+          type: "warning",
         });
         return;
-    }
+      }
     }
 
     async function addNewPlot() {
-
-
       if (!newPlot.plotName) {
         ElMessage({
-          message: '情节名称不能为空',
-          type: 'warning',
+          message: "情节名称不能为空",
+          type: "warning",
         });
         return;
       }
 
       if (!newPlot.scene) {
         ElMessage({
-          message: '场景不能为空',
-          type: 'warning',
+          message: "场景不能为空",
+          type: "warning",
         });
         return;
       }
@@ -267,16 +381,16 @@ export default defineComponent({
       console.log(newPlot.scene);
 
       if (newPlot.characters.length === 0) {
-        console.log(newPlot)
+        console.log(newPlot);
         ElMessage({
-          message: '角色不能为空',
-          type: 'warning',
+          message: "角色不能为空",
+          type: "warning",
         });
         return;
       }
 
       // 如果scene不是一个对象，说明是新建的场景
-      if (typeof newPlot.scene !== 'object') {
+      if (typeof newPlot.scene !== "object") {
         const newScene = {
           name: newPlot.scene,
           content: "",
@@ -284,28 +398,29 @@ export default defineComponent({
         };
         newPlot.scene = newScene;
         addScene({ ...newScene });
-        await axios.post('http://localhost:8000/add_scene', {
-          action: 'add_scene',
+        await axios.post("/api/add_scene", {
+          action: "add_scene",
           data: {
             scene: newScene,
           },
         });
       }
 
-
-      const existingPlotIndex = plots.value.findIndex((plot) => plot.plotName === newPlot.plotName);
+      const existingPlotIndex = plots.value.findIndex(
+        (plot) => plot.plotName === newPlot.plotName
+      );
       if (existingPlotIndex !== -1) {
         updatePlot({ index: existingPlotIndex, plot: { ...newPlot } });
 
         ElMessage({
-          message: '更新成功',
-          type: 'success',
+          message: "更新成功",
+          type: "success",
         });
       } else {
         addPlot({ ...newPlot });
         ElMessage({
-          message: '添加成功',
-          type: 'success',
+          message: "添加成功",
+          type: "success",
         });
       }
 
@@ -313,7 +428,7 @@ export default defineComponent({
     }
 
     function editPlot(index) {
-      beforeEditAsset.No = index+1
+      beforeEditAsset.No = index + 1;
       // beforeEditAsset.plotName = plots.value[index].plotName;
       // beforeEditAsset.plotStage = plots.value[index].plotStage;
       // beforeEditAsset.scene = plots.value[index].scene;
@@ -322,11 +437,11 @@ export default defineComponent({
       // beforeEditAsset.dialogue = plots.value[index].dialogue;
 
       const plotToEdit = plots.value[index];
-      editPlotData.No = index+1
+      editPlotData.No = index + 1;
       editPlotData.plotName = plotToEdit.plotName;
       editPlotData.plotStage = plotToEdit.plotStage;
       editPlotData.scene = plotToEdit.scene;
-      editPlotData.characters = plotToEdit.characters
+      editPlotData.characters = plotToEdit.characters;
       editPlotData.beat = plotToEdit.beat;
       editPlotData.dialogue = plotToEdit.dialogue;
       plotToEditIndex.value = index;
@@ -336,58 +451,60 @@ export default defineComponent({
     async function saveEditedPlot() {
       if (!editPlotData.plotName) {
         ElMessage({
-          message: '情节名称不能为空',
-          type: 'warning',
+          message: "情节名称不能为空",
+          type: "warning",
         });
         return;
       }
 
       if (!editPlotData.scene) {
         ElMessage({
-          message: '场景不能为空',
-          type: 'warning',
+          message: "场景不能为空",
+          type: "warning",
         });
         return;
       }
 
       if (editPlotData.characters.length === 0) {
         ElMessage({
-          message: '角色不能为空',
-          type: 'warning',
+          message: "角色不能为空",
+          type: "warning",
         });
         return;
       }
 
-      if(isNaN(Number(editPlotData.No,10))) {
+      if (isNaN(Number(editPlotData.No, 10))) {
         ElMessage({
-          message: '序号必须为数字',
-          type: 'warning',
+          message: "序号必须为数字",
+          type: "warning",
         });
         return;
       }
 
       // plots.value[]
-      let changes = ""
-      diff.diffChars(beforeEditAsset.beat, editPlotData.beat).forEach((part) => {
-        const value = part.value.replace(/\n/g, '');
-        if (part.added) {
-          changes += `[${value}]`;
-        } else if (part.removed) {
-          changes += `{${value}}`;
-        } else {
-          changes += value;
-        }
-      });
+      let changes = "";
+      diff
+        .diffChars(beforeEditAsset.beat, editPlotData.beat)
+        .forEach((part) => {
+          const value = part.value.replace(/\n/g, "");
+          if (part.added) {
+            changes += `[${value}]`;
+          } else if (part.removed) {
+            changes += `{${value}}`;
+          } else {
+            changes += value;
+          }
+        });
       // 保存修改的记录,
-      await axios.post('http://localhost:8000/save_changes', {
-        action: 'save_changes',
+      await axios.post("/api/save_changes", {
+        action: "save_changes",
         data: {
           changes: changes,
         },
       });
 
       // 如果scene不是一个对象，说明是新建的场景
-      if (typeof editPlotData.scene !== 'object') {
+      if (typeof editPlotData.scene !== "object") {
         const newScene = {
           name: editPlotData.scene,
           content: "",
@@ -395,8 +512,8 @@ export default defineComponent({
         };
         editPlotData.scene = newScene;
         addScene({ ...newScene });
-        await axios.post('http://localhost:8000/add_scene', {
-          action: 'add_scene',
+        await axios.post("/api/add_scene", {
+          action: "add_scene",
           data: {
             scene: newScene,
           },
@@ -404,25 +521,26 @@ export default defineComponent({
       }
 
       const updatedPlot = {
-          plotName: editPlotData.plotName,
-          plotStage: editPlotData.plotStage,
-          scene: editPlotData.scene,
-          characters: editPlotData.characters,
-          beat: editPlotData.beat,
-        };
+        plotName: editPlotData.plotName,
+        plotStage: editPlotData.plotStage,
+        scene: editPlotData.scene,
+        characters: editPlotData.characters,
+        beat: editPlotData.beat,
+      };
 
-      if(Number(editPlotData.No,10) !== beforeEditAsset.No){
-        movePlot({fromIndex: beforeEditAsset.No-1, toIndex: editPlotData.No-1})
-        updatePlot({ index: editPlotData.No-1, plot: updatedPlot });
-      }
-      else{
+      if (Number(editPlotData.No, 10) !== beforeEditAsset.No) {
+        movePlot({
+          fromIndex: beforeEditAsset.No - 1,
+          toIndex: editPlotData.No - 1,
+        });
+        updatePlot({ index: editPlotData.No - 1, plot: updatedPlot });
+      } else {
         updatePlot({ index: plotToEditIndex.value, plot: updatedPlot });
-
       }
       ElMessage({
-          message: '情节更新成功',
-          type: 'success',
-        });
+        message: "情节更新成功",
+        type: "success",
+      });
       handleEditDialogClose();
 
       // if (plotToEditIndex.value !== null) {
@@ -442,41 +560,45 @@ export default defineComponent({
       // }
     }
 
-    async function refreshData(){
-      delPlots()
-      delScenes()
+    async function refreshData() {
+      delPlots();
+      delScenes();
     }
 
     async function generatePlot() {
       try {
         loading.value = true;
-        const response = await axios.post('http://localhost:8000/init_plot_generation', {
-          action: 'init_plot_generation',
+        const response = await axios.post("/api/init_plot_generation", {
+          action: "init_plot_generation",
           data: {
-            characters: store.state.character.characters
-          }
+            characters: store.state.character.characters,
+          },
         });
         loading.value = false;
-        await refreshData()
+        await refreshData();
         addPlot(response.data);
         const scenes = response.data.reduce((acc, plot) => {
           if (!acc.find((scene) => scene.name === plot.scene.name)) {
-            acc.push({ name: plot.scene.name, content: plot.scene.content, image: null });
+            acc.push({
+              name: plot.scene.name,
+              content: plot.scene.content,
+              image: null,
+            });
           }
           return acc;
         }, []);
-        store.dispatch('addScene', scenes);
+        store.dispatch("addScene", scenes);
       } catch (error) {
         ElMessage({
-          message: '请求失败',
-          type: 'error',
+          message: "请求失败",
+          type: "error",
         });
       }
     }
 
     async function UploadPlot() {
       const payload = {
-        action: 'update_plot',
+        action: "update_plot",
         data: plots.value.map((plot) => ({
           plotName: plot.plotName,
           plotStage: plot.plotStage,
@@ -487,15 +609,15 @@ export default defineComponent({
       };
 
       try {
-        await axios.post('http://localhost:8000/update_plot', payload);
+        await axios.post("/api/update_plot", payload);
         ElMessage({
-          message: '上传成功',
-          type: 'success',
+          message: "上传成功",
+          type: "success",
         });
       } catch (error) {
         ElMessage({
-          message: '上传失败',
-          type: 'error',
+          message: "上传失败",
+          type: "error",
         });
       }
     }
@@ -537,11 +659,11 @@ export default defineComponent({
   padding: 30px;
   overflow: hidden;
   box-sizing: border-box;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
 .header {
-  background-color: #5973FF;
+  background-color: #5973ff;
   color: white;
   text-align: center;
   line-height: 60px;
@@ -550,7 +672,7 @@ export default defineComponent({
 
 .plot {
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   flex-direction: column;
   border-radius: 20px;
   overflow: hidden;
@@ -558,7 +680,7 @@ export default defineComponent({
   padding: 0;
 }
 
-.button-container-up{
+.button-container-up {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -579,11 +701,13 @@ export default defineComponent({
   margin: 0 5px;
   padding: 10px 20px;
   background-color: white;
-  border: 2px solid #5973FF;
-  color: #BCCFFF;
+  border: 2px solid #5973ff;
+  color: #bccfff;
   cursor: pointer;
   border-radius: 10px !important;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .button:hover {
@@ -600,7 +724,7 @@ export default defineComponent({
   overflow: hidden;
   box-sizing: border-box;
   padding-top: 5px;
-  padding-bottom: 5px; 
+  padding-bottom: 5px;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -610,14 +734,14 @@ export default defineComponent({
   overflow-y: auto;
   padding: 20px;
   border-radius: 20px;
-  background-color:#F1F1F1
+  background-color: #f1f1f1;
 }
 
 .plot-item {
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 10px;
-  background-color: #D5DCFF;
+  background-color: #d5dcff;
 }
 
 .plot-header {
@@ -657,7 +781,7 @@ export default defineComponent({
 }
 
 .cancel-button {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   color: #333;
 }
 

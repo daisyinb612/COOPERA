@@ -5,24 +5,37 @@
         <div class="art-asset">Craft the Scenes</div>
       </el-header>
       <el-container class="rightcontainer">
-<!--        <el-button-group class="button-container">-->
-<!--          <el-button class="asset-button" @click="selectTab('scene')"-->
-<!--                     :class="{ active: selectedTab === 'scene' }">场景</el-button>-->
-<!--        </el-button-group>-->
+        <!--        <el-button-group class="button-container">-->
+        <!--          <el-button class="asset-button" @click="selectTab('scene')"-->
+        <!--                     :class="{ active: selectedTab === 'scene' }">场景</el-button>-->
+        <!--        </el-button-group>-->
 
         <el-scrollbar class="assets-list">
-          <el-card v-for="(asset, index) in sceneList" :key="index" 
-           class="asset-item" 
-           shadow="hover"
-          @click="editAsset(index)">
-           <el-row :gutter="10" style="width: 100%;" align="middle">
+          <el-card
+            v-for="(asset, index) in sceneList"
+            :key="index"
+            class="asset-item"
+            shadow="hover"
+            @click="editAsset(index)"
+          >
+            <el-row :gutter="10" style="width: 100%" align="middle">
               <el-col :span="10" style="text-align: center">
-                <img v-if="asset.image" class="asset-image" :src="asset.image" />
+                <img
+                  v-if="asset.image"
+                  class="asset-image"
+                  :src="asset.image"
+                />
 
-                <img v-else class="asset-image" :src="require('@/assets/images/empty.png')"/>
+                <img
+                  v-else
+                  class="asset-image"
+                  :src="require('@/assets/images/empty.png')"
+                />
               </el-col>
-              <el-col :span="14"><div>{{ asset.name }}</div></el-col>
-           </el-row>
+              <el-col :span="14"
+                ><div>{{ asset.name }}</div></el-col
+              >
+            </el-row>
           </el-card>
         </el-scrollbar>
 
@@ -38,33 +51,58 @@
           <div>SCENE Assistant</div>
         </el-header>
         <el-main>
-          <div class="message" v-for="(message, index) in messages" :key="index">
+          <div
+            class="message"
+            v-for="(message, index) in messages"
+            :key="index"
+          >
             <el-row :gutter="5" align="middle">
               <!-- <el-col :span="message.prompt.length > 0 ?0: 19-message.prompt.length"></el-col>
               <el-col :span="message.prompt.length > 0 ?24: 5+message.prompt.length"> -->
-                <div v-if="message.prompt" class="human-iutput" >
-                {{ message.prompt }} </div>
+              <div v-if="message.prompt" class="human-iutput">
+                {{ message.prompt }}
+              </div>
               <!-- </el-col> -->
             </el-row>
-            <br>
+            <br />
             <el-row align="top">
-              <el-col :span="4"><el-avatar :src="require('@/assets/images/operalogo.jpg')" class="llm"></el-avatar></el-col>
-              <el-col :span="20"><div class="AI-output" v-html="message.content"></div></el-col>
+              <el-col :span="4"
+                ><el-avatar
+                  :src="require('@/assets/images/operalogo.jpg')"
+                  class="llm"
+                ></el-avatar
+              ></el-col>
+              <el-col :span="20"
+                ><div class="AI-output" v-html="message.content"></div
+              ></el-col>
             </el-row>
           </div>
         </el-main>
         <el-footer class="inputfooter">
-          <el-input placeholder="Ask any questions here..." v-model="inputMessage" class="input-field"
-                    @keyup.enter="sendMessage" clearable>
+          <el-input
+            placeholder="Ask any questions here..."
+            v-model="inputMessage"
+            class="input-field"
+            @keyup.enter="sendMessage"
+            clearable
+          >
             <template #append>
-              <el-button @click="sendMessage"><img class="upload-image" :src="require('@/assets/images/upload.png')"/></el-button>
+              <el-button @click="sendMessage"
+                ><img
+                  class="upload-image"
+                  :src="require('@/assets/images/upload.png')"
+              /></el-button>
             </template>
           </el-input>
-         </el-footer>
+        </el-footer>
       </div>
     </el-aside>
 
-    <el-dialog title="Edit Scene" v-model="showEditDialog" custom-class="dialog-content">
+    <el-dialog
+      title="Edit Scene"
+      v-model="showEditDialog"
+      custom-class="dialog-content"
+    >
       <!-- <el-form-item label="分组" :label-width="formLabelWidth">
         场景
       </el-form-item> -->
@@ -79,58 +117,77 @@
 
       <el-form-item label="Picture" :label-width="formLabelWidth">
         <div v-loading="loading">
-        <el-upload :http-request="uploadFile"
-                   list-type="picture-card"
-                   :on-success="handleUploadSuccess"
-                   v-model:file-list="fileList"
-                   :on-preview="handlePictureCardPreview"
-                   :on-remove="handleRemove"
-                   :on-exceed="handleExceed">
-          <i class="el-icon-plus"></i>
-        </el-upload>
-        <el-button @click="generate_image" class="confirm-button">Generate Picture</el-button>
-        <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
+          <el-upload
+            :http-request="uploadFile"
+            list-type="picture-card"
+            :on-success="handleUploadSuccess"
+            v-model:file-list="fileList"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :on-exceed="handleExceed"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-button @click="generate_image" class="confirm-button"
+            >Generate Picture</el-button
+          >
+          <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
         </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
-        <el-button @click="handleEditClose" class="cancel-button">Cancel</el-button>
-<!--        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>-->
-        <el-button type="primary" @click="saveEditedAsset" class="confirm-button">Confirm</el-button>
+        <el-button @click="handleEditClose" class="cancel-button"
+          >Cancel</el-button
+        >
+        <!--        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>-->
+        <el-button
+          type="primary"
+          @click="saveEditedAsset"
+          class="confirm-button"
+          >Confirm</el-button
+        >
       </el-footer>
 
       <el-dialog v-model="showDeleteConfirm">
         <div>你确认删除该资产吗？</div>
         <span class="dialog-footer">
-          <el-button @click="cancelDelete" class="cancel-button">取消</el-button>
-          <el-button type="danger" @click="confirmDelete" class="confirm-button">确定</el-button>
+          <el-button @click="cancelDelete" class="cancel-button"
+            >取消</el-button
+          >
+          <el-button type="danger" @click="confirmDelete" class="confirm-button"
+            >确定</el-button
+          >
         </span>
       </el-dialog>
     </el-dialog>
 
-        <!-- 图片预览对话框 -->
+    <!-- 图片预览对话框 -->
     <el-dialog v-model="previewVisible" :append-to-body="true">
       <img width="100%" :src="previewImage" alt="图片预览" />
     </el-dialog>
-
   </el-container>
 </template>
 
-
 <script>
-import { defineComponent, ref, reactive, computed, getCurrentInstance } from 'vue';
-import { mapActions,useStore } from 'vuex';
-import axios from 'axios';
-import * as diff from 'diff';
-import { ElMessage } from 'element-plus';
+import {
+  defineComponent,
+  ref,
+  reactive,
+  computed,
+  getCurrentInstance,
+} from "vue";
+import { mapActions, useStore } from "vuex";
+import axios from "axios";
+import * as diff from "diff";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
-  name: 'GScene',
+  name: "GScene",
 
   setup() {
     // preview
     const previewVisible = ref(false);
-    const previewImage = ref('');
+    const previewImage = ref("");
 
     const { proxy } = getCurrentInstance();
 
@@ -138,44 +195,44 @@ export default defineComponent({
     const addDialogVisible = ref(false);
     const showSaveDialog = ref(false);
     const showEditDialog = ref(false);
-    const curSaveType = ref('');
-    const curSaveThing = ref('');
-    const curEditAssetIndex = ref('');
+    const curSaveType = ref("");
+    const curSaveThing = ref("");
+    const curEditAssetIndex = ref("");
     const fileList = ref([]);
-    const inputMessage = ref('');
-    const selectedTab = ref('scene');
+    const inputMessage = ref("");
+    const selectedTab = ref("scene");
     const history = ref([]);
     const loading = ref(false);
     const messages = ref([
-        {
-            role: 'assistant',
-            prompt: '',
-            content: `hello, I'm an Intelligent Assistant who can help you with scene crafting.You can try asking me like the following questions:<br>
+      {
+        role: "assistant",
+        prompt: "",
+        content: `hello, I'm an Intelligent Assistant who can help you with scene crafting.You can try asking me like the following questions:<br>
                 What aspects should I consider in terms of suitability for scene creation?<br>
                 What are your creative directions and suggestions for a specific scene?`,
-            image: 'logo.png',
-            downloadIcon: true,
-          }
+        image: "logo.png",
+        downloadIcon: true,
+      },
     ]);
     const showDeleteConfirm = ref(false);
-    const sceneList=computed(()=>{
-      return store.state.scene.scenes
-    })
+    const sceneList = computed(() => {
+      return store.state.scene.scenes;
+    });
     const newAsset = reactive({
-      group: 'scenes',
-      name: '',
-      content: '',
+      group: "scenes",
+      name: "",
+      content: "",
       image: null,
     });
     const beforeEditAsset = reactive({
-      name: '',
-      content: '',
+      name: "",
+      content: "",
     });
-    const store=useStore();
+    const store = useStore();
     const currentEditAsset = reactive({
-      group: 'scenes',
-      name: '',
-      content: '',
+      group: "scenes",
+      name: "",
+      content: "",
       image: null,
     });
 
@@ -188,44 +245,39 @@ export default defineComponent({
       return scenes;
     });
 
-    const scenes=computed(()=>{
-      return store.state.scene.scenes
+    const scenes = computed(() => {
+      return store.state.scene.scenes;
     });
 
-    
-    function handlePictureCardPreview(file){
+    function handlePictureCardPreview(file) {
       previewImage.value = file.url;
       previewVisible.value = true;
     }
 
-
-    const actions = mapActions('scene', [
-      'addScene',
-      'deleteScene',
-    ]);
+    const actions = mapActions("scene", ["addScene", "deleteScene"]);
 
     // const addScene = (scene) => store.dispatch('addScene', scene);
-    const updateScene = (payload) => store.dispatch('updateScene', payload);
+    const updateScene = (payload) => store.dispatch("updateScene", payload);
     // const deleteScene = (index) => store.dispatch('updateScene', index);
 
     // Functions
     async function sendMessage() {
       if (!inputMessage.value) {
         ElMessage({
-          message: '输入不能为空',
-          type: 'warning',
+          message: "输入不能为空",
+          type: "warning",
         });
         return;
       }
 
       const userMessage = {
-        role: 'user',
+        role: "user",
         content: inputMessage.value,
       };
       history.value.push(userMessage);
 
       const requestBody = {
-        action: 'get_scene_help',
+        action: "get_scene_help",
         data: {
           history: history.value.map((msg) => ({
             role: msg.role,
@@ -236,58 +288,58 @@ export default defineComponent({
       };
 
       const assistantMessage = {
-            role: 'assistant',
-            prompt: inputMessage.value,
-            content: "loading...",
-            image: 'logo.png',
-            downloadIcon: true,
-          };
+        role: "assistant",
+        prompt: inputMessage.value,
+        content: "loading...",
+        image: "logo.png",
+        downloadIcon: true,
+      };
       messages.value.push(assistantMessage);
 
       try {
-        const response = await axios.post('http://localhost:8000/get_scene_help', requestBody);
+        const response = await axios.post("/api/get_scene_help", requestBody);
         if (response.status === 200) {
           const assistantMessage = {
-            role: 'assistant',
+            role: "assistant",
             prompt: inputMessage.value,
             content: response.data.answer,
-            image: 'logo.png',
+            image: "logo.png",
             downloadIcon: true,
           };
           messages.value.splice(messages.value.length - 1, 1, assistantMessage);
           history.value.push(assistantMessage);
 
-        //   const imageRequestBody = {
-        //     action: 'get_scene_image_help',
-        //     data: {
-        //       history: history.value.map((msg) => ({
-        //         role: msg.role,
-        //         content: msg.content,
-        //       })),
-        //       user_input: inputMessage.value,
-        //     },
-        //   };
+          //   const imageRequestBody = {
+          //     action: 'get_scene_image_help',
+          //     data: {
+          //       history: history.value.map((msg) => ({
+          //         role: msg.role,
+          //         content: msg.content,
+          //       })),
+          //       user_input: inputMessage.value,
+          //     },
+          //   };
 
-        //   const imageResponse = await axios.post('http://localhost:8000', imageRequestBody);
-        //   if (imageResponse.status === 200 && imageResponse.data.image) {
-        //     const index = messages.value.indexOf(assistantMessage);
-        //     if (index !== -1) {
-        //       messages.value[index].image = imageResponse.data.image;
-        //     }
-        //   }
-        //   inputMessage.value = '';
-        // } else {
-        //   ElMessage({
-        //     message: '请求失败',
-        //     type: 'error',
-        //   });
+          //   const imageResponse = await axios.post('/api', imageRequestBody);
+          //   if (imageResponse.status === 200 && imageResponse.data.image) {
+          //     const index = messages.value.indexOf(assistantMessage);
+          //     if (index !== -1) {
+          //       messages.value[index].image = imageResponse.data.image;
+          //     }
+          //   }
+          //   inputMessage.value = '';
+          // } else {
+          //   ElMessage({
+          //     message: '请求失败',
+          //     type: 'error',
+          //   });
 
           inputMessage.value = "";
         }
       } catch (error) {
         ElMessage({
-          message: '请求失败',
-          type: 'error',
+          message: "请求失败",
+          type: "error",
         });
       }
     }
@@ -301,9 +353,9 @@ export default defineComponent({
     }
 
     function handleAddDialogClose() {
-      newAsset.group = 'scenes';
-      newAsset.name = '';
-      newAsset.content = '';
+      newAsset.group = "scenes";
+      newAsset.name = "";
+      newAsset.content = "";
       newAsset.image = null;
       fileList.value = [];
       addDialogVisible.value = false;
@@ -314,13 +366,13 @@ export default defineComponent({
     };
 
     const handleExceed = () => {
-      proxy.$message.warning('只能上传一个附件');
+      proxy.$message.warning("只能上传一个附件");
     };
 
     function handleSaveClose() {
-      newAsset.group = '';
-      newAsset.name = '';
-      newAsset.content = '';
+      newAsset.group = "";
+      newAsset.name = "";
+      newAsset.content = "";
       newAsset.image = null;
       fileList.value = [];
       showSaveDialog.value = false;
@@ -334,22 +386,22 @@ export default defineComponent({
 
     async function saveAssetConfirm(group, name) {
       if (!name) {
-        proxy.$message.warning('资产名为空');
+        proxy.$message.warning("资产名为空");
         return;
       }
 
       const assetIndex = scenes.value.findIndex((asset) => asset.name === name);
       if (assetIndex !== -1) {
-        if (curSaveType.value === 'image') {
+        if (curSaveType.value === "image") {
           scenes[assetIndex].image = curSaveThing.value;
         } else {
           scenes[assetIndex].content = curSaveThing.value;
         }
         actions.updateScene({ index: assetIndex, scene: scenes[assetIndex] });
 
-        proxy.$message.success('资产更新成功');
-        await axios.post('http://localhost:8000/update_scene_asset', {
-          action: 'update_scene_asset',
+        proxy.$message.success("资产更新成功");
+        await axios.post("/api/update_scene_asset", {
+          action: "update_scene_asset",
           data: {
             scene: scenes[assetIndex],
             index: assetIndex,
@@ -358,13 +410,13 @@ export default defineComponent({
       } else {
         const newAsset = {
           name: name,
-          url: curSaveType.value === 'image' ? curSaveThing.value : null,
-          content: curSaveType.value === 'content' ? curSaveThing.value : '',
+          url: curSaveType.value === "image" ? curSaveThing.value : null,
+          content: curSaveType.value === "content" ? curSaveThing.value : "",
         };
         actions.addScene(newAsset);
-        proxy.$message.success('新资产添加成功');
-        await axios.post('http://localhost:8000/save_scene_asset', {
-          action: 'save_scene_asset',
+        proxy.$message.success("新资产添加成功");
+        await axios.post("/api/save_scene_asset", {
+          action: "save_scene_asset",
           data: {
             scene: newAsset,
           },
@@ -376,13 +428,15 @@ export default defineComponent({
     function editAsset(index) {
       beforeEditAsset.name = scenes.value[index].name;
       beforeEditAsset.content = scenes.value[index].content;
-      if(sceneList.value[index].image !== null) {
-        fileList.value = [{
-          name: sceneList.value[index].name,
-          url: sceneList.value[index].image,
-        }]
+      if (sceneList.value[index].image !== null) {
+        fileList.value = [
+          {
+            name: sceneList.value[index].name,
+            url: sceneList.value[index].image,
+          },
+        ];
       }
-      curEditAssetIndex.value = index
+      curEditAssetIndex.value = index;
       currentEditAsset.name = scenes.value[index].name;
       currentEditAsset.content = scenes.value[index].content;
       currentEditAsset.image = scenes.value[index].image;
@@ -391,18 +445,19 @@ export default defineComponent({
 
     const uploadFile = async (options) => {
       const formData = new FormData();
-      formData.append('action', 'save_scene_asset_image');
-      formData.append('scene_name', newAsset.name);
-      formData.append('scene_content', newAsset.content);
-      formData.append('scene_image', options.file);
+      formData.append("action", "save_scene_asset_image");
+      formData.append("scene_name", newAsset.name);
+      formData.append("scene_content", newAsset.content);
+      formData.append("scene_image", options.file);
 
-      await axios.post('http://localhost:8000/save_scene_asset', formData)
+      await axios
+        .post("/api/save_scene_asset", formData)
         .then((response) => {
           if (response.data.success) {
             newAsset.image = response.data.filePath;
             options.onSuccess(response.data, options.file);
           } else {
-            options.onError(new Error('Upload failed'));
+            options.onError(new Error("Upload failed"));
           }
         })
         .catch((error) => {
@@ -424,8 +479,8 @@ export default defineComponent({
 
     async function confirmDelete() {
       actions.deleteScene(curEditAssetIndex.value);
-      await axios.post('http://localhost:8000/delete_scene_asset', {
-        action: 'delete_scene_asset',
+      await axios.post("/api/delete_scene_asset", {
+        action: "delete_scene_asset",
         data: {
           index: curEditAssetIndex.value,
         },
@@ -433,94 +488,110 @@ export default defineComponent({
       showDeleteConfirm.value = false;
       handleEditClose();
       ElMessage({
-        type: 'success',
+        type: "success",
         message: `成功删除资产 "${currentEditAsset.value.name}"`,
       });
     }
 
     function getImageSrc(image) {
-      return image ? image : '@/assets/images/logo.png';
+      return image ? image : "@/assets/images/logo.png";
     }
 
     function handleUploadSuccess(response) {
       if (response.success) {
         scenes[curEditAssetIndex.value].image = response.filePath;
-        actions.updateScene({ index: curEditAssetIndex.value, scene: scenes[curEditAssetIndex.value] });
+        actions.updateScene({
+          index: curEditAssetIndex.value,
+          scene: scenes[curEditAssetIndex.value],
+        });
       }
     }
 
     async function saveEditedAsset() {
       // const editedAsset = Scenedata[curEditAssetIndex.value];
-      let changes = ""
-      diff.diffChars(beforeEditAsset.content, currentEditAsset.content).forEach((part) => {
-        const value = part.value.replace(/\n/g, '');
-        if (part.added) {
-          changes += `[${value}]`;
-        } else if (part.removed) {
-          changes += `{${value}}`;
-        } else {
-          changes += value;
-        }
-      });
+      let changes = "";
+      diff
+        .diffChars(beforeEditAsset.content, currentEditAsset.content)
+        .forEach((part) => {
+          const value = part.value.replace(/\n/g, "");
+          if (part.added) {
+            changes += `[${value}]`;
+          } else if (part.removed) {
+            changes += `{${value}}`;
+          } else {
+            changes += value;
+          }
+        });
       // 保存修改的记录,
-      await axios.post('http://localhost:8000/save_changes', {
-        action: 'save_changes',
+      await axios.post("/api/save_changes", {
+        action: "save_changes",
         data: {
           changes: changes,
         },
       });
       if (!currentEditAsset.name) {
-        proxy.$message.warning('资产名不能为空');
+        proxy.$message.warning("资产名不能为空");
         return;
       }
       if (!currentEditAsset.content) {
-        proxy.$message.warning('描述不能为空');
+        proxy.$message.warning("描述不能为空");
         return;
       }
       // if (!currentEditAsset.image) {
       //   proxy.$message.warning('请上传图片');
       //   return;
       // }
-      console.log(currentEditAsset)
-      const currentPlot = store.state.plot.plots[curEditAssetIndex.value]
+      console.log(currentEditAsset);
+      const currentPlot = store.state.plot.plots[curEditAssetIndex.value];
       console.log(currentPlot);
-      currentPlot.scene = {...currentEditAsset}
-      updateScene({ index: curEditAssetIndex.value, scene: { ...currentEditAsset } });
-      store.dispatch('updatePlot', { index: curEditAssetIndex.value,  plot: currentPlot });
-      await axios.post('http://localhost:8000/save_scene_asset', {
-          action: 'save_scene_asset',
-          data: {
-            index: curEditAssetIndex.value, scene: currentEditAsset
-          },
-        });
-      proxy.$message.success('资产更新成功');
+      currentPlot.scene = { ...currentEditAsset };
+      updateScene({
+        index: curEditAssetIndex.value,
+        scene: { ...currentEditAsset },
+      });
+      store.dispatch("updatePlot", {
+        index: curEditAssetIndex.value,
+        plot: currentPlot,
+      });
+      await axios.post("/api/save_scene_asset", {
+        action: "save_scene_asset",
+        data: {
+          index: curEditAssetIndex.value,
+          scene: currentEditAsset,
+        },
+      });
+      proxy.$message.success("资产更新成功");
       showEditDialog.value = false;
     }
 
     async function generate_image() {
       loading.value = true;
       const imageRequestBody = {
-            action: 'create_scene_picture',
-            data: {
-              name: currentEditAsset.name,
-              user_input: currentEditAsset.content,
-            },
-          };
+        action: "create_scene_picture",
+        data: {
+          name: currentEditAsset.name,
+          user_input: currentEditAsset.content,
+        },
+      };
 
-          const imageResponse = await axios.post('http://localhost:8000/create_scene_picture', imageRequestBody);
-          const pic_url = 'http://localhost:8000/get_image?filename=' + imageResponse.data.image + '&path=scene'
-          sceneList.value[curEditAssetIndex.value] = {
-            name: currentEditAsset.name,
-            url: pic_url,
-          }
-          loading.value = false;
-          currentEditAsset.image = pic_url;
-          fileList.value.push({
-            name: currentEditAsset.name,
-            url: pic_url,
-          });
-          newAsset.image = pic_url;
-      }
+      const imageResponse = await axios.post(
+        "/api/create_scene_picture",
+        imageRequestBody
+      );
+      const pic_url =
+        "/api/get_image?filename=" + imageResponse.data.image + "&path=scene";
+      sceneList.value[curEditAssetIndex.value] = {
+        name: currentEditAsset.name,
+        url: pic_url,
+      };
+      loading.value = false;
+      currentEditAsset.image = pic_url;
+      fileList.value.push({
+        name: currentEditAsset.name,
+        url: pic_url,
+      });
+      newAsset.image = pic_url;
+    }
 
     return {
       currentEditAsset,
@@ -585,7 +656,7 @@ body {
   padding: 30px;
   overflow: hidden;
   box-sizing: border-box;
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
 .upload-image {
@@ -594,12 +665,12 @@ body {
 }
 
 .el-main {
-  padding:10px;
+  padding: 10px;
 }
 
 .chat-panel {
   flex: 1;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -609,7 +680,7 @@ body {
 
 .scene-panel {
   flex: 3;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
@@ -624,7 +695,7 @@ body {
 }
 
 .header {
-  background-color: #5973FF;
+  background-color: #5973ff;
   color: white;
   text-align: center;
   line-height: 60px;
@@ -672,7 +743,7 @@ body {
 }
 
 .art-asset-header {
-  background-color: #5973FF;
+  background-color: #5973ff;
   color: white;
   text-align: center;
   line-height: 60px;
@@ -692,16 +763,18 @@ body {
 .asset-button {
   margin: 0 5px;
   padding: 10px 20px;
-  background-color: #BCCFFF;
+  background-color: #bccfff;
   color: white;
-  border: 2px solid #5973FF;
+  border: 2px solid #5973ff;
   cursor: pointer;
   border-radius: 10px !important;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .asset-button.active {
-  background-color: #5973FF;
+  background-color: #5973ff;
   border-radius: 10px;
   color: white;
 }
@@ -716,7 +789,7 @@ body {
 
 .assets-list {
   height: 100%;
-  width:100%;
+  width: 100%;
   flex: 1;
   overflow: hidden;
   padding: 20px;
@@ -730,7 +803,7 @@ body {
 }
 
 .asset-item {
-  align-items: center; 
+  align-items: center;
   margin: 15px;
   padding: 10px;
   height: auto;
@@ -740,7 +813,7 @@ body {
   border-radius: 5px;
   width: 150px;
   height: 150px;
-  border: 2px solid #ddd
+  border: 2px solid #ddd;
 }
 
 .add-button-container {
@@ -754,11 +827,13 @@ body {
   margin: 0 5px;
   padding: 10px 20px;
   background-color: white;
-  border: 2px solid #5973FF;
-  color: #BCCFFF;
+  border: 2px solid #5973ff;
+  color: #bccfff;
   cursor: pointer;
   border-radius: 10px !important;
-  transition: background-color 0.2s, color 0.2s;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .dialog-overlay {
@@ -793,31 +868,29 @@ body {
 }
 
 .cancel-button {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
   color: #333;
 }
 
 .confirm-button {
-  background-color: #5973FF;
+  background-color: #5973ff;
   color: white;
 }
 
-
-.human-iutput{
+.human-iutput {
   display: inline-flex;
-  justify-content: flex-start; 
-  word-wrap: break-all; 
+  justify-content: flex-start;
+  word-wrap: break-all;
   padding: 10px;
   line-height: 20px;
   border-radius: 5px;
   min-width: 90%;
-  background-color: #D5DCFF;
+  background-color: #d5dcff;
 }
 
-.AI-output{
+.AI-output {
   padding: 5px;
   line-height: 20px;
   border-radius: 10px;
 }
-
 </style>
