@@ -3,13 +3,11 @@ import time
 from flask import Flask, request, jsonify, send_file, send_from_directory, abort
 import os
 import requests
-from excel import ExcelOp
 from llm import LLM
 from flask_cors import CORS
 import json
 from PIL import Image
 from io import BytesIO
-import uuid
 
 app = Flask(__name__)
 CORS(app)
@@ -236,34 +234,6 @@ def delete_scene_asset():
     with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
         json.dump(old_data, f, indent=4, ensure_ascii=False)
     return jsonify({})
-
-
-@app.route('/api/init_dialogue_generation', methods=['POST'])
-def init_dialogue_generation():
-    data = request.get_json()
-    e = ExcelOp(file=info_dict["outline_path"])
-    number = int(data["data"]["plot_number"])
-    outline_pass = e.get_json_by_row(number + 1) if number >= 2 else "无"
-    outline_now = e.get_json_by_row(number + 1)
-    question = "\n###前情提要###:" + outline_pass + "\n###本章大纲###:" + outline_now
-    answer = global_llm.ask(
-        question=question, prompt=global_llm.setting_dialogue_create)
-    dialogue = global_llm.analyze_answer(answer)
-    global_llm.add_json_to_excel(
-        json_object=dialogue, filepath=info_dict["dialogue_path"])
-    return jsonify(dialogue)
-
-
-@app.route('/api/save_dialogue_asset', methods=['POST'])
-def save_dialogue_asset():
-    data = request.get_json()
-    number = int(data["data"]["plot_number"])
-    dialogue = data["data"]["dialogue"]
-
-    global_llm.update_json_to_excel(
-        json_object=dialogue, filepath=info_dict["dialogue_path"], sheet_index=number - 1)
-    return jsonify({})
-
 
 @app.route('/api/create_scene_picture', methods=['POST'])
 def create_scene_picture():
