@@ -437,7 +437,7 @@ def generate_dialogue():
     return jsonify(scene)
 
 
-@app.route("/upload_dialogue", methods=['POST'])
+@app.route("/api/upload_dialogue", methods=['POST'])
 def upload_dialogue():
     data = request.get_json()
     if not data:
@@ -499,7 +499,7 @@ def del_brackets(s: str):
     return s
 
 
-@app.route("/do_tts", methods=['POST'])
+@app.route("/api/do_tts", methods=['POST'])
 def do_tts():
     data = request.get_json()
     if not data:
