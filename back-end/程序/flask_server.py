@@ -455,7 +455,7 @@ def upload_dialogue():
         return jsonify({"error": "Invalid action type."}), 401
 
 
-@app.route("/generate_script", methods=['GET'])
+@app.route("/api/generate_script", methods=['GET'])
 def generate_script():
     res = {
         "storylines": "",
@@ -464,6 +464,9 @@ def generate_script():
     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
         storyline = f.read()
     res["storylines"] = storyline
+    if not os.path.exists(info_dict['dialogue_path']):
+        os.makedirs(os.path.dirname(
+            info_dict['dialogue_path']), exist_ok=True)
     with open(info_dict['dialogue_path'], "r", encoding="utf-8") as f:
         dialogue = json.load(f)
     with open(info_dict['characters_path'], "r", encoding="utf-8") as f:
