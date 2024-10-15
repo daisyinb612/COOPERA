@@ -85,7 +85,7 @@ def get_storyline_help():
 
     answer = global_llm.ask(
         question=question, prompt=global_llm.storyline_help, history=history)
-    print("Yes")
+    # print("Yes")
 
     return jsonify({"answer": answer})
 
@@ -229,7 +229,7 @@ def add_scene():
 def delete_scene_asset():
     data = request.get_json()
     index = data["data"]["index"]
-    print('index', index)
+    # print('index', index)
     with open(info_dict['scene_path'], 'r', encoding='utf-8') as f:
         old_data = json.load(f)
     old_data.pop(index)
@@ -313,7 +313,7 @@ def create_character_picture():
             req = requests.get(picture)
             image = Image.open(BytesIO(req.content))
             fileName = name+'.'+image.format.lower()
-            print(fileName)
+            # print(fileName)
             with open(info_dict['characters_image_path']+'/'+fileName, 'wb') as f:
                 f.write(req.content)
             return jsonify({"image": fileName})
@@ -538,7 +538,7 @@ def do_tts():
             print('openai failed due to: ', e)
             print('use baidu')
             id_speaker = data["data"]["id_speaker"]  # 1为男声，0为女声
-            print('id_speaker', id_speaker)
+            # print('id_speaker', id_speaker)
             url = "http://tsn.baidu.com/text2audio"
             header = {
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -574,7 +574,7 @@ def fresh_backend():
         now = datetime.now()
         user_id = now.strftime("%d-%m-%Y %H-%M-%S")
         print('user_id', user_id)
-        print(os.listdir('./'))
+        # print(os.listdir('./'))
 
         sub_path = './opera_info'
         user_file_name = f'../../experiment_data/{user_id}'
@@ -651,7 +651,7 @@ def fresh_backend():
 
         return jsonify({'result': True, 'filename': str(user_id)}), 200
     except Exception as e:
-        print(e)
+        # print(e)
         return jsonify({"result": str(e)}), 400
 
 
