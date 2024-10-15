@@ -2,13 +2,14 @@
   <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div>INPUT YOUR lOGLINE</div>
+        <div>INPUT YOUR LOGLINE</div>
       </el-header>
       <el-main class="editlogline" v-loading="loading">
         <el-scrollbar>
           <el-input
             v-model="loglineData"
             :rows="3"
+            autosize
             type="textarea"
             placeholder="Please write down your playwriting summary with two or three sentences "
           />

@@ -19,10 +19,10 @@
             >
               <div class="plot-header">
                 <div class="plot-name">
-                  <div>Plot{{ index + 1 }}:</div>
-                  {{ plot.plotName }}
+                  <div>Plot{{ index + 1 }} : {{ plot.plotName }}
+                  </div> 
                 </div>
-                <div class="plot-element">
+                <!-- <div class="plot-element">
                   <div>Plot Stage:</div>
                   {{ plot.plotStage }}
                 </div>
@@ -35,7 +35,7 @@
                   <span v-for="character in plot.characters" :key="character">
                     <span style="padding: 3px">{{ character.name }}</span>
                   </span>
-                </div>
+                </div> -->
               </div>
               <el-input
                 type="textarea"

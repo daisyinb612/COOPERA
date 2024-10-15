@@ -6,7 +6,7 @@
       </el-header>
       <el-main class="dialogue" v-loading="loading">
         <el-header class="button-container-up">
-          <el-scrollbar class="plot-name-list">
+          <el-main class="plot-name-list">
             <el-button
               v-for="(plot, index) in plots"
               :key="index"
@@ -15,7 +15,7 @@
             >
               {{ plot.plotName }}
             </el-button>
-          </el-scrollbar>
+          </el-main>
         </el-header>
 
         <el-main class="dialogue-list-container">
@@ -515,8 +515,6 @@ export default defineComponent({
 
 .plot-name-list {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
 }
 
 .plot-name-button {
