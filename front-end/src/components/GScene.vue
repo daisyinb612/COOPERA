@@ -810,9 +810,9 @@ body {
 }
 
 .asset-image {
-  border-radius: 5px;
   width: 150px;
   height: 150px;
+  border-radius: 5px;
   border: 2px solid #ddd;
 }
 

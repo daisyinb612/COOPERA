@@ -41,6 +41,11 @@
                       :src="selectedPlot.scene.image"
                       alt="Asset Image"
                     />
+                    <img
+                      v-else
+                      class="scene-image"
+                      :src="require('@/assets/images/empty.png')"
+                    />
                   </el-col>
                   <el-col :span="1"> </el-col>
                   <el-col :span="20">
@@ -114,7 +119,13 @@
                       Your browser does not support the audio element.
                     </audio>
                   </el-col>
-
+                  <el-col :span="1">
+                    <el-button circle>
+                      <el-icon @click="showAddDialog(index)">
+                        <Plus />
+                      </el-icon>
+                    </el-button>
+                  </el-col>
                   <el-col :span="1" v-if="index > 0">
                     <el-button circle>
                       <el-icon @click="swapDialogue(index, index - 1)">
@@ -129,23 +140,24 @@
                       </el-icon>
                     </el-button>
                   </el-col>
-                  <el-col :span="1">
-                    <el-button circle>
-                      <el-icon @click="showAddDialog(index)">
-                        <Plus />
-                      </el-icon>
-                    </el-button>
-                  </el-col>
                 </el-row>
 
-                <el-row align="middle">
-                  <el-col :span="24">
+                <el-row gutter="20" align="middle" >
+                  <el-col :span="22">
                     <el-input
+                      autosize
                       type="textarea"
                       v-model="dialogue.content"
                       placeholder="Enter beat here..."
                       class="beat-input"
                     ></el-input>
+                  </el-col>
+                  <el-col :span="2">
+                    <el-button >
+                      <el-icon @click="better()"> 
+                        <MagicStick />
+                      </el-icon>
+                    </el-button>
                   </el-col>
                 </el-row>
 
