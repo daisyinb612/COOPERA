@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-container class="character_panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">Craft the Characters</div>
+        <div class="art-asset">{{ this.$t('characters') }}</div>
       </el-header>
       <el-container class="rightcontainer">
         <!-- <el-button-group class="button-container">
@@ -39,7 +39,7 @@
 
         <el-footer class="add-button-container">
           <el-button class="addasset-button" @click="showAddDialog"
-            >Add New Character</el-button
+            >{{ this.$t('cha_add') }}</el-button
           >
           <!-- <el-button class="addasset-button" @click="upload">Save</el-button> -->
         </el-footer>
@@ -49,7 +49,7 @@
     <el-aside class="chatgpt_panel">
       <div class="chat">
         <el-header class="header">
-          <div>CHARACTER Assistant</div>
+          <div>{{ this.$t('cha_AI') }}</div>
         </el-header>
         <el-main>
           <div
@@ -81,7 +81,7 @@
         </el-main>
         <el-footer>
           <el-input
-            placeholder="Ask any questions here..."
+            :placeholder="$t('AI_input')"
             v-model="inputMessage"
             class="input-field"
             @keyup.enter="sendMessage"
@@ -100,7 +100,7 @@
     </el-aside>
 
     <el-dialog
-      title="Add New Character"
+      :title="$t('cha_add')"
       v-model="addDialogVisible"
       custom-class="dialog-content"
     >

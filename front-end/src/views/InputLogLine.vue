@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div> {{ this.$t('INPUT_LOGLINE') }}</div>
+        <div> {{ this.$t('SCRIPT_OUTLINE') }}</div>
       </el-header>
       <el-main class="editlogline" v-loading="loading">
         <el-scrollbar>
@@ -11,17 +11,17 @@
             :rows="3"
             autosize
             type="textarea"
-            placeholder="Please write down your playwriting summary with two or three sentences "
+            :placeholder="$t('log_placehoder')"
           />
         </el-scrollbar>
       </el-main>
 
       <el-footer class="button-container">
         <el-button class="upload-button" @click="FreshBackend"
-          >Refresh</el-button
+          >{{ this.$t('fresh') }}</el-button
         >
         <el-button class="upload-button" @click="UploadLogLine"
-          >Upload</el-button
+          >{{ this.$t('upload') }}</el-button
         >
       </el-footer>
     </el-main>
@@ -29,7 +29,7 @@
     <el-footer class="down-panel">
       <div class="chat">
         <el-header class="header">
-          <div class="asset-name">LOGLINE Intelligent Assistant</div>
+          <div class="asset-name">{{ this.$t('Logline_AI') }}</div>
         </el-header>
         <el-main>
           <div
@@ -69,7 +69,7 @@
         </el-main>
         <el-footer>
           <el-input
-            placeholder="You can ask LOGLINE Intelligent Assistant for help here..."
+            :placeholder="$t('AI_input')"
             v-model="inputMessage"
             @keyup.enter="sendMessage"
             clearable
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import { mapState, mapActions } from "vuex";
 import { ElMessage } from "element-plus";
 import axios from "axios";
@@ -250,10 +250,11 @@ export default defineComponent({
       {
         role: "assistant",
         prompt: "",
-        content: `hello, I'm an Intelligent Assistant who can help you with logline writing.
-                You can try asking me like the following questions:<br>
-                What should I pay attention to when writing logline?<br>
-                How can I summarize a specific story in two or three sentences?`,
+        // content:"",
+        content: `你好，我是帮助你创作故事概要的智能助手.
+                你可以尝试问我以下问题:<br>
+                在写故事概要的时候要注意哪些方面？<br>
+                要如何用两三句话总结故事？`,
         image: "logo.png",
         downloadIcon: true,
       },
@@ -265,13 +266,17 @@ export default defineComponent({
       set: (value) => store.dispatch("updateLoglineData", value),
     });
     console.log(store);
-
+    // onMounted(() => {
+    //   // 在 mounted 钩子中调用 $t 方法并赋值
+    //   messages.value[0].content = "this.$t('AI_forlog')";
+    // });
     return {
       inputMessage,
       messages,
       loading,
       history,
       loglineData, // 返回 loglineData
+      onMounted,
     };
   },
 });

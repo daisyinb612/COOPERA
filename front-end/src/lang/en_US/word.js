@@ -1,6 +1,31 @@
 export default {
+    // menu
+  'input': 'Input Your logline',
+  'character': 'Character',
+  'plot': 'Plot',
+  'scene': 'Scene',
+  'dialogue': 'Dialogue',
+  'output': 'Render Your Script',
     // logline
-  'INPUT_LOGLINE': 'Input your logline',
+  'SCRIPT_OUTLINE': 'Input your script outline',
+  'Logline_AI': 'LOGLINE Intelligent Assistant',
+  'fresh': 'Refresh',
+  'upload': 'Upload',
+  'log_placehoder': 'Please write down your playwriting summary with two or three sentences',
+  'AI_forlog': `hello, I'm an Intelligent Assistant who can help you with logline writing.
+                You can try asking me like the following questions:<br>
+                What should I pay attention to when writing logline?<br>
+                How can I summarize a specific story in two or three sentences?`,
+  'AI_input': 'You can ask Intelligent Assistant for help here',
+    // character
+  'characters': 'Craft the Characters',
+  'cha_AI': 'Assistant',
+  'cha_add': 'Add New Character',
 
-  // plot
+   // plot
+   'plots': 'Craft the Characters',
+
+   // plot
+
+
 }

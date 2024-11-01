@@ -2,7 +2,7 @@
   <el-row :class="$style.menu">
     <div :class="$style.menuInner">
       <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/inputlogline') ? $style.active : '' ]" @click="goToPage('/home/inputlogline')" plain>
-        <div :class="$style.inputLogline">input logline</div>
+        <div :class="$style.inputLogline">{{ this.$t('input') }}</div>
       </el-button>
     </div>
     <div :class="$style.menuChild">
@@ -12,7 +12,7 @@
             <el-icon :class="$style.icon">
               <User />
             </el-icon>
-            <div :class="$style.charater">Character</div>
+            <div :class="$style.charater">{{ this.$t('character') }}</div>
           </div>
         </el-button>
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagetwo') ? $style.active : '' ]" @click="goToPage('/home/pagetwo')" plain>
@@ -20,7 +20,7 @@
             <el-icon :class="$style.icon">
               <edit />
             </el-icon>
-            <div :class="$style.charater">Plot</div>
+            <div :class="$style.charater">{{ this.$t('plot') }}</div>
           </div>
         </el-button>
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagethree') ? $style.active : '' ]" @click="goToPage('/home/pagethree')" plain>
@@ -28,7 +28,7 @@
             <el-icon :class="$style.icon">
               <Location />
             </el-icon>
-            <div :class="$style.charater">Scene</div>
+            <div :class="$style.charater">{{ this.$t('scene') }}</div>
           </div>
         </el-button>
         <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/pagefour') ? $style.active : '' ]" @click="goToPage('/home/pagefour')" plain>
@@ -36,14 +36,14 @@
             <el-icon :class="$style.icon">
               <Reading />
             </el-icon>
-            <div :class="$style.charater">Dialogue</div>
+            <div :class="$style.charater">{{ this.$t('dialogue') }}</div>
           </div>
         </el-button>
       </div>
     </div>
     <div :class="$style.menuInner">
       <el-button :class="[ $style.inputLoglineWrapper, isActive('/home/renderscript') ? $style.active : '' ]" @click="goToPage('/home/renderscript')" plain>
-        <div :class="$style.inputLogline">render script</div>
+        <div :class="$style.inputLogline">{{ this.$t('output') }}</div>
       </el-button>
     </div>
   </el-row>
