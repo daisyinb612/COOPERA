@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="up-panel">
       <el-header class="header">
-        <div>INPUT YOUR LOGLINE</div>
+        <div> {{ this.$t('INPUT_LOGLINE') }}</div>
       </el-header>
       <el-main class="editlogline" v-loading="loading">
         <el-scrollbar>

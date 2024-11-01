@@ -4,6 +4,7 @@ import character from './modules/character';
 import plot from './modules/plot';
 import scene from './modules/scene';
 import script from './modules/script';
+import language from './modules/language'
 
 export default createStore({
   modules: {
@@ -12,5 +13,6 @@ export default createStore({
     plot,
     scene,
     script,
+    language
   },
 });

@@ -1,19 +1,79 @@
 <template>
+  <div style="display: flex; background: linear-gradient(162.86deg, #a1b0ff, #f472ff);
+">
     <div :class="$style.title">
       <div :class="$style.ellipseParent">
         <div :class="$style.frameChild"></div>
         <div :class="$style.coOpera">CO-OPERA</div>
       </div>
     </div>
+  <div class="right-bar">
+      <el-switch
+      v-model="language"
+      inline-prompt
+      style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+      active-text="ZH"
+      active-value="zh_CN"
+      inactive-text="EN"
+      inactive-value="en_US"
+      @change="change_language"
+  />
+  </div>
+  </div>
   </template>
   
   <script>
+  // import { useStore } from "vuex";
+  import { ref } from 'vue'
+ import { useI18n } from "vue-i18n";
+import { computed } from "vue";
   export default {
-    name: "WebTitle"
+    name: "WebTitle",
+
+    setup() {
+      // const store = useStore()
+      const language = ref(localStorage.lang || 'zh_CN')
+      const { t, locale } = useI18n();
+
+      function change_language(){
+        locale.value = language.value;
+        localStorage.setItem('lang', language.value)
+        location.reload()
+      }
+      const getCurrentLang = computed(() => {
+        return locale.value;
+      });
+
+      console.log(getCurrentLang.value);
+      console.log(t("message.hello"));
+
+      // const language = ref(store.getters['language']);
+
+      // function change_language() {
+      //   store.dispatch("setLanguage", language.value).then(()=>{
+      //     locale.value = language
+      //   })
+      // }
+
+    return{
+      language,
+      change_language
+    }
   }
+
+  }
+
+
   </script>
   
   <style module>
+  .right-bar {
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+
+  }
+
   .frameChild {
     width: 50px;
     position: relative;
@@ -41,7 +101,6 @@
   .title {
     width: 100%;
     position: relative;
-    background: linear-gradient(162.86deg, #a1b0ff, #f472ff);
     height: 80px;
     overflow: hidden;
     display: flex;
