@@ -19,20 +19,45 @@ export default {
   'AI_input': '在这里输入你的问题',
     // character
   'characters': '编辑角色',
+
   'cha_add': '添加新角色',
   'cha_AI': '智能导学',
+  'C_name': '名字',
+  'C_de': '描述',
+  'C_voice': '音色',
+  'voice': '选择声音',
+  'C_p': '图片',
+  'C_Genp': '生成角色图片',
+  'cancel': '取消',
+  'confirm': '确认',
+  'delete': '删除',
+
+  'cha_edit': '编辑角色',
 
      // plot
   'plots': '编辑情节',
   'GenP': '生成情节',
   'AddP': '添加新情节',
+  'EditP': '编辑情节内容',
+  'P_name': '情节名称',
+  'P_stage': '情节阶段',
+  'P_s': '场景',
+  'P_c': '出场角色',
+  'P_in': '介绍',
+  'P_number': '第几幕',
 
      // scene
   'scenes': '编辑场景',
+  'EditS': '编辑场景内容',
   'Scene_AI': '智能导学',
+  'S_name': '场景名字',
+  'S_de': '场景描述',
+  'S_p': '场景图片',
+  'S_Genp': '生成场景图片',
 
     // dialogue
   'dialogues': '逐个情节创作台词',
+  'GenD': ' 生成角色对话',
 
     // scipt
   'playwriting': ' 剧本',

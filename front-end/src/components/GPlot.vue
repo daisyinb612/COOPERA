@@ -58,10 +58,10 @@
       custom-class="dialog-content"
     >
       <el-form :model="newPlot" label-width="100px" class="add-plot-form">
-        <el-form-item label="Name">
+        <el-form-item :label="this.$t('P_name')" >
           <el-input v-model="newPlot.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Plot Stage">
+        <el-form-item :label="this.$t('P_stage')">
           <el-radio-group v-model="newPlot.plotStage">
             <el-radio
               v-for="stage in stageList"
@@ -72,7 +72,7 @@
             >
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="Scene">
+        <el-form-item :label="this.$t('P_s')">
           <el-select
             v-model="newPlot.scene"
             placeholder="please select or create a scene"
@@ -88,7 +88,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="Characters">
+        <el-form-item :label="this.$t('P_c')" >
           <el-select
             v-model="newPlot.characters"
             multiple
@@ -103,7 +103,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="introduction">
+        <el-form-item :label="this.$t('P_in')">
           <el-input type="textarea" v-model="newPlot.beat" autocomplete="off" />
         </el-form-item>
         <el-footer class="dialog-footer">
@@ -118,18 +118,18 @@
     </el-dialog>
 
     <el-dialog
-      title="Edit The Plot"
+    :title="$t('EditP')"
       v-model="editDialogVisible"
       custom-class="dialog-content"
     >
       <el-form :model="editPlotData" label-width="100px" class="add-plot-form">
-        <el-form-item label="Number">
+        <el-form-item :label="this.$t('P_number')">
           <el-input v-model="editPlotData.No" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Name">
+        <el-form-item :label="this.$t('P_name')">
           <el-input v-model="editPlotData.plotName" autocomplete="off" />
         </el-form-item>
-        <el-form-item label="Plot Stage">
+        <el-form-item :label="this.$t('P_stage')" >
           <el-radio-group v-model="editPlotData.plotStage">
             <el-radio
               v-for="stage in stageList"
@@ -140,7 +140,7 @@
             >
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="Scene">
+        <el-form-item :label="this.$t('P_s')">
           <el-select
             v-model="editPlotData.scene"
             placeholder="please select or create a scene"
@@ -168,7 +168,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="Characters">
+        <el-form-item :label="this.$t('P_c')">
           <el-select
             v-model="editPlotData.characters"
             multiple
@@ -183,7 +183,7 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="introduction">
+        <el-form-item :label="this.$t('P_in')">
           <el-input
             type="textarea"
             v-model="editPlotData.beat"
@@ -192,19 +192,19 @@
         </el-form-item>
         <el-footer class="dialog-footer">
           <el-button @click="handleEditDialogClose" class="cancel-button"
-            >Cancel</el-button
+            >{{ this.$t('cancel') }} </el-button
           >
           <el-button
             type="danger"
             @click="showDeleteDialog"
             class="delete-button"
-            >Delete</el-button
+            >{{ this.$t('delete') }}</el-button
           >
           <el-button
             type="primary"
             @click="saveEditedPlot"
             class="confirm-button"
-            >Confirm</el-button
+            >{{ this.$t('confirm') }}</el-button
           >
         </el-footer>
         <el-dialog v-model="showDeleteConfirm">

@@ -108,22 +108,22 @@
         <!-- <el-form-item label="分组">
           角色
         </el-form-item> -->
-        <el-form-item label="Name" :label-width="formLabelWidth">
+        <el-form-item :label="this.$t('C_name')" :label-width="formLabelWidth">
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
 
         <el-form-item
           v-if="newAsset.group === 'characters'"
-          label="Description"
+          :label="this.$t('C_de')"
           :label-width="formLabelWidth"
         >
           <el-input v-model="newAsset.content" autocomplete="off" />
         </el-form-item>
 
-        <el-form-item label="Voice">
+        <el-form-item :label="this.$t('C_voice')">
           <el-select
             v-model="newAsset.per"
-            placeholder="please choose voice gender"
+            :placeholder="this.$t('voice')"
           >
             <el-option
               v-for="audio in audios"
@@ -136,7 +136,7 @@
 
         <el-form-item
           v-if="newAsset.group === 'characters'"
-          label="picture"
+          :label="this.$t('C_p')"
           :label-width="formLabelWidth"
         >
           <div v-loading="loading">
@@ -152,7 +152,7 @@
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-button @click="generate_new_image" class="confirm-button"
-              >Generate Picture</el-button
+              >{{ this.$t('C_Genp') }}</el-button
             >
             <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
           </div>
@@ -160,10 +160,10 @@
 
         <el-footer class="dialog-footer">
           <el-button @click="handleAddDialogClose" class="cancel-button"
-            >cancel</el-button
+            >{{ this.$t('cancel') }}</el-button
           >
           <el-button type="primary" @click="addNewAsset" class="confirm-button"
-            >confirm</el-button
+            >{{ this.$t('confirm') }}</el-button
           >
         </el-footer>
       </el-form>
@@ -217,7 +217,7 @@
     </el-dialog>
 
     <el-dialog
-      title="Edit CHaracter"
+     :title="$t('cha_edit')"
       v-model="showEditDialog"
       custom-class="dialog-content"
     >
@@ -225,15 +225,15 @@
         角色
       </el-form-item> -->
 
-      <el-form-item label="Name" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('C_name')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="Description" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('C_di')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="Voice gender">
+      <el-form-item :label="this.$t('C_voice')" >
         <el-select v-model="currentEditAsset.per" placeholder="choose voice">
           <el-option
             v-for="audio in audios"
@@ -244,7 +244,7 @@
         </el-select>
       </el-form-item>
 
-      <el-form-item label="Picture" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('C_p')" :label-width="formLabelWidth">
         <div v-loading="loading">
           <el-upload
             :http-request="uploadFile"
@@ -258,23 +258,23 @@
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-button @click="generate_image" class="confirm-button"
-            >Generate Picture</el-button
+            >{{ this.$t('C_Genp') }}</el-button
           >
         </div>
       </el-form-item>
 
       <el-footer class="dialog-footer">
         <el-button @click="handleEditClose" class="cancel-button"
-          >Cancel</el-button
+          > {{ this.$t('cancel') }} </el-button
         >
         <el-button type="danger" @click="showDeleteDialog" class="delete-button"
-          >Delete</el-button
+          > {{ this.$t('delete') }} </el-button
         >
         <el-button
           type="primary"
           @click="saveEditedAsset"
           class="confirm-button"
-          >Confirm</el-button
+          > {{ this.$t('confirm') }} </el-button
         >
       </el-footer>
 

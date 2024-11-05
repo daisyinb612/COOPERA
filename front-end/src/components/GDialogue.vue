@@ -28,7 +28,7 @@
                     Plot Name: {{ selectedPlot.plotName }}
                   </div>
                   <el-button @click="generate_dialogue" class="confirm-button"
-                    >Generacte</el-button
+                    >{{ this.$t('GenD') }}</el-button
                   >
                   <!-- <el-button @click="save_dialogue" class="confirm-button">保存</el-button> -->
                   <!-- <div class="location">{{ selectedPlot.location }}</div> -->

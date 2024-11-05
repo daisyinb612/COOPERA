@@ -39,9 +39,6 @@
           </el-card>
         </el-scrollbar>
 
-        <!-- <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="upload">Upload</el-button>
-        </el-footer> -->
       </el-container>
     </el-container>
 
@@ -99,23 +96,23 @@
     </el-aside>
 
     <el-dialog
-      title="Edit Scene"
-      v-model="showEditDialog"
+      :title="this.$t('EditS')"
+     v-model="showEditDialog"
       custom-class="dialog-content"
     >
       <!-- <el-form-item label="分组" :label-width="formLabelWidth">
         场景
       </el-form-item> -->
 
-      <el-form-item label="Name" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('S_name')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="Description" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('S_de')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item label="Picture" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('S_p')" :label-width="formLabelWidth">
         <div v-loading="loading">
           <el-upload
             :http-request="uploadFile"
@@ -129,7 +126,7 @@
             <i class="el-icon-plus"></i>
           </el-upload>
           <el-button @click="generate_image" class="confirm-button"
-            >Generate Picture</el-button
+            >{{ this.$t('S_Genp') }}</el-button
           >
           <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
         </div>
@@ -137,14 +134,14 @@
 
       <el-footer class="dialog-footer">
         <el-button @click="handleEditClose" class="cancel-button"
-          >Cancel</el-button
+          >{{ this.$t('cancel') }}</el-button
         >
         <!--        <el-button type="danger" @click="showDeleteDialog" class="delete-button">删除</el-button>-->
         <el-button
           type="primary"
           @click="saveEditedAsset"
           class="confirm-button"
-          >Confirm</el-button
+          >{{ this.$t('confirm') }}</el-button
         >
       </el-footer>
 
