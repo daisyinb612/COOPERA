@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-container class="scene-panel">
       <el-header class="art-asset-header">
-        <div class="art-asset">Craft the Scenes</div>
+        <div class="art-asset">{{ this.$t('scenes') }}</div>
       </el-header>
       <el-container class="rightcontainer">
         <!--        <el-button-group class="button-container">-->
@@ -48,7 +48,7 @@
     <el-aside class="chat-panel">
       <div class="chat">
         <el-header class="header">
-          <div>SCENE Assistant</div>
+          <div>{{ this.$t('Scene_AI') }}</div>
         </el-header>
         <el-main>
           <div
@@ -80,7 +80,7 @@
         </el-main>
         <el-footer class="inputfooter">
           <el-input
-            placeholder="Ask any questions here..."
+            :placeholder="$t('AI_input')"
             v-model="inputMessage"
             class="input-field"
             @keyup.enter="sendMessage"

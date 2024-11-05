@@ -21,9 +21,21 @@ export default {
   'characters': '编辑角色',
   'cha_add': '添加新角色',
   'cha_AI': '智能导学',
-     // plot
-   'plots': 'Craft the Characters',
 
      // plot
+  'plots': '编辑情节',
+  'GenP': '生成情节',
+  'AddP': '添加新情节',
 
+     // scene
+  'scenes': '编辑场景',
+  'Scene_AI': '智能导学',
+
+    // dialogue
+  'dialogues': '逐个情节创作台词',
+
+    // scipt
+  'playwriting': ' 剧本',
+  'Gen': '查看',
+  
 }

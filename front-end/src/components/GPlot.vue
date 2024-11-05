@@ -2,12 +2,12 @@
   <el-container class="main-container">
     <el-main class="plot">
       <el-header class="header">
-        <div>Create the Plots</div>
+        <div>{{ this.$t('plots') }}</div>
       </el-header>
       <el-main class="plot">
         <el-header class="button-container-up">
-          <el-button class="button" @click="generatePlot">Generate</el-button>
-          <el-button class="button" @click="AddPlot">Add New Plot</el-button>
+          <el-button class="button" @click="generatePlot">{{ this.$t('GenP') }}</el-button>
+          <el-button class="button" @click="AddPlot">{{ this.$t('AddP') }}</el-button>
         </el-header>
         <el-main class="plot-list-container" v-loading="loading">
           <el-scrollbar class="plots-list">
@@ -47,13 +47,13 @@
           </el-scrollbar>
         </el-main>
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadPlot">Upload</el-button>
+          <el-button class="button" @click="UploadPlot">{{ this.$t('upload') }}</el-button>
         </el-footer>
       </el-main>
     </el-main>
 
     <el-dialog
-      title="Add New Plot"
+      :title="$t('AddP')"
       v-model="addDialogVisible"
       custom-class="dialog-content"
     >

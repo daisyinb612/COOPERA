@@ -16,16 +16,22 @@ export default {
                 You can try asking me like the following questions:<br>
                 What should I pay attention to when writing logline?<br>
                 How can I summarize a specific story in two or three sentences?`,
-  'AI_input': 'You can ask Intelligent Assistant for help here',
+  'AI_input': 'Ask your question here',
     // character
   'characters': 'Craft the Characters',
   'cha_AI': 'Assistant',
   'cha_add': 'Add New Character',
 
    // plot
-   'plots': 'Craft the Characters',
+  'plots': 'Craft the Characters',
+  'GenP': 'Generate Plots',
+  'AddP': 'Add New Plot',
 
-   // plot
+   // scene
+  'dialogues': ' Create dialogues plot by plot',
 
+   // scipt
+  'playwriting': ' Playwriting',
+  'Gen': ' Generate',
 
 }

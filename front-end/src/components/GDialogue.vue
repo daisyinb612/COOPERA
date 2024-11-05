@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <el-main class="dialogue">
       <el-header class="header">
-        <div>Creating dialogue</div>
+        <div>{{ this.$t('dialogues') }}</div>
       </el-header>
       <el-main class="dialogue" v-loading="loading">
         <el-header class="button-container-up">
@@ -227,7 +227,7 @@
         </el-main>
 
         <el-footer class="button-container-down">
-          <el-button class="button" @click="UploadDialogue">Upload</el-button>
+          <el-button class="button" @click="UploadDialogue">{{ this.$t('upload') }}</el-button>
         </el-footer>
       </el-main>
     </el-main>

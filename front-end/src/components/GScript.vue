@@ -2,10 +2,10 @@
   <el-container class="main-container">
     <el-main class="script">
       <el-header class="header">
-        <div>Playwriting</div>
+        <div>{{ this.$t('playwriting') }}</div>
       </el-header>
       <el-header class="button-container-up">
-        <el-button class="button" @click="generate_script">Generate</el-button>
+        <el-button class="button" @click="generate_script">{{ this.$t('Gen') }}</el-button>
       </el-header>
       <div class="script-header">
         <el-scrollbar class="script-content">
