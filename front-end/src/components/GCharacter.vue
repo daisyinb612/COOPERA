@@ -328,9 +328,14 @@ export default defineComponent({
       {
         role: "assistant",
         prompt: "",
-        content: `hello, I'm an Intelligent Assistant who can help you with character crafting.You can try asking me like the following questions:<br>
-                What aspects should I consider in terms of suitability for character creation?<br>
-                What are your creative directions and suggestions for a specific character?`,
+        content: `你好，我是辅助角色创作的智能助手。你可以尝试问我以下问题：<br>
+在角色创作中，我应该考虑哪些方面的适合性？<br>
+      对于特定角色，你有什么创意方向和建议？`,
+
+        // content: `hello, I'm an Intelligent Assistant who can help you with character crafting.You can try asking me like the following questions:<br>
+        //         What aspects should I consider in terms of suitability for character creation?<br>
+        //         What are your creative directions and suggestions for a specific character?`,
+
         image: "logo.png",
         downloadIcon: true,
       },
@@ -851,7 +856,7 @@ body {
 }
 
 .chatgpt_panel {
-  flex: 1;
+  flex: 3;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -861,7 +866,7 @@ body {
 }
 
 .character_panel {
-  flex: 3;
+  flex: 1;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

@@ -204,9 +204,15 @@ export default defineComponent({
       {
         role: "assistant",
         prompt: "",
-        content: `hello, I'm an Intelligent Assistant who can help you with scene crafting.You can try asking me like the following questions:<br>
-                What aspects should I consider in terms of suitability for scene creation?<br>
-                What are your creative directions and suggestions for a specific scene?`,
+        content: `你好，我是帮助你进行场景创作的智能助手。你可以尝试问我：
+        <br> 在场景创作的适宜性方面，我应该考虑哪些方面？
+        <br> 对于特定场景，你有什么创意方向和建议？`,
+
+        // content: `hello, I'm an Intelligent Assistant who can help you with scene crafting.You can try asking me like the following questions:<br>
+        //         What aspects should I consider in terms of suitability for scene creation?<br>
+        //         What are your creative directions and suggestions for a specific scene?`,
+
+              
         image: "logo.png",
         downloadIcon: true,
       },
@@ -232,11 +238,6 @@ export default defineComponent({
       content: "",
       image: null,
     });
-
-    // Computed properties
-    // const currentEditAsset = computed(() => {
-    //   return Scenedata[curEditAssetIndex.value] || { name: '', content: '', image: '' };
-    // });
 
     const filteredAssets = computed(() => {
       return scenes;
@@ -305,31 +306,6 @@ export default defineComponent({
           };
           messages.value.splice(messages.value.length - 1, 1, assistantMessage);
           history.value.push(assistantMessage);
-
-          //   const imageRequestBody = {
-          //     action: 'get_scene_image_help',
-          //     data: {
-          //       history: history.value.map((msg) => ({
-          //         role: msg.role,
-          //         content: msg.content,
-          //       })),
-          //       user_input: inputMessage.value,
-          //     },
-          //   };
-
-          //   const imageResponse = await axios.post('/api', imageRequestBody);
-          //   if (imageResponse.status === 200 && imageResponse.data.image) {
-          //     const index = messages.value.indexOf(assistantMessage);
-          //     if (index !== -1) {
-          //       messages.value[index].image = imageResponse.data.image;
-          //     }
-          //   }
-          //   inputMessage.value = '';
-          // } else {
-          //   ElMessage({
-          //     message: '请求失败',
-          //     type: 'error',
-          //   });
 
           inputMessage.value = "";
         }
@@ -666,7 +642,7 @@ body {
 }
 
 .chat-panel {
-  flex: 1;
+  flex: 3;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -676,7 +652,7 @@ body {
 }
 
 .scene-panel {
-  flex: 3;
+  flex: 1;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

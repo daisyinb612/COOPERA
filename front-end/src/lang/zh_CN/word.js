@@ -16,7 +16,7 @@ export default {
                 你可以尝试问我以下问题:<br>
                 在写故事概要的时候要注意哪些方面？<br>
                 要如何用两三句话总结你的故事？`,
-  'AI_input': '在这里输入你的问题',
+  'AI_input': '在这里输入问题',
     // character
   'characters': '编辑角色',
 
