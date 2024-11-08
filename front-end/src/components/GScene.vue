@@ -642,7 +642,7 @@ body {
 }
 
 .chat-panel {
-  flex: 3;
+  flex: 2;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -652,7 +652,7 @@ body {
 }
 
 .scene-panel {
-  flex: 1;
+  flex: 2;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
