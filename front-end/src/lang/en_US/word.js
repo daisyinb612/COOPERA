@@ -57,6 +57,8 @@ export default {
    // dialuge
   'dialogues': ' Create dialogues plot by plot',
   'GenD': ' Generate',
+  'AddD': ' Add Dialogue',
+  'content': 'content',
 
    // scipt
   'playwriting': ' Playwriting',

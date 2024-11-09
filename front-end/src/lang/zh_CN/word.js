@@ -58,6 +58,8 @@ export default {
     // dialogue
   'dialogues': '逐个情节创作台词',
   'GenD': ' 生成角色对话',
+  'AddD': ' 添加内容',
+  'content': '内容',
 
     // scipt
   'playwriting': ' 剧本',

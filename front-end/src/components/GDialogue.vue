@@ -25,7 +25,7 @@
               <el-card class="plot-item">
                 <div class="plot-header">
                   <div class="scene-name">
-                    Plot Name: {{ selectedPlot.plotName }}
+                    情节名称: {{ selectedPlot.plotName }}
                   </div>
                   <el-button @click="generate_dialogue" class="confirm-button"
                     >{{ this.$t('GenD') }}</el-button
@@ -49,18 +49,18 @@
                   </el-col>
                   <el-col :span="1"> </el-col>
                   <el-col :span="20">
-                    <div>Plot Name: : {{ selectedPlot.plotStage }}</div>
-                    <div>Scene: {{ selectedPlot.scene.name }}</div>
-                    <div>Description: {{ selectedPlot.scene.content }}</div>
+                    <!-- <div>情节阶段: : {{ selectedPlot.plotStage }}</div> -->
+                    <div>所在场地: {{ selectedPlot.scene.name }}</div>
+                    <div>场景描述: {{ selectedPlot.scene.content }}</div>
                     <div>
-                      Appearing Characters:
+                      出现的角色:
                       <span
                         v-for="character in selectedPlot.characters"
                         :key="character"
                         >{{ character.name }},</span
                       >
                     </div>
-                    <div>introduction: {{ selectedPlot.beat }}</div>
+                    <div>情节介绍: {{ selectedPlot.beat }}</div>
                   </el-col>
                 </el-row>
               </el-card>
@@ -160,37 +160,12 @@
                     </el-button>
                   </el-col>
                 </el-row>
-
-                <!-- <el-row  gutter="20" align="middle" justify="end">
-
-                  <el-col span="10" v-if="index > 0">
-                    <el-button circle>
-                      <el-icon @click="swapDialogue(index, index - 1)">
-                        <CaretTop />
-                      </el-icon>
-                    </el-button>
-                  </el-col>
-                  <el-col span="10" v-if="index < dialogues.length - 1">
-                    <el-button circle>
-                    <el-icon @click="swapDialogue(index, index + 1)">
-                      <CaretBottom />
-                    </el-icon>
-                  </el-button>
-                  </el-col>
-                  <el-col span="10">
-                    <el-button circle>
-                    <el-icon @click="showAddDialog(index)">
-                      <Plus />
-                    </el-icon>
-                  </el-button>
-                  </el-col>
-                </el-row> -->
               </el-card>
             </template>
           </el-scrollbar>
 
           <el-dialog
-            title="Add Dialogue"
+            :title="$t('AddD')"
             v-model="addDialogVisible"
             custom-class="dialog-content"
           >
@@ -199,7 +174,7 @@
               label-width="100px"
               class="add-plot-form"
             >
-              <el-form-item label="Character">
+              <el-form-item :label="$t('C_name')">
                 <el-select v-model="addDialogue.character">
                   <el-option
                     v-for="character in characters"
@@ -208,18 +183,18 @@
                   ></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item label="Content">
+              <el-form-item :label="$t('content')">
                 <el-input v-model="addDialogue.content" />
               </el-form-item>
               <el-footer class="dialog-footer">
                 <el-button @click="addDialogCancel" class="cancel-button"
-                  >Cancel</el-button
+                  >{{ this.$t('cancel') }}</el-button
                 >
                 <el-button
                   type="primary"
                   @click="addDialogConfirm"
                   class="confirm-button"
-                  >Confirm</el-button
+                  >{{ this.$t('confirm') }}</el-button
                 >
               </el-footer>
             </el-form>
@@ -263,8 +238,8 @@ export default defineComponent({
     });
     const beforeEditAssets = ref([]);
     const audios = {
-      "Female Voice": 0,
-      "Male Voice": 1,
+      "女音": 0,
+      "男音": 1,
       // "斯文男音": 3,
       // "小萌萌": 4,
       // "知性女音": 5,
