@@ -229,7 +229,7 @@
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
       </el-form-item>
 
-      <el-form-item :label="this.$t('C_di')" :label-width="formLabelWidth">
+      <el-form-item :label="this.$t('C_de')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.content" autocomplete="off" />
       </el-form-item>
 
