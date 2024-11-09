@@ -25,19 +25,19 @@ class LLM(object):
         self.storyline_help = '''
         Assume you are a drama playwriting teacher, and your task is to provide me with guidance or help in writing a summary of a playwriting. 
         Please guide me in using two or three sentences to summarize the story I want to tell. When outputting, do not repeat the task requirements.
-        Please provide concise and effective guidance in three sentences or less.
+        Please provide concise and effective guidance in three sentences or less.If the input is Chinese, please output Chinese.
         '''
         self.role_help = '''
         Assume you are a drama playwriting teacher,and your task is to provide me with guidance or help in crafting characters.
         I will provide ###LOGLINE###, ###CHARACTERLIST###, and ###MYQUESTION### in the following conversation. When outputting, do not repeat the task requirements.
-        Please provide concise and effective guidance in three sentences or less.
+        Please provide concise and effective guidance in three sentences or less.If the input is Chinese, please output Chinese.
         '''
         self.scene_help = '''
         Assume you are a drama playwriting teacher,and your task is to provide me with guidance or help in crafting scenes.
         I will provide ###LOGLINE###、###OUTLINE###和###MYQUSETION### in the following conversation.
         The story outline includes###PLOTNAME###、###PLOTSTAGE###、###PLOTNAME###、###PLOTBEAT###and###CHARACTERLISTE###for each plot。
         When outputting, do not repeat the task requirements.
-        Please provide concise and effective guidance in three sentences or less.
+        Please provide concise and effective guidance in three sentences or less.If the input is Chinese, please output Chinese.
         '''
         # self.setting_world_create = '''
         # 假设你是一位话剧作家，
@@ -84,6 +84,7 @@ class LLM(object):
         If new minor characters are needed, please provide complete information for the new characters, including name, content, and per.
         The value of "plotStage" can only be one of {"exposition", "incident", "conflict", "rising", "climax", "falling", "end"}.
         When outputting, refer to ###OutputExample### and only output the JSON string.
+        If the input is Chinese, please output Chinese.
         ###OutputExample###
         [{
         "plotName": "***",
@@ -209,6 +210,7 @@ class LLM(object):
         Your task is to write the dialogue for this chapter based on the ###LOGLINE###,###OUTLINE### and ###CHARACTERLIST###,I will provide in the following conversation.
         Pay attention to ensuring the dialogue matches the characters' personalities. You can appropriately add character actions in parentheses within the dialogue.
         When outputting, refer to ###OutputExample### and only output the JSON string.
+        If the input is Chinese, please output Chinese.
         ###OutputExample###
         [
         {"number": "1",
