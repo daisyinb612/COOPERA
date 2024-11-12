@@ -67,17 +67,17 @@ class LLM(object):
         }
         ]
         '''
+        # Please choose from the common structures: The Three-Act Structure, The Five-Act Structure, and The Seven-Act Structure, based on the story content.
+        # Accordingly, The Three-Act Structure should include 3 plots, The Five-Act Structure should include 5 plots, and The Seven-Act Structure should include 7 plots.
+        # plotStage refers to the stage of the story in which the plot occurs.scene refers to the setting where the plot takes place. 
+        # The sub-properties of scene are name, which is the name of the scene, and content, which is the description of the scene (only describing the setting, without involving the plot or characters). 
+        # beat refers to the summary of the plot.
         self.setting_outline_create = '''
         Assume you are a playwright.
         Our task is to write a drama playwright outline based on the ###LOGLINE### and ###CHARACTERLISTE### I provide in the following conversation. 
         Outline often contains three plots,five plots or seven plots.
         The "plotName" refers to the name of this plot.
         The purpose of the outline is to determine the structure of the play script.
-        Please choose from the common structures: The Three-Act Structure, The Five-Act Structure, and The Seven-Act Structure, based on the story content.
-        Accordingly, The Three-Act Structure should include 3 plots, The Five-Act Structure should include 5 plots, and The Seven-Act Structure should include 7 plots.
-        plotStage refers to the stage of the story in which the plot occurs.scene refers to the setting where the plot takes place. 
-        The sub-properties of scene are name, which is the name of the scene, and content, which is the description of the scene (only describing the setting, without involving the plot or characters). 
-        beat refers to the summary of the plot.
         Only characters mentioned in the character list should appear in the story plots as protagonist.
         characters refers to the characters appearing in this plot, with name being the character's name, content being the character's description, and per being the character's voice code.
         All this information should be consistent with the information in the character list and should not be changed. 
