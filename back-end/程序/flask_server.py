@@ -8,11 +8,14 @@ from flask_cors import CORS
 import json
 from PIL import Image
 from io import BytesIO
+import threading
 
 app = Flask(__name__)
 CORS(app)
 
 global_llm = LLM()
+
+async_tasks = {}
 
 # Configuration dictionary
 info_dict = {
@@ -124,41 +127,57 @@ def get_character_help():
         question=question, prompt=global_llm.role_help, history=history)
     return jsonify({"answer": answer})
 
-# @app.route('/api/save_character_asset', methods=['POST'])
-# def save_character_asset():
-#     data = request.get_json()
-#
-#     global_llm.save_json_to_excel(json_object=data["data"], filepath=info_dict["characters_path"])
-#     return jsonify({})
+
+@app.route('/api/check-task/<int:task_id>', methods=['GET'])
+def check_task(task_id):
+    task = async_tasks.get(task_id)
+    if task:
+        return jsonify({'status': task['status']})
+    else:
+        return jsonify({'status': 'not_found'}), 404
 
 
 @app.route('/api/init_plot_generation', methods=['POST'])
 def init_plot_generation():
-    with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
-        storyline = f.read()
-    characters = request.get_json()["data"]["characters"]
-    question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:"
-    for character in characters:
-        question += "角色名： "+character["name"] + "角色描述:  " + \
-            character["content"]+"角色音色： " + character["per"] + "\n"
+    data = request.get_json()
+    task_id = data.get("task_id")
+    if task_id is None:
+        def init_plot():
+            with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
+                storyline = f.read()
+            characters = data["data"]["characters"]
+            question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:"
+            for character in characters:
+                question += "角色名： "+character["name"] + "角色描述:  " + \
+                    character["content"]+"角色音色： " + character["per"] + "\n"
 
-    answer = global_llm.ask(
-        question=question, prompt=global_llm.setting_outline_create)
-    plot = global_llm.analyze_answer(answer)
-    if not os.path.exists(info_dict['outline_path']):
-        os.makedirs(os.path.dirname(info_dict['outline_path']), exist_ok=True)
-    with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
-        json.dump(plot, f, indent=4, ensure_ascii=False)
-    scene = []
-    for x in plot:
-        x['scene']['url'] = ""
-        scene.append(x['scene'])
-    if not os.path.exists(info_dict['scene_path']):
-        os.makedirs(os.path.dirname(info_dict['scene_path']), exist_ok=True)
-    with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
-        json.dump(scene, f, indent=4, ensure_ascii=False)
+            answer = global_llm.ask(
+                question=question, prompt=global_llm.setting_outline_create)
+            plot = global_llm.analyze_answer(answer)
+            if not os.path.exists(info_dict['outline_path']):
+                os.makedirs(os.path.dirname(info_dict['outline_path']), exist_ok=True)
+            with open(info_dict['outline_path'], 'w', encoding='utf-8') as f:
+                json.dump(plot, f, indent=4, ensure_ascii=False)
+            scene = []
+            for x in plot:
+                x['scene']['url'] = ""
+                scene.append(x['scene'])
+            if not os.path.exists(info_dict['scene_path']):
+                os.makedirs(os.path.dirname(info_dict['scene_path']), exist_ok=True)
+            with open(info_dict['scene_path'], 'w', encoding='utf-8') as f:
+                json.dump(scene, f, indent=4, ensure_ascii=False)
+            async_tasks[task_id]['status'] = 'completed'
 
-    return jsonify(plot)
+        task_id = len(async_tasks)+1
+        async_tasks[task_id] = {'status': 'processing'}
+
+        threading.Thread(target=init_plot).start()
+        return jsonify({'task_id': task_id})
+    else:
+        async_tasks.pop(task_id)
+        with open(info_dict['outline_path'], 'r', encoding='utf-8') as f:
+            plot = json.load(f)
+        return plot
 
 
 @app.route('/api/add_character', methods=['POST'])
@@ -308,8 +327,22 @@ def get_image():
     else:
         return abort(404, description="File not found")
 
+@app.route('/api/get_json', methods=['GET'])
+def get_json():
+    filename = request.args.get('filename')
+    path = request.args.get('path')
+    json_directory = f'./opera_info/' + str(path) + '/'
 
-@app.route("/update_character", methods=['POST'])
+    if not filename:
+        return jsonify({"error": "No filename provided"}), 400
+
+    file_path = os.path.join(json_directory, filename)
+    if os.path.exists(file_path):
+        return send_from_directory(json_directory, filename)
+    else:
+        return abort(404, description="File not found")
+
+@app.route("/api/update_character", methods=['POST'])
 def update_character():
     data = request.get_json()
     if not data:
@@ -329,7 +362,7 @@ def update_character():
         return jsonify({"error": "Invalid action type."}), 401
 
 
-@app.route("/delete_character", methods=['POST'])
+@app.route("/api/delete_character", methods=['POST'])
 def delete_character():
     data = request.get_json()
     if not data:
