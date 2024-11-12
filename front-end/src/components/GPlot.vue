@@ -568,32 +568,62 @@ export default defineComponent({
     async function generatePlot() {
       try {
         loading.value = true;
+
         const response = await axios.post("/api/init_plot_generation", {
           action: "init_plot_generation",
           data: {
             characters: store.state.character.characters,
           },
         });
-        loading.value = false;
-        await refreshData();
-        addPlot(response.data);
-        const scenes = response.data.reduce((acc, plot) => {
-          if (!acc.find((scene) => scene.name === plot.scene.name)) {
-            acc.push({
-              name: plot.scene.name,
-              content: plot.scene.content,
-              image: null,
+        console.log('responce.data:', response)
+        let task_id = response.data.task_id;
+
+        let interval_id = await setInterval(async () => {
+          const responce_check = await axios.get(`/api/check-task/${task_id}`);
+          let task_status = responce_check.data.status
+
+          if(task_status === 'completed'){
+            clearInterval(interval_id)
+            console.log('end generating plot')
+              const plot_data = await axios.post("/api/init_plot_generation", {
+              action: "init_plot_generation",
+              data: {
+                characters: store.state.character.characters,
+              },
+              task_id: task_id
             });
+
+          loading.value = false;
+
+          await refreshData();
+          addPlot(plot_data.data);
+          const scenes = plot_data.data.reduce((acc, plot) => {
+            if (!acc.find((scene) => scene.name === plot.scene.name)) {
+              acc.push({
+                name: plot.scene.name,
+                content: plot.scene.content,
+                image: null,
+              });
+            }
+            return acc;
+          }, []);
+          store.dispatch("addScene", scenes);
           }
-          return acc;
-        }, []);
-        store.dispatch("addScene", scenes);
+        }, 5000)
+
+        setTimeout(() => {
+          clearInterval(interval_id);
+          console.log('Stopped sending requests');
+        }, 300000);
+
+
       } catch (error) {
         ElMessage({
-          message: "请求失败",
+          message: error,
           type: "error",
         });
       }
+
     }
 
     async function UploadPlot() {
