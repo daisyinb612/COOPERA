@@ -1,7 +1,8 @@
 import time
-
-from flask import Flask, request, jsonify, send_file, send_from_directory, abort
+from flask import Flask, request, jsonify, send_file, send_from_directory, abort, render_template
 import os
+import networkx as nx
+from pyvis.network import Network
 import requests
 from llm import LLM
 from flask_cors import CORS
@@ -10,7 +11,7 @@ from PIL import Image
 from io import BytesIO
 import threading
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='template')
 CORS(app)
 
 global_llm = LLM()
@@ -96,17 +97,6 @@ def get_saved_storyline():
     with open(info_dict['world_setting_path'], 'r', encoding='utf-8') as f:
         storyline = f.read()
     return jsonify({"storyline": storyline})
-
-# @app.route('/api/init_character_generation', methods=['POST'])
-# def init_character_generation():
-#     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
-#         storyline = f.read()
-#     question = "###LOGLINE###:" + storyline
-#
-#     answer = global_llm.ask(question=question, prompt=global_llm.setting_role_create)
-#     characters = global_llm.analyze_answer(answer)
-#     global_llm.save_json_to_excel(json_object=characters, filepath=info_dict["characters_path"])
-#     return jsonify(characters)
 
 
 @app.route('/api/get_character_help', methods=['POST'])
@@ -201,19 +191,6 @@ def update_plot():
         json.dump(plot, f, indent=4, ensure_ascii=False)
     return jsonify({})
 
-# @app.route('/api/init_scene_generation', methods=['POST'])
-# def init_scene_generation():
-#     with open(info_dict['world_setting_path'], "r", encoding="utf-8") as f:
-#         storyline = f.read()
-#     with open(info_dict['outline_path'], "r", encoding="utf-8") as f:
-#         plot = json.load(f)
-#     question = "\n###LOGLINE###:" + storyline + "\n###CHARACTERLISTE###:" + plot
-#
-#     answer = global_llm.ask(question=question, prompt=global_llm.setting_scene_create)
-#     scene = global_llm.analyze_answer(answer)
-#     global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
-#     return jsonify(scene)
-
 
 @app.route('/api/save_scene_asset', methods=['POST'])
 def save_scene_asset():
@@ -293,7 +270,7 @@ def create_character_picture():
 
         action = data.get("action")
         if action == "create_character_picture":
-            prompt = "Extract and refine the visual details of the character based on the description provided. Use a fresh and unified color palette to generate an illustration-style image of a single character from ancient China, similar to the Disney illustration style, on a white background. Choose from the following colors: primary color red #CC0000, accent color gold #FFD700, accent color dark blue #191970, accent color silver #C0C0C0, accent color white #FFFFFF, and accent color dark red #8B0000. The image should have a white background and only feature the full figure of the character.The character's name is: " + \
+            prompt =  "Generates character avatars with white background. Use a fresh and unified color palette to generate an illustration-style image of a single character. Choose from the following colors: primary color red #CC0000, accent color gold #FFD700, accent color dark blue #191970, accent color silver #C0C0C0, accent color white #FFFFFF, and accent color dark red #8B0000. The character's name is: " + \
                 data["data"]["name"]+",and the character's description is: " + \
                 data["data"]["content"]
             name = data["data"]["name"]
@@ -399,14 +376,6 @@ def get_scene_help():
         question += "\nScene name: " + scene_name + ", Scene Content: " + scene_content
     question += '\n' + user_input
 
-    # for i in range(len(plot)):
-    #     plotName = plot[i]["plotName"]
-    #     plotStage = plot[i]["plotStage"]
-    #     scene = plot[i]["scene"]
-    #     beat = plot[i]["beat"]
-    #     characters = ', '.join(str(plot[i]["characters"]))
-    #     question += f"\n第{i + 1}章：情节名"   +  plotName + "，情节阶段" + plotStage + "，场景" + scene + "，梗概" + beat + "，角色表" + characters
-
     answer = global_llm.ask(
         question=question, prompt=global_llm.scene_help, history=history)
     return jsonify({"answer": answer})
@@ -433,10 +402,6 @@ def generate_dialogue():
     answer = global_llm.ask(
         question=question, prompt=global_llm.setting_dialogue_create)
     scene = global_llm.analyze_answer(answer)
-    # print('genrate_dialogue scene', scene)
-    # global_llm.save_json_to_excel(json_object=scene, filepath=info_dict["scene_path"])
-    # with open(info_dict["scene_path"], 'w', encoding='utf-8') as f:
-    #     json.dump(scene, f, indent=4, ensure_ascii=False)
     return jsonify(scene)
 
 
@@ -678,5 +643,76 @@ def get_audio():
         return abort(404, description="File not found")
 
 
+@app.route('/api/get_vis', methods=['POST'])
+def get_vis():
+    # 获取当前工作目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # 构建相对路径
+    file_path = os.path.join(current_dir, 'opera_info', 'character', 'characters.json')
+
+    # 读取原始JSON文件
+    with open(file_path, 'r') as file:
+        characters = json.load(file)
+
+    # 生成关系图
+    G = nx.Graph()
+
+    # 添加节点和边
+    for character in characters:
+        name = character['name']
+        G.add_node(name)
+        for related_name in character['related']:
+            G.add_edge(name, related_name)
+
+    net = Network(notebook=True, 
+                  height="750px", 
+                  width="100%", 
+                  cdn_resources='in_line', #生成资源嵌入html
+                  font_color="#000000",  #节点的颜色
+                  )
+
+    for character in characters:
+        name = character["name"]
+        if 'image' not in character:
+            character['image'] = ""
+
+        # image_path = character['image']
+        # if image_path.startswith('/api/get_image'):
+        #     image_path = f"{request.host_url}{image_path.lstrip('/')}"
+        net.add_node(name, 
+                     label=name, 
+                     shape="circularImage",
+                    #  image=image_path, 
+                     image=character.get('image'),
+                     size=30,  
+                     title=name,
+                     )
+
+    for edge in G.edges():
+        net.add_edge(edge[0],
+                     edge[1],
+                     color="#808080", 
+                     width=2)
+
+    # 生成HTML文件
+    html_file_path = './template/character_relations.html'
+    net.show(html_file_path)
+
+    # 返回生成的HTML文件
+    return jsonify({'path': html_file_path})
+
+# @app.route('=/api/get_image', methods=['GET'])
+# def serve_image():
+#     filename = request.args.get('filename')
+#     path = request.args.get('path')
+#     return send_from_directory(os.path.join(os.path.dirname(os.path.abspath(__file__)), path), filename)
+
+@app.route('/api/get_vis/get_html', methods=['GET'])
+def get_html():
+    return render_template("character_relations.html")
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
+    

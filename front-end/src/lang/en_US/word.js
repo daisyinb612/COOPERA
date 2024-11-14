@@ -20,10 +20,13 @@ export default {
     // character
   'characters': 'Craft the Characters',
   'cha_AI': 'Assistant',
-
+  'cha': 'character',
+  'cha_vis': 'visualization',
   'cha_add': 'Add New Character',
   'C_name': 'Name',
   'C_de': 'Description',
+  'C_re': 'Related',
+  'C_reh': 'please choose related roles',
   'C_voice': 'voice',
   'voice': 'please choose voice gender',
   'C_p': 'picture',

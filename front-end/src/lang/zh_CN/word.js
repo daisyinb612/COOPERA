@@ -19,11 +19,14 @@ export default {
   'AI_input': '在这里输入问题',
     // character
   'characters': '编辑角色',
-
+  'cha': '角色信息',
+  'cha_vis': '角色关系可视化',
   'cha_add': '添加新角色',
   'cha_AI': '智能导学',
   'C_name': '名字',
   'C_de': '描述',
+  'C_re': '关联角色',
+  'C_reh': '请选择关联角色',
   'C_voice': '音色',
   'voice': '选择声音',
   'C_p': '图片',

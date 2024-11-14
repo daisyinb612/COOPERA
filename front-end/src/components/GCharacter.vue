@@ -5,48 +5,50 @@
         <div class="art-asset">{{ this.$t('characters') }}</div>
       </el-header>
       <el-container class="rightcontainer">
-        <!-- <el-button-group class="button-container">
-          <el-button class="asset-button" @click="selectTab('characters')"
-                     :class="{ active: selectedTab === 'characters' }">角色</el-button>
-        </el-button-group> -->
-        <el-scrollbar class="assets-list">
-          <el-card
-            v-for="(asset, index) in charList"
-            :key="index"
-            class="asset-item"
-            shadow="hover"
-            @click="editAsset(index)"
-          >
-            <el-row :gutter="10" style="width: 100%" align="middle">
-              <el-col :span="4" style="text-align: center">
-                <img
-                  v-if="asset.image"
-                  class="asset-image"
-                  :src="asset.image"
-                />
-                <img
-                  v-else
-                  class="asset-image"
-                  :src="require('@/assets/images/empty.png')"
-                />
-              </el-col>
-              <el-col :span="20"
-                ><div>{{ asset.name }}</div></el-col
-              >
-            </el-row>
-          </el-card>
-        </el-scrollbar>
-
-        <el-footer class="add-button-container">
-          <el-button class="addasset-button" @click="showAddDialog"
-            >{{ this.$t('cha_add') }}</el-button
-          >
-          <!-- <el-button class="addasset-button" @click="upload">Save</el-button> -->
-        </el-footer>
+        <el-tabs
+          v-model="activeName"
+          type="card"
+          @tab-click="handleClick"
+        >
+        <el-tab-pane :label="this.$t('cha')" name="first" >
+            <el-scrollbar class="assets-list">
+              <el-card
+                v-for="(asset, index) in charList"
+                :key="index"
+                class="asset-item"
+                shadow="hover"
+                @click="editAsset(index)">
+                <el-row :gutter="10" style="width: 100%" align="middle">
+                    <el-col :span="4" style="text-align: center">
+                      <img
+                        v-if="asset.image"
+                        class="asset-image"
+                        :src="asset.image"
+                      />
+                      <img
+                        v-else
+                        class="asset-image"
+                        :src="require('@/assets/images/empty.png')"
+                      />
+                    </el-col>
+                    <el-col :span="20"
+                      ><div>{{ asset.name }}</div></el-col
+                    >
+                </el-row>
+              </el-card>
+            </el-scrollbar>
+            <el-footer class="add-button-container">
+              <el-button class="addasset-button" @click="showAddDialog"
+                >{{ this.$t('cha_add') }}</el-button>
+            </el-footer>
+        </el-tab-pane>
+        <el-tab-pane :label="this.$t('cha_vis')" name="second">
+              <iframe :src=htmlContent width="100%" frameborder="0"></iframe>
+        </el-tab-pane>
+        </el-tabs>
       </el-container>
     </el-container>
-
-    <el-aside class="chatgpt_panel">
+    <el-container class="chatgpt_panel">
       <div class="chat">
         <el-header class="header">
           <div>{{ this.$t('cha_AI') }}</div>
@@ -58,8 +60,6 @@
             :key="index"
           >
             <el-row :gutter="5" align="middle">
-              <!-- <el-col :span="message.prompt.length > 0 ?0: 19-message.prompt.length"></el-col>
-              <el-col :span="message.prompt.length > 0 ?24: 5+message.prompt.length"> -->
               <div v-if="message.prompt" class="human-iutput">
                 {{ message.prompt }}
               </div>
@@ -97,7 +97,7 @@
           </el-input>
         </el-footer>
       </div>
-    </el-aside>
+    </el-container>
 
     <el-dialog
       :title="$t('cha_add')"
@@ -105,9 +105,6 @@
       custom-class="dialog-content"
     >
       <el-form :model="newAsset" label-width="100px" class="add-asset-form">
-        <!-- <el-form-item label="分组">
-          角色
-        </el-form-item> -->
         <el-form-item :label="this.$t('C_name')" :label-width="formLabelWidth">
           <el-input v-model="newAsset.name" autocomplete="off" />
         </el-form-item>
@@ -118,6 +115,22 @@
           :label-width="formLabelWidth"
         >
           <el-input v-model="newAsset.content" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item :label="this.$t('C_re')" >
+          <el-select
+            v-model="newAsset.characters"
+            multiple
+            :placeholder="this.$t('C_reh')"
+            value-key="name"
+          >
+            <el-option
+              v-for="character in allCharacters"
+              :key="character.name"
+              :label="character.name"
+              :value="character"
+            />
+          </el-select>
         </el-form-item>
 
         <el-form-item :label="this.$t('C_voice')">
@@ -154,7 +167,6 @@
             <el-button @click="generate_new_image" class="confirm-button"
               >{{ this.$t('C_Genp') }}</el-button
             >
-            <!-- <el-button @click="save_image" class="confirm-button">保存</el-button> -->
           </div>
         </el-form-item>
 
@@ -221,9 +233,6 @@
       v-model="showEditDialog"
       custom-class="dialog-content"
     >
-      <!-- <el-form-item label="分组" :label-width="formLabelWidth">
-        角色
-      </el-form-item> -->
 
       <el-form-item :label="this.$t('C_name')" :label-width="formLabelWidth">
         <el-input v-model="currentEditAsset.name" autocomplete="off" />
@@ -290,6 +299,7 @@
         </span>
       </el-dialog>
     </el-dialog>
+    
   </el-container>
 </template>
 
@@ -363,6 +373,8 @@ export default defineComponent({
       // 10:"京腔",
       // 11:"温柔大叔",
     };
+    const allCharacters = computed(() => store.state.character.characters);
+
     const currentEditAsset = reactive({
       name: "",
       content: "",
@@ -379,6 +391,27 @@ export default defineComponent({
       console.log(store.state.character.characters);
       return store.state.character.characters;
     });
+    const activeName = ref('first');
+    const htmlContent = ref('');
+
+    const fetchHtmlContent = async () => {
+      try {
+        const response = await axios.post('/api/get_vis');
+        
+        let path = '/api/get_vis/get_html'
+        console.log('response', path, response)
+        htmlContent.value = path;
+      } catch (error) {
+        console.error('Error fetching HTML:', error);
+      }
+    };
+
+    const handleClick = (tab) => {
+      console.log('handelClick')
+      if (tab.paneName === 'first' && !htmlContent.value) {
+        fetchHtmlContent();
+      }
+    };
 
     // Functions
     async function sendMessage() {
@@ -430,31 +463,6 @@ export default defineComponent({
           };
           messages.value.splice(messages.value.length - 1, 1, assistantMessage);
           history.value.push(assistantMessage);
-
-          // const imageRequestBody = {
-          //   action: 'get_character_image_help',
-          //   data: {
-          //     history: history.value.map((msg) => ({
-          //       role: msg.role,
-          //       content: msg.content,
-          //     })),
-          //     user_input: inputMessage.value,
-          //   },
-          // };
-
-          //   const imageResponse = await axios.post('/api/get_character_image_help', imageRequestBody);
-          //   if (imageResponse.status === 200 && imageResponse.data.image) {
-          //     const index = messages.value.indexOf(assistantMessage);
-          //     if (index !== -1) {
-          //       messages.value[index].image = imageResponse.data.image;
-          //     }
-          //   }
-          //   inputMessage.value = '';
-          // } else {
-          //   ElMessage({
-          //     message: '请求失败',
-          //     type: 'error',
-          //   });
           inputMessage.value = "";
         }
       } catch (error) {
@@ -483,6 +491,7 @@ export default defineComponent({
       newAsset.name = "";
       newAsset.content = "";
       newAsset.image = "";
+      newAsset.characters = [];
       fileList.value = [];
       addDialogVisible.value = false;
     }
@@ -504,6 +513,7 @@ export default defineComponent({
       newAsset.name = "";
       newAsset.content = "";
       newAsset.image = "";
+      newAsset.characters = [];
       fileList.value = [];
       showSaveDialog.value = false;
     }
@@ -528,6 +538,7 @@ export default defineComponent({
         content: newAsset.content,
         image: newAsset.image || null,
         per: newAsset.per,
+        re: newAsset.re,
       };
       store.dispatch("addCharacter", character);
       axios.post("/api/add_character", {
@@ -778,6 +789,12 @@ export default defineComponent({
     }
 
     return {
+      loading,
+      charList,
+      audios,
+      allCharacters,
+      activeName,
+      htmlContent,
       currentEditAsset,
       fileList,
       addDialogVisible,
@@ -815,9 +832,7 @@ export default defineComponent({
       confirmDelete,
       handlePictureCardPreview,
       generate_image,
-      loading,
-      charList,
-      audios,
+      handleClick,
     };
   },
 });
@@ -878,8 +893,42 @@ body {
 
 .rightcontainer {
   width: 100%;
-  height: 100%;
+  height: 100vh; /* 使父容器填满整个视口高度 */
+  display: flex;
+  flex-direction: column;
+}
+
+/* .tabs >  {
+  flex: 1;
+  padding: 32px;
+}
+
+.demo-tabs >  {
+  flex: 1;
+  padding: 32px;
+} */
+
+
+.el-tabs--card {
+  height: calc(100vh - 110px);
+  /* overflow-y: auto; */
+}
+.el-tab-pane {
+  height: calc(100vh - 110px);
+  overflow-y: auto;
+}
+
+iframe {
+  width: 100%;
+  height: 100%; 
+}
+
+.assets-list {
+  height: auto;
+  width: 100%;
   overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .upload-image {
@@ -991,15 +1040,6 @@ body {
   color: white;
 }
 
-.assets-list {
-  height: 100%;
-  width: 100%;
-  flex: 1;
-  overflow: hidden;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
 .asset-item {
   /* display: flex; */
   align-items: center;
@@ -1035,6 +1075,7 @@ body {
 .add-button-container {
   display: flex;
   position: relative;
+  bottom: 0;
   justify-content: right;
   padding: 10px;
 }

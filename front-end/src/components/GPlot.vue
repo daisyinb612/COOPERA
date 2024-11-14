@@ -22,20 +22,6 @@
                   <div>Plot{{ index + 1 }} : {{ plot.plotName }}
                   </div> 
                 </div>
-                <!-- <div class="plot-element">
-                  <div>Plot Stage:</div>
-                  {{ plot.plotStage }}
-                </div>
-                <div class="location">
-                  <div>Scene:</div>
-                  {{ plot.scene.name }}
-                </div>
-                <div class="characters">
-                  <div>Appearing Characters:</div>
-                  <span v-for="character in plot.characters" :key="character">
-                    <span style="padding: 3px">{{ character.name }}</span>
-                  </span>
-                </div> -->
               </div>
               <el-input
                 type="textarea"
